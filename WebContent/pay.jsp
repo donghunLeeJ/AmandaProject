@@ -29,7 +29,9 @@
 
         <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-
+		<script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.1.min.js"
+	type="application/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <style>
             #weatherWidget .currentDesc {
                 color: #ffffff!important;
@@ -287,7 +289,7 @@
 
                                 <div class="card-body">
 
-                                    <button type="button" class="btn btn-outline-secondary btn-lg" style="width: 100%;height: 100%" type="button" id="2000won">2000원 충전<br>(2시간)</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-lg" style="width: 100%;height: 100%" type="button" id="pay2000">2000원 충전<br>(2시간)</button>
 
                                 </div>
                             </div><!-- /# card -->
@@ -298,7 +300,7 @@
 
                                 <div class="card-body">
 
-                                    <button type="button" class="btn btn-outline-success btn-lg" style="width: 100%;height: 100%" type="button" id="3000won">3000원 충전<br>(3시간)</button>
+                                    <button type="button" class="btn btn-outline-success btn-lg" style="width: 100%;height: 100%" type="button" id="pay3000">3000원 충전<br>(3시간)</button>
 
                                 </div>
                             </div><!-- /# card -->
@@ -309,7 +311,7 @@
 
                                 <div class="card-body">
 
-                                    <button type="button" class="btn btn-outline-danger btn-lg" style="width: 100%;height: 100%" type="button" id="5000won">5000원 충전<br>(5시간 30분)</button>
+                                    <button type="button" class="btn btn-outline-danger btn-lg" style="width: 100%;height: 100%" type="button" id="pay5000">5000원 충전<br>(5시간 30분)</button>
 
                                 </div>
                             </div><!-- /# card -->
@@ -320,7 +322,7 @@
 
                                 <div class="card-body">
 
-                                    <button type="button" class="btn btn-outline-warning btn-lg" style="width: 100%;height: 100%" type="button" id="10000won">10000원 충전<br>(11시간)</button>
+                                    <button type="button" class="btn btn-outline-warning btn-lg" style="width: 100%;height: 100%" type="button" id="pay10000">10000원 충전<br>(11시간)</button>
 
                                 </div>
                             </div><!-- /# card -->
@@ -331,26 +333,13 @@
 
                                 <div class="card-body">
 
-                                    <button type="button" class="btn btn-outline-info btn-lg" style="width: 100%;height: 100%" type="button" id="20000won">20000원 충전<br>(23시간)</button>                                  
+                                    <button type="button" class="btn btn-outline-info btn-lg" style="width: 100%;height: 100%" type="button" id="pay20000">20000원 충전<br>(23시간)</button>                                  
                                 </div>
                             </div><!-- /# card -->
                         </div>
-
-
                     </div>
-                    <!-- /Widgets -->
-                    <!--  Traffic  -->
-
-                    <!--  /Traffic -->
                     <div class="clearfix"></div>
-                    <!-- Orders -->
-                    <!-- /.orders -->
-                    <!-- To Do and Live Chat -->
-                    <!-- /To Do and Live Chat -->
-                    <!-- Calender Chart Weather  -->
-
-                    <!-- /#add-category -->
-                </div>
+              </div>
                 <!-- .animated -->
             </div>
             <!-- /.content -->
@@ -401,18 +390,18 @@
         <script>
             $("#pay1000").on("click",function(){
                 BootPay.request({
-                    price: '1000', //실제 결제되는 가격
+                    price: '1000',
                     application_id: "5cde4395b6d49c3e68bf277e",
-                    name: 'kh피씨방 1000원 충전', //결제창에서 보여질 이름
+                    name: 'kh피씨방 1000원 충전', 
                     pg: '',
-                    method: '', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
-                    show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+                    method: '', 
+                    show_agree_window: 0, 
                     items: [
                         {
-                            item_name: '나는 아이템', //상품명
-                            qty: 1, //수량
-                            unique: '123', //해당 상품을 구분짓는 primary key
-                            price: 1000, //상품 단가
+                            item_name: '나는 아이템',
+                            qty: 1,
+                            unique: '123', 
+                            price: 1000,
                         }
                     ],
                     user_info: {
@@ -421,37 +410,259 @@
                         addr: '사용자 주소',
                         phone: '010-1234-4567'
                     },
-                    order_id: '고유order_id_1234', //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+                    order_id: '고유order_id_1234', 
                     params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
                      
                 }).error(function (data) {
-                    //결제 진행시 에러가 발생하면 수행됩니다.
                     console.log(data);
                 }).cancel(function (data) {
-                    //결제가 취소되면 수행됩니다.
                     console.log(data);
                 }).ready(function (data) {
-                    // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
                     console.log(data);
                 }).confirm(function (data) {
-                    //결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
-                    //주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
-                    console.log(data);
-                    var enable = true; // 재고 수량 관리 로직 혹은 다른 처리
+                     console.log(data);
+                    var enable = true; 
                     if (enable) {
-                        this.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
+                        this.transactionConfirm(data); 
                     } else {
-                        this.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
+                        this.removePaymentWindow(); 
                     }
                 }).close(function (data) {
-
-
                 }).done(function (data) {
-                    //결제가 정상적으로 완료되면 수행됩니다
-                    //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+          
                     console.log(data);
                 })
             })
+              $("#pay2000").on("click",function(){
+                BootPay.request({
+                    price: '2000',
+                    application_id: "5cde4395b6d49c3e68bf277e",
+                    name: 'kh피씨방 2000원 충전', 
+                    pg: '',
+                    method: '', 
+                    show_agree_window: 0, 
+                    items: [
+                        {
+                            item_name: '나는 아이템',
+                            qty: 1,
+                            unique: '123', 
+                            price: 1000,
+                        }
+                    ],
+                    user_info: {
+                        username: '사용자 이름',
+                        email: '사용자 이메일',
+                        addr: '사용자 주소',
+                        phone: '010-1234-4567'
+                    },
+                    order_id: '고유order_id_1234', 
+                    params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+                     
+                }).error(function (data) {
+                    console.log(data);
+                }).cancel(function (data) {
+                    console.log(data);
+                }).ready(function (data) {
+                    console.log(data);
+                }).confirm(function (data) {
+                     console.log(data);
+                    var enable = true; 
+                    if (enable) {
+                        this.transactionConfirm(data); 
+                    } else {
+                        this.removePaymentWindow(); 
+                    }
+                }).close(function (data) {
+                }).done(function (data) {
+          
+                    console.log(data);
+                })
+            })
+              $("#pay3000").on("click",function(){
+                BootPay.request({
+                    price: '3000',
+                    application_id: "5cde4395b6d49c3e68bf277e",
+                    name: 'kh피씨방 3000원 충전', 
+                    pg: '',
+                    method: '', 
+                    show_agree_window: 0, 
+                    items: [
+                        {
+                            item_name: '나는 아이템',
+                            qty: 1,
+                            unique: '123', 
+                            price: 1000,
+                        }
+                    ],
+                    user_info: {
+                        username: '사용자 이름',
+                        email: '사용자 이메일',
+                        addr: '사용자 주소',
+                        phone: '010-1234-4567'
+                    },
+                    order_id: '고유order_id_1234', 
+                    params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+                     
+                }).error(function (data) {
+                    console.log(data);
+                }).cancel(function (data) {
+                    console.log(data);
+                }).ready(function (data) {
+                    console.log(data);
+                }).confirm(function (data) {
+                     console.log(data);
+                    var enable = true; 
+                    if (enable) {
+                        this.transactionConfirm(data); 
+                    } else {
+                        this.removePaymentWindow(); 
+                    }
+                }).close(function (data) {
+                }).done(function (data) {
+          
+                    console.log(data);
+                })
+            })
+              $("#pay5000").on("click",function(){
+                BootPay.request({
+                    price: '5000',
+                    application_id: "5cde4395b6d49c3e68bf277e",
+                    name: 'kh피씨방 5000원 충전', 
+                    pg: '',
+                    method: '', 
+                    show_agree_window: 0, 
+                    items: [
+                        {
+                            item_name: '나는 아이템',
+                            qty: 1,
+                            unique: '123', 
+                            price: 1000,
+                        }
+                    ],
+                    user_info: {
+                        username: '사용자 이름',
+                        email: '사용자 이메일',
+                        addr: '사용자 주소',
+                        phone: '010-1234-4567'
+                    },
+                    order_id: '고유order_id_1234', 
+                    params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+                     
+                }).error(function (data) {
+                    console.log(data);
+                }).cancel(function (data) {
+                    console.log(data);
+                }).ready(function (data) {
+                    console.log(data);
+                }).confirm(function (data) {
+                     console.log(data);
+                    var enable = true; 
+                    if (enable) {
+                        this.transactionConfirm(data); 
+                    } else {
+                        this.removePaymentWindow(); 
+                    }
+                }).close(function (data) {
+                }).done(function (data) {
+          
+                    console.log(data);
+                })
+            })
+              $("#pay10000").on("click",function(){
+                BootPay.request({
+                    price: '10000',
+                    application_id: "5cde4395b6d49c3e68bf277e",
+                    name: 'kh피씨방 10000원 충전', 
+                    pg: '',
+                    method: '', 
+                    show_agree_window: 0, 
+                    items: [
+                        {
+                            item_name: '나는 아이템',
+                            qty: 1,
+                            unique: '123', 
+                            price: 1000,
+                        }
+                    ],
+                    user_info: {
+                        username: '사용자 이름',
+                        email: '사용자 이메일',
+                        addr: '사용자 주소',
+                        phone: '010-1234-4567'
+                    },
+                    order_id: '고유order_id_1234', 
+                    params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+                     
+                }).error(function (data) {
+                    console.log(data);
+                }).cancel(function (data) {
+                    console.log(data);
+                }).ready(function (data) {
+                    console.log(data);
+                }).confirm(function (data) {
+                     console.log(data);
+                    var enable = true; 
+                    if (enable) {
+                        this.transactionConfirm(data); 
+                    } else {
+                        this.removePaymentWindow(); 
+                    }
+                }).close(function (data) {
+                }).done(function (data) {
+          
+                    console.log(data);
+                })
+            })
+              $("#pay20000").on("click",function(){
+                BootPay.request({
+                    price: '20000',
+                    application_id: "5cde4395b6d49c3e68bf277e",
+                    name: 'kh피씨방 20000원 충전', 
+                    pg: '',
+                    method: '', 
+                    show_agree_window: 0, 
+                    items: [
+                        {
+                            item_name: '나는 아이템',
+                            qty: 1,
+                            unique: '123', 
+                            price: 1000,
+                        }
+                    ],
+                    user_info: {
+                        username: '사용자 이름',
+                        email: '사용자 이메일',
+                        addr: '사용자 주소',
+                        phone: '010-1234-4567'
+                    },
+                    order_id: '고유order_id_1234', 
+                    params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+                     
+                }).error(function (data) {
+                    console.log(data);
+                }).cancel(function (data) {
+                    console.log(data);
+                }).ready(function (data) {
+                    console.log(data);
+                }).confirm(function (data) {
+                     console.log(data);
+                    var enable = true; 
+                    if (enable) {
+                        this.transactionConfirm(data); 
+                    } else {
+                        this.removePaymentWindow(); 
+                    }
+                }).close(function (data) {
+                }).done(function (data) {
+          
+                    console.log(data);
+                })
+            })
+
+
+
+
+
 
 
           
