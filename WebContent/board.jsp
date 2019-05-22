@@ -291,7 +291,7 @@ div {
 									class="photo media-left"><img alt="avatar"
 										src="images/avatar/3.jpg"></span>
 									<div class="message media-body">
-										<span class="name float-left">Cheryl Wheeler</span> <span
+										<span class="name float-left">Cheryl Wheeler2</span> <span
 											class="time float-right">10 minutes ago</span>
 										<p>Hello, this is an example msg</p>
 									</div>
