@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.MemberDAO;
+<<<<<<< HEAD
+import com.amanda.project.DTO.MemberDTO;
+
+=======
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 
 
 
@@ -17,12 +22,41 @@ public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getRequestURI().substring(request.getContextPath().length()+1);
 		response.setCharacterEncoding("utf-8");
+<<<<<<< HEAD
+		MemberDAO dao=new MemberDAO();
+=======
 		MemberDAO dao = new MemberDAO();
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 		switch(cmd) {
 		
 		case "loginProc.member" :
 			//로그인 화면에서 아이디 비밀번호 값을 받아 db와 비교하여 로그인을 실행시켜주는 controller
-					
+			String loginid=request.getParameter("loginid");
+			String loginpw=request.getParameter("loginpw");
+			System.out.println(loginid+loginpw);
+			try {
+				boolean login = dao.checklogin(loginid, dao.testSHA256(loginpw));
+				if(login==true) {
+					System.out.println(login);
+					request.getSession().setAttribute("id", loginid);
+					request.getSession().setAttribute("pw", loginpw);
+					request.setAttribute("login", login);
+				RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+				rd.forward(request, response);
+				}
+				else {
+					System.out.println(login);
+					request.setAttribute("login", login);
+					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+					rd.forward(request, response);
+				}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+		
+			
 			break;
 		case "idCheckByAjax.member" :
 			//로그인 화면에서 아이디 비밀번호 값을 받아 db와 비교하여 로그인을 실행시켜주는 controller
@@ -39,6 +73,17 @@ public class MemberController extends HttpServlet {
 			
 		case "updateProc.member" :
 			//회원 정보수정 컨트롤러
+<<<<<<< HEAD
+			String pw=request.getParameter("newpw");
+			String email=request.getParameter("email");
+			String phone=request.getParameter("phone");
+			try {
+				int result=dao.updateMember(new MemberDTO(pw,email,phone) );
+				System.out.println(result);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}	
+=======
 			String id = request.getParameter("newid");
 			String name = request.getParameter("newname");
 			String phone = request.getParameter("newpohone");
@@ -47,6 +92,7 @@ public class MemberController extends HttpServlet {
 			String address1 = request.getParameter("newaddress1");
 			String address2 = request.getParameter("newaddress2");
 			int result = 0;
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 //			if (request.getParameter("newpw") == null) {
 //				String pw = (String) request.getSession().getAttribute("pw");
 //				try {
@@ -71,7 +117,11 @@ public class MemberController extends HttpServlet {
 //
 //				}
 //				System.out.print(pw);
+<<<<<<< HEAD
+//			}	
+=======
 //			}		
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 			
 			break;
 		}
