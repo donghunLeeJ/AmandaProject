@@ -215,7 +215,7 @@
             <!-- 본문 들어가는 부분 -->
 
 
-            <form class="form-horizontal" role="form" method="" action="updateProc.member">
+            <form class="form-horizontal" role="form" method="post" action="updateProc.member">
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">

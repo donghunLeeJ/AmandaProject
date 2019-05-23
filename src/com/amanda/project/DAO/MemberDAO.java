@@ -48,18 +48,48 @@ public class MemberDAO {
 		return SHA;
 	}
 	public boolean checklogin(String id,String pw)throws Exception{
-		String sql="select * from Members where id='"+id+"'and pw='"+pw+"'";
+		String sql="select * from Member where id= ? and pw= ? ";
 		try (	Connection con=ds.getConnection();
 				PreparedStatement pstat=con.prepareStatement(sql);
-				ResultSet rs=pstat.executeQuery();
+
 				)
-		{return rs.next();}
+		{
+			pstat.setString(1, id );
+			pstat.setString(2, pw);
+			ResultSet rs=pstat.executeQuery();
+
+			return rs.next();
+		}
+	}
+	public MemberDTO select_user(String id){
+		String sql="select * from Member where id= ?";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				){		
+			pstat.setString(1, id );
+			ResultSet rs=pstat.executeQuery();
+			rs.next();
+			MemberDTO dto = new MemberDTO();
+			dto.setMem_seq(rs.getInt(1));
+			dto.setId(rs.getString(2));
+			dto.setPw(rs.getString(3));
+			dto.setName(rs.getString(4));
+			dto.setBirth(rs.getString(5));
+			dto.setPhone(rs.getString(6));
+			dto.setEmail(rs.getString(7));
+			dto.setPoint(rs.getInt(8));
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 
 
 	public int updateMember(MemberDTO dto) throws Exception {
-		String sql="update Members set pw=?,email=?,phone=?  where id=? ";
+		String sql="update Member set pw=?,email=?,phone=?  where id=? ";
 		Connection con=ds.getConnection();
 		PreparedStatement pstat=con.prepareStatement(sql);
 		pstat.setString(1,dto.getPw());
@@ -72,36 +102,37 @@ public class MemberDAO {
 		con.close();
 		return result;
 	}
+
 	public int joinmember(MemberDTO dto) throws Exception{
 		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default)";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-				pstat.setString(1, dto.getId());
-				pstat.setString(2, dto.getPw());
-				pstat.setString(3, dto.getName());
-				pstat.setString(4, dto.getBirth());
-				pstat.setString(5, dto.getEmail());
-				pstat.setString(6, dto.getPhone());
-				
-				int result = pstat.executeUpdate();
-				con.commit();
-				return result;
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getPw());
+			pstat.setString(3, dto.getName());
+			pstat.setString(4, dto.getBirth());
+			pstat.setString(5, dto.getEmail());
+			pstat.setString(6, dto.getPhone());
+
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
 		}
 	}
 	public int delete(String id, String pw) {
-		String sql = "delete from mem where id = ? and pw = ?";
-		
+		String sql = "delete from member where id = ? and pw = ?";
+
 		try(
 				Connection con = this.db_connect();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setString(1, id);
 			pstat.setString(2, pw);
-			
+
 			int result = pstat.executeUpdate();
-			con.commit();
+			
 			return result;
 		}catch(Exception e) {
 			e.printStackTrace();

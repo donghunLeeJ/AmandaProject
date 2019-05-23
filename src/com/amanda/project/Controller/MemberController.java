@@ -30,8 +30,7 @@ public class MemberController extends HttpServlet {
 				boolean login = dao.checklogin(loginid, dao.testSHA256(loginpw));
 				if(login==true) {
 					System.out.println(login);
-					request.getSession().setAttribute("id", loginid);
-					request.getSession().setAttribute("pw", loginpw);
+					request.getSession().setAttribute("user", dao.select_user(loginid));
 					request.setAttribute("login", login);
 				RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 				rd.forward(request, response);
@@ -50,10 +49,6 @@ public class MemberController extends HttpServlet {
 		
 			
 			break;
-		case "idCheckByAjax.member" :
-			//로그인 화면에서 아이디 비밀번호 값을 받아 db와 비교하여 로그인을 실행시켜주는 controller
-					
-			break;
 		case "joinProc.member" :
 			//회원 가입 컨트롤러
 			try {
@@ -66,6 +61,9 @@ public class MemberController extends HttpServlet {
 				String email = request.getParameter("joinmemberemail");//회원가입시 받는 email
 				String phone = request.getParameter("joinmemberphone");//회원가입시 받는 폰번호
 				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone);
+				
+				System.out.println(id);
+				
 				
 				int result = dao.joinmember(dto);
 				if(result == 1) {
