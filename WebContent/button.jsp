@@ -48,7 +48,7 @@
 <!--                                       마이페이지-->
                                         <button type="button" class="btn btn-outline-danger signbt mb-2" data-toggle="modal" data-target="#exampleModal" id="mypagebtn"> mypage   </button>
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<!--                                           <img src="lol.PNG" width="auto">-->
+
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
 
