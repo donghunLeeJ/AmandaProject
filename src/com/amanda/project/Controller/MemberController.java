@@ -77,7 +77,18 @@ public class MemberController extends HttpServlet {
 			break;
 		case "deleteProc.member" :
 			//회원 탈퇴 컨트롤러
+			//회원 탈퇴 컨트롤러
+			String delid= request.getParameter("id");//삭제할 아이디
+			String delpw= request.getParameter("pw");//삭제할 패스워드
 		
+			
+				int delresult = dao.delete(delid, delpw);
+				if(delresult==1) {
+					request.setAttribute("delresult", delresult);
+					request.getRequestDispatcher("WEB-INF/outmember.jsp").forward(request, response);
+				}
+			
+			
 			break;
 			
 		case "updateProc.member" :
