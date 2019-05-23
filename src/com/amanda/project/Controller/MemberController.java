@@ -68,8 +68,13 @@ public class MemberController extends HttpServlet {
 				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone);
 				
 				int result = dao.joinmember(dto);
-				request.setAttribute("result", result);
-				request.getRequestDispatcher("").forward(request, response);
+				if(result == 1) {
+					request.setAttribute("result", result);
+					request.getRequestDispatcher("WEB-INF/joincomp.jsp").forward(request, response);
+				}else {
+					response.sendRedirect("error.jsp");
+				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
