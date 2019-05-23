@@ -215,11 +215,11 @@
             <!-- 본문 들어가는 부분 -->
 
 
-            <form class="form-horizontal" role="form" method="" action="#">
+            <form class="form-horizontal" role="form" method="" action="updateProc.member">
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                        <input type="password" class="form-control" id="password" name="newpw" data-rule-required="true" placeholder="패스워드" maxlength="30">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -232,13 +232,13 @@
                 <div class="form-group" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40">
+                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40" name="email">
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" name="phone">
                     </div>
                 </div>
                 <div class="form-group">
@@ -250,6 +250,9 @@
 
         </div>
         </div><!-- .content -->
+        
+        
+        
     <div class="clearfix"></div>
 
     <footer class="site-footer">

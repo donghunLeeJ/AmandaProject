@@ -30,6 +30,12 @@ public class MemberDTO {
 	public String getName() {
 		return name;
 	}
+	public MemberDTO(String pw, String email, String phone) {
+		super();
+		this.pw = pw;
+		this.email = email;
+		this.phone = phone;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
