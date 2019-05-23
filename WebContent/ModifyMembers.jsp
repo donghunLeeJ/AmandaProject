@@ -5,11 +5,6 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +27,6 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-  
 
 </head>
 <body>
@@ -47,7 +41,7 @@
                         <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children active dropdown">
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Components</a>
                         <ul class="sub-menu children dropdown-menu">                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
@@ -79,7 +73,7 @@
 
                     <li class="menu-title">Icons</li><!-- /.menu-title -->
 
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a></li>
@@ -233,312 +227,89 @@
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0">
-                    <div class="col-sm-12">
+                    <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>지금까지 이런 메뉴는 없었다!!</h1>
+                                <h1>Dashboard</h1>
                             </div>
                         </div>
                     </div>
-                  
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">Icons</a></li>
+                                    <li class="active">FontAwesome</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="content">
-            <div class="animated fadeIn">
-                <div class="row">
+           <h1 align="center">정보수정</h1>
+        <div class="container"><!-- 좌우측의 공간 확보 -->
 
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">야채곱창</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/gobchang.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">매콤달콤한 야채곱창</h5>
-                                    <div class="location text-sm-center">5000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
+            <!-- 모달창 -->
+            <div class="modal fade" id="defaultModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">알림</h4>
                         </div>
-                    </div>
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">김치 볶음밥</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img  src="images/kimchi.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">반숙 계란이 2개나!!</h5>
-                                    <div class="location text-sm-center">5500원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
                         </div>
-                    </div>
-
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">바베큐 스테이크</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/barbecue.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">주문즉시 옆에서 구워요!!</h5>
-                                    <div class="location text-sm-center">11000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                         </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <!--// 모달창 -->
+            <hr/>
+            <!-- 본문 들어가는 부분 -->
+
+
+            <form class="form-horizontal" role="form" method="" action="#">
+                <div class="form-group" id="divPassword">
+                    <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" id="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
                     </div>
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">샐러드</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/selu.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">게임&다이어트를 동시에!</h5>
-                                    <div class="location text-sm-center">3500원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
+                </div>
+                <div class="form-group" id="divPasswordCheck">
+                    <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
                     </div>
+                </div>
 
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">소고기 볶음밥</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/beefbab.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">밥보다 고기양이 많다!!</h5>
-                                    <div class="location text-sm-center">5000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
+                <div class="form-group" id="divEmail">
+                    <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
+                    <div class="col-lg-10">
+                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40">
                     </div>
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">채끝살</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/beef.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">마블링이 블링블링!!</h5>
-                                    <div class="location text-sm-center">12000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
+                </div>
+                <div class="form-group" id="divPhoneNumber">
+                    <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
+                    <div class="col-lg-10">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
                     </div>
-
-
-
-                    <div class="col-md-4">
-                        
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-default">정보수정</button>
                     </div>
+                </div>
+            </form>
 
-                    <div class="col-md-4">
-                        
-                    </div>
-
-                    <div class="col-md-4">
-                       
-                    </div>
-
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">와플</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/waffle.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">사진과 다르지 않습니다!!</h5>
-                                    <div class="location text-sm-center">6000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">계절메뉴</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/pi.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">그릇부터가 과일이네!!</h5>
-                                    <div class="location text-sm-center">6000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-
-                   
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">밀푀유 나베</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/nabe.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">한겹한겹 육즙이..!!</h5>
-                                    <div class="location text-sm-center">7000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">샤브샤브</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/saboo.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">외식하러 여기로 오자!!</h5>
-                                    <div class="location text-sm-center">12000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-
-                   <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">어묵탕</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/Fish.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">음주하고 오신분을위한</h5>
-                                    <div class="location text-sm-center">7000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">전골</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/jeongol.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">전골 먹으러 오게되네!!</h5>
-                                    <div class="location text-sm-center">12000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">전주비빔밥</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/jun.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">전주 안가도 되겠네</h5>
-                                    <div class="location text-sm-center">7000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">분식세트</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/boonsik.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">학교에서 먹던 그 분식집!!</h5>
-                                    <div class="location text-sm-center">5000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-
-                    
-                    
-                   <div class="col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title mb-3">김치찌개</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img src="images/kimchitang.png" alt="">
-                                    <h5 class="text-sm-center mt-2 mb-1">여기 공기밥 추가요!!</h5>
-                                    <div class="location text-sm-center">6000원</div>
-                                </div>
-                                <hr>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div><!-- .row -->
-            </div><!-- .animated -->
+        </div>
         </div><!-- .content -->
-
     <div class="clearfix"></div>
 
     <footer class="site-footer">
@@ -569,3 +340,4 @@
 
 </body>
 </html>
+    
