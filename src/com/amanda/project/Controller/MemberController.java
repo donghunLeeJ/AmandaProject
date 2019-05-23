@@ -2,7 +2,6 @@ package com.amanda.project.Controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.MemberDAO;
+<<<<<<< HEAD
 import com.amanda.project.DTO.MemberDTO;
 
+=======
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 
 
 
@@ -20,7 +22,11 @@ public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getRequestURI().substring(request.getContextPath().length()+1);
 		response.setCharacterEncoding("utf-8");
+<<<<<<< HEAD
 		MemberDAO dao=new MemberDAO();
+=======
+		MemberDAO dao = new MemberDAO();
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 		switch(cmd) {
 		
 		case "loginProc.member" :
@@ -67,6 +73,7 @@ public class MemberController extends HttpServlet {
 			
 		case "updateProc.member" :
 			//회원 정보수정 컨트롤러
+<<<<<<< HEAD
 			String pw=request.getParameter("newpw");
 			String email=request.getParameter("email");
 			String phone=request.getParameter("phone");
@@ -76,6 +83,16 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {				
 				e.printStackTrace();
 			}	
+=======
+			String id = request.getParameter("newid");
+			String name = request.getParameter("newname");
+			String phone = request.getParameter("newpohone");
+			String email = request.getParameter("newemail");
+			String zipcode = request.getParameter("newpost");
+			String address1 = request.getParameter("newaddress1");
+			String address2 = request.getParameter("newaddress2");
+			int result = 0;
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 //			if (request.getParameter("newpw") == null) {
 //				String pw = (String) request.getSession().getAttribute("pw");
 //				try {
@@ -100,7 +117,11 @@ public class MemberController extends HttpServlet {
 //
 //				}
 //				System.out.print(pw);
+<<<<<<< HEAD
 //			}	
+=======
+//			}		
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
 			
 			break;
 		}

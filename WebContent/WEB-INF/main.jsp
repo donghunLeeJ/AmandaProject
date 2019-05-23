@@ -285,6 +285,7 @@
                                         
                                         
                                         </script>
+<<<<<<< HEAD
 								<!-- mypage fade된 부분 contents에 있어야 fade가 보여서 여기에 코딩함 -->
 								<div class="modal fade" id="exampleModal1" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLabel1"
@@ -340,8 +341,58 @@
 									</div>
 								</div>
 								<script>
+=======
+                               <!-- mypage fade된 부분 contents에 있어야 fade가 보여서 여기에 코딩함 -->
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body1">
+                                                        <form>
+                                                            <div class="form-group m-0 p-0">
+                           <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-user"></i><strong class="card-title pl-2">
+                                	My Page
+                                </strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="mx-auto d-block" >
+                                    <img class="rounded-circle mx-auto d-block" src="images/admin.jpg" alt="profile image" width="80px">
+                                    <h5 class="text-center mt-2 mb-1">Steven Lee</h5>
+                                    <div class="location text-center">Lv. 일반회원</div>
+                                </div>
+                                <hr>
+                                <div class="card-text">
+									<pre> <b>이름 </b> <p> </p></pre>                 
+									<pre> <b>생년월일</b><p> </p></pre>         
+									<pre> <b>이메일</b><p></p> </pre>  
+									<pre> <b>핸드폰번호</b><p> </p></pre>             
+                                    <pre> <b>잔여포인트</b><p> </p></pre> 
+                                </div>
+                            </div>
+                        </div>            
+                           </div>
+                                                              <div class="modal-footer">
+                                                               <button id="deletememberbtn"  type="button" class="btn btn-outline-info" data-dismiss="modal" >회원 탈퇴</button>
+                                                              <button id="pointPagebtn" type="button" class="btn btn-outline-info" data-dismiss="modal" >포인트 충전</button>
+                                                               <button id="updatememberbtn" type="button" class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                          
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+>>>>>>> f7dd6f183ad3758b555c0449b7452bb793303330
                                         $("#updatememberbtn").on("click",function(){
                                         	location.href="page?url=WEB-INF/ModifyMembers.jsp";
+                                        })
+                                        $("#deletememberbtn").on("click",function(){
+                                        	location.href="page?url=WEB-INF/deleteMem.jsp";
+                                        })
+                                        $("#pointPagebtn").on("click",function(){
+                                        	location.href="page?url=WEB-INF/pay.jsp";
                                         })
                                         </script>
 
