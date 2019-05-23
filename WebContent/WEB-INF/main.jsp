@@ -277,7 +277,7 @@
 								</div>
 								<script>
                                         $("#joinMem").on("click",function(){
-                                        	location.href="page?url=WEB-INF/JoinMembers.jsp";	
+                                        	location.href="page?url=WEB-INF/JoinMem.jsp";	
                                         })
                                         	document.getElementById("login").onclick = function() {
 									document.getElementById("form").submit();	}
