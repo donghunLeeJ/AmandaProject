@@ -298,6 +298,7 @@
 												</div>
 											</div>
 										</div>
+
 										<script>
 											$("#joinMem")
 													.on(
@@ -370,28 +371,31 @@
 																	data-dismiss="modal">Close</button>
 															</div>
 														</form>
+
 													</div>
 												</div>
 											</div>
 										</div>
 
+									</div>
+								</div>
+								<script>
+
+                                        $("#updatememberbtn").on("click",function(){
+                                        	location.href="page?url=WEB-INF/ModifyMembers.jsp";
+                                        })
+                                        $("#deletememberbtn").on("click",function(){
+                                        	location.href="page?url=WEB-INF/deleteMem.jsp";
+                                        })
+                                        $("#pointPagebtn").on("click",function(){
+                                        	location.href="page?url=WEB-INF/pay.jsp";
+                                        })
+                                        </script>
+
+
 				
 
 
-					<script>
-						$("#updatememberbtn")
-								.on(
-										"click",
-										function() {
-											location.href = "page?url=WEB-INF/ModifyMembers.jsp";
-										})
-						$("#deletememberbtn").on("click", function() {
-							location.href = "page?url=WEB-INF/deleteMem.jsp";
-						})
-						$("#pointPagebtn").on("click", function() {
-							location.href = "page?url=WEB-INF/pay.jsp";
-						})
-					</script>
 
 
 				</div>
