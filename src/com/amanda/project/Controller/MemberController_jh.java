@@ -49,6 +49,9 @@ public class MemberController_jh extends HttpServlet {
 				String address1 = request.getParameter("newaddress1");
 				String address2 = request.getParameter("newaddress2");
 				int result = 0;
+				
+				System.out.println(id);
+				
 //				if (request.getParameter("newpw") == null) {
 //					String pw = (String) request.getSession().getAttribute("pw");
 //					try {
