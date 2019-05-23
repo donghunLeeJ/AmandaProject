@@ -72,6 +72,24 @@ public class MemberDAO {
 		con.close();
 		return result;
 	}
+	public int joinmember(MemberDTO dto) throws Exception{
+		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default)";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+				pstat.setString(1, dto.getId());
+				pstat.setString(2, dto.getPw());
+				pstat.setString(3, dto.getName());
+				pstat.setString(4, dto.getBirth());
+				pstat.setString(5, dto.getEmail());
+				pstat.setString(6, dto.getPhone());
+				
+				int result = pstat.executeUpdate();
+				con.commit();
+				return result;
+		}
+	}
 }
 
 
