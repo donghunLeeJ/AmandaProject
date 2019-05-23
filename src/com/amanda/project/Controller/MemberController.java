@@ -8,12 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.amanda.project.DAO.MemberDAO;
 import com.amanda.project.DTO.MemberDTO;
-
-
-
 
 
 @WebServlet("*.member")
@@ -60,7 +56,24 @@ public class MemberController extends HttpServlet {
 			break;
 		case "joinProc.member" :
 			//회원 가입 컨트롤러
-		
+			try {
+				MemberDAO jdao = new MemberDAO();
+				String id = request.getParameter("joinmemberid");//회원가입시 받는 아이디
+				String pw = request.getParameter("joinmemberpw");//회원가입시 받는 비밀번호
+				String spw = jdao.testSHA256(pw);//비밀번호 sha처리
+				String name = request.getParameter("joinmembername");//회원가입시 받는 이름
+				String birth = request.getParameter("joinmemberbirth");//회원가입시 받는 생년월일
+				String email = request.getParameter("joinmemberemail");//회원가입시 받는 email
+				String phone = request.getParameter("joinmemberphone");//회원가입시 받는 폰번호
+				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone);
+				
+				int result = dao.joinmember(dto);
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("").forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			break;
 		case "deleteProc.member" :
 			//회원 탈퇴 컨트롤러

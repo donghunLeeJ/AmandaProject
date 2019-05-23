@@ -9,6 +9,17 @@ public class MemberDTO {
 	private String email;
 	private String phone;
 	private int point;
+	
+	
+	public MemberDTO(String id, String pw, String name, String birth, String email, String phone) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.birth = birth;
+		this.email = email;
+		this.phone = phone;
+	}
 	public int getMem_seq() {
 		return mem_seq;
 	}
