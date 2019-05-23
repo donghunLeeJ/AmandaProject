@@ -24,7 +24,10 @@
       <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
-   
+   <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
    <style>
         
    	#remember{
@@ -223,7 +226,7 @@
                                                             </div>                                                                                                                
                                                             <div class="modal-footer">
 																<div id="remember">   <input type="checkbox">자동로그인 </div>
-                                                               <button type="button" class="btn btn-primary" data-dismiss="modal">회원가입</button>                                                
+                                                               <button type="button" class="btn btn-primary" type="button" id="joinMem">회원가입</button>                                                
                                                                <button type="submit" class="btn btn-primary">login</button>
                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             </div>
@@ -232,6 +235,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <script>
+                                        $("#joinMem").on("click",function(){
+                                        	location.href="page?url=WEB-INF/JoinMembers.jsp";	
+                                        })
+                                        
+                                        
+                                        
+                                        
+                                        </script>
                                <!-- mypage fade된 부분 contents에 있어야 fade가 보여서 여기에 코딩함 -->
                                 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
