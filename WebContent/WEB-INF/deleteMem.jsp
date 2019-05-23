@@ -181,7 +181,7 @@
         </div>
 
         <div class="content">
-            <h1 align="center">회원가입</h1>
+            <h1 align="center">회원탈퇴 페이지 입니다</h1>
         <div class="container">
             <div class="modal fade" id="defaultModal">
                 <div class="modal-dialog">
@@ -203,9 +203,9 @@
             <hr/>
                <form class="form-horizontal" role="form" method="" action="#">
                 <div class="form-group" id="divId">
-                    <label for="inputId" class="col-lg-2 control-label">아이디</label>
+                    <label for="inputId" class="col-lg-2 control-label">아이디값을 가져다 넣어주세요 </label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="아이디값을 가져다 넣어주세요" maxlength="30">
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
@@ -221,34 +221,35 @@
                     </div>
                 </div>
                 <div class="form-group" id="divName">
-                    <label for="inputName" class="col-lg-2 control-label">이름</label>
+                    <label for="inputName" class="col-lg-2 control-label">이름 </label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
+                        <input type="text" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="이름값을 가져다 넣어주세요." maxlength="15">
                     </div>
                 </div>
 
                 <div class="form-group" id="divBirth">
                     <label for="inputBirth" class="col-lg-2 control-label">생년월일</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="name" data-rule-required="true" placeholder="ex)19000101" maxlength="15">
+                        <input type="text" class="form-control" id="name" data-rule-required="true" placeholder="생년월일값을 가져다 넣어주세요" maxlength="15">
                     </div>
                 </div>
 
                 <div class="form-group" id="divEmail">
-                    <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
+                    <label for="inputEmail" class="col-lg-2 control-label">이메일 </label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40">
+                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일을 가져다 넣어주세요" maxlength="40">
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
-                    <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
+                    <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호를 가져다 넣어주세요</label>
                     <div class="col-lg-10">
                         <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-default">회원가입</button>
+                        <button type="submit" class="btn btn-default">회원탈퇴</button>
+                        패스워드가 맞으면 회원탈퇴가 가능하게 만들어주세요
                     </div>
                 </div>
             </form>
