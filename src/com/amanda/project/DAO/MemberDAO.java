@@ -90,6 +90,24 @@ public class MemberDAO {
 				return result;
 		}
 	}
+	public int delete(String id, String pw) {
+		String sql = "delete from mem where id = ? and pw = ?";
+		
+		try(
+				Connection con = this.db_connect();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, id);
+			pstat.setString(2, pw);
+			
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
 }
 
 
