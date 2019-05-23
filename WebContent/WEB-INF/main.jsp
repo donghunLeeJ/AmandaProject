@@ -280,7 +280,8 @@
                         </div>            
                            </div>
                                                               <div class="modal-footer">
-                                                              <button type="button" class="btn btn-outline-info" data-dismiss="modal" >포인트 충전</button>
+                                                               <button id="deletememberbtn"  type="button" class="btn btn-outline-info" data-dismiss="modal" >회원 탈퇴</button>
+                                                              <button id="pointPagebtn" type="button" class="btn btn-outline-info" data-dismiss="modal" >포인트 충전</button>
                                                                <button id="updatememberbtn" type="button" class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                          
                                                             </div>
@@ -292,6 +293,12 @@
                                         <script>
                                         $("#updatememberbtn").on("click",function(){
                                         	location.href="page?url=WEB-INF/ModifyMembers.jsp";
+                                        })
+                                        $("#deletememberbtn").on("click",function(){
+                                        	location.href="page?url=WEB-INF/deleteMem.jsp";
+                                        })
+                                        $("#pointPagebtn").on("click",function(){
+                                        	location.href="page?url=WEB-INF/pay.jsp";
                                         })
                                         </script>
                                        
