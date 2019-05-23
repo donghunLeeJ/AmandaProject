@@ -93,16 +93,19 @@ public class MemberController extends HttpServlet {
 					request.getRequestDispatcher("WEB-INF/outmember.jsp").forward(request, response);
 				}
 			
-			
 			break;
 			
 		case "updateProc.member" :
 			//회원 정보수정 컨트롤러
 
-			
 			break;
+	
+		case "logoutProc.member" :
+			request.getSession().invalidate();
+			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
+		break;
+	
 		}
-				
 	}
 
 	
