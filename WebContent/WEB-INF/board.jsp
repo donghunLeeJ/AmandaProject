@@ -106,6 +106,7 @@ div {
 	<!-- Left Panel -->
 
 	<aside id="left-panel" class="left-panel">
+
 		<nav class="navbar navbar-expand-sm navbar-default">
 
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -215,6 +216,41 @@ div {
 							<li><i class="menu-icon fa fa-paper-plane"></i><a
 								href="pages-forget.html">Forget Pass</a></li>
 						</ul></li>
+
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+               <ul class="nav navbar-nav">
+					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+							class="menu-icon fa fa-laptop"></i>Home </a></li>
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/seat.jsp"> 
+					<i class="menu-icon fa fa-cogs"></i>잔여좌석
+					</a></li>
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/manu.jsp"> 
+					<i class="menu-icon fa fa-table"></i>메뉴
+					</a></li>
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/board.jsp"> 
+					<i class="menu-icon fa fa-th"></i>고객의소리
+					</a></li>
+					<c:choose>
+					<c:when test="${user == null }">
+						<li id="charge" class="menu-item-has-children dropdown"><a
+						href="#"> <i
+							class="menu-icon fa fa-tasks"></i>충전하기
+					</a></li>
+						<script>
+							$("#charge").on("click",function(){
+								alert("로그인 후 이용가능합니다.");	
+							})
+						</script>
+					</c:when>
+					<c:otherwise>
+					<li id="charge" class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/pay.jsp"> <i
+							class="menu-icon fa fa-tasks"></i>충전하기
+					</a></li>
+					</c:otherwise>
+					</c:choose>
+
 				</ul>
 			</div>
 		</nav>
