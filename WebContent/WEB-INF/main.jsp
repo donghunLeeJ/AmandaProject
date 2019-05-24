@@ -278,19 +278,29 @@
 									loaction.href=	 "page?url=WEB-INF/main.jsp";
 								}
 								</script>
-										<h3 class="card-title">충전/로그인/개인정보</h3>
-										<p class="card-text">내용</p>
-										<button type="button"
-											class="btn btn-outline-danger signbt mb-2"
-											data-toggle="modal" data-target="#exampleModal" id="loginbtn">
-											login</button>
-									</c:when>
-									<c:otherwise>
-										<h3 class="card-title">충전/로그인/개인정보</h3>
-										<p class="card-text">내용</p>
-										<h5>${user.name }님반갑습니다</h5>
-										<h5>${user.name }님의잔여포인트는${user.point }입니다</h5>
-									</c:otherwise>
+
+								<h3 class="card-title">충전/로그인/개인정보</h3>
+								<p class="card-text">내용</p>
+								<button type="button" class="btn btn-outline-danger signbt mb-2"
+									data-toggle="modal" data-target="#exampleModal" id="loginbtn">
+									login</button>
+								</c:when>
+								<c:otherwise>
+								<h3 class="card-title">충전/로그인/개인정보</h3>
+								<p class="card-text">내용</p>
+								<h5>${user.name } 님 반갑습니다</h5>
+								<h5>${user.name } 님의 잔여포인트는 ${user.point }입니다</h5>
+									<button type="button" class="btn btn-primary"  id="logoutbtn">logout</button>
+									<script>
+									$("#logoutbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "logoutProc.member";
+											})
+									</script>
+								</c:otherwise>
+
 								</c:choose>
 							</div>
 						</div>
