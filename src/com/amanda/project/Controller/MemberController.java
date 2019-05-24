@@ -2,6 +2,7 @@ package com.amanda.project.Controller;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.MemberDAO;
+import com.amanda.project.DAO.SeatDAO;
 import com.amanda.project.DTO.MemberDTO;
+import com.amanda.project.DTO.SeatDTO;
 
 
 @WebServlet("*.member")
@@ -21,6 +24,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;UTF-8");
 		MemberDAO dao=new MemberDAO();
+		SeatDAO seatdao = new SeatDAO();
 		
 		switch(cmd) {
 		
@@ -39,7 +43,7 @@ public class MemberController extends HttpServlet {
 					MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 					dto.getId();
 					request.setAttribute("login", login);
-				RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+				RequestDispatcher rd=request.getRequestDispatcher("seatAdd.seat");//로그인에 성공하는 순간 자릿값에 1을 주는 컨트롤러로 이동
 				rd.forward(request, response);
 				}
 				else {
@@ -132,14 +136,47 @@ public class MemberController extends HttpServlet {
 				
 				e.printStackTrace();
 			}
-			
-			
+				
 			break;
 	
 		case "logoutProc.member" :
-			//로그아아웃 컨트롤러 
-			request.getSession().invalidate();
-			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
+			//로그아아웃 컨트롤러 														
+			try {
+				String ipaddr ="192.168.60.27";
+				//String ipaddr = request.getRemoteAddr();//컴퓨터의 ip주소를 불러옴		
+				int result = seatdao.SeatUpdate(ipaddr);//이 메소드를 호출했을 때
+                                                        //만일 데이터베이스의 comUseCheck값이 1일 경우 0으로 갱신시킴
+				                                        //(로그아웃하는 순간 컴퓨터가 사용가능해짐)
+				
+				
+				if(result > 0) {
+
+					request.getSession().invalidate();
+					request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
+				}	
+				
+			} catch (Exception e1) {
+
+				e1.printStackTrace();
+			}
+			    
+		break;
+		
+		
+
+		case "seatView.member" :
+			//잔여좌석을 보여주는 컨트롤러임			
+		try {
+			
+				List<SeatDTO> SeatList = seatdao.SeatSelectAll();
+				request.setAttribute("SeatList", SeatList);
+				request.getRequestDispatcher("WEB-INF/seat.jsp").forward(request, response);
+				
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}		
+
 		break;
 	
 		}

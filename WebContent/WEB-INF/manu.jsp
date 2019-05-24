@@ -38,7 +38,7 @@
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp"> <i
+						href="seatView.member"> <i
 							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
