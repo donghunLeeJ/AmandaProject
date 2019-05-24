@@ -89,7 +89,7 @@ public class MemberDAO {
 
 
 
-	public int updateMember(MemberDTO dto) throws Exception {
+	public int updateMemberpw(MemberDTO dto) throws Exception {
 		String sql="update Member set pw=?,email=?,phone=?  where id=? ";
 		Connection con=ds.getConnection();
 		PreparedStatement pstat=con.prepareStatement(sql);
@@ -104,6 +104,8 @@ public class MemberDAO {
 		return result;
 	}
 
+	
+	
 	public int joinmember(MemberDTO dto) throws Exception{
 		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default)";
 		try(
