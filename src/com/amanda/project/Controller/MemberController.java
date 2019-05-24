@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DAO.MemberDAO;
+import com.amanda.project.DTO.ComDTO;
 import com.amanda.project.DTO.MemberDTO;
 
 
@@ -21,6 +23,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;UTF-8");
 		MemberDAO dao=new MemberDAO();
+		ComDAO cDao = new ComDAO();
 		
 		switch(cmd) {
 		
@@ -39,8 +42,16 @@ public class MemberController extends HttpServlet {
 					MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 					dto.getId();
 					request.setAttribute("login", login);
-				RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
-				rd.forward(request, response);
+					String ip = request.getRemoteAddr();
+					System.out.println(ip);
+					
+					if(cDao.seatOn(ip)>0) {
+						ComDTO cDto = cDao.seatNum_get(ip);
+						System.out.println(cDto.getOnOff());
+						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
+					}
+					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+					rd.forward(request, response);
 				}
 				else {
 					System.out.println(login);

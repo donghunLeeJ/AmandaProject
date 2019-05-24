@@ -1,0 +1,92 @@
+package com.amanda.project.DAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import com.amanda.project.DTO.ComDTO;
+
+public class ComDAO {
+	DataSource ds;
+	public ComDAO() {
+		Context ctx;
+		try {
+			ctx = new InitialContext();
+			Context env = (Context)ctx.lookup("java:/comp/env");
+			this.ds = (DataSource)env.lookup("jdbc");
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	public Connection db_connect() throws Exception {
+		return ds.getConnection();
+	}
+
+	public ComDTO seatNum_get(String id){
+		String sql="select * from pcComputer where comip = ? ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			pstat.setString(1, id );
+			ResultSet rs=pstat.executeQuery();
+			rs.next();
+			
+			ComDTO dto = new ComDTO(rs.getString(1),rs.getString(2),rs.getString(3));
+			
+			
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public List<ComDTO> selectSeat_all(){
+		String sql="select * from pcComputer ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			
+			List<ComDTO> arr = new ArrayList();
+			ResultSet rs=pstat.executeQuery();
+			while(rs.next()) {
+				ComDTO dto = new ComDTO(rs.getString(1),rs.getString(2),rs.getString(3));
+				arr.add(dto);
+			}
+			return arr;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	public int seatOn(String ip){
+		String sql="update pcComputer set comUseCheck = 1 where comIp = ? ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			pstat.setString(1, ip );
+			int rs=pstat.executeUpdate();
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+}

@@ -238,260 +238,31 @@
 			<div class="animated fadeIn">
 				<!-- Widgets  -->
 				<div class="row">
+					<c:forEach var="i" begin="1" end="25">
+					<c:choose>
+					<c:when test="${seat[i].onOff == 1  }">
 					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
+						<div class="card" style="height: 80%;background-color:red">
 							<h4>
-								1 <br> <br>
+								${i } <br> <br>
 							</h4>
 						</div>
 						<!-- /# card -->
 					</div>
+					</c:when>
+					<c:otherwise>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
 						<div class="card" style="height: 80%">
 							<h4>
-								2 <br> <br>
+								${i } <br> <br>
 							</h4>
 						</div>
 						<!-- /# card -->
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								3 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								4<br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								5 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								6 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								7 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								8 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								9 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								10 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								11 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								12 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								13 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								14 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								15 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								16 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								17 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								18 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								19 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								20 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								21 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								22 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								23 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								24 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								25 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								26 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								27 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								28 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								29 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div class="card" style="height: 80%">
-							<h4>
-								30 <br> <br>
-							</h4>
-						</div>
-						<!-- /# card -->
-					</div>
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
+					
 				</div>
 				<div class="clearfix"></div>
 			</div>
