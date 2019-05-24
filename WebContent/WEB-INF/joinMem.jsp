@@ -274,7 +274,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-default">회원가입</button>
+                        <button type="submit" class="btn btn-outline-success signbt mb-2">회원가입</button>
                     </div>
                 </div>
             </form>
