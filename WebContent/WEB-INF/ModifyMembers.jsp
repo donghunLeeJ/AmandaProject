@@ -45,15 +45,15 @@
 						href="page?url=WEB-INF/manu.jsp"> <i
 							class="menu-icon fa fa-table"></i>메뉴
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/board.jsp"> <i
-							class="menu-icon fa fa-th"></i>고객의소리
-					</a></li>
+
+					<li class="menu-item-has-children dropdown"><a href="Board.board?currentPage=1"> 
+					<i class="menu-icon fa fa-th"></i>고객의소리
 					<c:choose>
 					<c:when test="${user == null }">
 						<li id="charge" class="menu-item-has-children dropdown"><a
 						href="#"> <i
 							class="menu-icon fa fa-tasks"></i>충전하기
+
 					</a></li>
 						<script>
 							$("#charge").on("click",function(){

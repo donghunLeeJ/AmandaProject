@@ -110,9 +110,10 @@
 						href="page?url=WEB-INF/manu.jsp"> <i
 							class="menu-icon fa fa-table"></i>메뉴
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/board.jsp"> <i
-							class="menu-icon fa fa-th"></i>고객의소리
+
+					<li class="menu-item-has-children dropdown"><a href="Board.board?currentPage=1"> 
+					<i class="menu-icon fa fa-th"></i>고객의소리
+
 					</a></li>
 					<c:choose>
 					<c:when test="${user == null }">
