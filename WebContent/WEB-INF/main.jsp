@@ -260,6 +260,12 @@
 							<div class="card-body">
 								<c:choose>
 								<c:when test="${user == null }">
+								<script>
+								if(${login==false}){
+									alert("회원정보가 없습니다 다시 로그인하십시오");
+								loaction.href=	 "page?url=WEB-INF/main.jsp";
+								}
+								</script>
 								<h3 class="card-title">충전/로그인/개인정보</h3>
 								<p class="card-text">내용</p>
 								<button type="button" class="btn btn-outline-danger signbt mb-2"
@@ -351,23 +357,23 @@
 																<div class="card-text">
 																	<div>
 																		<b>이름 </b>
-																		<p></p>
+																		<p>${user.name}</p>
 																	</div>
 																	<div>
 																		<b>생년월일</b>
-																		<p></p>
+																		<p>${user.birth}</p>
 																	</div>
 																	<div>
 																		<b>이메일</b>
-																		<p></p>
+																		<p>${user.email}</p>
 																	</div>
 																	<div>
 																		<b>핸드폰번호</b>
-																		<p></p>
+																		<p>${user.phone}</p>
 																	</div>
 																	<div>
 																		<b>잔여포인트</b>
-																		<p></p>
+																		<p>${user.point}</p>
 																	</div>
 																</div>
 															</div>

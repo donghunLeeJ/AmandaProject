@@ -232,13 +232,13 @@
                 <div class="form-group" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40" name="email">
+                        <input type="email" class="form-control" id="email" data-rule-required="true"maxlength="40" name="newemail" value="${user.email}">
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" name="phone">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" name="phone" value="${user.phone}">
                     </div>
                 </div>
                 <div class="form-group">
