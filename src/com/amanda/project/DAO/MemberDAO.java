@@ -133,9 +133,10 @@ public class MemberDAO {
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setString(1, id);
-			pstat.setString(2, pw);
-
+			pstat.setString(2, this.testSHA256(pw));
+			
 			int result = pstat.executeUpdate();
+			System.out.println(result);
 			
 			return result;
 		}catch(Exception e) {

@@ -90,14 +90,24 @@ public class MemberController extends HttpServlet {
 			//회원 탈퇴 컨트롤러
 			String delid= request.getParameter("id");//삭제할 아이디
 			String delpw= request.getParameter("pw");//삭제할 패스워드
-		
+			
+			System.out.println(delid);
+			System.out.println(delpw);
 			
 				int delresult = dao.delete(delid, delpw);
-				if(delresult==1) {
-					request.setAttribute("delresult", delresult);
-					request.getRequestDispatcher("WEB-INF/outmember.jsp").forward(request, response);
-				}
-			
+				System.out.println(delresult);
+				
+					
+				
+					if(delresult==1) {
+						request.getSession().invalidate();
+						request.setAttribute("delresult", delresult);
+						request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
+					}else {
+						request.setAttribute("delresult", delresult);
+						request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
+					}
+					
 			break;
 
 			
