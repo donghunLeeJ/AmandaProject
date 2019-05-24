@@ -111,7 +111,7 @@ public class MemberController extends HttpServlet {
 			String phone=request.getParameter("phone");
 			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
            	String id=dto.getId();
-				int result=dao.updateMemberpw(new MemberDTO(id,pw,email,phone));
+				int result=dao.updateMember(new MemberDTO(id,pw,email,phone));
 				if(result==1) {
 					System.out.println(result);
 				request.getSession().setAttribute("user", dao.select_user(id));
