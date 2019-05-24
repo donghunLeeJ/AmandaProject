@@ -18,6 +18,7 @@ import org.apache.commons.io.FileExistsException;
 
 import com.amanda.project.DAO.BoardDAO;
 import com.amanda.project.DTO.BoardDTO;
+import com.amanda.project.DTO.MemberDTO;
 import com.amanda.project.DTO.ReplDTO;
 
 @WebServlet("*.board")
@@ -33,13 +34,13 @@ public class BoardController extends HttpServlet {
 		try {
 
 			if(command.equals("/BoardWrite.board")){
-				
 				String title = request.getParameter("title");
 				String newTitle = title.replace("<", "%1$2#").replace(">", "!5@4#");
-
 				String contents =request.getParameter("contents");
 				String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
-				String writer = (String)request.getSession().getAttribute("loginId");
+				
+				MemberDTO user = (MemberDTO)request.getSession().getAttribute("user");
+				String writer = user.getId();
 				int viewCount = 1;
 				String ipAddr = request.getLocalAddr();
 				BoardDTO dto = new BoardDTO(newTitle,newContents,writer,viewCount,ipAddr);
