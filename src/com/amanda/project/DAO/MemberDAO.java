@@ -1,4 +1,5 @@
 package com.amanda.project.DAO;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -76,8 +77,8 @@ public class MemberDAO {
 			dto.setPw(rs.getString(3));
 			dto.setName(rs.getString(4));
 			dto.setBirth(rs.getString(5));
-			dto.setPhone(rs.getString(6));
-			dto.setEmail(rs.getString(7));
+			dto.setEmail(rs.getString(6));
+			dto.setPhone(rs.getString(7));
 			dto.setPoint(rs.getInt(8));
 			return dto;
 		}catch(Exception e) {
@@ -92,7 +93,7 @@ public class MemberDAO {
 		String sql="update Member set pw=?,email=?,phone=?  where id=? ";
 		Connection con=ds.getConnection();
 		PreparedStatement pstat=con.prepareStatement(sql);
-		pstat.setString(1,dto.getPw());
+		pstat.setString(1,this.testSHA256(dto.getPw()));
 		pstat.setString(2,dto.getEmail());
 		pstat.setString(3, dto.getPhone());
 		pstat.setString(4, dto.getId());

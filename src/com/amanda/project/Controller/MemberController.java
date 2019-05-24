@@ -1,5 +1,6 @@
 package com.amanda.project.Controller;
 
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -26,8 +27,10 @@ public class MemberController extends HttpServlet {
 			String loginid=request.getParameter("loginid");
 			String loginpw=request.getParameter("loginpw");
 			System.out.println(loginid+loginpw);
+			boolean login;
 			try {
-				boolean login = dao.checklogin(loginid, dao.testSHA256(loginpw));
+				login = dao.checklogin(loginid, dao.testSHA256(loginpw));
+			
 				if(login==true) {
 					System.out.println(login);
 					request.getSession().setAttribute("user", dao.select_user(loginid));
@@ -41,11 +44,11 @@ public class MemberController extends HttpServlet {
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 					rd.forward(request, response);
 				}
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+				
 		
 			
 			break;
@@ -92,13 +95,36 @@ public class MemberController extends HttpServlet {
 				}
 			
 			break;
+
+			
 			
 		case "updateProc.member" :
-			//회원 정보수정 컨트롤러
-
+			//회원 정보수정 컨트롤러	
+			try {
+			String pw=request.getParameter("newpw");
+			String email=request.getParameter("newemail");
+			String phone=request.getParameter("phone");
+			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
+            String id=dto.getId();
+		
+				int result=dao.updateMember(new MemberDTO(id,pw,email,phone));
+				System.out.println(result);
+				if(result==1) {
+					System.out.println(result);
+				request.setAttribute("user", dao.select_user(id));
+					request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+			
+				}
+				} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+			
 			break;
 	
 		case "logoutProc.member" :
+			//로그아아웃 컨트롤러 
 			request.getSession().invalidate();
 			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
 		break;
