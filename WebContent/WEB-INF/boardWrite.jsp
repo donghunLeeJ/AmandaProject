@@ -2,12 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
+
 <html class="no-js" lang="">
-<!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +14,18 @@
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 <link rel="stylesheet"
@@ -40,10 +47,20 @@
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
 
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <style>
+#footer {
+	text-align: right;
+	padding: 0px;
+}
+
+.myrow {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 #wrapper {
-	margin-top: 50px;
+	margin-top: 20px;
+	padding: 0px;
 }
 
 div {
@@ -51,7 +68,7 @@ div {
 	text-align: center;
 }
 
-#write {
+#upload, #toList {
 	margin: 0px;
 }
 
@@ -60,53 +77,47 @@ div {
 	padding: 0px;
 }
 
+footer {
+	margin-top: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+header {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
 #text {
 	height: 600px;
-	line-height: 600px;
+	margin: 0px;
 }
 
-.titleLink {
-	border: none;
-	background-color: #00000000;
+#contents {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
 }
 
-#noInput {
-	border: none;
-	background-color: #00000000;
-	width: 90%;
-}
-.titleLink:hover{
-	cursor:pointer;
-}
-#writer {
-	word-wrap: break-word;
+#title {
+	margin-left: 10px;
+	width: 70%;
 }
 
-#searchDiv {
-	height: 50px;
-}
-
-#select, #search{
-	height: 30px;
+#titleWrapper {
 	margin-left: 10px;
 	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
 }
-#searchButt{
-	margin-left: 7px;
-	margin-right: 5px;
-}
-.myrow {
-	margin-left: 0px;
-	margin-right: 0px;
-}
-
 </style>
 </head>
 <body>
 	<!-- Left Panel -->
 
 	<aside id="left-panel" class="left-panel">
-
 		<nav class="navbar navbar-expand-sm navbar-default">
 
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -216,41 +227,6 @@ div {
 							<li><i class="menu-icon fa fa-paper-plane"></i><a
 								href="pages-forget.html">Forget Pass</a></li>
 						</ul></li>
-
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-               <ul class="nav navbar-nav">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/seat.jsp"> 
-					<i class="menu-icon fa fa-cogs"></i>잔여좌석
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/manu.jsp"> 
-					<i class="menu-icon fa fa-table"></i>메뉴
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/board.jsp"> 
-					<i class="menu-icon fa fa-th"></i>고객의소리
-					</a></li>
-					<c:choose>
-					<c:when test="${user == null }">
-						<li id="charge" class="menu-item-has-children dropdown"><a
-						href="#"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
-						<script>
-							$("#charge").on("click",function(){
-								alert("로그인 후 이용가능합니다.");	
-							})
-						</script>
-					</c:when>
-					<c:otherwise>
-					<li id="charge" class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/pay.jsp"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
-					</c:otherwise>
-					</c:choose>
-
 				</ul>
 			</div>
 		</nav>
@@ -333,7 +309,7 @@ div {
 									class="photo media-left"><img alt="avatar"
 										src="images/avatar/3.jpg"></span>
 									<div class="message media-body">
-										<span class="name float-left">Cheryl Wheeler</span> <span
+										<span class="name float-left">Cheryl Wheeler2</span> <span
 											class="time float-right">10 minutes ago</span>
 										<p>Hello, this is an example msg</p>
 									</div>
@@ -369,127 +345,45 @@ div {
 			</div>
 		</header>
 		<!-- /header -->
-		<!-- Header-->
-
-		<div class="breadcrumbs">
-			<div class="breadcrumbs-inner">
-				<div class="row m-0">
-					<div class="col-sm-4">
-						<div class="page-header float-left">
-							<div class="page-title">
-								<h1><b>자유 게시판</b></h1>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-8"></div>
-				</div>
-			</div>
-		</div>
 
 		<div class="content">
 			<div class="animated fadeIn">
-				<div class="row">
+				<div class="card">
 
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">
-									<div class="row" id="searchDiv">
-										<form action="BoardSearch.board">
-											<select id="select" name="select"><option>제목</option>
-												<option>글번호</option></select> <input type="text" id="search"
-												name="search"> <input type="text" id="hide"
-												name="currentPage" value="1">
-											<button id="searchButt" class="btn btn-secondary">검색</button>
-											<input type="button" value="전체 글 보기" id="showAll" class="btn btn-secondary">
-										</form>
+					<form action="BoardWrite.board" id="formWrite" method="post">
+						<div class="card-header">
+							<strong class="card-title">제목 : <input type="text"
+								id="title" name="title" required></strong>
+						</div>
+						<div class="card-body">
+							<div class="container" id="wrapper">
+								<div id="text">
+									<textarea id="contents" name="contents"></textarea>
+								</div>
+
+								<footer>
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
+
+											<input type="button" id="upload" value="작성하기"
+												class="btn btn-secondary"> <input type="button"
+												id="toList" value="목록으로" class="btn btn-secondary">
+										</div>
 									</div>
-								</strong>
-							</div>
-							<div class="card-body">
-								<table id="bootstrap-data-table"
-									class="table table-striped table-bordered">
-									<thead>
-										<tr class="row myrow">
-											<th
-												class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2">글
-												번호
-											</td>
-											<th
-												class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1">글
-												제목
-											</td>
-											<th
-												class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성자
-											
-											</td>
-											<th
-												class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성
-												시간
-											</td>
-											<th
-												class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">조회
-												수
-											</td>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="dto" items="${list}">
-											<form action="ShowContents.board" id="formContents">
-												<tr class="row myrow">
-													<td
-														class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2"><input
-														type="text" id="noInput" name="no"
-														value="${dto.board_seq}" readonly></td>
-													<td
-														class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button
-															class="titleLink">${dto.title}</button></td>
-													<td
-														class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writer}</td>
-													<td
-														class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writeDate}</td>
-													<td
-														class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">${dto.viewCount}</td>
-												</tr>
-											</form>
-										</c:forEach>
-									</tbody>
-								</table>
+								</footer>
 							</div>
 						</div>
-					</div>
-
-
+					</form>
 				</div>
 			</div>
-			<!-- .animated -->
-			<footer>
-				<div>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h5>${navi }</h5>
-					</div>
-				</div>
-				<div>
-					<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
-						<input type="button" id="write" value="글쓰기"
-							class="btn btn-secondary"> <input type="button"
-							id="goMain" value="메인 페이지로" class="btn btn-secondary">
-					</div>
-				</div>
-			</footer>
 		</div>
-		<!-- .content -->
-
-
 		<div class="clearfix"></div>
 
 		<footer class="site-footer">
 			<div class="footer-inner bg-white">
 				<div class="row">
-					<div class="col-sm-6">Copyright &copy; Amanda</div>
-					<div class="col-sm-6 text-right">
-						Designed by <a href="https://colorlib.com">Amanda</a>
-					</div>
+					<div class="col-sm-6 text-left">Copyright &copy; Amanda</div>
+					<div class="col-sm-6 text-right">Designed by Amanda</div>
 				</div>
 			</div>
 		</footer>
@@ -508,20 +402,62 @@ div {
 
 
 	<script>
-		$("#hide").hide();
-		$("#showAll").hide();
-		if ("${showAll}" == "showAll") {
-			$("#showAll").show();
-			$("#showAll").on("click", function() {
-				location.href = "Board.board?currentPage=1";
+		document.getElementById("toList").onclick = function() {
+			location.href = "Board.board?currentPage=1";
+		}
+
+		$(function() {
+			$("#contents").summernote({
+				placeholder : '글을 입력해주세요.',
+				tabsize : 2,
+				height : 100, // 기본 높이값
+				minHeight : 545, // 최소 높이값(null은 제한 없음)
+				maxHeight : 545, // 최대 높이값(null은 제한 없음)
+				focus : true, // 페이지가 열릴때 포커스를 지정함
+				lang : 'ko-KR',
+				//onlmageUpload callback함수 -> 미설정시 data형태로 에디터 그대로 삽입
+				callbacks : {
+					onImageUpload : function(files, editor, welEditable) {
+						for (var i = 0; i < files.length; i++) {
+							sendFile(files[i], this);
+						}
+					}
+				}
+			});
+
+			function sendFile(file, editor) {
+				var data = new FormData();
+				data.append('file', file);
+				$.ajax({
+					url : "ImageUpload.board",
+					type : "POST",
+					data : data,
+					cache : false,
+					contentType : false,
+					enctype : "multipart/form-data",
+					processData : false,
+					success : function(resp) {
+						$(".note-editable").append("<img src='"+resp+"'>");
+					},
+					fail : function(resp) {
+						console.log(resp);
+					}
+				});
+
+			}
+
+			$("#upload").on("click", function() {
+				$("#contents").val($(".note-editable").html());
+				if ($("#contents").val() == "<p><br></p>") {
+					alert("게시글을 작성해주세요.");
+				} else if ($("#title").val() == "") {
+					alert("제목을 작성해주세요.");
+				} else if($("#contents").val() != "<p><br></p>" && $("#title").val() != ""){
+					$("#formWrite").submit();
+				}
 			})
-		}
-		document.getElementById("write").onclick = function() {
-			location.href = "Write.board"
-		}
-		document.getElementById("goMain").onclick = function() {
-			location.href = "Index.log"
-		}
+
+		});
 	</script>
 
 </body>

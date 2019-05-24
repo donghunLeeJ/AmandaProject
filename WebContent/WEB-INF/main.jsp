@@ -35,11 +35,9 @@
 	href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
 	rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+
 
 
 <style>
@@ -85,13 +83,28 @@
 							class="menu-icon fa fa-table"></i>메뉴
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/board.jsp"> <i
+						href="Board.board?currentPage=1"> <i
 							class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a
+					<c:choose>
+					<c:when test="${user == null }">
+						<li id="charge" class="menu-item-has-children dropdown"><a
+						href="#"> <i
+							class="menu-icon fa fa-tasks"></i>충전하기
+					</a></li>
+						<script>
+							$("#charge").on("click",function(){
+								alert("로그인 후 이용가능합니다.");	
+							})
+						</script>
+					</c:when>
+					<c:otherwise>
+					<li id="charge" class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/pay.jsp"> <i
 							class="menu-icon fa fa-tasks"></i>충전하기
 					</a></li>
+					</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</nav>
@@ -305,7 +318,7 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form">
+												<form action="loginProc.member" id="form" method="post">
 													<div class="form-group">
 														<label for="exampleFormControlInput1">ID</label> <input
 															type="text" class="form-control" id="joinemail"
@@ -333,15 +346,11 @@
 								</div>
 
 								<script>
-									$("#joinMem")
-											.on(
-													"click",
-													function() {
-														location.href = "page?url=WEB-INF/joinMem.jsp";
-													})
+									$("#joinMem").on("click",function() {
+									location.href = "page?url=WEB-INF/joinMem.jsp";
+									})
 									document.getElementById("login").onclick = function() {
-										document.getElementById("form")
-												.submit();
+									document.getElementById("form").submit();
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
 								</script>

@@ -48,6 +48,7 @@ public class MemberDAO {
 		}
 		return SHA;
 	}
+	/** 디비 값을 확인하고 로그인을 진행하는 메서드*/
 	public boolean checklogin(String id,String pw)throws Exception{
 		String sql="select * from Member where id= ? and pw= ? ";
 		try (	Connection con=ds.getConnection();
@@ -62,6 +63,7 @@ public class MemberDAO {
 			return rs.next();
 		}
 	}
+	/** session에 값을 저장하기 위한 메서드*/
 	public MemberDTO select_user(String id){
 		String sql="select * from Member where id= ?";
 		try (	Connection con=ds.getConnection();
@@ -89,7 +91,9 @@ public class MemberDAO {
 
 
 
-	public int updateMemberpw(MemberDTO dto) throws Exception {
+	/** 회원정보수정 메서드*/
+	public int updateMember(MemberDTO dto) throws Exception {
+
 		String sql="update Member set pw=?,email=?,phone=?  where id=? ";
 		Connection con=ds.getConnection();
 		PreparedStatement pstat=con.prepareStatement(sql);
@@ -104,8 +108,11 @@ public class MemberDAO {
 		return result;
 	}
 
+
 	
-	
+
+	/** 회원가입 메서드*/
+
 	public int joinmember(MemberDTO dto) throws Exception{
 		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default)";
 		try(
@@ -124,6 +131,7 @@ public class MemberDAO {
 			return result;
 		}
 	}
+	/** 회원탈퇴 메서드*/
 	public int delete(String id, String pw) {
 		String sql = "delete from member where id = ? and pw = ?";
 

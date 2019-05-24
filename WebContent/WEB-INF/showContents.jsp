@@ -2,12 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
+
 <html class="no-js" lang="">
-<!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +14,18 @@
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 <link rel="stylesheet"
@@ -40,7 +47,6 @@
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
 
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <style>
 #wrapper {
 	margin-top: 50px;
@@ -51,7 +57,7 @@ div {
 	text-align: center;
 }
 
-#write {
+#upload, #toList {
 	margin: 0px;
 }
 
@@ -61,52 +67,96 @@ div {
 }
 
 #text {
-	height: 600px;
-	line-height: 600px;
+	height: 700px;
 }
 
-.titleLink {
-	border: none;
-	background-color: #00000000;
+#contents {
+	margin: 0px;
+	padding: 20px;
+	width: 100%;
+	height: 100%;
 }
 
-#noInput {
-	border: none;
-	background-color: #00000000;
+#repl {
+	margin: 0px;
+	padding: 10px;
 	width: 90%;
 }
-.titleLink:hover{
-	cursor:pointer;
+
+#replButt {
+	width: 10%;
 }
-#writer {
+
+#title {
+	margin-left: 10px;
+	width: 80%;
+}
+
+#writer, #writeDate {
+	margin-left: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 80%;
+}
+
+.titleWrapper {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#titlerow {
+	margin-top: 30px;
+}
+
+#writerrow, #daterow {
+	margin-top: 8px;
+}
+
+#replHeader {
+	margin-top: 30px;
+	margin-bottom: 40px;
+	width: 50px;
+}
+
+#replContentsBox {
+	margin-bottom: 100px;
+}
+
+#repl_writer {
 	word-wrap: break-word;
 }
 
-#searchDiv {
-	height: 50px;
+#repl_time {
+	word-wrap: break-word;
 }
 
-#select, #search{
-	height: 30px;
-	margin-left: 10px;
-	margin-top: 10px;
-}
-#searchButt{
-	margin-left: 7px;
-	margin-right: 5px;
-}
-.myrow {
-	margin-left: 0px;
-	margin-right: 0px;
+#replButts {
+	text-align: right;
+	padding: 0px;
 }
 
+#eachRepl {
+	margin-top: 20px;
+}
+
+#repl_text {
+	width: 100%;
+	border: none;
+	text-aligh: center;
+	padding-left : 10px;
+}
+#showReplBox{
+	border:0px;
+}
+#replBox{
+	margin-top:20px;
+}
 </style>
 </head>
 <body>
 	<!-- Left Panel -->
 
 	<aside id="left-panel" class="left-panel">
-
 		<nav class="navbar navbar-expand-sm navbar-default">
 
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -216,41 +266,6 @@ div {
 							<li><i class="menu-icon fa fa-paper-plane"></i><a
 								href="pages-forget.html">Forget Pass</a></li>
 						</ul></li>
-
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-               <ul class="nav navbar-nav">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/seat.jsp"> 
-					<i class="menu-icon fa fa-cogs"></i>잔여좌석
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/manu.jsp"> 
-					<i class="menu-icon fa fa-table"></i>메뉴
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/board.jsp"> 
-					<i class="menu-icon fa fa-th"></i>고객의소리
-					</a></li>
-					<c:choose>
-					<c:when test="${user == null }">
-						<li id="charge" class="menu-item-has-children dropdown"><a
-						href="#"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
-						<script>
-							$("#charge").on("click",function(){
-								alert("로그인 후 이용가능합니다.");	
-							})
-						</script>
-					</c:when>
-					<c:otherwise>
-					<li id="charge" class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/pay.jsp"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
-					</c:otherwise>
-					</c:choose>
-
 				</ul>
 			</div>
 		</nav>
@@ -333,7 +348,7 @@ div {
 									class="photo media-left"><img alt="avatar"
 										src="images/avatar/3.jpg"></span>
 									<div class="message media-body">
-										<span class="name float-left">Cheryl Wheeler</span> <span
+										<span class="name float-left">Cheryl Wheeler2</span> <span
 											class="time float-right">10 minutes ago</span>
 										<p>Hello, this is an example msg</p>
 									</div>
@@ -369,127 +384,136 @@ div {
 			</div>
 		</header>
 		<!-- /header -->
-		<!-- Header-->
-
-		<div class="breadcrumbs">
-			<div class="breadcrumbs-inner">
-				<div class="row m-0">
-					<div class="col-sm-4">
-						<div class="page-header float-left">
-							<div class="page-title">
-								<h1><b>자유 게시판</b></h1>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-8"></div>
-				</div>
-			</div>
-		</div>
 
 		<div class="content">
 			<div class="animated fadeIn">
-				<div class="row">
+				<div class="card">
 
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">
-									<div class="row" id="searchDiv">
-										<form action="BoardSearch.board">
-											<select id="select" name="select"><option>제목</option>
-												<option>글번호</option></select> <input type="text" id="search"
-												name="search"> <input type="text" id="hide"
-												name="currentPage" value="1">
-											<button id="searchButt" class="btn btn-secondary">검색</button>
-											<input type="button" value="전체 글 보기" id="showAll" class="btn btn-secondary">
-										</form>
+					<form action="BoardWrite.board" id="formWrite" method="post">
+						<div class="card-header">
+							<strong class="card-title"> <header>
+									<div class="row">
+										<div class="col-lg-8 col-md-8 col-sm-8 col-8 titleWrapper"
+											id="titlerow">
+											제목 : <input type="text" id="title" readonly
+												value="${dto.title}">
+										</div>
+										<div class="col-lg-4 col-md-4 col-sm-4 col-4 titleWrapper">
+											<div class="row">
+												<div class="col-lg-4 d-none d-lg-block" id="writerrow">글쓴이
+													:</div>
+												<div class="col-lg-8 col-md-12 col-sm-12 col-12">
+													<input type="text" id="writer" readonly
+														value="${dto.writer}">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-4 d-none d-lg-block" id="daterow">작성일시
+													:</div>
+												<div class="col-lg-8 col-md-12 col-sm-12 col-12">
+													<input type="text" id="writeDate" readonly
+														value="${dto.writeDate}">
+												</div>
+											</div>
+										</div>
 									</div>
-								</strong>
-							</div>
-							<div class="card-body">
-								<table id="bootstrap-data-table"
-									class="table table-striped table-bordered">
-									<thead>
-										<tr class="row myrow">
-											<th
-												class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2">글
-												번호
-											</td>
-											<th
-												class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1">글
-												제목
-											</td>
-											<th
-												class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성자
-											
-											</td>
-											<th
-												class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성
-												시간
-											</td>
-											<th
-												class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">조회
-												수
-											</td>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="dto" items="${list}">
-											<form action="ShowContents.board" id="formContents">
-												<tr class="row myrow">
-													<td
-														class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2"><input
-														type="text" id="noInput" name="no"
-														value="${dto.board_seq}" readonly></td>
-													<td
-														class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button
-															class="titleLink">${dto.title}</button></td>
-													<td
-														class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writer}</td>
-													<td
-														class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writeDate}</td>
-													<td
-														class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">${dto.viewCount}</td>
-												</tr>
-											</form>
-										</c:forEach>
-									</tbody>
-								</table>
+								</header></strong>
+						</div>
+						<div class="card-body">
+							<div class="container" id="wrapper">
+								<main id="main">
+								<div class="row" id="text">
+									<div id="contents" name="contents"
+										>${dto.contents}</div>
+								</div>
+								</main>
 							</div>
 						</div>
-					</div>
+					</form>
+					
+				</div>
+				<footer>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12"
+					id="footer">
 
+					<c:if test="${id==writer }">
+						<input type="button" id="modify" value="수정하기" class="btn btn-secondary">
+						<input type="button" id="delete" value="글 삭제" class="btn btn-secondary">
+					</c:if>
+					<input type="button" id="showReplBox" value="댓글달기" class="btn btn-secondary"> <input
+						type="button" id="toList" value="목록으로" class="btn btn-secondary">
 
 				</div>
 			</div>
-			<!-- .animated -->
-			<footer>
-				<div>
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h5>${navi }</h5>
-					</div>
-				</div>
-				<div>
-					<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
-						<input type="button" id="write" value="글쓰기"
-							class="btn btn-secondary"> <input type="button"
-							id="goMain" value="메인 페이지로" class="btn btn-secondary">
-					</div>
-				</div>
-			</footer>
+		</footer>
+		<form action="Reply.board" id="replForm">
+			<div class="row" id="replBox">
+				<input type="text" value="${no}" name="contents_no" id="contents_no">
+				<textarea id="repl" name="repl_contents"></textarea>
+				<input type="button" id="replButt" value="등록하기" class="btn btn-secondary">
+			</div>
+		</form>
+		<div id="replHeader">
+			<h4>댓글</h4>
 		</div>
-		<!-- .content -->
+		<div id="replContentsBox">
+			<c:forEach var="repldto" items="${replList}">
+				<form action="ReplEdit.board">
+					<div class="row" id="eachRepl">
+						<div
+							class="col-lg-2 col-md-2 col-sm-2 col-2"
+							id="repl_writer">${repldto.repl_writer}</div>
+						<div
+							class="col-lg-8 col-md-8 col-sm-8 col-8">
+							<input type="text" id="repl_text" name="repl_contents"
+								value="${repldto.repl_contents}" readonly> <input
+								type="text" class="hide" name="contents_no"
+								value="${repldto.contents_no}"> <input type="text"
+								class="hide" name="repl_seq" value="${repldto.repl_seq}">
+						</div>
 
-
+						<div
+							class="col-lg-2 col-md-2 col-sm-2 col-2"
+							id="repl_time">${repldto.repl_time}</div>
+					</div>
+					<c:if test="${id==repldto.repl_writer }">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12" id="replButts">
+								<input type="submit" class="replEditCompl btn btn-secondary" value="수정완료"
+									style="margin-right: 4px;" ><input type="button"
+									value="수정" class="modiRepl btn btn-secondary"> <input type="button"
+									value="삭제" class="delRepl btn btn-secondary">
+							</div>
+						</div>
+					</c:if>
+				</form>
+				<script>
+				$(".replEditCompl").hide();
+				$(".hide").hide();
+				
+				if(${id==repldto.repl_writer }){
+					$(".modiRepl").on("click",function(){
+						document.getElementById("repl_text").readOnly=false;
+						$(this).parent().find("input:nth-child(1)").show();
+						$(this).parent("div").parent("div").parent("form").find("div").find("div:nth-child(2)").find("input:nth-child(1)").focus();
+					})
+					$(".delRepl").on("click",function(){
+						location.href = "ReplDelete.board?repl_seq="+${repldto.repl_seq}+"&contents_no="+${repldto.contents_no};
+					})
+				}
+				</script>
+			</c:forEach>
+		</div>
+			</div>
+		</div>
 		<div class="clearfix"></div>
 
 		<footer class="site-footer">
 			<div class="footer-inner bg-white">
 				<div class="row">
-					<div class="col-sm-6">Copyright &copy; Amanda</div>
-					<div class="col-sm-6 text-right">
-						Designed by <a href="https://colorlib.com">Amanda</a>
-					</div>
+					<div class="col-sm-6 text-left">Copyright &copy; Amanda</div>
+					<div class="col-sm-6 text-right">Designed by Amanda</div>
 				</div>
 			</div>
 		</footer>
@@ -508,19 +532,33 @@ div {
 
 
 	<script>
-		$("#hide").hide();
-		$("#showAll").hide();
-		if ("${showAll}" == "showAll") {
-			$("#showAll").show();
-			$("#showAll").on("click", function() {
-				location.href = "Board.board?currentPage=1";
-			})
+	$("#contents_no").hide();
+	$("#replBox").hide();
+	$("#showReplBox").on("click",function(){
+		$("#replBox").slideDown(500,"");
+	})
+	$("#replButt").on("click",function(){
+		if($("#repl").val()==""){
+			alert("댓글을 입력해주세요.");
+		}else{
+			$("#replForm").submit();
 		}
-		document.getElementById("write").onclick = function() {
-			location.href = "Write.board"
+	})
+	
+		document.getElementById("toList").onclick = function() {
+			location.href = "Board.board?currentPage=1";
+		}	
+		
+		if(${id==writer }){
+		document.getElementById("modify").onclick = function() {
+			location.href = "ContentsEdit.board?no="+${no};
 		}
-		document.getElementById("goMain").onclick = function() {
-			location.href = "Index.log"
+		document.getElementById("delete").onclick = function() {
+			var result = confirm("정말 삭제하시겠습니까?");
+			if (result) {
+				location.href = "BoardDel.board?no="+${no};
+			}
+		}
 		}
 	</script>
 
