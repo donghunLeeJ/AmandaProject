@@ -105,20 +105,19 @@ public class MemberController extends HttpServlet {
 		case "updateProc.member" :
 			//회원 정보수정 컨트롤러	
 			try {
+				System.out.println("kk");
 			String pw=request.getParameter("newpw");
 			String email=request.getParameter("newemail");
 			String phone=request.getParameter("phone");
 			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
-            String id=dto.getId();
-		
-				int result=dao.updateMember(new MemberDTO(id,pw,email,phone));
-				System.out.println(result);
+           	String id=dto.getId();
+				int result=dao.updateMemberpw(new MemberDTO(id,pw,email,phone));
 				if(result==1) {
 					System.out.println(result);
-				request.setAttribute("user", dao.select_user(id));
+				request.getSession().setAttribute("user", dao.select_user(id));
 					request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-			
 				}
+			
 				} catch (Exception e) {
 				
 				e.printStackTrace();

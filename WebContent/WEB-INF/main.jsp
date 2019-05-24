@@ -292,6 +292,15 @@
 								<p class="card-text">내용</p>
 								<h5>${user.name } 님 반갑습니다</h5>
 								<h5>${user.name } 님의 잔여포인트는 ${user.point }입니다</h5>
+									<button type="button" class="btn btn-primary"  id="logoutbtn">logout</button>
+									<script>
+									$("#logoutbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "logoutProc.member";
+											})
+									</script>
 								</c:otherwise>
 								</c:choose>
 								<!-- 					여기부터 진향이가 만든 로그인폼 -->

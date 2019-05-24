@@ -23,9 +23,21 @@
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+<style>
+	#pwcheckbox{
+	width:500px;
+		height: 25px;
 
+	box-sizing: border-box;
+	}
+	#pwcheckbox1{
+		width: 25%;
+		float: left;
+	
+	}
+	</style>
 </head>
 <body>
     <!-- Left Panel -->
@@ -263,13 +275,13 @@
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="newpw" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                        <input type="password" class="form-control" id="newpw" name="newpw" data-rule-required="true" placeholder="패스워드" maxlength="30"  pattern="[0-9a-zA-z]{8,}"required>
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
-                    <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
+                    <label for="inputPasswordCheck" class="col-lg-2 control-label"><div id="pwcheckbox"><div id="pwcheckbox1">패스워드 확인 </div><div id="result"></div></div></label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                        <input type="password" class="form-control" id="newpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" name="newpw2" pattern="[0-9a-zA-z]{8,}" required>
                     </div>
                 </div>
 
@@ -295,7 +307,23 @@
         </div>
         </div><!-- .content -->
         
-        
+        <script>
+		document.getElementById("newpw2").oninput = function() {
+			var pw1 = document.getElementById("newpw").value;
+			var pw2 = document.getElementById("newpw2").value;
+
+			if (pw1 == pw2) {
+				document.getElementById("result").innerHTML = "패스워드일치";
+				result.style.color = "green";
+			}
+
+			else {
+				document.getElementById("result").innerHTML = "불일치";
+				result.style.color = "#e66178";
+
+			}
+		}
+	</script>
         
     <div class="clearfix"></div>
 
