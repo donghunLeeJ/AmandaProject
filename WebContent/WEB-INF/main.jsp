@@ -319,6 +319,8 @@
 							<div class="card-body">
 								<h3 class="card-title">PC방 이벤트가 들어갈 곳</h3>
 								<p class="card-text">내용</p>
+	
+
 							</div>
 						</div>
 					</div>
@@ -386,6 +388,10 @@
 								<div class="card-header">
 									<i class="fa fa-user"></i><strong class="card-title pl-2">
 										My Page </strong>
+										<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 								</div>
 								<div class="card-body">
 									<div class="mx-auto d-block">
@@ -428,8 +434,8 @@
 								충전</button>
 							<button id="updatememberbtn" type="button"
 								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
+									
 						</div>
 					</form>
 
@@ -441,6 +447,16 @@
 
 
 	<script>
+	
+	
+	$("#logoutbtn1")
+	.on(
+			"click",
+			function() {
+				location.href = "logoutProc.member";
+			})
+
+	
 							$("#updatememberbtn")
 									.on(
 											"click",

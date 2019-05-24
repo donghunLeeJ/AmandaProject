@@ -343,6 +343,10 @@
 															<div class="card-header">
 																<i class="fa fa-user"></i><strong
 																	class="card-title pl-2"> My Page </strong>
+																		<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
 															</div>
 															<div class="card-body">
 																<div class="mx-auto d-block">
@@ -388,7 +392,7 @@
 														<button id="updatememberbtn" type="button"
 															class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
 														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Close</button>
+															data-dismiss="modal" id="logout">로그아웃</button>
 													</div>
 												</form>
 
@@ -398,6 +402,12 @@
 								</div>
 
 						<script>
+						$("#logout")
+						.on(
+								"click",
+								function() {
+									location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+								})
 							$("#updatememberbtn")
 									.on(
 											"click",
