@@ -104,9 +104,25 @@ div {
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/board.jsp"> 
 					<i class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/pay.jsp">
-					 <i class="menu-icon fa fa-tasks"></i>충전하기
+					<c:choose>
+					<c:when test="${user == null }">
+						<li id="charge" class="menu-item-has-children dropdown"><a
+						href="#"> <i
+							class="menu-icon fa fa-tasks"></i>충전하기
 					</a></li>
+						<script>
+							$("#charge").on("click",function(){
+								alert("로그인 후 이용가능합니다.");	
+							})
+						</script>
+					</c:when>
+					<c:otherwise>
+					<li id="charge" class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/pay.jsp"> <i
+							class="menu-icon fa fa-tasks"></i>충전하기
+					</a></li>
+					</c:otherwise>
+					</c:choose>
 				</ul>
             </div>
         </nav>
