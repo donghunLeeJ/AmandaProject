@@ -1,5 +1,6 @@
 package com.amanda.project.Controller;
 
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.amanda.project.DAO.MemberDAO;
 import com.amanda.project.DTO.MemberDTO;
 
@@ -16,9 +18,10 @@ import com.amanda.project.DTO.MemberDTO;
 public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getRequestURI().substring(request.getContextPath().length()+1);
-		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;UTF-8");
 		MemberDAO dao=new MemberDAO();
-
+		
 		switch(cmd) {
 		
 		case "loginProc.member" :
@@ -26,11 +29,15 @@ public class MemberController extends HttpServlet {
 			String loginid=request.getParameter("loginid");
 			String loginpw=request.getParameter("loginpw");
 			System.out.println(loginid+loginpw);
+			boolean login;
 			try {
-				boolean login = dao.checklogin(loginid, dao.testSHA256(loginpw));
+				login = dao.checklogin(loginid, dao.testSHA256(loginpw));
+			
 				if(login==true) {
 					System.out.println(login);
 					request.getSession().setAttribute("user", dao.select_user(loginid));
+					MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
+					dto.getId();
 					request.setAttribute("login", login);
 				RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 				rd.forward(request, response);
@@ -41,11 +48,11 @@ public class MemberController extends HttpServlet {
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 					rd.forward(request, response);
 				}
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+				
 		
 			
 			break;
@@ -83,22 +90,54 @@ public class MemberController extends HttpServlet {
 			//회원 탈퇴 컨트롤러
 			String delid= request.getParameter("id");//삭제할 아이디
 			String delpw= request.getParameter("pw");//삭제할 패스워드
-		
+			
+			System.out.println(delid);
+			System.out.println(delpw);
 			
 				int delresult = dao.delete(delid, delpw);
-				if(delresult==1) {
-					request.setAttribute("delresult", delresult);
-					request.getRequestDispatcher("WEB-INF/outmember.jsp").forward(request, response);
-				}
-			
+				System.out.println(delresult);
+				
+					
+				
+					if(delresult==1) {
+						request.getSession().invalidate();
+						request.setAttribute("delresult", delresult);
+						request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
+					}else {
+						request.setAttribute("delresult", delresult);
+						request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
+					}
+					
 			break;
+
+			
 			
 		case "updateProc.member" :
-			//회원 정보수정 컨트롤러
-
+			//회원 정보수정 컨트롤러	
+			try {
+				System.out.println("kk");
+			String pw=request.getParameter("newpw");
+			String email=request.getParameter("newemail");
+			String phone=request.getParameter("phone");
+			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
+           	String id=dto.getId();
+				int result=dao.updateMember(new MemberDTO(id,pw,email,phone));
+				if(result==1) {
+					System.out.println(result);
+				request.getSession().setAttribute("user", dao.select_user(id));
+					request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+				}
+			
+				} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+			
 			break;
 	
 		case "logoutProc.member" :
+			//로그아아웃 컨트롤러 
 			request.getSession().invalidate();
 			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
 		break;

@@ -35,11 +35,9 @@
 	href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
 	rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+
 
 
 <style>
@@ -85,13 +83,27 @@
 							class="menu-icon fa fa-table"></i>메뉴
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/board.jsp"> <i
+						href="Board.board?currentPage=1"> <i
 							class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/pay.jsp"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
+					<c:choose>
+						<c:when test="${user == null }">
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+							<script>
+							$("#charge").on("click",function(){
+								alert("로그인 후 이용가능합니다.");	
+							})
+						</script>
+						</c:when>
+						<c:otherwise>
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/pay.jsp"> <i
+									class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</nav>
@@ -234,12 +246,10 @@
 		<!-- 		상단 네비 끝 -->
 		<!-- Content 시작 -->
 		<div class="content">
-			<!-- Animated -->
 			<div class="animated fadeIn">
-				<!-- Widgets  -->
 				<div class="row">
-					<div class="col-lg-12 area specifications">
-						<div class="card my-card border-danger">
+					<div class="col-lg-12 ">
+						<div class="card title">
 							<div class="card-body">
 								<h3 class="card-title">PC방 관련 스팩/사양이 들어갈 곳</h3>
 								<p class="card-text">내용</p>
@@ -256,12 +266,19 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="col-lg-6 area">
 						<div class="card my-card border-danger">
 							<div class="card-body">
 								<c:choose>
-								<c:when test="${user == null }">
+									<c:when test="${user == null }">
+										<script>
+								if(${login==false}){
+									alert("회원정보가 없습니다 다시 로그인하십시오");
+									loaction.href=	 "page?url=WEB-INF/main.jsp";
+								}
+								</script>
+
 								<h3 class="card-title">충전/로그인/개인정보</h3>
 								<p class="card-text">내용</p>
 								<button type="button" class="btn btn-outline-danger signbt mb-2"
@@ -273,134 +290,173 @@
 								<p class="card-text">내용</p>
 								<h5>${user.name } 님 반갑습니다</h5>
 								<h5>${user.name } 님의 잔여포인트는 ${user.point }입니다</h5>
+									<button type="button" class="btn btn-primary"  id="logoutbtn">logout</button>
+									<script>
+									$("#logoutbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "logoutProc.member";
+											})
+									</script>
 								</c:otherwise>
+
 								</c:choose>
-								<!-- 					여기부터 진향이가 만든 로그인폼 -->
-								<div class="modal fade" id="exampleModal" tabindex="-1"
-									role="dialog" aria-labelledby="exampleModalLabel"
-									aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">L O G I
-													N</h5>
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<form action="loginProc.member" id="form">
-													<div class="form-group">
-														<label for="exampleFormControlInput1">ID</label> <input
-															type="text" class="form-control" id="joinemail"
-															placeholder="ID를 입력하시오" required name="loginid">
-													</div>
-													<div class="form-group">
-														<label for="exampleFormControlInput1">Password</label> <input
-															type="password" class="form-control" id="joinpassword"
-															placeholder="비밀번호 입력하시오" required name="loginpw">
-													</div>
-													<div class="modal-footer">
-														<div id="remember">
-															<input type="checkbox">자동로그인
-														</div>
-														<button type="button" class="btn btn-primary"
-															type="button" id="joinMem">회원가입</button>
-														<button type="button" class="btn btn-primary" id="login">login</button>
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Close</button>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 area">
+						<div class="card my-card border-danger">
+							<div class="card-body">
+								<h3 class="card-title">오늘의 메뉴가 들어갈 곳</h3>
+								<p class="card-text">내용</p>
+							</div>
+						</div>
+					</div>
 
-								<script>
-									$("#joinMem")
-											.on(
-													"click",
-													function() {
-														location.href = "page?url=WEB-INF/joinMem.jsp";
-													})
-									document.getElementById("login").onclick = function() {
-										document.getElementById("form")
-												.submit();
-									}
-									// 									로그인 버튼과 회원가입 버튼의 script
-								</script>
-								<!-- 						진향이 로그인폼끝 -->
-								<!-- 								진향이 마이페이지 폼 -->
-								<div class="modal fade" id="exampleModal1" tabindex="-1"
-									role="dialog" aria-labelledby="exampleModalLabel1"
-									aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-body1">
-												<form>
-													<div class="form-group m-0 p-0">
-														<div class="card">
-															<div class="card-header">
-																<i class="fa fa-user"></i><strong
-																	class="card-title pl-2"> My Page </strong>
-															</div>
-															<div class="card-body">
-																<div class="mx-auto d-block">
-																	<img class="rounded-circle mx-auto d-block"
-																		src="images/admin.jpg" alt="profile image"
-																		width="80px">
-																	<h5 class="text-center mt-2 mb-1">Steven Lee</h5>
-																	<div class="location text-center">Lv. 일반회원</div>
-																</div>
-																<hr>
-																<div class="card-text">
-																	<div>
-																		<b>이름 </b>
-																		<p></p>
-																	</div>
-																	<div>
-																		<b>생년월일</b>
-																		<p></p>
-																	</div>
-																	<div>
-																		<b>이메일</b>
-																		<p></p>
-																	</div>
-																	<div>
-																		<b>핸드폰번호</b>
-																		<p></p>
-																	</div>
-																	<div>
-																		<b>잔여포인트</b>
-																		<p></p>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button id="deleteMembtn" type="button"
-															class="btn btn-outline-info" data-dismiss="modal">회원
-															탈퇴</button>
-														<button id="pointPagebtn" type="button"
-															class="btn btn-outline-info" data-dismiss="modal">포인트
-															충전</button>
-														<button id="updatememberbtn" type="button"
-															class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Close</button>
-													</div>
-												</form>
-
-											</div>
-										</div>
-									</div>
-								</div>
+					<div class="col-lg-6 area">
+						<div class="card my-card border-danger">
+							<div class="card-body">
+								<h3 class="card-title">PC방 이벤트가 들어갈 곳</h3>
+								<p class="card-text">내용</p>
+	
 
 							</div>
 						</div>
-						<script>
+					</div>
+				</div>
+			</div>
+			<!-- 					여기부터 진향이가 만든 로그인폼 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="loginProc.member" id="form" method="post">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">ID</label> <input
+								type="text" class="form-control" id="joinemail"
+								placeholder="ID를 입력하시오" required name="loginid">
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Password</label> <input
+								type="password" class="form-control" id="joinpassword"
+								placeholder="비밀번호 입력하시오" required name="loginpw">
+						</div>
+						<div class="modal-footer">
+							<div id="remember">
+								<input type="checkbox">자동로그인
+							</div>
+							<button type="button" class="btn btn-primary" type="button"
+								id="joinMem">회원가입</button>
+							<button type="button" class="btn btn-primary" id="login">login</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+									$("#joinMem").on("click",function() {
+									location.href = "page?url=WEB-INF/joinMem.jsp";
+									})
+									document.getElementById("login").onclick = function() {
+									document.getElementById("form").submit();
+									}
+									// 									로그인 버튼과 회원가입 버튼의 script
+	</script>
+								
+	<!-- 						진향이 로그인폼끝 -->
+	<!-- 								진향이 마이페이지 폼 -->
+	<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel1" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body1">
+					<form>
+						<div class="form-group m-0 p-0">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa fa-user"></i><strong class="card-title pl-2">
+										My Page </strong>
+										<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+								</div>
+								<div class="card-body">
+									<div class="mx-auto d-block">
+										<img class="rounded-circle mx-auto d-block"
+											src="images/admin.jpg" alt="profile image" width="130px">
+										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
+										<!-- <div class="location text-center">Lv. 일반회원</div> -->
+									</div>
+									<hr>
+									<div class="card-text">
+										<div>
+											<b>이름 </b>
+											<p>${user.name}</p>
+										</div>
+										<div>
+											<b>생년월일</b>
+											<p>${user.birth}</p>
+										</div>
+										<div>
+											<b>이메일</b>
+											<p>${user.email}</p>
+										</div>
+										<div>
+											<b>핸드폰번호</b>
+											<p>${user.phone}</p>
+										</div>
+										<div>
+											<b>잔여포인트</b>
+											<p>${user.point}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="deleteMembtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
+							<button id="pointPagebtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">포인트
+								충전</button>
+							<button id="updatememberbtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
+									
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+	
+	
+	$("#logoutbtn1")
+	.on(
+			"click",
+			function() {
+				location.href = "logoutProc.member";
+			})
+
+	
 							$("#updatememberbtn")
 									.on(
 											"click",
@@ -419,37 +475,13 @@
 						</script>
 
 
-						<!-- 진향이 마이페이지 폼끝 -->
-
-
-
-
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-6 area">
-				<div class="card my-card border-danger">
-					<div class="card-body">
-						<h3 class="card-title">오늘의 메뉴가 들어갈 곳</h3>
-						<p class="card-text">내용</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-6 area">
-				<div class="card my-card border-danger">
-					<div class="card-body">
-						<h3 class="card-title">PC방 이벤트가 들어갈 곳</h3>
-						<p class="card-text">내용</p>
-					</div>
-				</div>
-			</div>
+	<!-- 진향이 마이페이지 폼끝 -->
+		
+		
 		</div>
+	
+	<!-- 컨텐츠 끝 -->
 
-
-		<!-- /#add-category -->
-	</div>
-	</div>
 	<div class="clearfix"></div>
 	<!-- Footer -->
 	<footer class="site-footer">
@@ -462,7 +494,7 @@
 			</div>
 		</div>
 	</footer>
-	</div>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script
@@ -472,6 +504,5 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="assets/js/main.js"></script>
-
 </body>
 </html>
