@@ -35,9 +35,7 @@
 	href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
 	rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 
@@ -290,7 +288,7 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form">
+												<form action="loginProc.member" id="form" method="post">
 													<div class="form-group">
 														<label for="exampleFormControlInput1">ID</label> <input
 															type="text" class="form-control" id="joinemail"
@@ -318,15 +316,11 @@
 								</div>
 
 								<script>
-									$("#joinMem")
-											.on(
-													"click",
-													function() {
-														location.href = "page?url=WEB-INF/joinMem.jsp";
-													})
+									$("#joinMem").on("click",function() {
+									location.href = "page?url=WEB-INF/joinMem.jsp";
+									})
 									document.getElementById("login").onclick = function() {
-										document.getElementById("form")
-												.submit();
+									document.getElementById("form").submit();
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
 								</script>

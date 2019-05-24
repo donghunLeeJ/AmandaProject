@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.amanda.project.DAO.MemberDAO;
 import com.amanda.project.DTO.MemberDTO;
 
@@ -16,9 +17,10 @@ import com.amanda.project.DTO.MemberDTO;
 public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getRequestURI().substring(request.getContextPath().length()+1);
-		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;UTF-8");
 		MemberDAO dao=new MemberDAO();
-
+		
 		switch(cmd) {
 		
 		case "loginProc.member" :
@@ -31,6 +33,8 @@ public class MemberController extends HttpServlet {
 				if(login==true) {
 					System.out.println(login);
 					request.getSession().setAttribute("user", dao.select_user(loginid));
+					MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
+					dto.getId();
 					request.setAttribute("login", login);
 				RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 				rd.forward(request, response);

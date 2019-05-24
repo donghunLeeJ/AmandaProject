@@ -207,7 +207,7 @@
             </div>
        
             <hr/>
-               <form class="form-horizontal" role="form" method="get" action="joinProc.member">
+               <form class="form-horizontal" role="form" method="post" action="joinProc.member">
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
