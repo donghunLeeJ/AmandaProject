@@ -34,7 +34,7 @@ public class BoardController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		BoardDAO dao = new BoardDAO();
-		
+
 		int result = 0;
 		try {
 
@@ -175,7 +175,7 @@ public class BoardController extends HttpServlet {
 				String realFilePath = null;
 				String tempFileName = null;
 				FilesDTO fidto = new FilesDTO();
-				
+
 				if(!uploadPath.exists()) {uploadPath.mkdir();}
 
 				DiskFileItemFactory diskFactory = new DiskFileItemFactory();
@@ -186,7 +186,7 @@ public class BoardController extends HttpServlet {
 
 				try {
 					List<FileItem> items = sfu.parseRequest(request); // List<FileItem>을 리턴값으로 가진다
-					
+
 					for(FileItem fi : items) {
 						if(fi.getSize()==0) {continue;} // 업로드 파일 선택을 하지 않았을 경우 의미없는 빈 파일 생성을 방지
 						while(true) {
@@ -200,10 +200,10 @@ public class BoardController extends HttpServlet {
 								System.out.println("파일 이름 재설정");
 							}
 						}
-						
+
 						System.out.println(realFilePath);
 						fidto.getFiles().add(realFilePath);
-						
+
 						request.getSession().setAttribute("files", fidto);
 
 						JsonObject obj = new JsonObject();
@@ -218,22 +218,22 @@ public class BoardController extends HttpServlet {
 				}					
 			}else if(command.equals("/ImageDel.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
-				boolean flag = files.isFlag();
-				System.out.println(files.getFiles().size());
-				if(!flag) {
-					for(int i=0;i<files.getFiles().size();i++) {
-						String path = files.getFiles().get(i);
-						File fi = new File(path);
-						boolean fidel = fi.delete();
+				if(files!=null) {
+					boolean flag = files.isFlag();
+					if(!flag) {
+						System.out.println(files.getFiles().size()+"개의 파일");
+						for(int i=0;i<files.getFiles().size();i++) {
+							String path = files.getFiles().get(i);
+							File fi = new File(path);
+							boolean fidel = fi.delete();
 
-						if(fidel) {
-							System.out.println("파일 삭제 완료");
-						}else {
-							System.out.println("파일 삭제 실패");
+							if(fidel) {
+								System.out.println("파일 삭제 완료");
+							}else {
+								System.out.println("파일 삭제 실패");
+							}
 						}
 					}
-				}else {
-
 				}
 			}else if(command.equals("/Upload.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
