@@ -2,6 +2,7 @@ package com.amanda.project.Controller;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -118,10 +119,7 @@ public class MemberController extends HttpServlet {
 						request.setAttribute("delresult", delresult);
 						request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
 					}
-					
 			break;
-
-			
 			
 		case "updateProc.member" :
 			//회원 정보수정 컨트롤러	
@@ -143,15 +141,16 @@ public class MemberController extends HttpServlet {
 				
 				e.printStackTrace();
 			}
-			
-			
 			break;
 	
 		case "logoutProc.member" :
 			//로그아아웃 컨트롤러 
+			cDao.seatOff(request.getRemoteAddr());
+			List<ComDTO> arr = cDao.selectSeat_all();
+			request.getServletContext().setAttribute("seat", arr);
 			request.getSession().invalidate();
 			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
-		break;
+			break;
 	
 		}
 	}

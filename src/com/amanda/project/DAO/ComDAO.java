@@ -88,5 +88,20 @@ public class ComDAO {
 		}
 		return -1;
 	}
+	public int seatOff(String ip){
+		String sql="update pcComputer set comUseCheck = 0 where comIp = ? ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			pstat.setString(1, ip );
+			int rs=pstat.executeUpdate();
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 }
