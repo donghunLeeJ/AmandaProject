@@ -46,7 +46,7 @@
                                 <li class="active"><a href="page?url=WEB-INF/main.jsp"><i
                                                                                           class="menu-icon fa fa-laptop"></i>Home </a></li>
                                 <li class="menu-item-has-children dropdown"><a
-                                                                               href="page?url=WEB-INF/seat.jsp"> <i
+                                                                               href="page?url=WEB-INF/seat.jsp" onclick="send()" > <i
                                                                                                                     class="menu-icon fa fa-cogs"></i>잔여좌석
                                     </a></li>
                                 <li class="menu-item-has-children dropdown"><a
@@ -426,6 +426,8 @@
                                 <div class="col-sm-6">Copyright &copy; 2018 Ela Admin</div>
                                 <div class="col-sm-6 text-right">
                                     Designed by <a href="https://colorlib.com">Colorlib</a>
+                                <button type="btn" onclick="send()" > gggg </button>
+                                
                                 </div>
                             </div>
                         </div>
@@ -461,40 +463,19 @@
                     <script src="assets/js/init/flot-chart-init.js"></script>
 
 
-                    <script >
-                        var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
-                        send();
-                        
-                        
-                        
-                        webSocket.onerror = function(event){
-                            onError(event);
-                        }
-                        webSocket.onopen = function(event) {
-                            onOpen(event);
-                        };
-                        webSocket.onmessage = function(event) {
-                            onMessage(event);
-                        };
-                        function onMessage(event) {
-                            console.log(event);
-                        	location.reload();
-                        }
-                        function onOpen(event) {
-                           console.log(event);
-                        }
-                        function onError(event) {
-                            alert(event.data);
-                        }
-                        function send() {
-                            webSocket.send("새로 들어옴");
-                            
-                        }
-                        
-
-
-                    </script>
-
+                   <!-- 	---------------------------------소켓연결  script--------------------------------- -->
+	 <script >
+                    var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+                    webSocket.onopen ;
+                    webSocket.onerror ;
+                    webSocket.onmessage = function(event) {
+                      	 location.reload();
+                    };
+                    var send = function(){
+                    	webSocket.send("hi");
+                    }
+          </script>
+	<!-- 	---------------------------------소켓연결  script--------------------------------- -->
 
 
                     </body>

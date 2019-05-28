@@ -710,6 +710,19 @@ div {
 		}
 		}
 	</script>
+<!-- 	---------------------------------소켓연결  script--------------------------------- -->
+	 <script >
+                    var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+                    webSocket.onopen ;
+                    webSocket.onerror ;
+                    webSocket.onmessage = function(event) {
+                      	 location.reload();
+                    };
+                    var send = function(){
+                    	webSocket.send("hi");
+                    }
+          </script>
+	<!-- 	---------------------------------소켓연결  script--------------------------------- -->
 
 </body>
 </html>

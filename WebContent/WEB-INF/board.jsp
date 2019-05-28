@@ -112,7 +112,7 @@
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp"> <i
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
@@ -584,6 +584,19 @@
 			location.href = "Index.log"
 		}
 	</script>
+		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
+	 <script >
+                    var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+                    webSocket.onopen ;
+                    webSocket.onerror ;
+                    webSocket.onmessage = function(event) {
+                      	 location.reload();
+                    };
+                    var send = function(){
+                    	webSocket.send("hi");
+                    }
+          </script>
+	<!-- 	---------------------------------소켓연결  script--------------------------------- -->
 
 </body>
 </html>
