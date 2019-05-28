@@ -34,6 +34,7 @@ public class BoardController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		BoardDAO dao = new BoardDAO();
+		
 		int result = 0;
 		try {
 
@@ -173,7 +174,8 @@ public class BoardController extends HttpServlet {
 				File uploadPath = new File(filePath);
 				String realFilePath = null;
 				String tempFileName = null;
-
+				FilesDTO fidto = new FilesDTO();
+				
 				if(!uploadPath.exists()) {uploadPath.mkdir();}
 
 				DiskFileItemFactory diskFactory = new DiskFileItemFactory();
@@ -184,6 +186,7 @@ public class BoardController extends HttpServlet {
 
 				try {
 					List<FileItem> items = sfu.parseRequest(request); // List<FileItem>을 리턴값으로 가진다
+					
 					for(FileItem fi : items) {
 						if(fi.getSize()==0) {continue;} // 업로드 파일 선택을 하지 않았을 경우 의미없는 빈 파일 생성을 방지
 						while(true) {
@@ -197,8 +200,7 @@ public class BoardController extends HttpServlet {
 								System.out.println("파일 이름 재설정");
 							}
 						}
-
-						FilesDTO fidto = new FilesDTO();
+						
 						System.out.println(realFilePath);
 						fidto.getFiles().add(realFilePath);
 						
@@ -217,10 +219,10 @@ public class BoardController extends HttpServlet {
 			}else if(command.equals("/ImageDel.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
 				boolean flag = files.isFlag();
+				System.out.println(files.getFiles().size());
 				if(!flag) {
 					for(int i=0;i<files.getFiles().size();i++) {
 						String path = files.getFiles().get(i);
-						//String path2 = request.getParameter("path");
 						File fi = new File(path);
 						boolean fidel = fi.delete();
 

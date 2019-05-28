@@ -359,7 +359,6 @@ header {
 							<div class="container" id="wrapper">
 								<div id="text">
 									<textarea id="contents" name="contents"></textarea>
-									<input type="text" id="path" name="path">
 								</div>
 
 								<footer>
@@ -406,19 +405,6 @@ header {
 		document.getElementById("toList").onclick = function() {
 			var result = confirm("작성중이던 게시물이 삭제됩니다. 정말 나가시겠습니까?");
 			if (result) {
-				$.ajax({
-					url : "ImageDel.board",
-					type : "POST",
-					data : {
-						path : $("#path").val()
-					},
-					success : function(resp) {
-						console.log(resp);
-					},
-					fail : function(resp) {
-						console.log(resp);
-					}
-				});
 				location.href = "Board.board?currentPage=1";
 			}
 		}
@@ -427,20 +413,9 @@ header {
 			event.preventDefault();
 			$.ajax({
 				url : "ImageDel.board",
-				type : "POST",
-				data : {
-					path : $("#path").val()
-				},
-				success : function(resp) {
-					console.log(resp);
-				},
-				fail : function(resp) {
-					console.log(resp);
-				}
+				type : "POST"
 			});
 		});
-
-		$("#path").hide();
 
 		$(function() {
 			$("#contents").summernote({
@@ -475,10 +450,9 @@ header {
 					processData : false,
 					success : function(resp) {
 						$(".note-editable").append("<img src='"+resp.url+"'>");
-						$("#path").val(resp.path);
 					},
 					fail : function(resp) {
-						console.log(resp);
+						console.log(resp.url);
 					}
 				});
 

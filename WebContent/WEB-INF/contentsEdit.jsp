@@ -451,7 +451,6 @@ div {
 								<main id="main">
 								<div id="text">
 									<textarea id="contents" name="contents" required>${dto.contents}</textarea>
-									<input type="text" id="path" name="path">
 								</div>
 								</main>
 
@@ -497,25 +496,20 @@ div {
 
 	<script>
 		document.getElementById("toList").onclick = function() {
-			var result = confirm("작성중이던 게시물이 삭제됩니다. 정말 나가시겠습니까?");
+			var result = confirm("작성중이던 내용을 잃을 수 있습니다. 정말 나가시겠습니까?");
 			if (result) {
-				$.ajax({
-					url : "ImageDel.board",
-					type : "POST",
-					data : {
-						path : $("#path").val()
-					},
-					success : function(resp) {
-						console.log(resp);
-					},
-					fail : function(resp) {
-						console.log(resp);
-					}
-				});
 				location.href = "Board.board?currentPage=1";
 			}
 		}
-
+		
+		window.addEventListener("beforeunload", function(event) {
+			event.preventDefault();
+			$.ajax({
+				url : "ImageDel.board",
+				type : "POST"
+			});
+		});
+		
 		$(function() {
 			$("#no").hide();
 			$("#path").hide();
@@ -544,16 +538,16 @@ div {
 					url : "ImageUpload.board",
 					type : "POST",
 					data : data,
+					dataType : "json",
 					cache : false,
 					contentType : false,
 					enctype : "multipart/form-data",
 					processData : false,
 					success : function(resp) {
-						$(".note-editable").append("<img src='"+resp+"'>");
-						$("#path").val(resp.path);
+						$(".note-editable").append("<img src='"+resp.url+"'>");
 					},
 					fail : function(resp) {
-						console.log(resp);
+						console.log(resp.url);
 					}
 				});
 
@@ -569,6 +563,10 @@ div {
 							alert("제목을 작성해주세요.");
 						} else if ($("#contents").val() != "<p><br></p>"
 								&& $("#title").val() != "") {
+							$.ajax({
+								url : "Upload.board",
+								type : "POST"
+							});
 							$("#formEdit").submit();
 						}
 					})
