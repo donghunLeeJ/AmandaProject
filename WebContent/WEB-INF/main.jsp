@@ -141,69 +141,22 @@
 								</div>
 
 								<div class="dropdown for-notification">
-									<button class="btn btn-secondary dropdown-toggle" type="button"
-										id="notification" data-toggle="dropdown" aria-haspopup="true"
+									 <button class="btn btn-secondary " type="button"
+										id="message" data-toggle="modal" aria-haspopup="true"
 										aria-expanded="false">
 										<i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="notification">
-										<p class="red">You have 3 Notification</p>
-										<a class="dropdown-item media" href="#"> <i
-											class="fa fa-check"></i>
-											<p>Server #1 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-info"></i>
-											<p>Server #2 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-warning"></i>
-											<p>Server #3 overloaded.</p>
-										</a>
-									</div>
+									</button> 
+								
 								</div>
 
-								<div class="dropdown for-message">
+								<div class=" for-message">
 									<button class="btn btn-secondary dropdown-toggle" type="button"
 										id="message" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false">
 										<i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
 									</button>
-									<div class="dropdown-menu" aria-labelledby="message">
-										<p class="red">You have 4 Mails</p>
-										<a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/1.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jonathan Smith</span> <span
-													class="time float-right">Just now</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/2.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jack Sanders</span> <span
-													class="time float-right">5 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/3.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Cheryl Wheeler</span> <span
-													class="time float-right">10 minutes ago</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/4.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Rachel Santos</span> <span
-													class="time float-right">15 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a>
-									</div>
-								</div>
+								
+								</div> 
 							</div>
 							<!--  mypage 사람 사진-->
 							<div class="user-area  float-right">
@@ -291,12 +244,19 @@
 								<h5>${user.name } 님 반갑습니다</h5>
 								<h5>${user.name } 님의 잔여포인트는 ${user.point }입니다</h5>
 									<button type="button" class="btn btn-primary"  id="logoutbtn">logout</button>
+									<button type="button" class="btn btn-primary"  id="msg">msg</button>
 									<script>
 									$("#logoutbtn")
 									.on(
 											"click",
 											function() {
 												location.href = "logoutProc.member";
+											})
+											$("#msg")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/admin.jsp";
 											})
 									</script>
 								</c:otherwise>
@@ -443,20 +403,14 @@
 			</div>
 		</div>
 	</div>
-
-
-
 	<script>
-	
 	
 	$("#logoutbtn1")
 	.on(
 			"click",
 			function() {
 				location.href = "logoutProc.member";
-			})
-
-	
+			})	
 							$("#updatememberbtn")
 									.on(
 											"click",
@@ -476,7 +430,7 @@
 
 
 	<!-- 진향이 마이페이지 폼끝 -->
-		
+	
 		
 		</div>
 	
