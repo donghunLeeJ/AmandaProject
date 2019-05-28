@@ -359,6 +359,7 @@ header {
 							<div class="container" id="wrapper">
 								<div id="text">
 									<textarea id="contents" name="contents"></textarea>
+									<input type="text" id="path" name="path">
 								</div>
 
 								<footer>
@@ -403,8 +404,43 @@ header {
 
 	<script>
 		document.getElementById("toList").onclick = function() {
-			location.href = "Board.board?currentPage=1";
+			var result = confirm("작성중이던 게시물이 삭제됩니다. 정말 나가시겠습니까?");
+			if (result) {
+				$.ajax({
+					url : "ImageDel.board",
+					type : "POST",
+					data : {
+						path : $("#path").val()
+					},
+					success : function(resp) {
+						console.log(resp);
+					},
+					fail : function(resp) {
+						console.log(resp);
+					}
+				});
+				location.href = "Board.board?currentPage=1";
+			}
 		}
+
+		window.addEventListener("beforeunload", function(event) {
+			event.preventDefault();
+			$.ajax({
+				url : "ImageDel.board",
+				type : "POST",
+				data : {
+					path : $("#path").val()
+				},
+				success : function(resp) {
+					console.log(resp);
+				},
+				fail : function(resp) {
+					console.log(resp);
+				}
+			});
+		});
+
+		$("#path").hide();
 
 		$(function() {
 			$("#contents").summernote({
@@ -432,12 +468,14 @@ header {
 					url : "ImageUpload.board",
 					type : "POST",
 					data : data,
+					dataType : "json",
 					cache : false,
 					contentType : false,
 					enctype : "multipart/form-data",
 					processData : false,
 					success : function(resp) {
-						$(".note-editable").append("<img src='"+resp+"'>");
+						$(".note-editable").append("<img src='"+resp.url+"'>");
+						$("#path").val(resp.path);
 					},
 					fail : function(resp) {
 						console.log(resp);
@@ -446,16 +484,23 @@ header {
 
 			}
 
-			$("#upload").on("click", function() {
-				$("#contents").val($(".note-editable").html());
-				if ($("#contents").val() == "<p><br></p>") {
-					alert("게시글을 작성해주세요.");
-				} else if ($("#title").val() == "") {
-					alert("제목을 작성해주세요.");
-				} else if($("#contents").val() != "<p><br></p>" && $("#title").val() != ""){
-					$("#formWrite").submit();
-				}
-			})
+			$("#upload").on(
+					"click",
+					function() {
+						$("#contents").val($(".note-editable").html());
+						if ($("#contents").val() == "<p><br></p>") {
+							alert("게시글을 작성해주세요.");
+						} else if ($("#title").val() == "") {
+							alert("제목을 작성해주세요.");
+						} else if ($("#contents").val() != "<p><br></p>"
+								&& $("#title").val() != "") {
+							$.ajax({
+								url : "Upload.board",
+								type : "POST"
+							});
+							$("#formWrite").submit();
+						}
+					})
 
 		});
 	</script>

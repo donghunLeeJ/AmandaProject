@@ -75,6 +75,7 @@ div {
 	padding: 20px;
 	width: 100%;
 	height: 100%;
+	overflow:auto;
 }
 
 #repl {
@@ -422,7 +423,7 @@ div {
 						<div class="card-body">
 							<div class="container" id="wrapper">
 								<main id="main">
-								<div class="row" id="text">
+								<div id="text">
 									<div id="contents" name="contents"
 										>${dto.contents}</div>
 								</div>
@@ -532,6 +533,7 @@ div {
 
 
 	<script>
+	
 	$("#contents_no").hide();
 	$("#replBox").hide();
 	$("#showReplBox").on("click",function(){

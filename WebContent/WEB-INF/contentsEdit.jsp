@@ -112,6 +112,7 @@ header {
 	margin-bottom: 10px;
 	width: 100%;
 }
+
 #wrapper {
 	margin-top: 50px;
 	padding: 0px;
@@ -450,6 +451,7 @@ div {
 								<main id="main">
 								<div id="text">
 									<textarea id="contents" name="contents" required>${dto.contents}</textarea>
+									<input type="text" id="path" name="path">
 								</div>
 								</main>
 
@@ -457,8 +459,9 @@ div {
 									<div class="row">
 										<div class=" logo col-lg-12 col-md-12 col-sm-12" id="footer">
 
-											<input type="button" id="complete" value="수정완료" class="btn btn-secondary"> <input
-												type="button" id="toList" value="목록으로" class="btn btn-secondary">
+											<input type="button" id="complete" value="수정완료"
+												class="btn btn-secondary"> <input type="button"
+												id="toList" value="목록으로" class="btn btn-secondary">
 										</div>
 									</div>
 								</footer>
@@ -494,11 +497,28 @@ div {
 
 	<script>
 		document.getElementById("toList").onclick = function() {
-			location.href = "Board.board?currentPage=1";
+			var result = confirm("작성중이던 게시물이 삭제됩니다. 정말 나가시겠습니까?");
+			if (result) {
+				$.ajax({
+					url : "ImageDel.board",
+					type : "POST",
+					data : {
+						path : $("#path").val()
+					},
+					success : function(resp) {
+						console.log(resp);
+					},
+					fail : function(resp) {
+						console.log(resp);
+					}
+				});
+				location.href = "Board.board?currentPage=1";
+			}
 		}
 
 		$(function() {
 			$("#no").hide();
+			$("#path").hide();
 			$("#contents").summernote({
 				placeholder : '글을 입력해주세요.',
 				tabsize : 2,
@@ -530,6 +550,7 @@ div {
 					processData : false,
 					success : function(resp) {
 						$(".note-editable").append("<img src='"+resp+"'>");
+						$("#path").val(resp.path);
 					},
 					fail : function(resp) {
 						console.log(resp);
