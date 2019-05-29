@@ -194,7 +194,7 @@ public class BoardController extends HttpServlet {
 				FilesDTO fidto = null;
 				if(files!=null) {
 					fidto = files;
-				}else if(files==null) {
+				}else {
 					fidto = new FilesDTO();
 				}
 				if(!uploadPath.exists()) {uploadPath.mkdir();}
@@ -255,11 +255,13 @@ public class BoardController extends HttpServlet {
 							}
 						}
 					}
+					request.getSession().setAttribute("files", null);
 				}
 			}else if(command.equals("/Upload.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
 				files.setFlag(true);
 				files.setFiles(null);
+				request.getSession().setAttribute("files", null);
 			}
 
 		}catch(Exception e) {
