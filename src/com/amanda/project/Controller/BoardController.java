@@ -185,13 +185,18 @@ public class BoardController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/boardReplDelProc.jsp").forward(request, response);	
 
 			}else if(command.equals("/ImageUpload.board")) {
+				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
 				String rootPath = this.getServletContext().getRealPath("/"); // 현재 서블릿에 대한 환경정보 추출 -> 실행하기 위해 복사되는 파일의 진짜 경로 추출 -> 저장할 폴더 지정
 				String filePath = rootPath + "files/"+(String)request.getSession().getAttribute("loginId")+"/"; // 파일이 저장될 본 저장소
 				File uploadPath = new File(filePath);
 				String realFilePath = null;
 				String tempFileName = null;
-				FilesDTO fidto = new FilesDTO();
-
+				FilesDTO fidto = null;
+				if(files!=null) {
+					fidto = files;
+				}else if(files==null) {
+					fidto = new FilesDTO();
+				}
 				if(!uploadPath.exists()) {uploadPath.mkdir();}
 
 				DiskFileItemFactory diskFactory = new DiskFileItemFactory();
