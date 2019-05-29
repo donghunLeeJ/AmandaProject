@@ -33,12 +33,12 @@ public class MemberController extends HttpServlet {
 			String loginid=request.getParameter("loginid");
 			String loginpw=request.getParameter("loginpw");
 			System.out.println(loginid+loginpw);
-			boolean login;
+			int login;
 			try {
 				login = dao.checklogin(loginid, dao.testSHA256(loginpw));
 			
-				if(login==true) {
-					System.out.println(login);
+				if(login==1) {
+					
 					request.getSession().setAttribute("user", dao.select_user(loginid));
 					MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 					dto.getId();
@@ -54,10 +54,13 @@ public class MemberController extends HttpServlet {
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 					rd.forward(request, response);
 				}
-				else {
+				else if(login == -1){
 					System.out.println(login);
 					request.setAttribute("login", login);
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+					rd.forward(request, response);
+				}else {
+					RequestDispatcher rd=request.getRequestDispatcher("../error.jsp");
 					rd.forward(request, response);
 				}
 			} catch (Exception e1) {

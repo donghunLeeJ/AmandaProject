@@ -273,8 +273,8 @@
 								<c:choose>
 									<c:when test="${user == null }">
 										<script>
-								if(${login==false}){
-									alert("회원정보가 없습니다 다시 로그인하십시오");
+								if(${login== -1}){
+									alert("아이디가 없습니다 ");
 									loaction.href=	 "page?url=WEB-INF/main.jsp";
 								}
 								</script>

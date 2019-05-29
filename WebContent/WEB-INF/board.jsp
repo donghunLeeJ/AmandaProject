@@ -387,12 +387,19 @@
 				</div>
 				<div>
 					<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
-						<input type="button" id="write" value="글쓰기" class="btn btn-secondary"> <input type="button"
+						<c:if test="${user != null }">
+						<input type="button" id="write" value="글쓰기" class="btn btn-secondary">
+						</c:if>
+						 <input type="button"
 							id="goMain" value="메인 페이지로" class="btn btn-secondary">
 					</div>
 				</div>
 			</footer>
 		</div>
+		<script>
+			
+		
+		</script>
 		<!-- .content -->
 
 
@@ -585,7 +592,7 @@
 			location.href = "Write.board"
 		}
 		document.getElementById("goMain").onclick = function() {
-			location.href = "Index.log"
+			location.href = "page?url=WEB-INF/main.jsp"
 		}
 	</script>
 	

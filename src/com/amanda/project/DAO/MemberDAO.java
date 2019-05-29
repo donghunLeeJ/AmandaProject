@@ -49,7 +49,7 @@ public class MemberDAO {
 		return SHA;
 	}
 	/** 디비 값을 확인하고 로그인을 진행하는 메서드*/
-	public boolean checklogin(String id,String pw)throws Exception{
+	public int checklogin(String id,String pw)throws Exception{
 		String sql="select * from Member where id= ? and pw= ? ";
 		try (	Connection con=ds.getConnection();
 				PreparedStatement pstat=con.prepareStatement(sql);
@@ -59,8 +59,15 @@ public class MemberDAO {
 			pstat.setString(1, id );
 			pstat.setString(2, pw);
 			ResultSet rs=pstat.executeQuery();
-
-			return rs.next();
+			if(rs.next()) {
+				return 1;
+			}else {
+				return -1;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 	/** session에 값을 저장하기 위한 메서드*/

@@ -18,11 +18,8 @@ import org.apache.commons.io.FileExistsException;
 
 import com.amanda.project.DAO.BoardDAO;
 import com.amanda.project.DTO.BoardDTO;
-
 import com.amanda.project.DTO.FilesDTO;
-
 import com.amanda.project.DTO.MemberDTO;
-
 import com.amanda.project.DTO.ReplDTO;
 import com.google.gson.JsonObject;
 
@@ -49,7 +46,8 @@ public class BoardController extends HttpServlet {
 				String contents =request.getParameter("contents");
 				String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
 
-				String writer = (String)request.getSession().getAttribute("loginId");
+				MemberDTO mdto=(MemberDTO)request.getSession().getAttribute("user");
+				String writer = mdto.getId();
 				String path =request.getParameter("path");
 
 				int viewCount = 1;
@@ -153,8 +151,9 @@ public class BoardController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/boardDelProc.jsp").forward(request, response);	
 
 			}else if(command.equals("/Reply.board")) {
-
-				String id = (String)request.getSession().getAttribute("loginId");
+				MemberDTO mdto=(MemberDTO)request.getSession().getAttribute("user");
+				String id = mdto.getId();
+				
 				String repl_contents = request.getParameter("repl_contents");
 				int contents_no = Integer.parseInt(request.getParameter("contents_no"));
 
