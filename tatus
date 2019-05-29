@@ -1,0 +1,362 @@
+[33mcommit c63be7cde67a6e926b82bc4afaa06039e80b49c5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Tue May 28 16:32:34 2019 +0900
+
+    HY
+
+[33mcommit f110691b1830dea30b4261d5f7f160a974b3cdd0[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Tue May 28 15:32:56 2019 +0900
+
+    HY
+
+[33mcommit 9ac358118a5af6f5360eb4b6e26207b567c745a1[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Tue May 28 12:30:12 2019 +0900
+
+    HY
+
+[33mcommit a956ffb2194be9291d202d6a3c8ac22f1c081d32[m
+Merge: d4e442b 35e6e64
+Author: Jack <dlgodud8997@naver.com>
+Date:   Tue May 28 12:26:25 2019 +0900
+
+    Merge branch 'master' of https://github.com/EvelyneYoungLee/AmandaProject
+
+[33mcommit d4e442b9c30808686e8e08988026b9cbb329197f[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Tue May 28 12:25:10 2019 +0900
+
+    HY
+
+[33mcommit 35e6e642f95fcb7bc86633c3a106837e318a02d1[m
+Merge: 0df7e77 1d52cd0
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Fri May 24 10:40:59 2019 +0900
+
+    Merge branch 'master' into master
+
+[33mcommit 0df7e77d69b6d3165c12241805453c00800a328f[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Fri May 24 10:29:27 2019 +0900
+
+    HYBoard
+
+[33mcommit 1d52cd0cf21f629a9a8a539028d8693855d1d80e[m
+Author: dong <sidong91@gmail.com>
+Date:   Fri May 24 10:27:49 2019 +0900
+
+    commit point 2
+
+[33mcommit 124801740f7fec3641fd1fec022b3e350076a93f[m
+Merge: 0cb0fa7 e7e60c0
+Author: dong <sidong91@gmail.com>
+Date:   Fri May 24 09:44:02 2019 +0900
+
+    Merge branch 'master' of https://github.com/donghunLeeJ/AmandaProject
+
+[33mcommit 0cb0fa70c38437e7a1eb80da91bddfcd01a75a88[m
+Author: dong <sidong91@gmail.com>
+Date:   Fri May 24 09:43:53 2019 +0900
+
+    commit point
+
+[33mcommit e7e60c08896b74644d1afeea15ac2f27515ea7e4[m
+Merge: 805538c 723c95c
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Fri May 24 09:41:42 2019 +0900
+
+    Merge pull request #10 from ParkJinHyang/master
+    
+    hyang
+
+[33mcommit 723c95c7eaae0e4cddbc047c5345c5b5e3177cd0[m
+Author: hyang <mickey916@naver.com>
+Date:   Fri May 24 09:35:18 2019 +0900
+
+    hyang
+
+[33mcommit 805538c430f408db7315fec74b5cdefec4761535[m
+Author: donghunLeeJ <sidong91@gmail.com>
+Date:   Thu May 23 20:53:55 2019 +0900
+
+    check
+
+[33mcommit b0ff953d5321517b10a041bf8eee1a92db7339d0[m
+Merge: 0102e99 af7675d
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Thu May 23 19:37:47 2019 +0900
+
+    Merge pull request #8 from ParkJinHyang/master
+    
+    loginandlogout contetns 05/23
+
+[33mcommit af7675d186fc992ac460d55837417d0920e54583[m
+Merge: ea4e08e 0102e99
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Thu May 23 19:37:35 2019 +0900
+
+    Merge branch 'master' into master
+
+[33mcommit 0102e9984edfa71830272ba2b27de253d78e37e0[m
+Merge: 2dda480 46b3235
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Thu May 23 19:33:43 2019 +0900
+
+    Merge pull request #9 from Ken-Park/master
+    
+    change sangjun
+
+[33mcommit 46b32356447b65d9e28e2a5a269c21d794926a07[m
+Author: Jack <kkjspdlqj@naver.com>
+Date:   Thu May 23 18:37:16 2019 +0900
+
+    change sangjun
+
+[33mcommit ea4e08ef66906d95a2f95524d28a4bd8b7183338[m
+Author: hyang <mickey916@naver.com>
+Date:   Thu May 23 18:19:30 2019 +0900
+
+    loginandlogout contetns 05/23
+
+[33mcommit 2dda4802016e54f14d23ff8a15fa45a6b1362d79[m
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 17:57:19 2019 +0900
+
+    commit point
+
+[33mcommit e8ba0f72830b1bcdf1cc714128f4db24ee31e4ca[m
+Merge: 2d61f1c 7d80966
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Thu May 23 17:34:43 2019 +0900
+
+    Merge pull request #7 from HanuelCho/master
+    
+    delete add
+
+[33mcommit 7d80966267fab7eb34c5573a1ddce94e4805a5f0[m
+Author: Park <acesang@naver.com>
+Date:   Thu May 23 17:23:36 2019 +0900
+
+    delete add
+
+[33mcommit 2d61f1cfd4c142fdce874849cfa81f1cdce7bca0[m
+Merge: 0f7c0a5 5b25e5b
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Thu May 23 17:10:40 2019 +0900
+
+    Merge pull request #6 from Ken-Park/master
+    
+    joinMem gogo
+
+[33mcommit 5b25e5b3c8301f6ca702521dc02b04906319f878[m
+Author: Jack <kkjspdlqj@naver.com>
+Date:   Thu May 23 17:09:15 2019 +0900
+
+    joinMem gogo
+
+[33mcommit 0f7c0a569119d963d5fc3148636b9ed2ffcbceac[m
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 16:41:26 2019 +0900
+
+    modify all
+
+[33mcommit 456b716f8ed7829810b9c00c7ba69aec5bd5be6e[m
+Merge: f7dd6f1 8125e38
+Author: donghunLeeJ <50863805+donghunLeeJ@users.noreply.github.com>
+Date:   Thu May 23 16:22:39 2019 +0900
+
+    Merge pull request #5 from ParkJinHyang/master
+    
+    이거 수정
+
+[33mcommit 8125e3863664592a613e3fff5f277eff38804a81[m
+Merge: a623809 f7dd6f1
+Author: hyang <mickey916@naver.com>
+Date:   Thu May 23 16:17:17 2019 +0900
+
+    test
+
+[33mcommit a6238091c376df760e0bc6340835626a6caf91d7[m
+Author: hyang <mickey916@naver.com>
+Date:   Thu May 23 16:05:34 2019 +0900
+
+    update and main
+
+[33mcommit f7dd6f183ad3758b555c0449b7452bb793303330[m
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 15:42:09 2019 +0900
+
+    add deletemem.jsp
+
+[33mcommit 68d68e916bb80021e731c2a3cced05e425f3d897[m
+Author: hyang <mickey916@naver.com>
+Date:   Thu May 23 14:47:01 2019 +0900
+
+    hyangtest
+
+[33mcommit f8102dbe2bdd749aa426159483126f97f43c24bb[m
+Merge: d2f8465 309cc82
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 13:58:15 2019 +0900
+
+    modify main
+
+[33mcommit d2f846506ae8675496a73be8688ab8a777e0d916[m
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 13:54:04 2019 +0900
+
+    modify main
+
+[33mcommit 309cc8269b135ae1f2e8456c5fef43ed18601167[m
+Author: hyang <mickey916@naver.com>
+Date:   Thu May 23 12:25:52 2019 +0900
+
+    mypageplusupdatemember contents 05/23-12:25
+
+[33mcommit 6a4357be0c9f71753c9f607864b8b0935b2f6c50[m
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 12:02:19 2019 +0900
+
+    add modimem
+
+[33mcommit 84deeb62e61a0b9741882295f6e40d923f2cf4bc[m
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 10:46:09 2019 +0900
+
+    dto add
+
+[33mcommit 2155baf93d3f2cb84d60b4052cf6b2d342dcaacb[m
+Author: dong <sidong91@gmail.com>
+Date:   Thu May 23 10:23:12 2019 +0900
+
+    WEB-INF and version up
+
+[33mcommit b1cf21225972142e885c630d95f5052a8414ad2a[m
+Merge: c77509c 6ed40ae
+Author: hyang <mickey916@naver.com>
+Date:   Thu May 23 09:07:20 2019 +0900
+
+    Merge branch 'master' of https://github.com/EvelyneYoungLee/Amanda
+
+[33mcommit c77509c32656d64cfbffbaad24fa76d63a7e31ea[m
+Author: hyang <mickey916@naver.com>
+Date:   Thu May 23 09:06:31 2019 +0900
+
+    main plus button contents 05/23 09:06
+
+[33mcommit 6ed40aed0eca7e79b51e17e69ab5b9ba25d17db2[m
+Author: Park <acesang@naver.com>
+Date:   Wed May 22 18:38:32 2019 +0900
+
+    add ModifyMembers.jsp - 05/22 - 18:38
+
+[33mcommit d2279d9021392b7a7197cacea77f29146f2b22f5[m
+Author: unknown <jjkill78@gmail.com>
+Date:   Wed May 22 17:50:09 2019 +0900
+
+    modi menu
+
+[33mcommit 702c408082a13cb5aae1e084008a358cde2e6a2c[m
+Author: Park <acesang@naver.com>
+Date:   Wed May 22 17:13:50 2019 +0900
+
+    upload joinmem
+
+[33mcommit 6a6225330a03f349d870542de2e5b9b4ea023ace[m
+Author: unknown <jjkill78@gmail.com>
+Date:   Wed May 22 17:06:36 2019 +0900
+
+    update menu
+
+[33mcommit 3a10dbbcc7d8dc360ec2aef5108bbff1194f1eca[m
+Author: unknown <jjkill78@gmail.com>
+Date:   Wed May 22 16:44:47 2019 +0900
+
+    upload menu
+
+[33mcommit 63272d3091aa8c91220ba6addbf5170bd64a37d1[m
+Author: Park <acesang@naver.com>
+Date:   Wed May 22 16:34:54 2019 +0900
+
+    add JoinMember.jsp - 16:34
+
+[33mcommit 2cacc5271cf9da14eaf62f98db5717d0ac869917[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Wed May 22 16:28:24 2019 +0900
+
+    haeyoung
+
+[33mcommit e00061ac4e5a46221cade570d6b54c53145bd41d[m
+Merge: 984e93b ec6a6d7
+Author: Jack <dlgodud8997@naver.com>
+Date:   Wed May 22 16:27:00 2019 +0900
+
+    Merge branch 'master' of https://github.com/EvelyneYoungLee/Amanda
+
+[33mcommit 984e93bf5b731ed0c87638817355d49545d2b75a[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Wed May 22 16:26:24 2019 +0900
+
+    young
+
+[33mcommit ec6a6d717962d1dd306cd110ab48fe75a35f1331[m
+Author: hyang <mickey916@naver.com>
+Date:   Wed May 22 16:26:24 2019 +0900
+
+    profile.jpg contents 05/22-16:22
+
+[33mcommit fc630fbef6f825ff6de73a9b9d22790d6e058f36[m
+Merge: eee5b10 7485e66
+Author: hyang <mickey916@naver.com>
+Date:   Wed May 22 16:23:45 2019 +0900
+
+    Merge branch 'master' of https://github.com/EvelyneYoungLee/Amanda
+
+[33mcommit eee5b10eeda651da4f36cfe3d097880b774b3756[m
+Author: hyang <mickey916@naver.com>
+Date:   Wed May 22 16:22:30 2019 +0900
+
+    button.jsp contents 05/22-16:22
+
+[33mcommit 7485e66190ce1e7c7476ab1a60531a5bdd2e8a4d[m
+Author: Jack <kkjspdlqj@naver.com>
+Date:   Wed May 22 16:18:43 2019 +0900
+
+    main.jsp add
+
+[33mcommit 1831f4f51a53db112036c9e48e94f1d4760b65d7[m
+Author: dong <sidong91@gmail.com>
+Date:   Wed May 22 16:04:34 2019 +0900
+
+    add seat.jsp
+
+[33mcommit 44aab1f7c704b07d5f96a0800aede3603b533d94[m
+Author: dong <sidong91@gmail.com>
+Date:   Wed May 22 16:03:07 2019 +0900
+
+    add pay.jsp
+
+[33mcommit c63e517d7705efeb904fe31c24af1c1408982687[m
+Author: dong <sidong91@gmail.com>
+Date:   Wed May 22 15:56:34 2019 +0900
+
+    upload src
+
+[33mcommit d3b2c785b891e4e26bfef263caefdf4ab12618bb[m
+Author: unknown <jjkill78@gmail.com>
+Date:   Wed May 22 12:35:37 2019 +0900
+
+    haha
+
+[33mcommit 4b377e9045edb05ac74641bf02778e1ca97ecd87[m
+Author: dong <sidong91@gmail.com>
+Date:   Wed May 22 12:31:32 2019 +0900
+
+    2 commit
+
+[33mcommit 91934606e82473ef24ef93b57f886015489ff32e[m
+Author: Jack <dlgodud8997@naver.com>
+Date:   Wed May 22 12:20:42 2019 +0900
+
+    first

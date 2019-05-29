@@ -361,7 +361,7 @@ div {
 									<div class="row" id="searchDiv">
 										<form action="BoardSearch.board">
 											<select id="select" name="select"><option>제목</option>
-												<option>글번호</option></select> <input type="text" id="search"
+												<option>작성자</option></select> <input type="text" id="search"
 												name="search"> <input type="text" id="hide"
 												name="currentPage" value="1">
 											<button id="searchButt" class="btn btn-secondary">검색</button>

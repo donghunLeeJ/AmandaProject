@@ -68,15 +68,28 @@ public class BoardController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/board.jsp").forward(request, response);
 
 			}else if(command.equals("/BoardSearch.board")){
-				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-				String title = request.getParameter("search");
-				String navi = dao.getNaviSearch(currentPage, title);
-				request.setAttribute("navi", navi);
-				List<BoardDTO> list = new ArrayList<>();			
-				list = dao.searchBoard(currentPage, title);
-				request.setAttribute("list", list);
-				request.setAttribute("showAll", "showAll");
-				request.getRequestDispatcher("WEB-INF/board.jsp").forward(request, response);
+				String searchType = request.getParameter("select");
+				int currentPage = Integer.parseInt(request.getParameter("currentPage"));			
+
+				if(searchType.equals("제목")) {
+					String title = request.getParameter("search");
+					String navi = dao.getNaviSearch(currentPage, title);
+					request.setAttribute("navi", navi);
+					List<BoardDTO> list = new ArrayList<>();			
+					list = dao.searchBoard(currentPage, title);
+					request.setAttribute("list", list);
+					request.setAttribute("showAll", "showAll");
+					request.getRequestDispatcher("WEB-INF/board.jsp").forward(request, response);
+				}else if(searchType.equals("작성자")) {
+					String writer = request.getParameter("search");
+					String navi = dao.getNaviByWriter(currentPage, writer);
+					request.setAttribute("navi", navi);
+					List<BoardDTO> list = new ArrayList<>();			
+					list = dao.searchWriter(currentPage, writer);
+					request.setAttribute("list", list);
+					request.setAttribute("showAll", "showAll");
+					request.getRequestDispatcher("WEB-INF/board.jsp").forward(request, response);
+				}
 
 			}else if(command.equals("/ShowContents.board")){
 				String id = (String)request.getSession().getAttribute("loginId");
