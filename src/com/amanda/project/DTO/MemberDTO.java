@@ -9,8 +9,30 @@ public class MemberDTO {
 	private String email;
 	private String phone;
 	private int point;
+	private String postcode;
+	private String address1;
+	private String address2;
 	
-	//update
+	public MemberDTO() {}
+	
+	
+	public MemberDTO(int mem_seq, String id, String pw, String name, String birth, String email, String phone,
+			int point, String postcode, String address1, String address2) {
+		super();
+		this.mem_seq = mem_seq;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.birth = birth;
+		this.email = email;
+		this.phone = phone;
+		this.point = point;
+		this.postcode = postcode;
+		this.address1 = address1;
+		this.address2 = address2;
+	}
+	
+	
 	public MemberDTO(String id, String pw, String email, String phone) {
 		super();
 		this.id = id;
@@ -27,6 +49,28 @@ public class MemberDTO {
 		this.email = email;
 		this.phone = phone;
 	}
+	
+	
+	public MemberDTO(String pw, String email, String phone) {
+		super();
+		this.pw = pw;
+		this.email = email;
+		this.phone = phone;
+	}
+	
+	public MemberDTO(String id,String pw, String name, String birth,String email,String phone,String postcode, String address1, String address2) {
+		super();
+		this.id=id;
+		this.pw=pw;
+		this.name=name;
+		this.birth=birth;
+		this.email=email;
+		this.phone=phone;
+		this.postcode=postcode;
+		this.address1=address1;
+		this.address2=address2;
+	}
+	
 	public int getMem_seq() {
 		return mem_seq;
 	}
@@ -47,12 +91,6 @@ public class MemberDTO {
 	}
 	public String getName() {
 		return name;
-	}
-	public MemberDTO(String pw, String email, String phone) {
-		super();
-		this.pw = pw;
-		this.email = email;
-		this.phone = phone;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -81,19 +119,24 @@ public class MemberDTO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public MemberDTO() {
-		super();
+	public String getPostcode() {
+		return postcode;
 	}
-	public MemberDTO(int mem_seq, String id, String pw, String name, String birth, String email, String phone,
-			int point) {
-		super();
-		this.mem_seq = mem_seq;
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.birth = birth;
-		this.email = email;
-		this.phone = phone;
-		this.point = point;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
+	public String getAddress1() {
+		return address1;
+	}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	
+	
 }
