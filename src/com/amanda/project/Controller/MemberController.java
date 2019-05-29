@@ -79,12 +79,21 @@ public class MemberController extends HttpServlet {
 				String birth = request.getParameter("joinmemberbirth");//회원가입시 받는 생년월일
 				String email = request.getParameter("joinmemberemail");//회원가입시 받는 email
 				String phone = request.getParameter("joinmemberphone");//회원가입시 받는 폰번호
-				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone);
+				String postcode = request.getParameter("postcode");
+				String address1 = request.getParameter("address1");
+				String address2 = request.getParameter("address2");
 				
-				System.out.println(id);
+				System.out.println("컨트롤러");
+				System.out.println(postcode);
+				System.out.println(address1);
+				System.out.println(address2);
+				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone,postcode,address1,address2);
+				
+				
 				
 				
 				int result = dao.joinmember(dto);
+				System.out.println(result);
 				if(result == 1) {
 					request.setAttribute("result", result);
 					request.getRequestDispatcher("WEB-INF/joincomp.jsp").forward(request, response);
@@ -103,13 +112,11 @@ public class MemberController extends HttpServlet {
 			String delid= request.getParameter("id");//삭제할 아이디
 			String delpw= request.getParameter("pw");//삭제할 패스워드
 			
-			System.out.println(delid);
 			System.out.println(delpw);
 			
+			
 				int delresult = dao.delete(delid, delpw);
-				System.out.println(delresult);
-				
-					
+				//System.out.println(delresult);
 				
 					if(delresult==1) {
 						request.getSession().invalidate();

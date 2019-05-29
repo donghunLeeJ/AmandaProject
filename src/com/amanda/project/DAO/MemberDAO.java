@@ -82,6 +82,10 @@ public class MemberDAO {
 			dto.setEmail(rs.getString(6));
 			dto.setPhone(rs.getString(7));
 			dto.setPoint(rs.getInt(8));
+			dto.setPostcode(rs.getString(9));
+			dto.setAddress1(rs.getString(10));
+			dto.setAddress2(rs.getString(11));
+			
 			return dto;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -114,7 +118,7 @@ public class MemberDAO {
 	/** 회원가입 메서드*/
 
 	public int joinmember(MemberDTO dto) throws Exception{
-		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default)";
+		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default,?,?,?)";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -125,6 +129,9 @@ public class MemberDAO {
 			pstat.setString(4, dto.getBirth());
 			pstat.setString(5, dto.getEmail());
 			pstat.setString(6, dto.getPhone());
+			pstat.setString(7, dto.getPostcode());
+			pstat.setString(8, dto.getAddress1());
+			pstat.setString(9, dto.getAddress2());
 
 			int result = pstat.executeUpdate();
 			con.commit();

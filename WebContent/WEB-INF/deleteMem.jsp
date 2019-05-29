@@ -206,7 +206,7 @@
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디 </label>
                     <div class="col-lg-10">
-                        <input type="text" name="id" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="${user.id }" maxlength="30" readonly>
+                        <input type="text" name="id" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" value="${user.id }" maxlength="30" readonly>
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
