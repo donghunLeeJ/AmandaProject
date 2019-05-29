@@ -165,6 +165,23 @@ public class MemberDAO {
 			return -1;
 		}
 	}
+	public int PointUpdate(int point , String id) throws Exception{
+		String sql = "update member set point=? where id=?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				
+				){
+			
+			pstat.setInt(1, point);
+			pstat.setString(2, id);
+		
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
 }
 
 
