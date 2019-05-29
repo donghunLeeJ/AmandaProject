@@ -206,7 +206,7 @@
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디 </label>
                     <div class="col-lg-10">
-                        <input type="text" name="id" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="${user.id }" maxlength="30" readonly>
+                        <input type="text" name="id" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" value="${user.id }" maxlength="30" readonly>
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
@@ -408,19 +408,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="assets/js/main.js"></script>
-	<!-- 	---------------------------------소켓연결  script--------------------------------- -->
-	 <script >
-                    var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
-                    webSocket.onopen ;
-                    webSocket.onerror ;
-                    webSocket.onmessage = function(event) {
-                      	 location.reload();
-                    };
-                    var send = function(){
-                    	webSocket.send("hi");
-                    }
-          </script>
-	<!-- 	---------------------------------소켓연결  script--------------------------------- -->
+
 
 
 </body>
