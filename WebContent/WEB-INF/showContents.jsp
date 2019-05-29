@@ -542,7 +542,7 @@
 							<input type="button" id="showReplBox" value="댓글달기"
 								class="btn btn-secondary"> <input type="button"
 								id="toList" value="목록으로" class="btn btn-secondary">
-
+							<input type="text" id="hide">
 						</div>
 					</div>
 				</footer>
