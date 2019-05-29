@@ -9,19 +9,24 @@
  <meta charset="UTF-8">
     <title>chat</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <style>
+    #inputMessage{
+    width:400px;
+    height:200px;
+ 
+     }
+    </style>
 </head>
 <body>
-
        <fieldset> 
-        <textarea id="messageWindow" rows="10" cols="50" readonly="true"></textarea>
-        <input id="inputMessage" type="text" >
+        <textarea id="inputMessage" ></textarea>
         <input type="submit" value="send" onclick="send()" >
     </fieldset>
 
 </body>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('ws://localhost:8080/Fork/broadcasting');
+        var webSocket = new WebSocket('ws://192.168.60.29:8080/Fork/broadcasting');
         var inputMessage = document.getElementById('inputMessage');
     webSocket.onerror = function(event) {
       onError(event)
@@ -36,25 +41,26 @@
        var msg = event.data.split(":");
        var who = msg[0];
        var contents = msg[1];
-       
-       textarea.value += "상대 : " + contents + "\n";
-       
+       console.log(who);
+       if(who== "admin" ){
+       textarea.value += "관리자:" + contents  + "\n";
+       }
     }
     function onOpen(event) {
-        $("#messageWindow").text("채팅에 참여하였습니다.");
+        $("#messageWindow").html("채팅에 참여하였습니다.\n");
     }
     function onError(event) {
       alert(event.data);
     }
     function send() {
-        textarea.value += "admin:" + inputMessage.value + "\n";
-        webSocket.send("admin :"+inputMessage.value);
+        webSocket.send("${user.name}:"+inputMessage.value);
         inputMessage.value = "";
+        window.close();
     }
     function enterkey() {
         if (window.event.keyCode == 13) {
             send();
         }
     }
-  </script> -->
+  </script>
 </html>

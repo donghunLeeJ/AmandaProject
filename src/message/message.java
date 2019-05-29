@@ -24,6 +24,7 @@ public class message {
             for(Session client : clients) {
                 if(!client.equals(session)) {
                     client.getBasicRemote().sendText(message);
+                    
                 }
             }
         }
