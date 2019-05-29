@@ -117,120 +117,198 @@ header {
 <body>
 	<!-- Left Panel -->
 
+	<!-- 왼쪽 네비 시작 -->
 	<aside id="left-panel" class="left-panel">
 		<nav class="navbar navbar-expand-sm navbar-default">
-
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="index.html"><i class="menu-icon fa fa-laptop"></i>자유
-							게시판 </a></li>
-					<li class="menu-title">UI elements</li>
-					<!-- /.menu-title -->
-					<li class="menu-item-has-children dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-cogs"></i>Components
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="fa fa-puzzle-piece"></i><a
-								href="ui-buttons.html">Buttons</a></li>
-							<li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
-							<li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
-
-							<li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
-							<li><i class="fa fa-exclamation-triangle"></i><a
-								href="ui-alerts.html">Alerts</a></li>
-							<li><i class="fa fa-spinner"></i><a
-								href="ui-progressbar.html">Progress Bars</a></li>
-							<li><i class="fa fa-fire"></i><a href="ui-modals.html">Modals</a></li>
-							<li><i class="fa fa-book"></i><a href="ui-switches.html">Switches</a></li>
-							<li><i class="fa fa-th"></i><a href="ui-grids.html">Grids</a></li>
-							<li><i class="fa fa-file-word-o"></i><a
-								href="ui-typgraphy.html">Typography</a></li>
-						</ul></li>
-					<li class="menu-item-has-children active dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-table"></i>Tables
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="fa fa-table"></i><a href="tables-basic.html">Basic
-									Table</a></li>
-							<li><i class="fa fa-table"></i><a href="tables-data.html">Data
-									Table</a></li>
-						</ul></li>
-					<li class="menu-item-has-children dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-th"></i>Forms
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="menu-icon fa fa-th"></i><a
-								href="forms-basic.html">Basic Form</a></li>
-							<li><i class="menu-icon fa fa-th"></i><a
-								href="forms-advanced.html">Advanced Form</a></li>
-						</ul></li>
-
-					<li class="menu-title">Icons</li>
-					<!-- /.menu-title -->
-
-					<li class="menu-item-has-children dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-tasks"></i>Icons
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a
-								href="font-fontawesome.html">Font Awesome</a></li>
-							<li><i class="menu-icon ti-themify-logo"></i><a
-								href="font-themify.html">Themefy Icons</a></li>
-						</ul></li>
-					<li><a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets
+					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+							class="menu-icon fa fa-laptop"></i>Home </a></li>
+					<li class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-bar-chart"></i>Charts
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="menu-icon fa fa-line-chart"></i><a
-								href="charts-chartjs.html">Chart JS</a></li>
-							<li><i class="menu-icon fa fa-area-chart"></i><a
-								href="charts-flot.html">Flot Chart</a></li>
-							<li><i class="menu-icon fa fa-pie-chart"></i><a
-								href="charts-peity.html">Peity Chart</a></li>
-						</ul></li>
-
-					<li class="menu-item-has-children dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-area-chart"></i>Maps
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="menu-icon fa fa-map-o"></i><a
-								href="maps-gmap.html">Google Maps</a></li>
-							<li><i class="menu-icon fa fa-street-view"></i><a
-								href="maps-vector.html">Vector Maps</a></li>
-						</ul></li>
-					<li class="menu-title">Extras</li>
-					<!-- /.menu-title -->
-					<li class="menu-item-has-children dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-glass"></i>Pages
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="menu-icon fa fa-sign-in"></i><a
-								href="page-login.html">Login</a></li>
-							<li><i class="menu-icon fa fa-sign-in"></i><a
-								href="page-register.html">Register</a></li>
-							<li><i class="menu-icon fa fa-paper-plane"></i><a
-								href="pages-forget.html">Forget Pass</a></li>
-						</ul></li>
+					<li class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/manu.jsp"> <i
+							class="menu-icon fa fa-table"></i>메뉴
+					</a></li>
+					<li class="menu-item-has-children dropdown"><a
+						href="Board.board?currentPage=1"> <i
+							class="menu-icon fa fa-th"></i>고객의소리
+					</a></li>
+					<c:choose>
+						<c:when test="${user == null }">
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+							<script>
+							$("#charge").on("click",function(){
+								alert("로그인 후 이용가능합니다.");	
+							})
+						</script>
+						</c:when>
+						<c:otherwise>
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/pay.jsp"> <i
+									class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</nav>
 	</aside>
+<!-- 						진향이 로그인폼끝 -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">L O G I
+													N</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<form action="loginProc.member" id="form" method="post">
+													<div class="form-group">
+														<label for="exampleFormControlInput1">ID</label> <input
+															type="text" class="form-control" id="joinemail"
+															placeholder="ID를 입력하시오" required name="loginid">
+													</div>
+													<div class="form-group">
+														<label for="exampleFormControlInput1">Password</label> <input
+															type="password" class="form-control" id="joinpassword"
+															placeholder="비밀번호 입력하시오" required name="loginpw">
+													</div>
+													<div class="modal-footer">
+														<div id="remember">
+															<input type="checkbox">자동로그인
+														</div>
+														<button type="button" class="btn btn-primary"
+															type="button" id="joinMem">회원가입</button>
+														<button type="button" class="btn btn-primary" id="login">login</button>
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Close</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<script>
+									$("#joinMem").on("click",function() {
+									location.href = "page?url=WEB-INF/joinMem.jsp";
+									})
+									document.getElementById("login").onclick = function() {
+									document.getElementById("form").submit();
+									}
+									// 									로그인 버튼과 회원가입 버튼의 script
+								</script>
+								<!-- 								진향이 마이페이지 폼 -->
+									<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel1" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body1">
+					<form>
+						<div class="form-group m-0 p-0">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa fa-user"></i><strong class="card-title pl-2">
+										My Page </strong>
+										<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+								</div>
+								<div class="card-body">
+									<div class="mx-auto d-block">
+										<img class="rounded-circle mx-auto d-block"
+											src="images/admin.jpg" alt="profile image" width="130px">
+										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
+										<!-- <div class="location text-center">Lv. 일반회원</div> -->
+									</div>
+									<hr>
+									<div class="card-text">
+										<div>
+											<b>이름 </b>
+											<p>${user.name}</p>
+										</div>
+										<div>
+											<b>생년월일</b>
+											<p>${user.birth}</p>
+										</div>
+										<div>
+											<b>이메일</b>
+											<p>${user.email}</p>
+										</div>
+										<div>
+											<b>핸드폰번호</b>
+											<p>${user.phone}</p>
+										</div>
+										<div>
+											<b>잔여포인트</b>
+											<p>${user.point}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="deleteMembtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
+							<button id="pointPagebtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">포인트
+								충전</button>
+							<button id="updatememberbtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
+									
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+	
+	
+	$("#logoutbtn1")
+	.on(
+			"click",
+			function() {
+				location.href = "logoutProc.member";
+			})
+
+	
+							$("#updatememberbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+											})
+							$("#deleteMembtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/deleteMem.jsp";
+											})
+							$("#pointPagebtn").on("click", function() {
+								location.href = "page?url=WEB-INF/pay.jsp";
+							})
+						</script>
+
+
+						<!-- 진향이 마이페이지 폼끝 -->
 
 	<div id="right-panel" class="right-panel">
 
@@ -478,6 +556,8 @@ header {
 
 		});
 	</script>
+
+	
 
 </body>
 </html>

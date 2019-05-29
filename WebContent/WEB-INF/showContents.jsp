@@ -144,13 +144,15 @@ div {
 	width: 100%;
 	border: none;
 	text-aligh: center;
-	padding-left : 10px;
+	padding-left: 10px;
 }
-#showReplBox{
-	border:0px;
+
+#showReplBox {
+	border: 0px;
 }
-#replBox{
-	margin-top:20px;
+
+#replBox {
+	margin-top: 20px;
 }
 </style>
 </head>
@@ -385,7 +387,154 @@ div {
 			</div>
 		</header>
 		<!-- /header -->
+		<!-- 						진향이 로그인폼끝 -->
+		<!-- 								진향이 마이페이지 폼 -->
+		<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel1" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body1">
+					<form>
+						<div class="form-group m-0 p-0">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa fa-user"></i><strong class="card-title pl-2">
+										My Page </strong>
+										<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+								</div>
+								<div class="card-body">
+									<div class="mx-auto d-block">
+										<img class="rounded-circle mx-auto d-block"
+											src="images/admin.jpg" alt="profile image" width="130px">
+										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
+										<!-- <div class="location text-center">Lv. 일반회원</div> -->
+									</div>
+									<hr>
+									<div class="card-text">
+										<div>
+											<b>이름 </b>
+											<p>${user.name}</p>
+										</div>
+										<div>
+											<b>생년월일</b>
+											<p>${user.birth}</p>
+										</div>
+										<div>
+											<b>이메일</b>
+											<p>${user.email}</p>
+										</div>
+										<div>
+											<b>핸드폰번호</b>
+											<p>${user.phone}</p>
+										</div>
+										<div>
+											<b>잔여포인트</b>
+											<p>${user.point}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="deleteMembtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
+							<button id="pointPagebtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">포인트
+								충전</button>
+							<button id="updatememberbtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
+									
+						</div>
+					</form>
 
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+	
+	
+	$("#logoutbtn1")
+	.on(
+			"click",
+			function() {
+				location.href = "logoutProc.member";
+			})
+
+	
+							$("#updatememberbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+											})
+							$("#deleteMembtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/deleteMem.jsp";
+											})
+							$("#pointPagebtn").on("click", function() {
+								location.href = "page?url=WEB-INF/pay.jsp";
+							})
+						</script>
+
+		<!-- 진향이 마이페이지 폼끝 -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form action="loginProc.member" id="form" method="post">
+							<div class="form-group">
+								<label for="exampleFormControlInput1">ID</label> <input
+									type="text" class="form-control" id="joinemail"
+									placeholder="ID를 입력하시오" required name="loginid">
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Password</label> <input
+									type="password" class="form-control" id="joinpassword"
+									placeholder="비밀번호 입력하시오" required name="loginpw">
+							</div>
+							<div class="modal-footer">
+								<div id="remember">
+									<input type="checkbox">자동로그인
+								</div>
+								<button type="button" class="btn btn-primary" type="button"
+									id="joinMem">회원가입</button>
+								<button type="button" class="btn btn-primary" id="login">login</button>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+									$("#joinMem").on("click",function() {
+									location.href = "page?url=WEB-INF/joinMem.jsp";
+									})
+									document.getElementById("login").onclick = function() {
+									document.getElementById("form").submit();
+									}
+									// 									로그인 버튼과 회원가입 버튼의 script
+								</script>
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="card">
@@ -423,77 +572,81 @@ div {
 						<div class="card-body">
 							<div class="container" id="wrapper">
 								<main id="main">
+
 								<div id="text">
 									<div id="contents" name="contents"
 										>${dto.contents}</div>
+
+				
 								</div>
 								</main>
 							</div>
 						</div>
 					</form>
-					
+
 				</div>
 				<footer>
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12"
-					id="footer">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
 
-					<c:if test="${id==writer }">
-						<input type="button" id="modify" value="수정하기" class="btn btn-secondary">
-						<input type="button" id="delete" value="글 삭제" class="btn btn-secondary">
-					</c:if>
-					<input type="button" id="showReplBox" value="댓글달기" class="btn btn-secondary"> <input
-						type="button" id="toList" value="목록으로" class="btn btn-secondary">
+							<c:if test="${user.id==writer }">
+								<input type="button" id="modify" value="수정하기"
+									class="btn btn-secondary">
+								<input type="button" id="delete" value="글 삭제"
+									class="btn btn-secondary">
+							</c:if>
+							<input type="button" id="showReplBox" value="댓글달기"
+								class="btn btn-secondary"> <input type="button"
+								id="toList" value="목록으로" class="btn btn-secondary">
 
-				</div>
-			</div>
-		</footer>
-		<form action="Reply.board" id="replForm">
-			<div class="row" id="replBox">
-				<input type="text" value="${no}" name="contents_no" id="contents_no">
-				<textarea id="repl" name="repl_contents"></textarea>
-				<input type="button" id="replButt" value="등록하기" class="btn btn-secondary">
-			</div>
-		</form>
-		<div id="replHeader">
-			<h4>댓글</h4>
-		</div>
-		<div id="replContentsBox">
-			<c:forEach var="repldto" items="${replList}">
-				<form action="ReplEdit.board">
-					<div class="row" id="eachRepl">
-						<div
-							class="col-lg-2 col-md-2 col-sm-2 col-2"
-							id="repl_writer">${repldto.repl_writer}</div>
-						<div
-							class="col-lg-8 col-md-8 col-sm-8 col-8">
-							<input type="text" id="repl_text" name="repl_contents"
-								value="${repldto.repl_contents}" readonly> <input
-								type="text" class="hide" name="contents_no"
-								value="${repldto.contents_no}"> <input type="text"
-								class="hide" name="repl_seq" value="${repldto.repl_seq}">
 						</div>
-
-						<div
-							class="col-lg-2 col-md-2 col-sm-2 col-2"
-							id="repl_time">${repldto.repl_time}</div>
 					</div>
-					<c:if test="${id==repldto.repl_writer }">
-						<div class="row">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-12" id="replButts">
-								<input type="submit" class="replEditCompl btn btn-secondary" value="수정완료"
-									style="margin-right: 4px;" ><input type="button"
-									value="수정" class="modiRepl btn btn-secondary"> <input type="button"
-									value="삭제" class="delRepl btn btn-secondary">
-							</div>
-						</div>
-					</c:if>
+				</footer>
+				<form action="Reply.board" id="replForm">
+					<div class="row" id="replBox">
+						<input type="text" value="${no}" name="contents_no"
+							id="contents_no">
+						<textarea id="repl" name="repl_contents"></textarea>
+						<input type="button" id="replButt" value="등록하기"
+							class="btn btn-secondary">
+					</div>
 				</form>
-				<script>
+				<div id="replHeader">
+					<h4>댓글</h4>
+				</div>
+				<div id="replContentsBox">
+					<c:forEach var="repldto" items="${replList}">
+						<form action="ReplEdit.board">
+							<div class="row" id="eachRepl">
+								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_writer">${repldto.repl_writer}</div>
+								<div class="col-lg-8 col-md-8 col-sm-8 col-8">
+									<input type="text" id="repl_text" name="repl_contents"
+										value="${repldto.repl_contents}" readonly> <input
+										type="text" class="hide" name="contents_no"
+										value="${repldto.contents_no}"> <input type="text"
+										class="hide" name="repl_seq" value="${repldto.repl_seq}">
+								</div>
+
+								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_time">${repldto.repl_time}</div>
+							</div>
+							<c:if test="${user.id==repldto.repl_writer }">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
+										id="replButts">
+										<input type="submit" class="replEditCompl btn btn-secondary"
+											value="수정완료" style="margin-right: 4px;"><input
+											type="button" value="수정" class="modiRepl btn btn-secondary">
+										<input type="button" value="삭제"
+											class="delRepl btn btn-secondary">
+									</div>
+								</div>
+							</c:if>
+						</form>
+						<script>
 				$(".replEditCompl").hide();
 				$(".hide").hide();
 				
-				if(${id==repldto.repl_writer }){
+				if(${user.id==repldto.repl_writer }){
 					$(".modiRepl").on("click",function(){
 						document.getElementById("repl_text").readOnly=false;
 						$(this).parent().find("input:nth-child(1)").show();
@@ -504,8 +657,8 @@ div {
 					})
 				}
 				</script>
-			</c:forEach>
-		</div>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -563,6 +716,7 @@ div {
 		}
 		}
 	</script>
+
 
 </body>
 </html>

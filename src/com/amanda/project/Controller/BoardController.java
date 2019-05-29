@@ -18,7 +18,11 @@ import org.apache.commons.io.FileExistsException;
 
 import com.amanda.project.DAO.BoardDAO;
 import com.amanda.project.DTO.BoardDTO;
+
 import com.amanda.project.DTO.FilesDTO;
+
+import com.amanda.project.DTO.MemberDTO;
+
 import com.amanda.project.DTO.ReplDTO;
 import com.google.gson.JsonObject;
 
@@ -42,9 +46,9 @@ public class BoardController extends HttpServlet {
 
 				String title = request.getParameter("title");
 				String newTitle = title.replace("<", "%1$2#").replace(">", "!5@4#");
-
 				String contents =request.getParameter("contents");
 				String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
+
 				String writer = (String)request.getSession().getAttribute("loginId");
 				String path =request.getParameter("path");
 
