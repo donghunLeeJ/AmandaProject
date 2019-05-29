@@ -75,7 +75,7 @@
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp"> <i
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
@@ -273,8 +273,8 @@
 								<c:choose>
 									<c:when test="${user == null }">
 										<script>
-								if(${login==false}){
-									alert("회원정보가 없습니다 다시 로그인하십시오");
+								if(${login== -1}){
+									alert("아이디가 없습니다 ");
 									loaction.href=	 "page?url=WEB-INF/main.jsp";
 								}
 								</script>
@@ -511,16 +511,34 @@
 					</div>
 				</div>
 			</div>
-		</footer>
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-		<script src="assets/js/main.js"></script>
+		</div>
+	</footer>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+	<script src="assets/js/main.js"></script>
+	    <!-- 	---------------------------------소켓연결  script--------------------------------- -->
+	 <script >
+                    
+	 		if(${user.id != null } ){
+	 		 	var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+     	        webSocket.onopen = function(event){
+     	           	webSocket.send("hi");
+     	        };
+                webSocket.onerror ;
+                    
+                 
+	 		}
+          </script>
+	<!-- 	---------------------------------소켓연결  script--------------------------------- -->
+	
+
 </body>
 </html>

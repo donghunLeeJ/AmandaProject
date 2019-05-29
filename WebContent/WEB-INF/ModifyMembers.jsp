@@ -50,8 +50,8 @@
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp"> <i
-							class="menu-icon fa fa-cogs"></i>잔여좌석
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fa fa-cogs" ></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/manu.jsp"> <i

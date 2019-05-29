@@ -24,7 +24,8 @@ public class WebSocket {
 	}
 
 	@OnClose
-	public void onClose(){
+	public void onClose(Session session){
+		System.out.println(session);
 		System.out.println("Close Connection ...");
 	}
 

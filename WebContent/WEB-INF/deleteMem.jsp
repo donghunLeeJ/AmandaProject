@@ -27,7 +27,7 @@
 				 <ul class="nav navbar-nav">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/seat.jsp"> 
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/seat.jsp" onclick="send()"> 
 					<i class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/manu.jsp"> 
@@ -408,6 +408,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="assets/js/main.js"></script>
+
 
 
 </body>
