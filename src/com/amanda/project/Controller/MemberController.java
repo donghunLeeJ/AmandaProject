@@ -2,6 +2,7 @@ package com.amanda.project.Controller;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DAO.MemberDAO;
+import com.amanda.project.DTO.ComDTO;
 import com.amanda.project.DTO.MemberDTO;
 
 
@@ -21,6 +24,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;UTF-8");
 		MemberDAO dao=new MemberDAO();
+		ComDAO cDao = new ComDAO();
 		
 		switch(cmd) {
 		
@@ -39,8 +43,16 @@ public class MemberController extends HttpServlet {
 					MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 					dto.getId();
 					request.setAttribute("login", login);
-				RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
-				rd.forward(request, response);
+					String ip = request.getRemoteAddr();
+					System.out.println(ip);
+					
+					if(cDao.seatOn(ip)>0) {
+						ComDTO cDto = cDao.seatNum_get(ip);
+						System.out.println(cDto.getOnOff());
+						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
+					}
+					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+					rd.forward(request, response);
 				}
 				else {
 					System.out.println(login);
@@ -90,48 +102,55 @@ public class MemberController extends HttpServlet {
 			//회원 탈퇴 컨트롤러
 			String delid= request.getParameter("id");//삭제할 아이디
 			String delpw= request.getParameter("pw");//삭제할 패스워드
-		
+			
+			System.out.println(delid);
+			System.out.println(delpw);
 			
 				int delresult = dao.delete(delid, delpw);
-				if(delresult==1) {
-					request.setAttribute("delresult", delresult);
-					request.getRequestDispatcher("WEB-INF/outmember.jsp").forward(request, response);
-				}
-			
+				System.out.println(delresult);
+				
+					
+				
+					if(delresult==1) {
+						request.getSession().invalidate();
+						request.setAttribute("delresult", delresult);
+						request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
+					}else {
+						request.setAttribute("delresult", delresult);
+						request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
+					}
 			break;
-
-			
 			
 		case "updateProc.member" :
 			//회원 정보수정 컨트롤러	
 			try {
+				System.out.println("kk");
 			String pw=request.getParameter("newpw");
 			String email=request.getParameter("newemail");
 			String phone=request.getParameter("phone");
 			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
-            String id=dto.getId();
-		
+           	String id=dto.getId();
 				int result=dao.updateMember(new MemberDTO(id,pw,email,phone));
-				System.out.println(result);
 				if(result==1) {
 					System.out.println(result);
-				request.setAttribute("user", dao.select_user(id));
+				request.getSession().setAttribute("user", dao.select_user(id));
 					request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-			
 				}
+			
 				} catch (Exception e) {
 				
 				e.printStackTrace();
 			}
-			
-			
 			break;
 	
 		case "logoutProc.member" :
 			//로그아아웃 컨트롤러 
+			cDao.seatOff(request.getRemoteAddr());
+			List<ComDTO> arr = cDao.selectSeat_all();
+			request.getServletContext().setAttribute("seat", arr);
 			request.getSession().invalidate();
 			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
-		break;
+			break;
 	
 		}
 	}

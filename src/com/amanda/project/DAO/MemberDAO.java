@@ -90,8 +90,10 @@ public class MemberDAO {
 	}
 
 
+
 	/** 회원정보수정 메서드*/
 	public int updateMember(MemberDTO dto) throws Exception {
+
 		String sql="update Member set pw=?,email=?,phone=?  where id=? ";
 		Connection con=ds.getConnection();
 		PreparedStatement pstat=con.prepareStatement(sql);
@@ -105,7 +107,12 @@ public class MemberDAO {
 		con.close();
 		return result;
 	}
+
+
+	
+
 	/** 회원가입 메서드*/
+
 	public int joinmember(MemberDTO dto) throws Exception{
 		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default)";
 		try(
@@ -133,9 +140,10 @@ public class MemberDAO {
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setString(1, id);
-			pstat.setString(2, pw);
-
+			pstat.setString(2, this.testSHA256(pw));
+			
 			int result = pstat.executeUpdate();
+			System.out.println(result);
 			
 			return result;
 		}catch(Exception e) {
