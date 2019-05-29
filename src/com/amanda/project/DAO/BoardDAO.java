@@ -22,7 +22,7 @@ public class BoardDAO {
 	}
 
 	public int write(BoardDTO dto) throws Exception{				
-		String sql = "insert into board values(board_seq.nextval,?,?,?,sysdate,?,?)";
+		String sql = "insert into board values(board_seq.nextval,?,?,?,sysdate,?,?,?)";
 		try(
 				Connection con = this.connect();	
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -32,6 +32,7 @@ public class BoardDAO {
 			pstat.setString(3, dto.getWriter());
 			pstat.setInt(4, dto.getViewCount());
 			pstat.setString(5, dto.getIpAddr());
+			pstat.setString(6, dto.getPath());
 
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -103,13 +104,27 @@ public class BoardDAO {
 			con1.commit();
 			con2.commit();
 			if(rs.next()) {			
-				BoardDTO dto = new BoardDTO(rs.getString(1),rs.getString(2),rs.getTimestamp(3),rs.getString(4).replace("&lt;script&gt","&lt$$;script$$&gt").replace("&lt;/script&gt","&lt$$;/script$$&gt"));
+				BoardDTO dto = new BoardDTO(rs.getString(1),rs.getString(2),rs.getTimestamp(3),rs.getString(4).replace("&lt;/script&gt","&lt$$;/script$$&gt"));
 				return dto;
 			}
 			return null;
 		}
 	}
-	
+	public String selectPath(int no) throws Exception{
+		String sql = "select path from board where board_seq=?";
+		try(
+				Connection con = this.connect();		
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, no);
+			ResultSet rs = pstat.executeQuery();
+			if(rs.next()) {			
+				String path = rs.getString(1);
+				return path;
+			}
+			return null;
+		}
+	}
 	public int update(String title, String contents, int no) throws Exception{
 		String sql = "update board set title=?, contents=?, writedate=sysdate where board_seq=?";
 		try(
@@ -155,12 +170,12 @@ public class BoardDAO {
 		}
 	}
 	private int boardSearchCount(String title) throws Exception{
-		String sql = "select count(*) from board where title=?";
+		String sql = "select count(*) from board where title like ?";
 		try(
 				Connection con = this.connect();	
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1, title);
+			pstat.setString(1, "%"+title+"%");
 			ResultSet rs = pstat.executeQuery();
 			if(rs.next()) {			
 				int count=rs.getInt(1);
