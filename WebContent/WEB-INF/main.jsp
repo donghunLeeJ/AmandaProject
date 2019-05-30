@@ -140,6 +140,8 @@
                            </form>
                         </div>
 
+
+			
                         <div class="dropdown for-notification">
                            <button class="btn btn-secondary dropdown-toggle" type="button"
                               id="notification" data-toggle="dropdown" aria-haspopup="true"
@@ -267,6 +269,7 @@
                   </div>
                </div>
 
+
                <div class="col-lg-6 area">
                   <div class="card my-card border-danger">
                      <div class="card-body">
@@ -279,30 +282,80 @@
                         }
                         </script>
 
-                        <h3 class="card-title">충전/로그인/개인정보</h3>
-                        <p class="card-text">내용</p>
-                        <button type="button" class="btn btn-outline-danger signbt mb-2"
-                           data-toggle="modal" data-target="#exampleModal" id="loginbtn">
-                           login</button>
-                        </c:when>
-                        <c:otherwise>
-                        <h3 class="card-title">충전/로그인/개인정보</h3>
-                        <p class="card-text">내용</p>
-                        <h5>${user.name } 님 반갑습니다</h5>
-                        <h5>${user.name } 님의 잔여포인트는 ${point }입니다</h5>                        
-                        <h5 id="timeout"></h5>
-                        
-                           <button type="button" class="btn btn-primary"  id="logoutbtn">logout</button>
-                           <script>
-                           $("#logoutbtn")
-                           .on(
-                                 "click",
-                                 function() {
-                                    location.href = "logoutProc.member";
-                                 })
-               
-                                 
-                                 
+
+										<h3 class="card-title">충전/로그인/개인정보</h3>
+										<p class="card-text">내용</p>
+										<button type="button"
+											class="btn btn-outline-danger signbt mb-2"
+											data-toggle="modal" data-target="#exampleModal" id="loginbtn">
+											login</button>
+									</c:when>
+									<c:otherwise>
+										<h3 class="card-title">충전/로그인/개인정보</h3>
+										<p class="card-text">내용</p>
+										<h5>${user.name }님반갑습니다</h5>
+										<h5>${user.name }님의잔여포인트는${user.point }입니다</h5>
+										<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
+										<button type="button" class="btn btn-primary" id="msg">msg</button>
+										
+										<script>
+										//msg보내는 소켓 및 버튼
+										 var webSocket = new WebSocket('ws://192.168.60.29:8080/Fork/broadcasting');
+									    webSocket.onerror = function(event) {
+     									 onError(event)
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  										if("${user.name}"=="관리자"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; 
+       											var contents = msg[1];
+       											 var who2=msg[2];
+       											
+     								 if(who!="admin"&&who2=="admin"){
+    								window.open("reply.message?who="+who+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 }
+    											}
+  											
+  										  }		 
+  									 
+  										else{
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; //admin
+       											var contents = msg[1];
+       											 var who2=msg[2]; //clinet이름      											    							
+     								 if("${user.name}"==who2&&who=="admin") 
+     								{
+    								window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 
+     								 }
+     								 
+     							 }
+     							
+  								}	
+  								//메시지 끝
+  								
+									$("#logoutbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "logoutProc.member";
+											})
+											$("#msg")
+									.on(
+											"click",
+											function() {
+												
+												window.open("page?url=WEB-INF/newmessage.jsp", "",
+											
+											})
+									
+
                                  
                                  
                                  
@@ -335,6 +388,7 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
                            </script>
                         </c:otherwise>
 
+
                         </c:choose>
                      </div>
                   </div>
@@ -353,53 +407,60 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
 							<div class="card-body">
 								<h3 class="card-title">PC방 이벤트가 들어갈 곳</h3>
 								<p class="card-text">내용</p>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- 					여기부터 진향이가 만든 로그인폼 -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="loginProc.member" id="form" method="post">
-						<div class="form-group">
-							<label for="exampleFormControlInput1">ID</label> <input
-								type="text" class="form-control" id="joinemail"
-								placeholder="ID를 입력하시오" required name="loginid">
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Password</label> <input
-								type="password" class="form-control" id="joinpassword"
-								placeholder="비밀번호 입력하시오" required name="loginpw">
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" type="button"
+
+						<div class="modal-body">
+							<form action="loginProc.member" id="form" method="post">
+								<div class="form-group">
+									<label for="exampleFormControlInput1">ID</label> <input
+										type="text" class="form-control" id="joinemail"
+										placeholder="ID를 입력하시오" required name="loginid">
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlInput1">Password</label> <input
+										type="password" class="form-control" id="joinpassword"
+										placeholder="비밀번호 입력하시오" required name="loginpw">
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-primary" type="button"
 									id="reinputpw">비밀번호재설정</button>
-							<button type="button" class="btn btn-primary" type="button"
-								id="joinMem">회원가입</button>
-							<button type="button" class="btn btn-primary" id="login">login</button>
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary" type="button"
+										id="joinMem">회원가입</button>
+									<button type="button" class="btn btn-primary" id="login">login</button>
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+								</div>
+							</form>
+
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 	<script>
 									$("#reinputpw").on("click",function(){
 									location.href = "page?url=WEB-INF/modifypassword.jsp";
 									})
+
 									$("#joinMem").on("click",function() {
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
@@ -408,6 +469,7 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
 	</script>
+
 								
 	<!-- 						진향이 로그인폼끝 -->
 	<!-- 								진향이 마이페이지 폼 -->
@@ -552,6 +614,7 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
    <script src="assets/js/main.js"></script>
      <script>
 							
+
 							$("#updatememberbtn")
 									.on(
 											"click",
@@ -568,7 +631,39 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
 								location.href = "page?url=WEB-INF/pay.jsp";
 							})
 						</script>
-     
+
+
+
+			<!-- 진향이 마이페이지 폼끝 -->
+
+
+		</div>
+
+		<!-- 컨텐츠 끝 -->
+
+		<div class="clearfix"></div>
+		<!-- Footer -->
+		<footer class="site-footer">
+			<div class="footer-inner bg-white">
+				<div class="row">
+					<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
+					<div class="col-sm-6 text-right">
+						Designed by <a href="https://colorlib.com">1조</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+		<script src="assets/js/main.js"></script>
+
      
      
      
@@ -588,5 +683,6 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
     </script>
    <!--    ---------------------------------소켓연결  script--------------------------------- -->
    
+
 </body>
 </html>
