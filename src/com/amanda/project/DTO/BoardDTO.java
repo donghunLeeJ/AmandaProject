@@ -11,8 +11,10 @@ private String writer;
 private Timestamp writeDate;
 private int viewCount;
 private String ipAddr;
+private String path = null;
+
 public BoardDTO(String board_seq, String title, String contents, String writer, Timestamp writeDate, int viewCount,
-		String ipAddr) {
+		String ipAddr, String path) {
 	super();
 	this.board_seq = board_seq;
 	this.title = title;
@@ -21,6 +23,7 @@ public BoardDTO(String board_seq, String title, String contents, String writer, 
 	this.writeDate = writeDate;
 	this.viewCount = viewCount;
 	this.ipAddr = ipAddr;
+	this.path = path;
 }
 public BoardDTO(String title, String writer, Timestamp writeDate, String contents) {
 	super();
@@ -38,13 +41,14 @@ public BoardDTO(String board_seq, String title, String writer, Timestamp writeDa
 	this.viewCount = viewCount;
 }
 public BoardDTO(String title, String contents, String writer, int viewCount,
-		String ipAddr) {
+		String ipAddr, String path) {
 	super();
 	this.title = title;
 	this.contents = contents;
 	this.writer = writer;
 	this.viewCount = viewCount;
 	this.ipAddr = ipAddr;
+	this.path = path;
 }
 public String getFormedTime() {
 	long currentTime = System.currentTimeMillis();
@@ -108,6 +112,12 @@ public String getIpAddr() {
 }
 public void setIpAddr(String ipAddr) {
 	this.ipAddr = ipAddr;
+}
+public String getPath() {
+	return path;
+}
+public void setPath(String path) {
+	this.path = path;
 }
 
 

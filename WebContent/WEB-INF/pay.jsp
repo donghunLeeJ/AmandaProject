@@ -35,7 +35,8 @@
 	href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
 	rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 
 
@@ -75,7 +76,7 @@
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp"> <i
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
@@ -263,8 +264,8 @@
 
 						<div class="card-body">
 
-							<button type="button" class="btn btn-outline-primary btn-lg"
-								style="width: 100%; height: 100%" type="button" id="pay1000">
+							<button id="pay1000" type="button" class="btn btn-outline-primary btn-lg"
+								style="width: 100%; height: 100%" type="button" >
 								1000원 충전<br>(1시간)
 							</button>
 
@@ -278,8 +279,8 @@
 
 						<div class="card-body">
 
-							<button type="button" class="btn btn-outline-secondary btn-lg"
-								style="width: 100%; height: 100%" type="button" id="pay2000">
+							<button id="pay2000" type="button" class="btn btn-outline-secondary btn-lg"
+								style="width: 100%; height: 100%" type="button" >
 								2000원 충전<br>(2시간)
 							</button>
 
@@ -293,8 +294,8 @@
 
 						<div class="card-body">
 
-							<button type="button" class="btn btn-outline-success btn-lg"
-								style="width: 100%; height: 100%" type="button" id="pay3000">
+							<button id="pay3000" type="button" class="btn btn-outline-success btn-lg"
+								style="width: 100%; height: 100%" type="button" >
 								3000원 충전<br>(3시간)
 							</button>
 
@@ -308,8 +309,8 @@
 
 						<div class="card-body">
 
-							<button type="button" class="btn btn-outline-danger btn-lg"
-								style="width: 100%; height: 100%" type="button" id="pay5000">
+							<button id="pay5000" type="button" class="btn btn-outline-danger btn-lg"
+								style="width: 100%; height: 100%" type="button" >
 								5000원 충전<br>(5시간 30분)
 							</button>
 
@@ -323,8 +324,8 @@
 
 						<div class="card-body">
 
-							<button type="button" class="btn btn-outline-warning btn-lg"
-								style="width: 100%; height: 100%" type="button" id="pay10000">
+							<button id="pay10000" type="button" class="btn btn-outline-warning btn-lg"
+								style="width: 100%; height: 100%" type="button" >
 								10000원 충전<br>(11시간)
 							</button>
 
@@ -338,8 +339,8 @@
 
 						<div class="card-body">
 
-							<button type="button" class="btn btn-outline-info btn-lg"
-								style="width: 100%; height: 100%" type="button" id="pay20000">
+							<button  id="pay20000" type="button" class="btn btn-outline-info btn-lg"
+								style="width: 100%; height: 100%" type="button">
 								20000원 충전<br>(23시간)
 							</button>
 						</div>
@@ -401,70 +402,85 @@
 								</script>
 		<!-- 								진향이 마이페이지 폼 -->
 		<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel1" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-body1">
-						<form>
-							<div class="form-group m-0 p-0">
-								<div class="card">
-									<div class="card-header">
-										<i class="fa fa-user"></i><strong class="card-title pl-2">
-											My Page </strong>
+		aria-labelledby="exampleModalLabel1" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body1">
+					<form>
+						<div class="form-group m-0 p-0">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa fa-user"></i><strong class="card-title pl-2">
+										My Page </strong>
+										<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+								</div>
+								<div class="card-body">
+									<div class="mx-auto d-block">
+										<img class="rounded-circle mx-auto d-block"
+											src="images/admin.jpg" alt="profile image" width="130px">
+										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
+										<!-- <div class="location text-center">Lv. 일반회원</div> -->
 									</div>
-									<div class="card-body">
-										<div class="mx-auto d-block">
-											<img class="rounded-circle mx-auto d-block"
-												src="images/admin.jpg" alt="profile image" width="80px">
-											<h5 class="text-center mt-2 mb-1">Steven Lee</h5>
-											<div class="location text-center">Lv. 일반회원</div>
+									<hr>
+									<div class="card-text">
+										<div>
+											<b>이름 </b>
+											<p>${user.name}</p>
 										</div>
-										<hr>
-										<div class="card-text">
-											<div>
-												<b>이름 </b>
-												<p>${user.name}</p>
-											</div>
-											<div>
-												<b>생년월일</b>
-												<p>${user.birth}</p>
-											</div>
-											<div>
-												<b>이메일</b>
-												<p>${user.email}</p>
-											</div>
-											<div>
-												<b>핸드폰번호</b>
-												<p>${user.phone}</p>
-											</div>
-											<div>
-												<b>잔여포인트</b>
-												<p>${user.point}</p>
-											</div>
+										<div>
+											<b>생년월일</b>
+											<p>${user.birth}</p>
+										</div>
+										<div>
+											<b>이메일</b>
+											<p>${user.email}</p>
+										</div>
+										<div>
+											<b>핸드폰번호</b>
+											<p>${user.phone}</p>
+										</div>
+										<div>
+											<b>잔여포인트</b>
+											<p>${user.point}</p>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="modal-footer">
-								<button id="deleteMembtn" type="button"
-									class="btn btn-outline-info" data-dismiss="modal">회원
-									탈퇴</button>
-								<button id="pointPagebtn" type="button"
-									class="btn btn-outline-info" data-dismiss="modal">포인트
-									충전</button>
-								<button id="updatememberbtn" type="button"
-									class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Close</button>
-							</div>
-						</form>
+						</div>
+						<div class="modal-footer">
+							<button id="deleteMembtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
+							<button id="pointPagebtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">포인트
+								충전</button>
+							<button id="updatememberbtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
+									
+						</div>
+					</form>
 
-					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<script>
+
+
+	<script>
+	
+	
+	$("#logoutbtn1")
+	.on(
+			"click",
+			function() {
+				location.href = "logoutProc.member";
+			})
+
+	
 							$("#updatememberbtn")
 									.on(
 											"click",
@@ -481,7 +497,6 @@
 								location.href = "page?url=WEB-INF/pay.jsp";
 							})
 						</script>
-
 
 		<!-- 진향이 마이페이지 폼끝 -->
 
@@ -511,5 +526,169 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script>
+	var id = "${user.id }";
+	var paid_amount = 1;
+	$("#pay1000").on("click",function(){
+	IMP.init('imp96545220'); 
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'AmandaPC',
+	    amount : 1000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        paid_amount = rsp.paid_amount;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	});
+	})
+	$("#pay2000").on("click",function(){
+	IMP.init('imp96545220'); 
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'AmandaPC',
+	    amount : 2000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        paid_amount = rsp.paid_amount;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	});
+	})
+	$("#pay3000").on("click",function(){
+	IMP.init('imp96545220'); 
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'AmandaPC',
+	    amount : 3000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        paid_amount = rsp.paid_amount;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	});
+	})
+	$("#pay5000").on("click",function(){
+	IMP.init('imp96545220'); 
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'AmandaPC',
+	    amount : 5000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        paid_amount = rsp.paid_amount;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	});
+	})
+	$("#pay10000").on("click",function(){
+	IMP.init('imp96545220'); 
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'AmandaPC',
+	    amount : 10000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        paid_amount = rsp.paid_amount;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	});
+	})
+	$("#pay20000").on("click",function(){
+	IMP.init('imp96545220'); 
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'AmandaPC',
+	    amount : 20000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        paid_amount = rsp.paid_amount;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	});
+	})
+	</script>
+	
+	
 </body>
 </html>

@@ -51,7 +51,7 @@ public class MemberDAO {
 		return SHA;
 	}
 	/** 디비 값을 확인하고 로그인을 진행하는 메서드*/
-	public boolean checklogin(String id,String pw)throws Exception{
+	public int checklogin(String id,String pw)throws Exception{
 		String sql="select * from Member where id= ? and pw= ? ";
 		try (	Connection con=ds.getConnection();
 				PreparedStatement pstat=con.prepareStatement(sql);
@@ -61,8 +61,15 @@ public class MemberDAO {
 			pstat.setString(1, id );
 			pstat.setString(2, pw);
 			ResultSet rs=pstat.executeQuery();
-
-			return rs.next();
+			if(rs.next()) {
+				return 1;
+			}else {
+				return -1;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 	/** session에 값을 저장하기 위한 메서드*/
@@ -84,6 +91,10 @@ public class MemberDAO {
 			dto.setEmail(rs.getString(6));
 			dto.setPhone(rs.getString(7));
 			dto.setPoint(rs.getInt(8));
+			dto.setPostcode(rs.getString(9));
+			dto.setAddress1(rs.getString(10));
+			dto.setAddress2(rs.getString(11));
+			
 			return dto;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -116,7 +127,7 @@ public class MemberDAO {
 	/** 회원가입 메서드*/
 
 	public int joinmember(MemberDTO dto) throws Exception{
-		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default)";
+		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default,?,?,?)";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -127,6 +138,9 @@ public class MemberDAO {
 			pstat.setString(4, dto.getBirth());
 			pstat.setString(5, dto.getEmail());
 			pstat.setString(6, dto.getPhone());
+			pstat.setString(7, dto.getPostcode());
+			pstat.setString(8, dto.getAddress1());
+			pstat.setString(9, dto.getAddress2());
 
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -153,6 +167,7 @@ public class MemberDAO {
 			return -1;
 		}
 	}
+
 	
 	/** 아이디,이메일값으로 회원가입여부 확인*/
 	public int existMember(String id, String email) {
@@ -177,6 +192,25 @@ public class MemberDAO {
 			return -1;
 		}
 	}
+
+	public int PointUpdate(int point , String id) throws Exception{
+		String sql = "update member set point=? where id=?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				
+				){
+			
+			pstat.setInt(1, point);
+			pstat.setString(2, id);
+		
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+
 }
 
 

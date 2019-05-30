@@ -75,6 +75,7 @@ div {
 	padding: 20px;
 	width: 100%;
 	height: 100%;
+	overflow:auto;
 }
 
 #repl {
@@ -143,15 +144,13 @@ div {
 	width: 100%;
 	border: none;
 	text-aligh: center;
-	padding-left: 10px;
+	padding-left : 10px;
 }
-
-#showReplBox {
-	border: 0px;
+#showReplBox{
+	border:0px;
 }
-
-#replBox {
-	margin-top: 20px;
+#replBox{
+	margin-top:20px;
 }
 </style>
 </head>
@@ -386,6 +385,7 @@ div {
 			</div>
 		</header>
 		<!-- /header -->
+
 		<!-- 						진향이 로그인폼끝 -->
 		<!-- 								진향이 마이페이지 폼 -->
 		<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
@@ -523,11 +523,11 @@ div {
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
 								</script>
+
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="card">
 
-					<form action="BoardWrite.board" id="formWrite" method="post">
 						<div class="card-header">
 							<strong class="card-title"> <header>
 									<div class="row">
@@ -560,77 +560,77 @@ div {
 						<div class="card-body">
 							<div class="container" id="wrapper">
 								<main id="main">
-								<div class="row" id="text">
-									<div id="contents" name="contents">${dto.contents}</div>
+								<div id="text">
+									<div id="contents" name="contents"
+										>${dto.contents}</div>
 								</div>
 								</main>
 							</div>
 						</div>
-					</form>
-
+					
 				</div>
 				<footer>
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12"
+					id="footer">
 
-							<c:if test="${user.id==writer }">
-								<input type="button" id="modify" value="수정하기"
-									class="btn btn-secondary">
-								<input type="button" id="delete" value="글 삭제"
-									class="btn btn-secondary">
-							</c:if>
-							<input type="button" id="showReplBox" value="댓글달기"
-								class="btn btn-secondary"> <input type="button"
-								id="toList" value="목록으로" class="btn btn-secondary">
+					<c:if test="${id==writer }">
+						<input type="button" id="modify" value="수정하기" class="btn btn-secondary">
+						<input type="button" id="delete" value="글 삭제" class="btn btn-secondary">
+					</c:if>
+					<input type="button" id="showReplBox" value="댓글달기" class="btn btn-secondary"> <input
+						type="button" id="toList" value="목록으로" class="btn btn-secondary">
 
-						</div>
-					</div>
-				</footer>
-				<form action="Reply.board" id="replForm">
-					<div class="row" id="replBox">
-						<input type="text" value="${no}" name="contents_no"
-							id="contents_no">
-						<textarea id="repl" name="repl_contents"></textarea>
-						<input type="button" id="replButt" value="등록하기"
-							class="btn btn-secondary">
-					</div>
-				</form>
-				<div id="replHeader">
-					<h4>댓글</h4>
 				</div>
-				<div id="replContentsBox">
-					<c:forEach var="repldto" items="${replList}">
-						<form action="ReplEdit.board">
-							<div class="row" id="eachRepl">
-								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_writer">${repldto.repl_writer}</div>
-								<div class="col-lg-8 col-md-8 col-sm-8 col-8">
-									<input type="text" id="repl_text" name="repl_contents"
-										value="${repldto.repl_contents}" readonly> <input
-										type="text" class="hide" name="contents_no"
-										value="${repldto.contents_no}"> <input type="text"
-										class="hide" name="repl_seq" value="${repldto.repl_seq}">
-								</div>
+			</div>
+		</footer>
+		<form action="Reply.board" id="replForm">
+			<div class="row" id="replBox">
+				<input type="text" value="${no}" name="contents_no" id="contents_no">
+				<textarea id="repl" name="repl_contents"></textarea>
+				<input type="button" id="replButt" value="등록하기" class="btn btn-secondary">
+			</div>
+		</form>
+		<div id="replHeader">
+			<h4>댓글</h4>
+		</div>
+		<div id="replContentsBox">
+			<c:forEach var="repldto" items="${replList}">
+				<form action="ReplEdit.board">
+					<div class="row" id="eachRepl">
+						<div
+							class="col-lg-2 col-md-2 col-sm-2 col-2"
+							id="repl_writer">${repldto.repl_writer}</div>
+						<div
+							class="col-lg-8 col-md-8 col-sm-8 col-8">
+							<input type="text" id="repl_text" name="repl_contents"
+								value="${repldto.repl_contents}" readonly> <input
+								type="text" class="hide" name="contents_no"
+								value="${repldto.contents_no}"> <input type="text"
+								class="hide" name="repl_seq" value="${repldto.repl_seq}">
+								<input type="text" class="hide" id="path">
+						</div>
 
-								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_time">${repldto.repl_time}</div>
+						<div
+							class="col-lg-2 col-md-2 col-sm-2 col-2"
+							id="repl_time">${repldto.repl_time}</div>
+					</div>
+					<c:if test="${id==repldto.repl_writer }">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12" id="replButts">
+								<input type="submit" class="replEditCompl btn btn-secondary" value="수정완료"
+									style="margin-right: 4px;" ><input type="button"
+									value="수정" class="modiRepl btn btn-secondary"> <input type="button"
+									value="삭제" class="delRepl btn btn-secondary">
 							</div>
-							<c:if test="${user.id==repldto.repl_writer }">
-								<div class="row">
-									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
-										id="replButts">
-										<input type="submit" class="replEditCompl btn btn-secondary"
-											value="수정완료" style="margin-right: 4px;"><input
-											type="button" value="수정" class="modiRepl btn btn-secondary">
-										<input type="button" value="삭제"
-											class="delRepl btn btn-secondary">
-									</div>
-								</div>
-							</c:if>
-						</form>
-						<script>
+						</div>
+					</c:if>
+				</form>
+				<script>
 				$(".replEditCompl").hide();
 				$(".hide").hide();
 				
-				if(${user.id==repldto.repl_writer }){
+				if(${id==repldto.repl_writer }){
 					$(".modiRepl").on("click",function(){
 						document.getElementById("repl_text").readOnly=false;
 						$(this).parent().find("input:nth-child(1)").show();
@@ -641,8 +641,8 @@ div {
 					})
 				}
 				</script>
-					</c:forEach>
-				</div>
+			</c:forEach>
+		</div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -670,6 +670,7 @@ div {
 
 
 	<script>
+	
 	$("#contents_no").hide();
 	$("#replBox").hide();
 	$("#showReplBox").on("click",function(){
@@ -687,7 +688,7 @@ div {
 			location.href = "Board.board?currentPage=1";
 		}	
 		
-		if(${id==writer }){
+		if(${user.id == writer }){
 		document.getElementById("modify").onclick = function() {
 			location.href = "ContentsEdit.board?no="+${no};
 		}

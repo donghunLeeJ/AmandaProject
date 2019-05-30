@@ -109,10 +109,13 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
+
+				
+
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp"> <i
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
@@ -142,6 +145,7 @@
 					</a></li>
 					</c:otherwise>
 					</c:choose>
+
 				</ul>
 			</div>
 		</nav>
@@ -309,7 +313,7 @@
 									<div class="row" id="searchDiv">
 										<form action="BoardSearch.board">
 											<select id="select" name="select"><option>제목</option>
-												<option>글번호</option></select> <input type="text" id="search"
+												<option>작성자</option></select> <input type="text" id="search"
 												name="search"> <input type="text" id="hide"
 												name="currentPage" value="1">
 											<button id="searchButt" class="btn btn-secondary">검색</button>
@@ -383,12 +387,19 @@
 				</div>
 				<div>
 					<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
-						<input type="button" id="write" value="글쓰기" class="btn btn-secondary"> <input type="button"
+						<c:if test="${user != null }">
+						<input type="button" id="write" value="글쓰기" class="btn btn-secondary">
+						</c:if>
+						 <input type="button"
 							id="goMain" value="메인 페이지로" class="btn btn-secondary">
 					</div>
 				</div>
 			</footer>
 		</div>
+		<script>
+			
+		
+		</script>
 		<!-- .content -->
 
 
@@ -455,75 +466,86 @@
 									// 									로그인 버튼과 회원가입 버튼의 script
 								</script>
 								<!-- 								진향이 마이페이지 폼 -->
-								<div class="modal fade" id="exampleModal1" tabindex="-1"
-									role="dialog" aria-labelledby="exampleModalLabel1"
-									aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-body1">
-												<form>
-													<div class="form-group m-0 p-0">
-														<div class="card">
-															<div class="card-header">
-																<i class="fa fa-user"></i><strong
-																	class="card-title pl-2"> My Page </strong>
-															</div>
-															<div class="card-body">
-																<div class="mx-auto d-block">
-																	<img class="rounded-circle mx-auto d-block"
-																		src="images/admin.jpg" alt="profile image"
-																		width="80px">
-																	<h5 class="text-center mt-2 mb-1">Steven Lee</h5>
-																	<div class="location text-center">Lv. 일반회원</div>
-																</div>
-																<hr>
-																<div class="card-text">
-																	<div>
-																		<b>이름 </b>
-																		<p>${user.name}</p>
-																	</div>
-																	<div>
-																		<b>생년월일</b>
-																		<p>${user.birth}</p>
-																	</div>
-																	<div>
-																		<b>이메일</b>
-																		<p>${user.email}</p>
-																	</div>
-																	<div>
-																		<b>핸드폰번호</b>
-																		<p>${user.phone}</p>
-																	</div>
-																	<div>
-																		<b>잔여포인트</b>
-																		<p>${user.point}</p>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button id="deleteMembtn" type="button"
-															class="btn btn-outline-info" data-dismiss="modal">회원
-															탈퇴</button>
-														<button id="pointPagebtn" type="button"
-															class="btn btn-outline-info" data-dismiss="modal">포인트
-															충전</button>
-														<button id="updatememberbtn" type="button"
-															class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Close</button>
-													</div>
-												</form>
-
-											</div>
+									<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel1" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body1">
+					<form>
+						<div class="form-group m-0 p-0">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa fa-user"></i><strong class="card-title pl-2">
+										My Page </strong>
+										<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+								</div>
+								<div class="card-body">
+									<div class="mx-auto d-block">
+										<img class="rounded-circle mx-auto d-block"
+											src="images/admin.jpg" alt="profile image" width="130px">
+										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
+										<!-- <div class="location text-center">Lv. 일반회원</div> -->
+									</div>
+									<hr>
+									<div class="card-text">
+										<div>
+											<b>이름 </b>
+											<p>${user.name}</p>
+										</div>
+										<div>
+											<b>생년월일</b>
+											<p>${user.birth}</p>
+										</div>
+										<div>
+											<b>이메일</b>
+											<p>${user.email}</p>
+										</div>
+										<div>
+											<b>핸드폰번호</b>
+											<p>${user.phone}</p>
+										</div>
+										<div>
+											<b>잔여포인트</b>
+											<p>${user.point}</p>
 										</div>
 									</div>
 								</div>
-
 							</div>
 						</div>
-						<script>
+						<div class="modal-footer">
+							<button id="deleteMembtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
+							<button id="pointPagebtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">포인트
+								충전</button>
+							<button id="updatememberbtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
+									
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+	
+	
+	$("#logoutbtn1")
+	.on(
+			"click",
+			function() {
+				location.href = "logoutProc.member";
+			})
+
+	
 							$("#updatememberbtn")
 									.on(
 											"click",
@@ -540,7 +562,6 @@
 								location.href = "page?url=WEB-INF/pay.jsp";
 							})
 						</script>
-
 
 						<!-- 진향이 마이페이지 폼끝 -->
 		
@@ -571,9 +592,10 @@
 			location.href = "Write.board"
 		}
 		document.getElementById("goMain").onclick = function() {
-			location.href = "Index.log"
+			location.href = "page?url=WEB-INF/main.jsp"
 		}
 	</script>
+	
 
 </body>
 </html>
