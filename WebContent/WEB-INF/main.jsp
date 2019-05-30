@@ -294,7 +294,8 @@
 										<h3 class="card-title">충전/로그인/개인정보</h3>
 										<p class="card-text">내용</p>
 										<h5>${user.name }님반갑습니다</h5>
-										<h5>${user.name }님의잔여포인트는${user.point }입니다</h5>
+										<h5>${user.name } 님의 잔여포인트는 <span id="point"></span> 입니다.</h5>	
+								        <h5>${user.name }님의 남은 시간은 <span id="timeout"></span> 입니다.</h5>
 										<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
 										<button type="button" class="btn btn-primary" id="msg">msg</button>
 										
@@ -355,35 +356,38 @@
 											
 											})
 									
-
-                                 
-                                 
-                                 
-var SetTime = ${point };   
-mm = Math.floor(SetTime / 60) + "분 ";  
-$("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + mm + "</font> 입니다.");
- 
-   function msg_time(){  
-                              
-      m = Math.floor(SetTime / 60) + "분 "  
-      
-      var msg = "${user.name }님의 남은 시간은 <font color='red'>" + m + "</font> 입니다.";
-      
-     $("#timeout").html(msg);// div 영역에 보여줌 
-      
-     SetTime--; 
-    
-     
-      if (SetTime < 0) {         
-         clearInterval(tid);       
-      }
-      
+  function msg_time(){  
+			   
+  $.ajax({  	    	 
+	         url: 'usertime.com', //ComController에 있는 usertime으로 이동함
+	         type: 'POST'
+	          
+	 }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
+	         		
+		 $("#point").html(point);
+	       	   
+	      m = (Math.floor(point/60)) + "분 "; 
+	      var msg = "<font color='red'>" + m +"</font>";
+	      
+	     $("#timeout").html(msg);
+	                       
+	      if (point == 300){    
+	    	  
+	         alert("선불시간이 5분 남았습니다.");  
+	         
+	      }else if(point == 0){
+	    	  
+	    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+	    	  location.href = "logoutProc.member";
+	    	  clearInterval(tid);       
+	      }   	     	                 
+	 });   	     
    }
-   
+   									
+   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
    function TimerStart(){ tid=setInterval('msg_time()',1000) };
-   TimerStart();
-   
-                                 
+   TimerStart();                               
+                                                                 
                                                          
                            </script>
                         </c:otherwise>

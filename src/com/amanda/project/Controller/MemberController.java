@@ -101,12 +101,15 @@ public class MemberController extends HttpServlet {
 					//각각 timertask클래스 변수 , 스레드가 작동하기까지 대기 시간,반복 주기를 나타냄
 					//(반복주기에서 1000은 1초와 같다.)
 					time.schedule(timertask,1,1000);
-					String ip = request.getRemoteAddr();			
+				
+					//String ip = "192.168.60.27";
+				    String ip = request.getRemoteAddr();			
 					System.out.println(ip);
 
 					if(cDao.seatOn(ip)>0) {
 						ComDTO cDto = cDao.seatNum_get(ip);
 						System.out.println(cDto.getOnOff());
+						request.getServletContext().setAttribute("UserSeatNum", cDto.getSeatNum());//로그인한 사용자의 자리번호를 담는다(자기 자리의 남은 시간을 표현할 때 사용함)	
 						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
 					}
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
@@ -218,14 +221,14 @@ public class MemberController extends HttpServlet {
 
 			try {
 
-
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 				String id=dto.getId();
 
 				//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
 				dao.PointUpdate(pointmap.get(id), id);		
 
-				cDao.seatOff(request.getRemoteAddr());	
+				cDao.seatOff(request.getRemoteAddr());
+				//cDao.seatOff("192.168.60.27");
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
 
@@ -348,8 +351,6 @@ public class MemberController extends HttpServlet {
 			}else {
 
 			}
-
-
 
 		}
 	}
