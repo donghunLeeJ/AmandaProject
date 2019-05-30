@@ -497,9 +497,8 @@ div {
 									placeholder="비밀번호 입력하시오" required name="loginpw">
 							</div>
 							<div class="modal-footer">
-								<div id="remember">
-									<input type="checkbox">자동로그인
-								</div>
+								<button type="button" class="btn btn-primary" type="button"
+									id="reinputpw">비밀번호재설정</button>
 								<button type="button" class="btn btn-primary" type="button"
 									id="joinMem">회원가입</button>
 								<button type="button" class="btn btn-primary" id="login">login</button>
@@ -513,6 +512,9 @@ div {
 		</div>
 
 		<script>
+									$("reinputpw").on("click",function(){
+										location.href = "WEB-INF/modifypassword.jsp";
+									})
 									$("#joinMem").on("click",function() {
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
