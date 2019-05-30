@@ -666,11 +666,50 @@
    		  <c:forEach var="i" items="${seat }">
 				<script>
 					if(${i.onOff }==1){
-						$('#seat${i.seatNum}').css('background-color','red'); 	
-													
-					}		
+						$('#seat${i.seatNum}').css('background-color','red');}										
 				</script>
 			</c:forEach>
+     
+     
+  <script>
+     
+  //만일 자리번호랑 사용자가 정한 자리번호 값이 서로 같다면?
+     if($("#seat${UserSeatNum}>h4").text() == ${UserSeatNum}){
+    		
+    	 function msg_time(){  
+    		   
+    		   $.ajax({  
+    		    	 
+    		         url: 'usertime.com',
+    		         type: 'POST'
+    		          
+    		 }).done(function(point){
+    			 		       	   
+    		      m = (Math.floor(point/60)) + "분 "; 
+    		      var msg = "<font color='green'>" + m +"</font>";
+    		         
+    		 	$("#seat${UserSeatNum}>h4").html("${user.name }님의 남은 시간 :" + msg);	
+    		 			 	
+    		      if (point == 300){      
+    		    	  
+    		         alert("선불시간이 5분 남았습니다.");
+    		         
+    		      }else if(point == 0){
+    		    	  
+    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+    		    	  location.href = "logoutProc.member";
+    		    	  clearInterval(tid); 
+    		    	  
+    		      }   
+    		 });	   	     
+    	   }	   			
+    	 
+    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
+    	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
+    	   TimerStart();	
+    }
+         
+     </script>
      
    
 </body>
