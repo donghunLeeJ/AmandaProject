@@ -579,15 +579,12 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
                      })
                   </script>
 
-
-
-
    <!-- 진향이 마이페이지 폼끝 -->
       
       
       </div>
     
-   
+         
    <!-- 컨텐츠 끝 -->
 
    <div class="clearfix"></div>
@@ -602,6 +599,7 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
          </div>
       </div>
    </footer>
+  
 
    <script
       src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
