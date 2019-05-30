@@ -348,12 +348,127 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
                   </div>
                </div>
 
-               <div class="col-lg-6 area">
-                  <div class="card my-card border-danger">
-                     <div class="card-body">
-                        <h3 class="card-title">PC방 이벤트가 들어갈 곳</h3>
-                        <p class="card-text">내용</p>
-   
+					<div class="col-lg-6 area">
+						<div class="card my-card border-danger">
+							<div class="card-body">
+								<h3 class="card-title">PC방 이벤트가 들어갈 곳</h3>
+								<p class="card-text">내용</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 					여기부터 진향이가 만든 로그인폼 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="loginProc.member" id="form" method="post">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">ID</label> <input
+								type="text" class="form-control" id="joinemail"
+								placeholder="ID를 입력하시오" required name="loginid">
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Password</label> <input
+								type="password" class="form-control" id="joinpassword"
+								placeholder="비밀번호 입력하시오" required name="loginpw">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" type="button"
+									id="reinputpw">비밀번호재설정</button>
+							<button type="button" class="btn btn-primary" type="button"
+								id="joinMem">회원가입</button>
+							<button type="button" class="btn btn-primary" id="login">login</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+									$("#reinputpw").on("click",function(){
+									location.href = "page?url=WEB-INF/modifypassword.jsp";
+									})
+									$("#joinMem").on("click",function() {
+									location.href = "page?url=WEB-INF/joinMem.jsp";
+									})
+									document.getElementById("login").onclick = function() {
+									document.getElementById("form").submit();
+									}
+									// 									로그인 버튼과 회원가입 버튼의 script
+	</script>
+								
+	<!-- 						진향이 로그인폼끝 -->
+	<!-- 								진향이 마이페이지 폼 -->
+	<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel1" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body1">
+					<form>
+						<div class="form-group m-0 p-0">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa fa-user"></i><strong class="card-title pl-2">
+										My Page </strong>
+								</div>
+								<div class="card-body">
+									<div class="mx-auto d-block">
+										<img class="rounded-circle mx-auto d-block"
+											src="images/admin.jpg" alt="profile image" width="80px">
+										<h5 class="text-center mt-2 mb-1">Steven Lee</h5>
+										<div class="location text-center">Lv. 일반회원</div>
+									</div>
+									<hr>
+									<div class="card-text">
+										<div>
+											<b>이름 </b>
+											<p>${user.name}</p>
+										</div>
+										<div>
+											<b>생년월일</b>
+											<p>${user.birth}</p>
+										</div>
+										<div>
+											<b>이메일</b>
+											<p>${user.email}</p>
+										</div>
+										<div>
+											<b>핸드폰번호</b>
+											<p>${user.phone}</p>
+										</div>
+										<div>
+											<b>잔여포인트</b>
+											<p>${user.point}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="deleteMembtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
+							<button id="pointPagebtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">포인트
+								충전</button>
+							<button id="updatememberbtn" type="button"
+								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</form>
+
 
                      </div>
                   </div>
@@ -478,6 +593,26 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
       </div>
    </div>
 
+
+
+	<script>
+							
+							$("#updatememberbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+											})
+							$("#deleteMembtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/deleteMem.jsp";
+											})
+							$("#pointPagebtn").on("click", function() {
+								location.href = "page?url=WEB-INF/pay.jsp";
+							})
+						</script>
 
 
    <script>

@@ -2,12 +2,21 @@ package com.amanda.project.Controller;
 
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +26,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DAO.MemberDAO;
-import com.amanda.project.DTO.ComDTO;
+
+import com.amanda.project.DAO.SendMailDAO;
+
 import com.amanda.project.DTO.MemberDTO;
+import com.amanda.project.DTO.SendMailDTO;
 
 
 @WebServlet("*.member")
@@ -33,7 +45,11 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;UTF-8");
 		MemberDAO dao=new MemberDAO();
+
+		SendMailDAO sdao = new SendMailDAO();
+
 		ComDAO cDao = new ComDAO();
+
 
 
 		switch(cmd) {
@@ -46,6 +62,7 @@ public class MemberController extends HttpServlet {
 			int login;
 			try {
 				login = dao.checklogin(loginid, dao.testSHA256(loginpw));
+
 
 
 				if(login==1) {
@@ -101,6 +118,7 @@ public class MemberController extends HttpServlet {
 
 
 				}else if(login == -1){
+
 					System.out.println(login);
 					request.setAttribute("login", login);
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
@@ -127,6 +145,7 @@ public class MemberController extends HttpServlet {
 				String birth = request.getParameter("joinmemberbirth");//회원가입시 받는 생년월일
 				String email = request.getParameter("joinmemberemail");//회원가입시 받는 email
 				String phone = request.getParameter("joinmemberphone");//회원가입시 받는 폰번호
+
 				String postcode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
@@ -137,13 +156,14 @@ public class MemberController extends HttpServlet {
 				System.out.println(address2);
 				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone,postcode,address1,address2);
 
+
 				int result = dao.joinmember(dto);
 				System.out.println(result);
 				if(result == 1) {
 					request.setAttribute("result", result);
 					request.getRequestDispatcher("WEB-INF/joincomp.jsp").forward(request, response);
 				}else {
-					response.sendRedirect("error.jsp");
+					response.sendRedirect("../error.jsp");
 				}
 
 			} catch (Exception e) {
@@ -154,6 +174,7 @@ public class MemberController extends HttpServlet {
 		case "deleteProc.member" :
 			//회원 탈퇴 컨트롤러
 
+
 			String delid= request.getParameter("id");//삭제할 아이디
 			String delpw= request.getParameter("pw");//삭제할 패스워드
 
@@ -161,6 +182,7 @@ public class MemberController extends HttpServlet {
 
 			int delresult = dao.delete(delid, delpw);
 			//System.out.println(delresult);
+
 
 			if(delresult==1) {
 				request.getSession().invalidate();
@@ -170,7 +192,6 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("delresult", delresult);
 				request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
 			}
-			break;
 
 		case "updateProc.member" :
 			//회원 정보수정 컨트롤러	
@@ -192,7 +213,9 @@ public class MemberController extends HttpServlet {
 
 				e.printStackTrace();
 			}
-			break;
+
+
+		break;
 
 		case "logoutProc.member" :
 
@@ -220,7 +243,117 @@ public class MemberController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			break;						
+			break;					
+		case "resetpwProc.member" :
+			//비밀번호재설정
+			String id = request.getParameter("checkid");//입력받은 id값
+			String email = request.getParameter("checkemail");//입력받은 email값
+			int result = dao.existMember(id, email);//있으면 return 1,없으면 0, 에러면 -1
+			if(result == 1) {
+				request.setAttribute("id", id);
+				request.setAttribute("email", email);
+				request.getRequestDispatcher("sendemailProc.member").forward(request, response);
+			}else if(result == 0) {
+				request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//이 창에서 회원아니라고 alert
+			}else {
+				response.sendRedirect("../error.jsp");
+			}
+			break;
+
+		case "sendemailProc.member" :
+			//이메일전송
+			String from = "acesang@naver.com";
+			String to = (String)request.getAttribute("email");
+			String subject = "비밀번호 재설정 확인코드입니다.";
+			String content = sdao.randomnumber()+"";
+			// 입력값 받음
+
+			String saveid = (String)request.getAttribute("id");//이메일로 받은 코드 db저장할때 저장할 id값
+			SendMailDTO sdto = new SendMailDTO(saveid,to,content);
+			sdao.pwcheck_insert(sdto);
+
+			Properties p = new Properties(); // 정보를 담을 객체
+
+			p.put("mail.smtp.host","smtp.naver.com"); // 네이버 SMTP
+
+			p.put("mail.smtp.port", "465");
+			p.put("mail.smtp.starttls.enable", "true");
+			p.put("mail.smtp.auth", "true");
+			p.put("mail.smtp.debug", "true");
+			p.put("mail.smtp.socketFactory.port", "465");
+			p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			p.put("mail.smtp.socketFactory.fallback", "false");
+			// SMTP 서버에 접속하기 위한 정보들
+
+			try{
+				Authenticator auth = new SendMailDAO();
+				Session ses = Session.getInstance(p, auth);
+
+				ses.setDebug(true);
+
+				MimeMessage msg = new MimeMessage(ses); // 메일의 내용을 담을 객체
+				msg.setSubject(subject); // 제목
+
+				Address fromAddr = new InternetAddress(from);
+				msg.setFrom(fromAddr); // 보내는 사람
+
+				Address toAddr = new InternetAddress(to);
+				msg.addRecipient(Message.RecipientType.TO, toAddr); // 받는 사람
+
+
+				msg.setContent(content, "text/html;charset=UTF-8"); // 내용과 인코딩
+
+				Transport.send(msg); // 전송
+
+				request.setAttribute("email", to);
+				request.setAttribute("saveid", saveid);//id값 전달
+				request.setAttribute("content", content);//코드번호 전달
+				request.getRequestDispatcher("WEB-INF/pwcodecheck.jsp").forward(request, response);
+			} catch(Exception e){
+				sdao.pwcheck_delete(saveid, to);
+				e.printStackTrace();
+				response.sendRedirect("../error.jsp");
+				// 오류 발생시 뒤로 돌아가도록
+				return;
+
+			}
+			break;
+
+		case "pwcheckProc.member" :
+			String pw_email = request.getParameter("email");
+			String pwcode = request.getParameter("pwcodecheck");
+			String pw_id = request.getParameter("saveid");
+			String contentcheck = sdao.show_pwcode(pw_id);
+
+			if(contentcheck.equals(pwcode)) {
+				request.setAttribute("pw_id", pw_id);
+				request.setAttribute("pw_email", pw_email);
+				request.getRequestDispatcher("WEB-INF/reinputpw.jsp").forward(request, response);
+			}else {
+				sdao.pwcheck_delete(pw_id, pw_email);
+				request.getRequestDispatcher("WEB-INF/wrongpwcode.jsp").forward(request, response);
+			}
+			break;
+		
+		case "pwcompleteProc.member" :
+			String pww_email = request.getParameter("pw_email");
+			String pww_id = request.getParameter("pw_id");
+			String pww_pw = request.getParameter("reinputpw");
+			String spww_pw = dao.testSHA256(pww_pw);
+			sdao.pwcheck_delete(pww_id, pww_email);//
+
+			int compw = sdao.renew_pw(pww_id, spww_pw);//비밀번호 수정
+
+			if(compw == 1) {
+				request.getRequestDispatcher("WEB-INF/pwcomplete.jsp").forward(request, response);
+			}else if(compw == 0){
+				request.getRequestDispatcher("WEB-INF/modifypassword.jsp").forward(request, response);
+			}else {
+
+			}
+
+
+
 		}
 	}
 

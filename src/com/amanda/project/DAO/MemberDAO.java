@@ -5,10 +5,12 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
 import com.amanda.project.DTO.MemberDTO;
 
 
@@ -165,6 +167,32 @@ public class MemberDAO {
 			return -1;
 		}
 	}
+
+	
+	/** 아이디,이메일값으로 회원가입여부 확인*/
+	public int existMember(String id, String email) {
+		String sql = "select * from member where id=? and email=?";
+		
+		try(
+				Connection con = this.db_connect();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			MemberDTO dto = new MemberDTO(id,email);
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getEmail());
+			ResultSet rs=pstat.executeQuery();
+			
+			if(rs.next()) {
+				return 1;
+			}else {
+				return 0;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
 	public int PointUpdate(int point , String id) throws Exception{
 		String sql = "update member set point=? where id=?";
 		try(
@@ -182,6 +210,7 @@ public class MemberDAO {
 		}
 	}
 	
+
 }
 
 
