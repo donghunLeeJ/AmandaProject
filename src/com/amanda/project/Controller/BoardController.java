@@ -19,8 +19,11 @@ import org.apache.commons.io.FileExistsException;
 import com.amanda.project.DAO.BoardDAO;
 import com.amanda.project.DTO.BoardDTO;
 import com.amanda.project.DTO.FilesDTO;
+import com.amanda.project.DTO.MemberDTO;
 import com.amanda.project.DTO.ReplDTO;
 import com.google.gson.JsonObject;
+
+
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
@@ -45,9 +48,12 @@ public class BoardController extends HttpServlet {
 
 				String contents =request.getParameter("contents");
 				String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
-				String writer = (String)request.getSession().getAttribute("loginId");
+
+				MemberDTO writerdto = (MemberDTO)request.getSession().getAttribute("user");
+				String writer = writerdto.getId();
+
 				String path =request.getParameter("path");
-				System.out.println(path);
+
 				int viewCount = 1;
 				String ipAddr = request.getLocalAddr();
 				BoardDTO dto = new BoardDTO(newTitle,newContents,writer,viewCount,ipAddr,path);
@@ -61,7 +67,7 @@ public class BoardController extends HttpServlet {
 				int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				String navi = dao.getNavi(currentPage);
 				request.setAttribute("navi", navi);
-				List<BoardDTO> list = new ArrayList<>();			
+				List<BoardDTO> list = new ArrayList<>();         
 				list = dao.selectBoard(currentPage);
 				request.setAttribute("list", list);
 				request.setAttribute("showAll", "noShow");
@@ -69,13 +75,13 @@ public class BoardController extends HttpServlet {
 
 			}else if(command.equals("/BoardSearch.board")){
 				String searchType = request.getParameter("select");
-				int currentPage = Integer.parseInt(request.getParameter("currentPage"));			
+				int currentPage = Integer.parseInt(request.getParameter("currentPage"));         
 
 				if(searchType.equals("제목")) {
 					String title = request.getParameter("search");
 					String navi = dao.getNaviSearch(currentPage, title);
 					request.setAttribute("navi", navi);
-					List<BoardDTO> list = new ArrayList<>();			
+					List<BoardDTO> list = new ArrayList<>();         
 					list = dao.searchBoard(currentPage, title);
 					request.setAttribute("list", list);
 					request.setAttribute("showAll", "showAll");
@@ -84,7 +90,7 @@ public class BoardController extends HttpServlet {
 					String writer = request.getParameter("search");
 					String navi = dao.getNaviByWriter(currentPage, writer);
 					request.setAttribute("navi", navi);
-					List<BoardDTO> list = new ArrayList<>();			
+					List<BoardDTO> list = new ArrayList<>();         
 					list = dao.searchWriter(currentPage, writer);
 					request.setAttribute("list", list);
 					request.setAttribute("showAll", "showAll");
@@ -92,8 +98,9 @@ public class BoardController extends HttpServlet {
 				}
 
 			}else if(command.equals("/ShowContents.board")){
-				MemberDTO mdto=(MemberDTO)request.getSession().getAttribute("user");
-				String id = mdto.getId();
+
+
+
 				int no = Integer.parseInt(request.getParameter("no"));
 				BoardDTO dto = dao.selectContents(no);
 				String writer = dto.getWriter();
@@ -102,7 +109,7 @@ public class BoardController extends HttpServlet {
 
 				request.setAttribute("replList", replList);
 				request.setAttribute("dto", dto);
-				request.setAttribute("id", id);
+
 				request.setAttribute("no", no);
 				request.setAttribute("writer", writer);
 				request.getRequestDispatcher("WEB-INF/showContents.jsp").forward(request, response);
@@ -136,23 +143,27 @@ public class BoardController extends HttpServlet {
 			}else if(command.equals("/BoardDel.board")) {
 				int no = Integer.parseInt(request.getParameter("no"));
 				String path = dao.selectPath(no);
-				System.out.println(path);
-				File fi = new File(path);
-				boolean fidel = fi.delete();
-
-				result = dao.delete(no);
-				if(fidel) {
-					System.out.println("파일 삭제 완료");
-				}else {
-					System.out.println("파일 삭제 실패");
+				
+				if(path !=null) {
+					File fi = new File(path);
+					boolean fidel = fi.delete();
+					if(fidel) {
+						System.out.println("파일 삭제 완료");
+					}else {
+						System.out.println("파일 삭제 실패");
+					} 
 				}
+				result = dao.delete(no);
 				request.setAttribute("no", no);
 				request.setAttribute("result", result);
-				request.getRequestDispatcher("WEB-INF/boardDelProc.jsp").forward(request, response);	
+				request.getRequestDispatcher("WEB-INF/boardDelProc.jsp").forward(request, response);  		
+
+
 
 			}else if(command.equals("/Reply.board")) {
 
-				String id = (String)request.getSession().getAttribute("loginId");
+				MemberDTO writerdto = (MemberDTO)request.getSession().getAttribute("user");
+				String id = writerdto.getId();
 				String repl_contents = request.getParameter("repl_contents");
 				int contents_no = Integer.parseInt(request.getParameter("contents_no"));
 
@@ -160,19 +171,19 @@ public class BoardController extends HttpServlet {
 
 				request.setAttribute("no", contents_no);
 				request.setAttribute("result", result);
-				request.getRequestDispatcher("WEB-INF/boardReplProc.jsp").forward(request, response);	
+				request.getRequestDispatcher("WEB-INF/boardReplProc.jsp").forward(request, response);   
 
 
 
 			}else if(command.equals("/ReplEdit.board")) {
 				int repl_seq = Integer.parseInt(request.getParameter("repl_seq"));
 				int contents_no = Integer.parseInt(request.getParameter("contents_no"));
-				String repl_contents = request.getParameter("repl_contents");			
+				String repl_contents = request.getParameter("repl_contents");         
 				result = dao.updateRepl(repl_seq,repl_contents);
 
 				request.setAttribute("result", result);
 				request.setAttribute("contents_no", contents_no);
-				request.getRequestDispatcher("WEB-INF/boardReplEditProc.jsp").forward(request, response);	
+				request.getRequestDispatcher("WEB-INF/boardReplEditProc.jsp").forward(request, response);   
 
 			}else if(command.equals("/ReplDelete.board")) {
 				int repl_seq = Integer.parseInt(request.getParameter("repl_seq"));
@@ -181,14 +192,14 @@ public class BoardController extends HttpServlet {
 
 				request.setAttribute("result", result);
 				request.setAttribute("contents_no", contents_no);
-				request.getRequestDispatcher("WEB-INF/boardReplDelProc.jsp").forward(request, response);	
+				request.getRequestDispatcher("WEB-INF/boardReplDelProc.jsp").forward(request, response);   
 
 			}else if(command.equals("/ImageUpload.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
 				String rootPath = this.getServletContext().getRealPath("/"); // 현재 서블릿에 대한 환경정보 추출 -> 실행하기 위해 복사되는 파일의 진짜 경로 추출 -> 저장할 폴더 지정
-				MemberDTO mdto=(MemberDTO)request.getSession().getAttribute("user");
-				String id = mdto.getId();
-				String filePath = rootPath + "files/"+id+"/"; // 파일이 저장될 본 저장소
+				MemberDTO writerdto = (MemberDTO)request.getSession().getAttribute("user");
+				String writer = writerdto.getId();
+				String filePath = rootPath + "files/"+writer+"/"; // 파일이 저장될 본 저장소
 				File uploadPath = new File(filePath);
 				String realFilePath = null;
 				String tempFileName = null;
@@ -229,7 +240,9 @@ public class BoardController extends HttpServlet {
 						request.getSession().setAttribute("files", fidto);
 
 						JsonObject obj = new JsonObject();
-						obj.addProperty("url", "files/"+id+"/" + tempFileName);
+
+
+						obj.addProperty("url", "files/"+writer+"/" + tempFileName);
 						obj.addProperty("path", realFilePath);
 						response.getWriter().print(obj);
 
@@ -237,7 +250,7 @@ public class BoardController extends HttpServlet {
 				}catch(Exception e) {
 					e.printStackTrace();
 					response.sendRedirect("error.jsp");
-				}					
+				}               
 			}else if(command.equals("/ImageDel.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
 				if(files!=null) {

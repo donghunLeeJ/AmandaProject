@@ -415,48 +415,48 @@
 				</div>
 			</div>
 		</footer>
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-									role="dialog" aria-labelledby="exampleModalLabel"
-									aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">L O G I
-													N</h5>
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<form action="loginProc.member" id="form" method="post">
-													<div class="form-group">
-														<label for="exampleFormControlInput1">ID</label> <input
-															type="text" class="form-control" id="joinemail"
-															placeholder="ID를 입력하시오" required name="loginid">
-													</div>
-													<div class="form-group">
-														<label for="exampleFormControlInput1">Password</label> <input
-															type="password" class="form-control" id="joinpassword"
-															placeholder="비밀번호 입력하시오" required name="loginpw">
-													</div>
-													<div class="modal-footer">
-														<div id="remember">
-															<input type="checkbox">자동로그인
-														</div>
-														<button type="button" class="btn btn-primary"
-															type="button" id="joinMem">회원가입</button>
-														<button type="button" class="btn btn-primary" id="login">login</button>
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Close</button>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<script>
+					<!-- 					여기부터 진향이가 만든 로그인폼 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="loginProc.member" id="form" method="post">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">ID</label> <input
+								type="text" class="form-control" id="joinemail"
+								placeholder="ID를 입력하시오" required name="loginid">
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Password</label> <input
+								type="password" class="form-control" id="joinpassword"
+								placeholder="비밀번호 입력하시오" required name="loginpw">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" type="button"
+									id="reinputpw">비밀번호재설정</button>
+							<button type="button" class="btn btn-primary" type="button"
+								id="joinMem">회원가입</button>
+							<button type="button" class="btn btn-primary" id="login">login</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+									$("#reinputpw").on("click",function(){
+									location.href = "page?url=WEB-INF/modifypassword.jsp";
+									})
 									$("#joinMem").on("click",function() {
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
@@ -464,109 +464,120 @@
 									document.getElementById("form").submit();
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
-								</script>
-								<!-- 								진향이 마이페이지 폼 -->
-									<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel1" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body1">
-					<form>
-						<div class="form-group m-0 p-0">
-							<div class="card">
-								<div class="card-header">
-									<i class="fa fa-user"></i><strong class="card-title pl-2">
-										My Page </strong>
-										<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-								</div>
-								<div class="card-body">
-									<div class="mx-auto d-block">
-										<img class="rounded-circle mx-auto d-block"
-											src="images/admin.jpg" alt="profile image" width="130px">
-										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
-										<!-- <div class="location text-center">Lv. 일반회원</div> -->
-									</div>
-									<hr>
-									<div class="card-text">
-										<div>
-											<b>이름 </b>
-											<p>${user.name}</p>
-										</div>
-										<div>
-											<b>생년월일</b>
-											<p>${user.birth}</p>
-										</div>
-										<div>
-											<b>이메일</b>
-											<p>${user.email}</p>
-										</div>
-										<div>
-											<b>핸드폰번호</b>
-											<p>${user.phone}</p>
-										</div>
-										<div>
-											<b>잔여포인트</b>
-											<p>${user.point}</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button id="deleteMembtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
-							<button id="pointPagebtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">포인트
-								충전</button>
-							<button id="updatememberbtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
-									
-						</div>
-					</form>
+	</script>
+								
+	<!-- 						진향이 로그인폼끝 -->
+	<!-- 								진향이 마이페이지 폼 -->
+	<div class="modal fade" id="exampleModal1" tabindex="-1"
+            role="dialog" aria-labelledby="exampleModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-body1">
+                     <form>
+                        <div class="form-group m-0 p-0">
+                           <div class="card">
+                              <div class="card-header">
+                                 <i class="fa fa-user"></i><strong class="card-title pl-2">
+                                    My Page </strong>
+                                 <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="card-body">
+                                 <div class="mx-auto d-block">
+                                    <img class="rounded-circle mx-auto d-block"
+                                       src="images/admin.jpg" alt="profile image" width="130px">
+                                    <h5 class="text-center mt-2 mb-1">
+                                       <b>${user.id} 님</b>
+                                    </h5>
+                                    <!-- <div class="location text-center">Lv. 일반회원</div> -->
+                                 </div>
+                                 <hr>
+                                 <div class="card-text">
+                                    <div>
+                                       <b>이름 </b>
+                                       <p>${user.name}</p>
+                                    </div>
+                                    <div>
+                                       <b>생년월일</b>
+                                       <p>${user.birth}</p>
+                                    </div>
+                                    <div>
+                                       <b>이메일</b>
+                                       <p>${user.email}</p>
+                                    </div>
+                                    <div>
+                                       <b>핸드폰번호</b>
+                                       <p>${user.phone}</p>
+                                    </div>
+                                    <div>
+                                       <b>잔여포인트</b>
+                                       <p>${user.point}</p>
+                                    </div>
+                                    <div>
+                                       <b>주소</b>
+                                       <p>
+                                       ${user.address1 }</p>
+                                       <p>${user.address2 }</p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button id="deleteMembtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">회원
+                              탈퇴</button>
+                           <button id="pointPagebtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">포인트
+                              충전</button>
+                           <button id="updatememberbtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+                           <button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
 
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                     </form>
+
+                  </div>
+               </div>
+            </div>
+         </div>
 
 
 
-	<script>
-	
-	
-	$("#logoutbtn1")
-	.on(
-			"click",
-			function() {
-				location.href = "logoutProc.member";
-			})
+         <script>
+   
+   
+   $("#logoutbtn1")
+   .on(
+         "click",
+         function() {
+            location.href = "logoutProc.member";
+         })
 
-	
-							$("#updatememberbtn")
-									.on(
-											"click",
-											function() {
-												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
-											})
-							$("#deleteMembtn")
-									.on(
-											"click",
-											function() {
-												location.href = "page?url=WEB-INF/deleteMem.jsp";
-											})
-							$("#pointPagebtn").on("click", function() {
-								location.href = "page?url=WEB-INF/pay.jsp";
-							})
-						</script>
+   
+                     $("#updatememberbtn")
+                           .on(
+                                 "click",
+                                 function() {
+                                    location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+                                 })
+                     $("#deleteMembtn")
+                           .on(
+                                 "click",
+                                 function() {
+                                    location.href = "page?url=WEB-INF/deleteMem.jsp";
+                                 })
+                     $("#pointPagebtn").on("click", function() {
+                        location.href = "page?url=WEB-INF/pay.jsp";
+                     })
+                  </script>
+   <!-- 진향이 마이페이지 폼끝 -->
+       </div>
 
-						<!-- 진향이 마이페이지 폼끝 -->
-		
 
-	</div>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -588,12 +599,13 @@
 				location.href = "Board.board?currentPage=1";
 			})
 		}
-		document.getElementById("write").onclick = function() {
-			location.href = "Write.board"
-		}
 		document.getElementById("goMain").onclick = function() {
 			location.href = "page?url=WEB-INF/main.jsp"
 		}
+		document.getElementById("write").onclick = function() {
+			location.href = "Write.board"
+		}
+		
 	</script>
 	
 

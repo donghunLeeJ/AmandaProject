@@ -2,13 +2,11 @@ package com.amanda.project.Controller;
 
 
 import java.io.IOException;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -26,9 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DAO.MemberDAO;
-
 import com.amanda.project.DAO.SendMailDAO;
-
+import com.amanda.project.DTO.ComDTO;
 import com.amanda.project.DTO.MemberDTO;
 import com.amanda.project.DTO.SendMailDTO;
 

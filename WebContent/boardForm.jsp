@@ -1,73 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="">
+<!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Main</title>
+<title>게시판</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-<link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-
+	href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+	href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
 <link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+	href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
 <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+<link rel="stylesheet"
+	href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<link
+	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
+	rel='stylesheet' type='text/css'>
+
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<link
-   href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css"
-   rel="stylesheet">
-<link
-   href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
-   rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-
-
-
 <style>
-#remember {
-   width: 35%;
-   height: 100%;
-   margin: 0px;
+#wrapper {
+	margin-top: 50px;
 }
 
-.modal-footer {
-   box-sizing: border-box;
+#nav{
+	box-sizing: border-box;
+	text-align: center;
 }
 
-.modal-body1 {
-   padding: 1px;
+#write {
+	margin: 0px;
 }
 
-.card-header {
-   color: gray;
-   background-color: #bbe3e3;
+#footer {
+	text-align: right;
+	padding: 0px;
 }
 
-.card-text {
-   text-align: left;
+#text {
+	height: 600px;
+	line-height: 600px;
 }
+
+.titleLink {
+	border: none;
+	background-color: #00000000;
+}
+
+#noInput {
+	border: none;
+	background-color: #00000000;
+	width: 90%;
+}
+.titleLink:hover{
+	cursor:pointer;
+}
+#writer {
+	word-wrap: break-word;
+}
+
+#searchDiv {
+	height: 50px;
+}
+
+#select, #search{
+	height: 30px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+#searchButt{
+	margin-left: 7px;
+	margin-right: 5px;
+}
+.myrow {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 </style>
 </head>
-
 <body>
-   <!-- 왼쪽 네비 시작 -->
+	<!-- Left Panel -->
+ <!-- 왼쪽 네비 시작 -->
    <aside id="left-panel" class="left-panel">
       <nav class="navbar navbar-expand-sm navbar-default">
          <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -243,120 +276,94 @@
             </c:otherwise>
          </c:choose>
       </header>
-      <!--       상단 네비 끝 -->
-      <!-- Content 시작 -->
-      <div class="content ">
-		<!-- Animated -->
-		<div class="animated fadeIn">
-			<!-- Widgets  -->
-			<div class="row">
-				<div class="col-lg-12 col-md-12">
-					<div class="card mb-5">
-						<div class="card-body border border-secondary ">
-							<h4>포인트 충전</h4>
+		
+		<!-- .content -->
+	<div class="content">
+	<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">
+									<div class="row" id="searchDiv">
+										<form action="BoardSearch.board">
+											<select id="select" name="select"><option>제목</option>
+												<option>작성자</option></select> <input type="text" id="search"
+												name="search"> <input type="text" id="hide"
+												name="currentPage" value="1">
+											<button id="searchButt" class="btn btn-secondary">검색</button>
+											<input type="button" value="전체 글 보기" id="showAll" class="btn btn-secondary">
+										</form>
+									</div>
+								</strong>
+							</div>
+							<div class="card-body">
+								<table id="bootstrap-data-table"
+									class="table table-striped table-bordered">
+									<thead>
+										<tr class="row myrow">
+											<th
+												class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2">글
+												번호
+											</td>
+											<th
+												class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1">글
+												제목
+											</td>
+											<th
+												class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성자
+											
+											</td>
+											<th
+												class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성
+												시간
+											</td>
+											<th
+												class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">조회
+												수
+											</td>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="dto" items="${list}">
+											<form action="ShowContents.board" id="formContents">
+												<tr class="row myrow">
+													<td
+														class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2"><input
+														type="text" id="noInput" name="no"
+														value="${dto.board_seq}" readonly></td>
+													<td
+														class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button
+															class="titleLink">${dto.title}</button></td>
+													<td
+														class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writer}</td>
+													<td
+														class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writeDate}</td>
+													<td
+														class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">${dto.viewCount}</td>
+												</tr>
+											</form>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
-					<!-- /# card -->
-				</div>
-				<div class="col-lg-6 col-md-6">
-					<div class="card" style="height: 80%">
 
-						<div class="card-body">
 
-							<button id="pay1000" type="button" class="btn btn-outline-primary btn-lg"
-								style="width: 100%; height: 100%" type="button" >
-								1000원 충전<br>(1시간)
-							</button>
-
-						</div>
-					</div>
-					<!-- /# card -->
-				</div>
-
-				<div class="col-lg-6 col-md-6">
-					<div class="card" style="height: 80%">
-
-						<div class="card-body">
-
-							<button id="pay2000" type="button" class="btn btn-outline-secondary btn-lg"
-								style="width: 100%; height: 100%" type="button" >
-								2000원 충전<br>(2시간)
-							</button>
-
-						</div>
-					</div>
-					<!-- /# card -->
-				</div>
-
-				<div class="col-lg-6 col-md-6">
-					<div class="card" style="height: 80%">
-
-						<div class="card-body">
-
-							<button id="pay3000" type="button" class="btn btn-outline-success btn-lg"
-								style="width: 100%; height: 100%" type="button" >
-								3000원 충전<br>(3시간)
-							</button>
-
-						</div>
-					</div>
-					<!-- /# card -->
-				</div>
-
-				<div class="col-lg-6 col-md-6">
-					<div class="card" style="height: 80%">
-
-						<div class="card-body">
-
-							<button id="pay5000" type="button" class="btn btn-outline-danger btn-lg"
-								style="width: 100%; height: 100%" type="button" >
-								5000원 충전<br>(5시간 30분)
-							</button>
-
-						</div>
-					</div>
-					<!-- /# card -->
-				</div>
-
-				<div class="col-lg-6 col-md-6">
-					<div class="card" style="height: 80%">
-
-						<div class="card-body">
-
-							<button id="pay10000" type="button" class="btn btn-outline-warning btn-lg"
-								style="width: 100%; height: 100%" type="button" >
-								10000원 충전<br>(11시간)
-							</button>
-
-						</div>
-					</div>
-					<!-- /# card -->
-				</div>
-
-				<div class="col-lg-6 col-md-6">
-					<div class="card" style="height: 80%">
-
-						<div class="card-body">
-
-							<button  id="pay20000" type="button" class="btn btn-outline-info btn-lg"
-								style="width: 100%; height: 100%" type="button">
-								20000원 충전<br>(23시간)
-							</button>
-						</div>
-					</div>
-					<!-- /# card -->
 				</div>
 			</div>
-			<div class="clearfix"></div>
-		</div>
-
-
-
-
-      
-    
-			<!-- 					여기부터 진향이가 만든 로그인폼 -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	
+	
+	
+	
+	
+	
+	
+		<!-- 						진향이 로그인폼 -->
+	
+	
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -514,218 +521,37 @@
                         location.href = "page?url=WEB-INF/pay.jsp";
                      })
                   </script>
-   <!-- 진향이 마이페이지 폼끝 -->
-       </div>
-   
-   <!-- 컨텐츠 끝 -->
+                          
+		<div class="clearfix"></div>
 
-   <div class="clearfix"></div>
-   <!-- Footer -->
-   <footer class="site-footer">
-      <div class="footer-inner bg-white">
-         <div class="row">
-            <div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
-            <div class="col-sm-6 text-right">
-               Designed by <a href="https://colorlib.com">1조</a>
-            </div>
-         </div>
-      </div>
-   </footer>
+		<footer class="site-footer">
+			<div class="footer-inner bg-white">
+				<div class="row">
+					<div class="col-sm-6">Copyright &copy; Amanda</div>
+					<div class="col-sm-6 text-right">
+						Designed by <a href="https://colorlib.com">Amanda</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+		   
+          </div>
+<!--       =-------------------    contents 끝  -------------------------= -->
+       
+				
 
-   <script
-      src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-   <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-   <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-   <script
-      src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-   <script src="assets/js/main.js"></script>
-	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-     <script>
-							
-							$("#updatememberbtn")
-									.on(
-											"click",
-											function() {
-												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
-											})
-							$("#deleteMembtn")
-									.on(
-											"click",
-											function() {
-												location.href = "page?url=WEB-INF/deleteMem.jsp";
-											})
-							$("#pointPagebtn").on("click", function() {
-								location.href = "page?url=WEB-INF/pay.jsp";
-							})
-						</script>
-     
-<script>
-	var id = "${user.id }";
-	var paid_amount = 1;
-	$("#pay1000").on("click",function(){
-	IMP.init('imp96545220'); 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
-	    amount : 1000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        paid_amount = rsp.paid_amount;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
-	});
-	})
-	$("#pay2000").on("click",function(){
-	IMP.init('imp96545220'); 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
-	    amount : 2000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        paid_amount = rsp.paid_amount;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
-	});
-	})
-	$("#pay3000").on("click",function(){
-	IMP.init('imp96545220'); 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
-	    amount : 3000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        paid_amount = rsp.paid_amount;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
-	});
-	})
-	$("#pay5000").on("click",function(){
-	IMP.init('imp96545220'); 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
-	    amount : 5000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        paid_amount = rsp.paid_amount;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
-	});
-	})
-	$("#pay10000").on("click",function(){
-	IMP.init('imp96545220'); 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
-	    amount : 10000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        paid_amount = rsp.paid_amount;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
-	});
-	})
-	$("#pay20000").on("click",function(){
-	IMP.init('imp96545220'); 
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
-	    amount : 20000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        paid_amount = rsp.paid_amount;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
-	});
-	})
-	</script>
-	
-     
-     
-     
-   
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+	<script src="assets/js/main.js"></script>
+
+
+
+
 </body>
 </html>
