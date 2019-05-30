@@ -20,20 +20,27 @@
 											<div class="mx-auto d-block">
 												
 												<h5 class="mt-2 mb-1">
-													<b>보낸 사람:${who}</b>
+													<b>보낸사람:관리자</b>
 												</h5>
 											</div>
 											<hr>
 											<div class="card-text">
 												${text}	
-												<form action="page?url=WEB-INF/main.jsp" id="form">
-												<input type="text" placeholder="reply"><input type="button" value="전송" id="send">						
+												<form action="page?url=WEB-INF/main.jsp" id="form"> 												<input type="text" placeholder="reply" id="reply">
+												 <input type="submit" value="send" onclick="send()"> 	 
 											</form>
+											
 											<script>
-											$("#send")											
-											.on("click",function() {
-												$("form").submit();
-												window.close();})
+											
+										        var webSocket = new WebSocket('ws://192.168.60.29:8080/Fork/broadcasting');
+											function onError(event) {
+										      alert(event.data);
+										    }
+										   function send() {
+										        webSocket.send("${who}:"+reply.value+":admin");
+										        reply.value = "";
+										        window.close();
+										    }  
 											</script>
 											
 											</div>

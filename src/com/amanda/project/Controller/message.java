@@ -1,4 +1,4 @@
-package message;
+package com.amanda.project.Controller;
 
 
 import java.io.IOException;
@@ -19,12 +19,12 @@ public class message {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         System.out.println(session);
-    	System.out.println(message);
+    	System.out.println("메시지"+message);
         synchronized(clients) {
             for(Session client : clients) {
                 if(!client.equals(session)) {
                     client.getBasicRemote().sendText(message);
-                    
+                   
                 }
             }
         }

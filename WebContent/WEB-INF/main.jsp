@@ -242,45 +242,52 @@
 										<h3 class="card-title">충전/로그인/개인정보</h3>
 										<p class="card-text">내용</p>
 										<h5>${user.name }님반갑습니다</h5>
-										<h5>${user.name }님의잔여포인트는 ${user.point }입니다</h5>
+										<h5>${user.name }님의잔여포인트는${user.point }입니다</h5>
 										<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
 										<button type="button" class="btn btn-primary" id="msg">msg</button>
-										<input type="button" id="openmsg" value="openmsg" flag="false">
+										
 										<script>
-										 var webSocket = new WebSocket('ws://localhost:8080/Fork/broadcasting');
-									    // var inputMessage = document.getElementById('inputMessage');
-										   webSocket.onerror = function(event) {
-      onError(event)
-    };
-    webSocket.onopen = function(event) {
-      /* onOpen(event) */
-    };
-    webSocket.onmessage = function(event) {
-      onMessage(event)
-    };
-    function onMessage(event) {
-    	  var msg = event.data.split(":");
-          var who = msg[0]; //상대의 id값 받기 
-       	var contents = msg[1];
-    	window.open("messagcontroller?who="+who+"&content="+contents, "",
-		"width=500px,height=300px")
-     
-       			console.log(who);
-    	 	 	
-    	    }
-    function onOpen(event) {
-       
-    }
-    function onError(event) {
-      alert(event.data);
-    }
-    function send() {
-        textarea.value += "admin:" + inputMessage.value + "\n";
-        webSocket.send("admin:"+inputMessage.value);
-        inputMessage.value = "";
-  
-    }
-																			
+										//msg보내는 소켓 및 버튼
+										 var webSocket = new WebSocket('ws://192.168.60.29:8080/Fork/broadcasting');
+									    webSocket.onerror = function(event) {
+     									 onError(event)
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  										if("${user.name}"=="관리자"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; 
+       											var contents = msg[1];
+       											 var who2=msg[2];
+       											
+     								 if(who!="admin"&&who2=="admin"){
+    								window.open("reply.message?who="+who+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 }
+    											}
+  											
+  										  }		 
+  									 
+  										else{
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; //admin
+       											var contents = msg[1];
+       											 var who2=msg[2]; //clinet이름      											    							
+     								 if("${user.name}"==who2&&who=="admin") 
+     								{
+    								window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 
+     								 }
+     								 
+     							 }
+     							
+  								}	
+  								//메시지 끝
+  								
 									$("#logoutbtn")
 									.on(
 											"click",
@@ -291,7 +298,9 @@
 									.on(
 											"click",
 											function() {
-												location.href = "page?url=WEB-INF/admin.jsp";
+												
+												window.open("page?url=WEB-INF/newmessage.jsp", "",
+											
 											})
 									</script>
 									</c:otherwise>
