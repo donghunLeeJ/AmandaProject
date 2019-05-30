@@ -32,7 +32,7 @@
 											</form>
 											
 											<script>
-											  var webSocket = new WebSocket('ws://192.168.60.29:8080/Fork/broadcasting');
+											  var webSocket = new WebSocket('ws://192.168.60.20/AmandaProject/broadcasting');
 											function onError(event) {
 										      alert(event.data);
 										    }

@@ -300,7 +300,7 @@
 										
 										<script>
 										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.29:8080/Fork/broadcasting');
+										 var webSocket = new WebSocket('ws://192.168.60.20/AmandaProject/broadcasting');
 									    webSocket.onerror = function(event) {
      									 onError(event)
    											 };
@@ -351,7 +351,7 @@
 											"click",
 											function() {
 												
-												window.open("page?url=WEB-INF/newmessage.jsp", "",
+												window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
 											
 											})
 									
@@ -454,8 +454,7 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
 				</div>
 			</div>
 
-		</div>
-	</div>
+	
 	<script>
 									$("#reinputpw").on("click",function(){
 									location.href = "page?url=WEB-INF/modifypassword.jsp";
@@ -587,6 +586,7 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
       
       
       </div>
+    
    
    <!-- 컨텐츠 끝 -->
 
@@ -637,23 +637,13 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
 			<!-- 진향이 마이페이지 폼끝 -->
 
 
-		</div>
+		
 
 		<!-- 컨텐츠 끝 -->
 
 		<div class="clearfix"></div>
 		<!-- Footer -->
-		<footer class="site-footer">
-			<div class="footer-inner bg-white">
-				<div class="row">
-					<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
-					<div class="col-sm-6 text-right">
-						Designed by <a href="https://colorlib.com">1조</a>
-					</div>
-				</div>
-			</div>
-		</footer>
-
+	
 		<script
 			src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 		<script

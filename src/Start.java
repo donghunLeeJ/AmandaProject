@@ -15,7 +15,7 @@ import com.amanda.project.DTO.ComDTO;
 
 @WebServlet("/Start")
 public class Start extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ComDAO dao = new ComDAO();
