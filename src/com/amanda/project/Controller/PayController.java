@@ -22,16 +22,17 @@ public class PayController extends HttpServlet {
 		MemberDAO dao=new MemberDAO();
 		ComDAO cDao = new ComDAO();
 		PayDAO pdao = new PayDAO();
-		switch(cmd) {
 		
-		case "time.pay" :
+		if(cmd.equals("time.pay")) {
 			String id = request.getParameter("id");
 			int point=Integer.parseInt(request.getParameter("amount"));
 			System.out.println(pdao.update_point(id, point));
+			pdao.pay_table_insert(id, point);
 			request.getSession().setAttribute("user", dao.select_user(id));
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-		break;
 		}
+	
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

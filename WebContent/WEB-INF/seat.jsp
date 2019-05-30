@@ -666,7 +666,9 @@
    		  <c:forEach var="i" items="${seat }">
 				<script>
 					if(${i.onOff }==1){
-						$('#seat${i.seatNum}').css('background-color','red');}										
+						$('#seat${i.seatNum}').css('background-color','red');
+						$("#seat${i.seatNum} h4").append("${i.id }");	
+					}										
 				</script>
 			</c:forEach>
      
