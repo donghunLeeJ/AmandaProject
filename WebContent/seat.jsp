@@ -428,6 +428,8 @@
 							</h4>
 						</div>
 					</div>
+				
+					
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -556,7 +558,7 @@
 			<c:forEach var="i" items="${seat }">
 				<script>
 					if(${i.onOff }==1){
-						$('#seat${i.seatNum}').css('background-color','red'); 	
+						$('#seat${i.seatnumber}>.card').css('background-color','red'); 	
 													
 					}		
 				</script>
@@ -597,8 +599,6 @@
 			<!-- /.content -->
 
 		</div>
-		
-		
 		<div class="clearfix"></div>
 		<!-- Footer -->
 		<footer class="site-footer">

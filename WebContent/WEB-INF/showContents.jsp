@@ -653,7 +653,7 @@
 			location.href = "Board.board?currentPage=1";
 		}	
 		
-		if(${id==writer }){
+		if(${user.id == writer }){
 		document.getElementById("modify").onclick = function() {
 			location.href = "ContentsEdit.board?no="+${no};
 		}
