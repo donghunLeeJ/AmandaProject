@@ -35,8 +35,8 @@
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fa fa-cogs" ></i>잔여좌석
+						href="page?url=WEB-INF/seat.jsp"> <i
+							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/manu.jsp"> <i
@@ -694,6 +694,18 @@
                             divPhoneNumber.removeClass("has-error");
                             divPhoneNumber.addClass("has-success");
                         }
+                        
+                        if($("#postcode").val()==""){
+                        	modalContents.text("주소를 입력해주세요");
+                        	modal.modal("show");
+                        	
+                        	divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                            return false;
+                        }else{
+                        	  divEmail.removeClass("has-error");
+                              divEmail.addClass("has-success");
+                        }
 
 
                     });
@@ -733,8 +745,6 @@
                 }
 
             </script>
-
-            
 
 </body>
 </html>
