@@ -2052,38 +2052,85 @@
                      })
                   </script>
 
+   <!-- 진향이 마이페이지 폼끝 -->
+    
+   <!-- 컨텐츠 끝 -->
 
-	<!-- .content -->
+   <div class="clearfix"></div>
+   <!-- Footer -->
+   <footer class="site-footer">
+      <div class="footer-inner bg-white">
+         <div class="row">
+            <div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
+            <div class="col-sm-6 text-right">
+               Designed by <a href="https://colorlib.com">1조</a>
+            </div>
+         </div>
+      </div>
+   </footer>
 
-	<div class="clearfix"></div>
-
-	<footer class="site-footer">
-		<div class="footer-inner bg-white">
-			<div class="row">
-				<div class="col-sm-6">Copyright &copy; 2018 Ela Admin</div>
-				<div class="col-sm-6 text-right">
-					Designed by <a href="https://colorlib.com">Colorlib</a>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-	<!-- /#right-panel -->
-
-	<!-- Right Panel -->
-
-	<!-- Scripts -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-	<script src="assets/js/main.js"></script>
-
+   <script
+      src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+   <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+   <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+   <script
+      src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+   <script src="assets/js/main.js"></script>
+     <script>
+							
+							$("#updatememberbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+											})
+							$("#deleteMembtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/deleteMem.jsp";
+											})
+							$("#pointPagebtn").on("click", function() {
+								location.href = "page?url=WEB-INF/pay.jsp";
+							})
+							
+							
+												
+	  //5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수			
+			function msg_time(){  
+    		   
+    		   $.ajax({  
+    		    	 
+    		         url: 'usertime.com',
+    		         type: 'POST'
+    		          
+    		 }).done(function(point){
+    			 		       	   	 			 	
+    		      if (point == 300){      
+    		    	  
+    		         alert("선불시간이 5분 남았습니다.");
+    		         
+    		      }else if(point == 0){
+    		    	  
+    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+    		    	  location.href = "logoutProc.member";
+    		    	  clearInterval(tid); 		    	  
+    		      }   
+    		 });	   	     
+    	   }	   			
+    	 
+    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
+    	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
+    	   TimerStart();	
+  												
+	</script>
+     
+     
+     
+     
+   
 
 </body>
 </html>
