@@ -355,45 +355,63 @@
 												window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
 											
 											})
-									
-  function msg_time(){  
-			   
-  $.ajax({  	    	 
-	         url: 'usertime.com', //ComController에 있는 usertime으로 이동함
-	         type: 'POST'
-	          
-	 }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
-	         		
-		 $("#point").html(point);
-	       	   
-	      m = (Math.floor(point/60)) + "분 "; 
-	      var msg = "<font color='red'>" + m +"</font>";
-	      
-	     $("#timeout").html(msg);
-	                       
-	      if (point == 300){    
-	    	  
-	         alert("선불시간이 5분 남았습니다.");  
-	         
-	      }else if(point == 0){
-	    	  
-	    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
-	    	  location.href = "logoutProc.member";
-	    	  clearInterval(tid);       
-	      }   	     	                 
-	 });   	     
-   }
-   									
-   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
-   function TimerStart(){ tid=setInterval('msg_time()',1000) };
-   TimerStart();                               
-                                                                 
-                                                         
+											                                                         
                            </script>
                         </c:otherwise>
-
-
                         </c:choose>
+                                                 
+    <c:choose> 
+    <c:when test="${user != null }">
+     <script>
+	
+     function msg_time(){  
+		   
+    	  $.ajax({  	    	 
+    		         url: 'usertime.com', //ComController에 있는 usertime으로 이동함
+    		         type: 'POST'
+    		          
+    		 }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
+    		         		
+    			 $("#point").html(point);
+    		       	   
+    		      m = (Math.floor(point/60)) + "분 "; 
+    		      var msg = "<font color='red'>" + m +"</font>";
+    		      
+    		     $("#timeout").html(msg);
+    		                       
+    		      if (point == 300){    
+    		    	  
+    		         alert("선불시간이 5분 남았습니다.");  
+    		         
+    		      }else if(point == 0){
+    		    	  
+    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+    		    	  location.href = "logoutProc.member";
+    		    	  clearInterval(tid);       
+    		      }   	     	                 
+    		 });   	     
+    	   }
+    	   		
+    	  								
+    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
+    	   function TimerStart(){tid=setInterval('msg_time()',1000) };
+    	   TimerStart();                          
+     		 
+   </script>    
+  </c:when>
+ </c:choose>                     
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                      </div>
                   </div>
                </div>
