@@ -25,22 +25,20 @@ public class PayController extends HttpServlet {
 		PayDAO pdao = new PayDAO();
 
 		MenuDAO menuDAO= new MenuDAO();
-		switch(cmd) {
+		
 
 		
 		if(cmd.equals("time.pay")) {
 			String id = request.getParameter("id");
-			int point=Integer.parseInt(request.getParameter("amount"));
-			System.out.println(pdao.update_point(id, point));
-			pdao.pay_table_insert(id, point);
+			int price=Integer.parseInt(request.getParameter("amount"));
+			String name = request.getParameter("name");
+			System.out.println(pdao.update_point(id, price));
+			menuDAO.insertMenu(id, name, price);
 			request.getSession().setAttribute("user", dao.select_user(id));
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-
-		break;
 		
-		
-		case "menu.pay":
-			id=request.getParameter("id");
+		}else if(cmd.equals("menu.pay")) {
+			String id=request.getParameter("id");
 			String name = request.getParameter("name");
 			int price=Integer.parseInt(request.getParameter("amount"));
 			System.out.println("pay");
@@ -48,13 +46,11 @@ public class PayController extends HttpServlet {
 			System.out.println(name);
 			System.out.println(price);
 			menuDAO.insertMenu(id,name,price);
-			
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-			
-		break;
 		
-
 		}
+
+		
 	
 		
 	}

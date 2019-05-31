@@ -258,41 +258,104 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">매출 조회</h4>
+						<select class="selectpicker" id="selected">
+							<optgroup label="매출액">
+								<option>월 별 매출액</option>
+								<option>주간 매출액</option>
+							</optgroup>
+							<optgroup label="Camping">
+								<option>메뉴별 매출액 </option>
+								<option>회원별 매출액</option>
+								<option>Toilet Paper</option>
+							</optgroup>
+						</select>
+						<button class="btn btn-primary" id="searchAjax"> 조회 </button>
+					</div>
+				</div>
+			</div>
 			<!-- /# column -->
 
 			<script>
-			  var ctx = document.getElementById( "barChart" );
+		
+			$("#searchAjax").on("click",function(){
+				$.ajax({
+					type:"get",
+					url:"search.chart",
+					data : {
+						what : $("#selected").val(),
+						how : "how"
+						
+					}
+				}).done(function(rsp){
+					var arr = JSON.parse(rsp);
+					var ctx = document.getElementById( "barChart" );
+				    //    ctx.height = 200;
+				    var myChart = new Chart( ctx, {
+				        type: 'bar',
+				        data: {
+				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
+				            datasets: [
+				                {
+				                    label: "매출액",
+				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
+				                    borderColor: "rgba(0, 194, 146, 0.9)",
+				                    borderWidth: "0",
+				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+				                            },
+				                    ]
+				        },
+				        options: {
+				            scales: {
+				                yAxes: [{
+				                    ticks: {
+				                       min:0,
+				                        max:10,
+				                        stepSize: 1
+				                    }
+				                   }]
+				            }
+				        }
+				    } );
+				
+				}) 
+				
+			})
+				
+			
+			
+			
+			
+			
+			
+			var ctx = document.getElementById( "barChart" );
 			    //    ctx.height = 200;
 			    var myChart = new Chart( ctx, {
 			        type: 'bar',
 			        data: {
-			            labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
+			            labels: [ , , , , , ,  ],
 			            datasets: [
 			                {
-			                    label: "My First dataset",
-			                    data: [ 500000, 600000, 700000, 200000, 100000, 50000, 600000 ],
+			                    label: "매출액",
+			                    data: [ , , , , , ,  ],
 			                    borderColor: "rgba(0, 194, 146, 0.9)",
 			                    borderWidth: "0",
 			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
 			                            },
-			                {
-			                    label: "My Second dataset",
-			                    data: [200000, 300000, 600000, 800000, 100000, 500000, 200000 ],
-			                    borderColor: "rgba(0,0,0,0.09)",
-			                    borderWidth: "0",
-			                    backgroundColor: "rgba(0,0,0,0.07)"
-			                            }
-			                        ]
+			                    ]
 			        },
 			        options: {
 			            scales: {
-			                yAxes: [ {
+			                yAxes: [{
 			                    ticks: {
 			                       min:0,
-			                        max:1000000,
-			                        stepSize: 100000
+			                        max:1000,
+			                        stepSize: 100
 			                    }
-			                                } ]
+			                   }]
 			            }
 			        }
 			    } );
