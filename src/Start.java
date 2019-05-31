@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DTO.ComDTO;
 
-
 @WebServlet("/Start")
 public class Start extends HttpServlet {
 	
@@ -20,7 +19,7 @@ public class Start extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ComDAO dao = new ComDAO();
 		List<ComDTO> arr = dao.selectSeat_all();
-//		System.out.println(arr.get(1).getIp());
+//		System.out.println(arr.get(1).getIp());]
 		request.getServletContext().setAttribute("seat", arr);
 		request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		

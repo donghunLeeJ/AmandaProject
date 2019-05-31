@@ -643,6 +643,8 @@
 	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
 	});
 	})
+	
+	
 	$("#pay5000").on("click",function(){
 	IMP.init('imp96545220'); 
 	IMP.request_pay({
