@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DAO.MemberDAO;
+import com.amanda.project.DAO.MenuDAO;
 import com.amanda.project.DAO.PayDAO;
 
 
@@ -22,6 +23,10 @@ public class PayController extends HttpServlet {
 		MemberDAO dao=new MemberDAO();
 		ComDAO cDao = new ComDAO();
 		PayDAO pdao = new PayDAO();
+
+		MenuDAO menuDAO= new MenuDAO();
+		switch(cmd) {
+
 		
 		if(cmd.equals("time.pay")) {
 			String id = request.getParameter("id");
@@ -30,6 +35,25 @@ public class PayController extends HttpServlet {
 			pdao.pay_table_insert(id, point);
 			request.getSession().setAttribute("user", dao.select_user(id));
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+
+		break;
+		
+		
+		case "menu.pay":
+			id=request.getParameter("id");
+			String name = request.getParameter("name");
+			int price=Integer.parseInt(request.getParameter("amount"));
+			System.out.println("pay");
+			System.out.println(id);
+			System.out.println(name);
+			System.out.println(price);
+			menuDAO.insertMenu(id,name,price);
+			
+			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+			
+		break;
+		
+
 		}
 	
 		

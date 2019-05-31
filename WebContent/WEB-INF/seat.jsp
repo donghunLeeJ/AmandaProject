@@ -78,9 +78,12 @@
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
-               <li class="menu-item-has-children dropdown"><a
+              
+                     <li id=menu class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/manu.jsp"> <i
                      class="menu-icon fa fa-table"></i>메뉴
+               </a></li>
+              
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i

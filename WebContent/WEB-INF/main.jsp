@@ -68,6 +68,7 @@
 </head>
 
 <body>
+
 	<!-- 왼쪽 네비 시작 -->
 	<aside id="left-panel" class="left-panel">
 		<nav class="navbar navbar-expand-sm navbar-default">
@@ -93,10 +94,12 @@
 								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
 							</a></li>
 							<script>
+
                      $("#charge").on("click",function(){
                         alert("로그인 후 이용가능합니다.");   
                      })
                   </script>
+
 						</c:when>
 						<c:otherwise>
 							<li id="charge" class="menu-item-has-children dropdown"><a
@@ -302,6 +305,7 @@
 								<c:choose>
 									<c:when test="${user == null }">
 										<script>
+
                         if(${login== -1}){
                            alert("아이디가 없습니다 ");
                            loaction.href=    "page?url=WEB-INF/main.jsp";
