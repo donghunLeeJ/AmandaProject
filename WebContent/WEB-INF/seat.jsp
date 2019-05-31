@@ -657,9 +657,7 @@
                     webSocket.onmessage = function(event) {
                       	 location.reload();
                     };
-                    var send = function(){
-                    	webSocket.send("hi");
-                    }
+                  
           </script>
 		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
      

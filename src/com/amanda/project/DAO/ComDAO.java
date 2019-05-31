@@ -71,6 +71,24 @@ public class ComDAO {
 		}
 		return null;
 	}
+	public int selectSeat(){
+		String sql="select count(*) from pcComputer where comUseCheck = 1 ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			
+			List<ComDTO> arr = new ArrayList();
+			ResultSet rs=pstat.executeQuery();
+			rs.next();
+			int result = rs.getInt(1);
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 	
 	public int seatOn(String ip){
