@@ -25,6 +25,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+        
+        
+<!-- -------------------------------------------------------- -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<!-- ------------------------------- -->
+
+
 </head>
 <body>
     <!-- 왼쪽 네비 시작 -->
@@ -35,8 +46,8 @@
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fa fa-cogs" ></i>잔여좌석
+						href="page?url=WEB-INF/seat.jsp"> <i
+							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/manu.jsp"> <i
@@ -256,7 +267,7 @@
                 <div class="form-group" id="divBirth">
                     <label for="inputBirth" class="col-lg-2 control-label">생년월일</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="birth" name="joinmemberbirth" data-rule-required="true" placeholder="ex)19000101" maxlength="15">
+                        <input type="text" class="form-control" id="birth" name="joinmemberbirth" data-rule-required="true" pattern="^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$" placeholder="ex)19000101" maxlength="15">
                     </div>
                 </div>
 
@@ -411,7 +422,35 @@
 
 	<script>
 	
+	 $("#birth").datepicker({
+		  showOn: "both", // 버튼과 텍스트 필드 모두 캘린더를 보여준다.
+		  buttonImage: "/application/db/jquery/images/calendar.gif", // 버튼 이미지
+		  buttonImageOnly: true, // 버튼에 있는 이미지만 표시한다.
+		  changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+		  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+		  minDate: '-100y', // 현재날짜로부터 100년이전까지 년을 표시한다.
+		  nextText: '다음 달', // next 아이콘의 툴팁.
+		  prevText: '이전 달', // prev 아이콘의 툴팁.
+		  numberOfMonths: [1,1], // 한번에 얼마나 많은 월을 표시할것인가. [2,3] 일 경우, 2(행) x 3(열) = 6개의 월을 표시한다.
+		  //stepMonths: 3, // next, prev 버튼을 클릭했을때 얼마나 많은 월을 이동하여 표시하는가. 
+		  yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+		  showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+		  currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
+		  closeText: '닫기',  // 닫기 버튼 패널
+		  dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+		  showAnim: "slide", //애니메이션을 적용한다.
+		  showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
+		  dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+		  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
+		                    
+		 });
 	
+	
+	
+	
+	
+	
+	//----------------------------------------------------------------------------------------------------
 	$("#logoutbtn1")
 	.on(
 			"click",
@@ -464,6 +503,9 @@
 	<script>
 
                 $(function(){
+                	
+                	$("img.ui-datepicker-trigger").remove();
+                	
                     //모달을 전역변수로 선언
                     var modalContents = $(".modal-contents");
                     var modal = $("#defaultModal");
@@ -694,6 +736,18 @@
                             divPhoneNumber.removeClass("has-error");
                             divPhoneNumber.addClass("has-success");
                         }
+                        
+                        if($("#postcode").val()==""){
+                        	modalContents.text("주소를 입력해주세요");
+                        	modal.modal("show");
+                        	
+                        	divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                            return false;
+                        }else{
+                        	  divEmail.removeClass("has-error");
+                              divEmail.addClass("has-success");
+                        }
 
 
                     });
@@ -733,8 +787,6 @@
                 }
 
             </script>
-
-            
 
 </body>
 </html>

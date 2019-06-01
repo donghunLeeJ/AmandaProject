@@ -78,9 +78,12 @@
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
-               <li class="menu-item-has-children dropdown"><a
+              
+                     <li id=menu class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/manu.jsp"> <i
                      class="menu-icon fa fa-table"></i>메뉴
+               </a></li>
+              
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
@@ -657,16 +660,16 @@
                     webSocket.onmessage = function(event) {
                       	 location.reload();
                     };
-                    var send = function(){
-                    	webSocket.send("hi");
-                    }
+                  
           </script>
 		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
      
    		  <c:forEach var="i" items="${seat }">
 				<script>
 					if(${i.onOff }==1){
-						$('#seat${i.seatNum}').css('background-color','red');}										
+						$('#seat${i.seatNum}').css('background-color','red');
+						$("#seat${i.seatNum} h4").append("${i.id }");	
+					}										
 				</script>
 			</c:forEach>
      

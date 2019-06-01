@@ -36,9 +36,9 @@
 	rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
 <script
 	src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
 
 
 <style>
@@ -68,7 +68,6 @@
 </head>
 
 <body>
-
 	<!-- 왼쪽 네비 시작 -->
 	<aside id="left-panel" class="left-panel">
 		<nav class="navbar navbar-expand-sm navbar-default">
@@ -94,12 +93,10 @@
 								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
 							</a></li>
 							<script>
-
                      $("#charge").on("click",function(){
                         alert("로그인 후 이용가능합니다.");   
                      })
                   </script>
-
 						</c:when>
 						<c:otherwise>
 							<li id="charge" class="menu-item-has-children dropdown"><a
@@ -252,225 +249,125 @@
 		<!--       상단 네비 끝 -->
 		<!-- Content 시작 -->
 		<div class="content">
-			<div class="animated fadeIn">
-				<div class="row">
-					<div class="col-lg-12 ">
-						<div class="card title">
-							<div class="card-body">
-								<h3 class="card-title">PC방 관련 스팩/사양이 들어갈 곳</h3>
-								<p class="card-text">내용</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 area">
-						<div class="card">
-							<div class="card-body">
-								<h3 class="card-title">잔여좌석</h3>
-								<canvas id="doughutChart"></canvas>
-							</div>
-						</div>
-					</div>
-					<script>
-                var ctx = document.getElementById( "doughutChart" );
-    ctx.height = 150;
-    var myChart = new Chart( ctx, {
-        type: 'doughnut',
-        data: {
-            datasets: [ {
-                data: [ ${seatUsed }, 25-${seatUsed } ],
-                backgroundColor: [
-                                    "rgba(0, 194, 146,0.9)",
-                          	        "rgba(0,0,0,0.07)"
-                                ],
-                hoverBackgroundColor: [
-                                    "rgba(0, 194, 146,0.9)",
-                                    "rgba(0,0,0,0.07)"
-                                ]
 
-                            } ],
-            labels: [
-                            "사용중인 좌석",
-                            "빈좌석",
-                           
-                        ]
-      			  },
-       	 options: {
-       		     responsive: true
-     		   }
-  		  } );
-   	 </script>
-					<div class="col-lg-6 area">
-						<div class="card my-card border-danger">
-							<div class="card-body">
-								<c:choose>
-									<c:when test="${user == null }">
-										<script>
-
-                        if(${login== -1}){
-                           alert("아이디가 없습니다 ");
-                           loaction.href=    "page?url=WEB-INF/main.jsp";
-                        }
-                        </script>
-
-
-										<h3 class="card-title">충전/로그인/개인정보</h3>
-										<p class="card-text">내용</p>
-										<button type="button"
-											class="btn btn-outline-danger signbt mb-2"
-											data-toggle="modal" data-target="#exampleModal" id="loginbtn">
-											login</button>
-									</c:when>
-									<c:otherwise>
-										<h3 class="card-title">충전/로그인/개인정보</h3>
-										<p class="card-text">내용</p>
-										<h5>${user.name }님반갑습니다</h5>
-										<h5>${user.name }
-											님의 잔여포인트는 <span id="point"></span> 입니다.
-										</h5>
-										<h5>${user.name }님의
-											남은 시간은 <span id="timeout"></span> 입니다.
-										</h5>
-										<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
-										<button type="button" class="btn btn-primary" id="msg">msg</button>
-
-										<script>
-										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.20/AmandaProject/broadcasting');
-									    webSocket.onerror = function(event) {
-     									 onError(event)
-   											 };
-  										 webSocket.onmessage = function(event) {
-   										   onMessage(event)
-  										  };
-  										if("${user.name}"=="관리자"){
-  										  function onMessage(event) {
-    										  var msg = event.data.split(":");
-       										  var who = msg[0]; 
-       											var contents = msg[1];
-       											 var who2=msg[2];
-       											
-     								 if(who!="admin"&&who2=="admin"){
-    								window.open("reply.message?who="+who+"&&content="+contents, "",
-									"width=500px,height=300px");
-     										 }
-    											}
-  											
-  										  }		 
-  									 
-  										else{
-  										  function onMessage(event) {
-    										  var msg = event.data.split(":");
-       										  var who = msg[0]; //admin
-       											var contents = msg[1];
-       											 var who2=msg[2]; //clinet이름      											    							
-     								 if("${user.name}"==who2&&who=="admin") 
-     								{
-    								window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
-									"width=500px,height=300px");
-     										 
-     								 }
-     								 
-     							 }
-     							
-  								}	
-  								//메시지 끝
-  								
-									$("#logoutbtn")
-									.on(
-											"click",
-											function() {
-												location.href = "logoutProc.member";
-											})
-											$("#msg")
-									.on(
-											"click",
-											function() {
-												
-												window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
-											
-											})
-
-											                                                         
-                           </script>
-                        </c:otherwise>
-                        </c:choose>
-                                                 
-    <c:choose> 
-    <c:when test="${user != null }">
-     <script>
-	
-     function msg_time(){  
-		   
-    	  $.ajax({  	    	 
-    		         url: 'usertime.com', //ComController에 있는 usertime으로 이동함
-    		         type: 'POST'
-    		          
-    		 }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
-    		         		
-    			 $("#point").html(point);
-    		       	   
-    		      m = (Math.floor(point/60)) + "분 "; 
-    		      var msg = "<font color='red'>" + m +"</font>";
-    		      
-    		     $("#timeout").html(msg);
-    		                       
-    		      if (point == 300){    
-    		    	  
-    		         alert("선불시간이 5분 남았습니다.");  
-    		         
-    		      }else if(point == 0){
-    		    	  
-    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
-    		    	  location.href = "logoutProc.member";
-    		    	  clearInterval(tid);       
-    		      }   	     	                 
-    		 });   	     
-    	   }
-    	   		
-    	  								
-    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
-    	   function TimerStart(){tid=setInterval('msg_time()',1000) };
-    	   TimerStart();                          
-     		 
-   </script>    
-  </c:when>
- </c:choose>                     
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-6 area">
-                  <div class="card my-card border-danger">
-                     <div class="card-body">
-                        <h3 class="card-title">오늘의 메뉴가 들어갈 곳</h3>
-                        <p class="card-text">내용</p>
-                     </div>
-                  </div>
-               </div>
-
-
-					<div class="col-lg-6 area">
-						<div class="card my-card border-danger">
-							<div class="card-body">
-								<h3 class="card-title">PC방 이벤트가 들어갈 곳</h3>
-								<p class="card-text">내용</p>
-
-							</div>
-						</div>
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">Bar chart</h4>
+						<canvas id="barChart"></canvas>
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">매출 조회</h4>
+						<select class="selectpicker" id="selected">
+							<optgroup label="매출액">
+								<option>월 별 매출액</option>
+								<option>주간 매출액</option>
+							</optgroup>
+							<optgroup label="Camping">
+								<option>메뉴별 매출액 </option>
+								<option>회원별 매출액</option>
+								<option>Toilet Paper</option>
+							</optgroup>
+						</select>
+						<button class="btn btn-primary" id="searchAjax"> 조회 </button>
+					</div>
+				</div>
+			</div>
+			<!-- /# column -->
+
+			<script>
+		
+			$("#searchAjax").on("click",function(){
+				$.ajax({
+					type:"get",
+					url:"search.chart",
+					data : {
+						what : $("#selected").val(),
+						how : "how"
+						
+					}
+				}).done(function(rsp){
+					var arr = JSON.parse(rsp);
+					var ctx = document.getElementById( "barChart" );
+				    //    ctx.height = 200;
+				    var myChart = new Chart( ctx, {
+				        type: 'bar',
+				        data: {
+				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
+				            datasets: [
+				                {
+				                    label: "매출액",
+				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
+				                    borderColor: "rgba(0, 194, 146, 0.9)",
+				                    borderWidth: "0",
+				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+				                            },
+				                    ]
+				        },
+				        options: {
+				            scales: {
+				                yAxes: [{
+				                    ticks: {
+				                       min:0,
+				                        max:10,
+				                        stepSize: 1
+				                    }
+				                   }]
+				            }
+				        }
+				    } );
+				
+				}) 
+				
+			})
+				
+			
+			
+			
+			
+			
+			
+			var ctx = document.getElementById( "barChart" );
+			    //    ctx.height = 200;
+			    var myChart = new Chart( ctx, {
+			        type: 'bar',
+			        data: {
+			            labels: [ , , , , , ,  ],
+			            datasets: [
+			                {
+			                    label: "매출액",
+			                    data: [ , , , , , ,  ],
+			                    borderColor: "rgba(0, 194, 146, 0.9)",
+			                    borderWidth: "0",
+			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+			                            },
+			                    ]
+			        },
+			        options: {
+			            scales: {
+			                yAxes: [{
+			                    ticks: {
+			                       min:0,
+			                        max:1000,
+			                        stepSize: 100
+			                    }
+			                   }]
+			            }
+			        }
+			    } );
+
+    </script>
+
+
+
+
+
+
+
 			<!-- 					여기부터 진향이가 만든 로그인폼 -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -690,7 +587,6 @@
 
 
 		<!-- 진향이 마이페이지 폼끝 -->
-
 
 
 

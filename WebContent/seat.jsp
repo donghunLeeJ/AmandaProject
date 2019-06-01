@@ -558,7 +558,8 @@
 			<c:forEach var="i" items="${seat }">
 				<script>
 					if(${i.onOff }==1){
-						$('#seat${i.seatnumber}>.card').css('background-color','red'); 	
+						$('#seat${i.seatnumber}').css('background-color','red');
+						$("#seat${i.seatnumber} h4").append("${i.id }");
 													
 					}		
 				</script>
