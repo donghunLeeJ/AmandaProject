@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.ComDAO;
+
+
 import com.amanda.project.DAO.VisitDAO;
 import com.amanda.project.DAO.everythreehoursDAO;
 import com.amanda.project.DTO.ComDTO;
@@ -62,5 +65,6 @@ public class Start extends HttpServlet {
 		
 		doGet(request, response);
 	}
+
 
 }
