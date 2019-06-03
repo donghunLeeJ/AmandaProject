@@ -57,10 +57,11 @@ public class MemberController extends HttpServlet {
 			try {
 				login = dao.checklogin(loginid, dao.testSHA256(loginpw));
 
-	if(login==1) {
+				if(login==1) {
 					if(loginid.equals("admin"))  //관리자인 경우 admincharcontroller로 이동후 main접속 하기
 					{
 						
+						request.getSession().setAttribute("user", dao.select_user(loginid));
 						RequestDispatcher rd=request.getRequestDispatcher("adminchart.visit");
 						rd.forward(request, response);					
 					}
@@ -69,7 +70,7 @@ public class MemberController extends HttpServlet {
 					MemberDTO user = dao.select_user(loginid);
 					//pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
 					pointmap.put(loginid, user.getPoint());					
-									
+								
 				
 					request.setAttribute("login", login);													
 					request.getSession().setAttribute("user", dao.select_user(loginid));
@@ -122,7 +123,7 @@ public class MemberController extends HttpServlet {
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/loginProc.jsp");
 					rd.forward(request, response);							
 
-
+					}
 				}else if(login == -1){
 
 					System.out.println(login);

@@ -249,35 +249,50 @@
 		<!--       상단 네비 끝 -->
 		<!-- Content 시작 -->
 		<div class="content">
-
+			<div class = "row">
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">오늘의 누적 방문자수</h4>
+						<canvas id="myChart"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 ">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">3시간전 방문자수</h4>
+						<canvas id="myChart2"></canvas>
+					</div>
+				</div>
+			</div>
 			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-body">
 						<h4 class="mb-3">Bar chart</h4>
 						<canvas id="barChart"></canvas>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="card">
-					<div class="card-body">
 						<h4 class="mb-3">매출 조회</h4>
 						<select class="selectpicker" id="selected">
 							<optgroup label="매출액">
 								<option>월 별 매출액</option>
 								<option>주간 매출액</option>
 							</optgroup>
-							<optgroup label="Camping">
+							<optgroup label="종류별">
 								<option>메뉴별 매출액 </option>
 								<option>회원별 매출액</option>
-								<option>Toilet Paper</option>
 							</optgroup>
 						</select>
 						<button class="btn btn-primary" id="searchAjax"> 조회 </button>
+					
+					
 					</div>
 				</div>
 			</div>
+			
+			</div>
 			<!-- /# column -->
+
+
 
 			<script>
 		
@@ -325,12 +340,6 @@
 				
 			})
 				
-			
-			
-			
-			
-			
-			
 			var ctx = document.getElementById( "barChart" );
 			    //    ctx.height = 200;
 			    var myChart = new Chart( ctx, {
@@ -359,9 +368,84 @@
 			            }
 			        }
 			    } );
+			
+			</script>
+	
+	
+	
+	
+	
+	
+	
+	<script>
+			
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {  
+  
+    type:'line',
+ 
+    data: {
+    			
+    			  labels: [
+    				  <c:forEach var="dto" items="${list}">
+    				 '${dto.date}',
+    				 </c:forEach>
+    			  ],
+    		  datasets: [{
+    	            label: 'Date',
+    	            backgroundColor: 'rgb(255, 99, 132)',
+    	            borderColor: 'rgb(255, 99, 132)',
+    	            data: [ <c:forEach var="dto" items="${list}">
+   				 '${dto.vcount}',
+				 </c:forEach>]
+    	        }]
+    			 
+        
+       
+    },
+    options:{},
+	 title: {
+		 text: '최근 5일 하루 총 방문자 수 ' 
+	 }
 
-    </script>
+});
 
+</script>
+
+
+
+	<script>
+			
+var ctx = document.getElementById('myChart2').getContext('2d');
+var chart = new Chart(ctx, {  
+  
+    type:'line',
+ 
+    data: {
+    			
+    			  labels: ['9시간전','6시간전','3시간전'
+    				 
+    			  ],
+    		  datasets: [{
+    	            label: 'Date',
+    	            backgroundColor: 'rgb(255, 99, 132)',
+    	            borderColor: 'rgb(255, 99, 132)',
+    	            data: [ <c:forEach var="dto" items="${list1}">
+      				 '${dto.vcount}',
+    				 </c:forEach>
+				]
+    	        }]
+    			 
+        
+       
+    },
+    options:{},
+	 title: {
+		 text: '오늘 하루 최근 방문자 수  ' 
+	 }
+
+});
+</script>
 
 
 

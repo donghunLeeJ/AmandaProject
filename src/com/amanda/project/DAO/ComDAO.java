@@ -152,6 +152,21 @@ public class ComDAO {
 			e.printStackTrace();
 		}
 		return -1;
+	}public int usedSeat(){
+		String sql="select count(comusecheck) from pccomputer where COMUSECHECK = '1'";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			int result =  rs.getInt(1);
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 	
 }

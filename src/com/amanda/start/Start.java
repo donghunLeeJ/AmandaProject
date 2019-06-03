@@ -52,6 +52,7 @@ public class Start extends HttpServlet {
 		List<ComDTO> arr = dao.selectSeat_all();
 			//System.out.println(arr.get(1).getIp());
 		request.getServletContext().setAttribute("seat", arr);
+		request.setAttribute("seatUsed", dao.usedSeat());
 		
 		
 		//--------------ㅡmain 이동 ---------------------------------------	

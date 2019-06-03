@@ -29,7 +29,6 @@ public class VisitController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;UTF-8");
 
-
 		switch(cmd) {
 
 		case "adminchart.visit" :
