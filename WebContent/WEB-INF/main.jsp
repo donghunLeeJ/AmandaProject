@@ -253,6 +253,12 @@
                <div class="col-lg-12 ">
                   <div class="card title">
                      <div class="card-body">
+                     <input type="button" id="babo">
+                     <script>
+                     	$("#babo").on("click",function(){
+                     		location.href = "page?url=member.manage"
+                     	})
+                     </script>
                         <h3 class="card-title">PC방 관련 스팩/사양이 들어갈 곳</h3>
                         <p class="card-text">내용</p>
                      </div>

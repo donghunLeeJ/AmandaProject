@@ -12,10 +12,21 @@ public class MemberDTO {
 	private String postcode;
 	private String address1;
 	private String address2;
+	private int usehour;
 	
 	public MemberDTO() {}
 	
 	
+	public MemberDTO(int mem_seq, String id, String name, String phone, int usehour) {
+		super();
+		this.mem_seq = mem_seq;
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.usehour = usehour;
+	}
+
+
 	public MemberDTO(int mem_seq, String id, String pw, String name, String birth, String email, String phone,
 			int point, String postcode, String address1, String address2) {
 		super();
@@ -33,6 +44,24 @@ public class MemberDTO {
 	}
 	
 	
+
+	public MemberDTO(int mem_seq, String id, String pw, String name, String birth, String email, String phone,
+			int point, String postcode, String address1, String address2, int usehour) {
+		super();
+		this.mem_seq = mem_seq;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.birth = birth;
+		this.email = email;
+		this.phone = phone;
+		this.point = point;
+		this.postcode = postcode;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.usehour = usehour;
+	}
+
 
 	public MemberDTO(String id, String pw, String email, String phone) {
 		super();
@@ -77,6 +106,16 @@ public class MemberDTO {
 		this.address2=address2;
 	}
 	
+	
+	public MemberDTO(int mem_seq, String name, String phone, int usehour) {
+		super();
+		this.mem_seq = mem_seq;
+		this.name = name;
+		this.phone = phone;
+		this.usehour = usehour;
+	}
+
+
 	public int getMem_seq() {
 		return mem_seq;
 	}
@@ -142,6 +181,16 @@ public class MemberDTO {
 	}
 	public void setAddress2(String address2) {
 		this.address2 = address2;
+	}
+
+
+	public int getUsehour() {
+		return usehour;
+	}
+
+
+	public void setUsehour(int usehour) {
+		this.usehour = usehour;
 	}
 	
 	

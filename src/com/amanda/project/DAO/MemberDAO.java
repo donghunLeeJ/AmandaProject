@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -127,7 +129,7 @@ public class MemberDAO {
 	/** 회원가입 메서드*/
 
 	public int joinmember(MemberDTO dto) throws Exception{
-		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default,?,?,?)";
+		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default,?,?,?,default)";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -207,6 +209,46 @@ public class MemberDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
+		}
+	}
+	public int usehourUpdate(int point , String id) throws Exception{
+		String sql = "update member set usehour=usehour+? where id=?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				
+				){
+			
+			pstat.setInt(1, point);
+			pstat.setString(2, id);
+		
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	public List<MemberDTO> show_member() {
+		List<MemberDTO> list = new ArrayList<>();
+		String sql = "select mem_seq,id,name,phone,usehour from member ";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			while(rs.next()) {
+				int num = rs.getInt(1);
+				String id = rs.getString(2);
+				String name = rs.getString(3);
+				String phone = rs.getString(4);
+				int usehour = rs.getInt(5);
+				MemberDTO dto = new MemberDTO(num,id,name,phone,usehour);
+				list.add(dto);
+			}
+			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
