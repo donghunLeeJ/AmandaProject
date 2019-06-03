@@ -292,6 +292,23 @@ public class MemberDAO {
 			return null;
 		}
 	}
+	public int deleteblacklist(int num) {
+	      String sql = "update member set blackcheck='n' where mem_seq=?";
+	      try(
+	            Connection con = ds.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ){
+	            pstat.setInt(1, num);
+	            
+	            int result = pstat.executeUpdate();
+	            con.commit();
+	            return result;
+	            
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         return 0;
+	      }
+	   }
 }
 
 
