@@ -313,8 +313,8 @@
 				                yAxes: [{
 				                    ticks: {
 				                       min:0,
-				                        max:10,
-				                        stepSize: 1
+				                        max:500000,
+				                        stepSize: 50000
 				                    }
 				                   }]
 				            }
