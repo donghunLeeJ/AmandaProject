@@ -144,8 +144,7 @@ public class ComDAO {
 
 				)
 		{
-		
-			pstat.setString(2, ip );
+			pstat.setString(1, ip );
 			int rs=pstat.executeUpdate();
 			return rs;
 		}catch(Exception e) {

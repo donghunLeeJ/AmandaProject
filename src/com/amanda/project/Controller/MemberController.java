@@ -62,7 +62,7 @@ public class MemberController extends HttpServlet {
 					{
 						
 						request.getSession().setAttribute("user", dao.select_user(loginid));
-						RequestDispatcher rd=request.getRequestDispatcher("adminchart.visit");
+						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/adminmain.jsp");
 						rd.forward(request, response);					
 					}
 					else {
