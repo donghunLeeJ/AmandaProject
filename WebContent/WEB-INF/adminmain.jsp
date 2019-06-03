@@ -88,7 +88,7 @@
 							class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="member.manage"> <i
+						href="Board.board?currentPage=1"> <i
 							class="menu-icon fa fa-th"></i>고객관리
 					</a></li>
 					
@@ -120,26 +120,25 @@
 				<div class="card">
 					<div class="card-body">
 						<h4 class="mb-3">오늘의 누적 방문자수</h4>
-						<canvas id="barChart1"></canvas>
-						<h4 class="mb-3">방문자수 조회</h4>
-						<select class="selectpicker" id="selected1">
-							<optgroup label="시간별">
-								<option>시간별 방문자</option>
-								<option>최근 일주일</option>
-							</optgroup>
-						</select>
-						<button class="btn btn-primary" id="searchAjax1"> 조회 </button>
+						<canvas id="myChart"></canvas>
 					</div>
 				</div>
 			</div>
-			
+			<div class="col-lg-6 ">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">3시간전 방문자수</h4>
+						<canvas id="myChart2"></canvas>
+					</div>
+				</div>
+			</div>
 			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-body">
 						<h4 class="mb-3">Bar chart</h4>
-						<canvas id="barChart2"></canvas>
+						<canvas id="barChart"></canvas>
 						<h4 class="mb-3">매출 조회</h4>
-						<select class="selectpicker" id="selected2">
+						<select class="selectpicker" id="selected">
 							<optgroup label="매출액">
 								<option>월 별 매출액</option>
 								<option>주간 매출액</option>
@@ -149,7 +148,7 @@
 								<option>회원별 매출액</option>
 							</optgroup>
 						</select>
-						<button class="btn btn-primary" id="searchAjax2"> 조회 </button>
+						<button class="btn btn-primary" id="searchAjax"> 조회 </button>
 					
 					
 					</div>
@@ -162,61 +161,19 @@
 
 
 			<script>
-			$("#searchAjax1").on("click",function(){
-				$.ajax({
-					type:"get",
-					url:"visit.chart",
-					data : {
-						what : $("#selected1").val(),
-						how : "how"
-						
-					}
-				}).done(function(rsp){
-					var arr = JSON.parse(rsp);
-					var ctx = document.getElementById( "barChart1" );
-				    //    ctx.height = 200;
-				    var myChart = new Chart( ctx, {
-				        type: 'bar',
-				        data: {
-				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
-				            datasets: [
-				                {
-				                    label: "방문자수",
-				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
-				                    borderColor: "rgba(0, 194, 146, 0.9)",
-				                    borderWidth: "0",
-				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-				                            },
-				                    ]
-				        },
-				        options: {
-				            scales: {
-				                yAxes: [{
-				                    ticks: {
-				                       min:0,
-				                        max:100,
-				                        stepSize: 10
-				                    }
-				                   }]
-				            }
-				        }
-				    } );
-				
-				}) 
-				
-			})
-			$("#searchAjax2").on("click",function(){
+		
+			$("#searchAjax").on("click",function(){
 				$.ajax({
 					type:"get",
 					url:"search.chart",
 					data : {
-						what : $("#selected2").val(),
+						what : $("#selected").val(),
 						how : "how"
 						
 					}
 				}).done(function(rsp){
 					var arr = JSON.parse(rsp);
-					var ctx = document.getElementById( "barChart2" );
+					var ctx = document.getElementById( "barChart" );
 				    //    ctx.height = 200;
 				    var myChart = new Chart( ctx, {
 				        type: 'bar',
@@ -248,35 +205,8 @@
 				}) 
 				
 			})
-				var ctx = document.getElementById("barChart1");
-			    //    ctx.height = 200;
-			    var myChart = new Chart( ctx, {
-			        type: 'bar',
-			        data: {
-			            labels: [ , , , , , ,  ],
-			            datasets: [
-			                {
-			                    label: "방문자 수",
-			                    data: [ , , , , , ,  ],
-			                    borderColor: "rgba(0, 194, 146, 0.9)",
-			                    borderWidth: "0",
-			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-			                            },
-			                    ]
-			        },
-			        options: {
-			            scales: {
-			                yAxes: [{
-			                    ticks: {
-			                       min:0,
-			                        max:1000,
-			                        stepSize: 100
-			                    }
-			                   }]
-			            }
-			        }
-			    } );
-			var ctx = document.getElementById("barChart2");
+				
+			var ctx = document.getElementById( "barChart" );
 			    //    ctx.height = 200;
 			    var myChart = new Chart( ctx, {
 			        type: 'bar',
@@ -306,7 +236,109 @@
 			    } );
 			
 			</script>
-		<!-- 					여기부터 진향이가 만든 로그인폼 -->
+	
+	
+	
+	
+	
+	
+	
+	<script>
+			
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {  
+  
+    type:'line',
+ 
+    data: {
+    			
+    			  labels: [
+    				  <c:forEach var="dto" items="${list}">
+    				 '${dto.date}',
+    				 </c:forEach>
+    			  ],
+    		  datasets: [{
+    	            label: 'Date',
+    	            backgroundColor: 'rgb(255, 99, 132)',
+    	            borderColor: 'rgb(255, 99, 132)',
+    	            data: [ <c:forEach var="dto" items="${list}">
+   				 '${dto.vcount}',
+				 </c:forEach>]
+    	        }]
+    			 
+        
+       
+    },
+    options:{},
+	 title: {
+		 text: '최근 5일 하루 총 방문자 수 ' 
+	 }
+
+});
+
+</script>
+
+
+
+	<script>
+			
+var ctx = document.getElementById('myChart2').getContext('2d');
+var chart = new Chart(ctx, {  
+  
+    type:'line',
+ 
+    data: {
+    			
+    			  labels: ['9시간전','6시간전','3시간전'
+    				 
+    			  ],
+    		  datasets: [{
+    	            label: 'Date',
+    	            backgroundColor: 'rgb(255, 99, 132)',
+    	            borderColor: 'rgb(255, 99, 132)',
+    	            data: [ <c:forEach var="dto" items="${list1}">
+      				 '${dto.vcount}',
+    				 </c:forEach>
+				]
+    	        }]
+    			 
+        
+       
+    },
+    options:{},
+	 title: {
+		 text: '오늘 하루 최근 방문자 수  ' 
+	 }
+
+});
+</script>
+<script> /*메시지  */
+ var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject/broadcasting');
+									    webSocket.onerror = function(event) {
+     									// onError(event)
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  										if("${user.name}"=="관리자"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; 
+       											var contents = msg[1];
+       											 var who2=msg[2];
+       											
+     								 if(who!="관리자"&&who2=="admin"){
+    								window.open("reply.message?who="+who+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 }
+    											}
+  											
+  										  }		 
+
+</script>
+
+
+			<!-- 					여기부터 진향이가 만든 로그인폼 -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -544,5 +576,22 @@
 		<script src="assets/js/main.js"></script>
 
 
+
+
+
+<!-- 		<!--    ---------------------------------소켓연결  script--------------------------------- --> -->
+<!-- 		<script> -->
+                    
+//           if(${user.id != null } ){
+//               var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+//                 webSocket.onopen = function(event){
+//                       webSocket.send("hi");
+//                 };
+//                 webSocket.onerror ;
+                    
+                 
+//           }
+<!--     </script> -->
+		<!--    ---------------------------------소켓연결  script--------------------------------- -->
 </body>
 </html>

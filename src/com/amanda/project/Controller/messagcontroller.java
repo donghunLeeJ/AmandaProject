@@ -13,27 +13,28 @@
   
   protected void doGet(HttpServletRequest request, HttpServletResponse
   response) throws ServletException, IOException {
-  request.setCharacterEncoding("utf-8"); String requestURI =
-  request.getRequestURI(); String contextPath = request.getContextPath();
+  request.setCharacterEncoding("utf-8"); 
+  String requestURI =  request.getRequestURI(); 
+  String contextPath = request.getContextPath();
   String command = requestURI.substring(contextPath.length()); 
   System.out.println(command);
   try {
   
-  if(command.equals("/reply.message")){//받을때 String
+  if(command.equals("/reply.message")){
   String who=request.getParameter("who"); 
   String text=request.getParameter("content");
   request.setAttribute("who", who);
   request.setAttribute("text",text); 
-  RequestDispatcher  rd=request.getRequestDispatcher("WEB-INF/admintoclinet.jsp"); rd.forward(request,response); //cient에게 보내기
+  RequestDispatcher  rd=request.getRequestDispatcher("WEB-INF/admintoclinet.jsp"); rd.forward(request,response); //cient�뿉寃� 蹂대궡湲�
   
   } 
-  else if(command.equals("/replytoclient.message")){//받을때 String
+  else if(command.equals("/replytoclient.message")){
 	  String who=request.getParameter("who"); 
 	  String text=request.getParameter("content");
 	  System.out.println("client"+who+text);
 	  request.setAttribute("who", who);
 	  request.setAttribute("text",text); 
-	  RequestDispatcher  rd=request.getRequestDispatcher("WEB-INF/clienttoadmin.jsp"); rd.forward(request,response); //admin에게 보내기 
+	  RequestDispatcher  rd=request.getRequestDispatcher("WEB-INF/clienttoadmin.jsp"); rd.forward(request,response); //admin�뿉寃� 蹂대궡湲� 
  
 	  } 
  
