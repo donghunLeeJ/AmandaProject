@@ -1,26 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Ela Admin - HTML5 Admin Template</title>
+<title>Main</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 <link rel="stylesheet"
@@ -34,7 +34,37 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
 	rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+
+
+<style>
+#remember {
+	width: 35%;
+	height: 100%;
+	margin: 0px;
+}
+
+.modal-footer {
+	box-sizing: border-box;
+}
+
+.modal-body1 {
+	padding: 1px;
+}
+
+.card-header {
+	color: gray;
+	background-color: #bbe3e3;
+}
+
+.card-text {
+	text-align: left;
+}
+</style>
 </head>
 
 <body>
@@ -53,11 +83,9 @@
 						href="page?url=WEB-INF/manu.jsp"> <i
 							class="menu-icon fa fa-table"></i>메뉴
 					</a></li>
-
 					<li class="menu-item-has-children dropdown"><a
 						href="Board.board?currentPage=1"> <i
 							class="menu-icon fa fa-th"></i>고객의소리
-
 					</a></li>
 					<c:choose>
 						<c:when test="${user == null }">
@@ -65,10 +93,10 @@
 								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
 							</a></li>
 							<script>
-                                            $("#charge").on("click",function(){
-                                                alert("로그인 후 이용가능합니다.");	
-                                            })
-                                        </script>
+                     $("#charge").on("click",function(){
+                        alert("로그인 후 이용가능합니다.");   
+                     })
+                  </script>
 						</c:when>
 						<c:otherwise>
 							<li id="charge" class="menu-item-has-children dropdown"><a
@@ -112,6 +140,8 @@
 										</button>
 									</form>
 								</div>
+
+
 
 								<div class="dropdown for-notification">
 									<button class="btn btn-secondary dropdown-toggle" type="button"
@@ -216,223 +246,128 @@
 				</c:otherwise>
 			</c:choose>
 		</header>
-		<!-- /#header -->
-		<!-- Breadcrumbs-->
-		<div class="breadcrumbs">
-			<div class="breadcrumbs-inner">
-				<div class="row m-0">
-					<div class="col-sm-12">
-						<div class="page-header float-left">
-							<div class="page-title">
-								<h1>잔여좌석</h1>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
+		<!--       상단 네비 끝 -->
+		<!-- Content 시작 -->
 		<div class="content">
-			<!-- Animated -->
-			<div class="animated fadeIn">
-				<!-- Widgets  -->
-				<div class="row">
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat1" class="card" style="height: 80%; background-color: white">
-							<h4>
-								1 <br> <br>
-							</h4>
-						</div>
+
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">Bar chart</h4>
+						<canvas id="barChart"></canvas>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat2" class="card" style="height: 80%; background-color: white">
-							<h4>
-								2 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat3" class="card" style="height: 80%; background-color: white">
-							<h4>
-								3 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat4" class="card" style="height: 80%; background-color: white">
-							<h4>
-								4 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat5" class="card" style="height: 80%; background-color: white">
-							<h4>
-								5 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat6" class="card" style="height: 80%; background-color: white">
-							<h4>
-								6 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat7" class="card" style="height: 80%; background-color: white">
-							<h4>
-								7 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat8" class="card" style="height: 80%; background-color: white">
-							<h4>
-								8 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat9" class="card" style="height: 80%; background-color: white">
-							<h4>
-								9 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat10" class="card" style="height: 80%; background-color: white">
-							<h4>
-								10 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat11" class="card" style="height: 80%; background-color: white">
-							<h4>
-								11 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat12" class="card" style="height: 80%; background-color: white">
-							<h4>
-								12 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat13" class="card" style="height: 80%; background-color: white">
-							<h4>
-								13 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat14" class="card" style="height: 80%; background-color: white">
-							<h4>
-								14 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat15" class="card" style="height: 80%; background-color: white">
-							<h4>
-								15 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat16" class="card" style="height: 80%; background-color: white">
-							<h4>
-								16 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat17" class="card" style="height: 80%; background-color: white">
-							<h4>
-								17 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-					
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat18" class="card" style="height: 80%; background-color: white">
-							<h4>
-								18 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat19" class="card" style="height: 80%; background-color: white">
-							<h4>
-								19 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat20" class="card" style="height: 80%; background-color: white">
-							<h4>
-								20 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat21" class="card" style="height: 80%; background-color: white">
-							<h4>
-								21 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat22" class="card" style="height: 80%; background-color: white">
-							<h4>
-								22 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat23" class="card" style="height: 80%; background-color: white">
-							<h4>
-								23 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat24" class="card" style="height: 80%; background-color: white">
-							<h4>
-								24 <br> <br>
-							</h4>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat25" class="card" style="height: 80%; background-color: white">
-							<h4>
-								25 <br> <br>
-							</h4>
-						</div>
-					</div>
-				
-					
 				</div>
-				<div class="clearfix"></div>
 			</div>
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mb-3">매출 조회</h4>
+						<select class="selectpicker" id="selected">
+							<optgroup label="매출액">
+								<option>월 별 매출액</option>
+								<option>주간 매출액</option>
+							</optgroup>
+							<optgroup label="Camping">
+								<option>메뉴별 매출액 </option>
+								<option>회원별 매출액</option>
+								<option>Toilet Paper</option>
+							</optgroup>
+						</select>
+						<button class="btn btn-primary" id="searchAjax"> 조회 </button>
+					</div>
+				</div>
+			</div>
+			<!-- /# column -->
+
+			<script>
+		
+			$("#searchAjax").on("click",function(){
+				$.ajax({
+					type:"get",
+					url:"search.chart",
+					data : {
+						what : $("#selected").val(),
+						how : "how"
+						
+					}
+				}).done(function(rsp){
+					var arr = JSON.parse(rsp);
+					var ctx = document.getElementById( "barChart" );
+				    //    ctx.height = 200;
+				    var myChart = new Chart( ctx, {
+				        type: 'bar',
+				        data: {
+				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
+				            datasets: [
+				                {
+				                    label: "매출액",
+				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
+				                    borderColor: "rgba(0, 194, 146, 0.9)",
+				                    borderWidth: "0",
+				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+				                            },
+				                    ]
+				        },
+				        options: {
+				            scales: {
+				                yAxes: [{
+				                    ticks: {
+				                       min:0,
+				                        max:500000,
+				                        stepSize: 50000
+				                    }
+				                   }]
+				            }
+				        }
+				    } );
+				
+				}) 
+				
+			})
+				
+			
+			
+			
+			
+			
+			
+			var ctx = document.getElementById( "barChart" );
+			    //    ctx.height = 200;
+			    var myChart = new Chart( ctx, {
+			        type: 'bar',
+			        data: {
+			            labels: [ , , , , , ,  ],
+			            datasets: [
+			                {
+			                    label: "매출액",
+			                    data: [ , , , , , ,  ],
+			                    borderColor: "rgba(0, 194, 146, 0.9)",
+			                    borderWidth: "0",
+			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+			                            },
+			                    ]
+			        },
+			        options: {
+			            scales: {
+			                yAxes: [{
+			                    ticks: {
+			                       min:0,
+			                        max:1000,
+			                        stepSize: 100
+			                    }
+			                   }]
+			            }
+			        }
+			    } );
+
+    </script>
+
+
+
+
+
+
+
 			<!-- 					여기부터 진향이가 만든 로그인폼 -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -445,6 +380,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
+
 						<div class="modal-body">
 							<form action="loginProc.member" id="form" method="post">
 								<div class="form-group">
@@ -458,9 +394,8 @@
 										placeholder="비밀번호 입력하시오" required name="loginpw">
 								</div>
 								<div class="modal-footer">
-									<div id="remember">
-										<input type="checkbox">자동로그인
-									</div>
+									<button type="button" class="btn btn-primary" type="button"
+										id="reinputpw">비밀번호찾기</button>
 									<button type="button" class="btn btn-primary" type="button"
 										id="joinMem">회원가입</button>
 									<button type="button" class="btn btn-primary" id="login">login</button>
@@ -468,19 +403,27 @@
 										data-dismiss="modal">Close</button>
 								</div>
 							</form>
+
 						</div>
 					</div>
 				</div>
 			</div>
+
+
 			<script>
-                            $("#joinMem").on("click",function() {
-                                location.href = "page?url=WEB-INF/joinMem.jsp";
-                            })
-                            document.getElementById("login").onclick = function() {
-                                document.getElementById("form").submit();
-                            }
-                            // 									로그인 버튼과 회원가입 버튼의 script
-                        </script>
+									$("#reinputpw").on("click",function(){
+									location.href = "page?url=WEB-INF/modifypassword.jsp";
+									})
+
+									$("#joinMem").on("click",function() {
+									location.href = "page?url=WEB-INF/joinMem.jsp";
+									})
+									document.getElementById("login").onclick = function() {
+									document.getElementById("form").submit();
+									}
+									// 									로그인 버튼과 회원가입 버튼의 script
+	</script>
+
 
 			<!-- 						진향이 로그인폼끝 -->
 			<!-- 								진향이 마이페이지 폼 -->
@@ -532,6 +475,11 @@
 													<b>잔여포인트</b>
 													<p>${user.point}</p>
 												</div>
+												<div>
+													<b>주소</b>
+													<p>${user.address1 }</p>
+													<p>${user.address2 }</p>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -554,66 +502,58 @@
 					</div>
 				</div>
 			</div>
-			
-			<c:forEach var="i" items="${seat }">
-				<script>
-					if(${i.onOff }==1){
-						$('#seat${i.seatnumber}').css('background-color','red');
-						$("#seat${i.seatnumber} h4").append("${i.id }");
-													
-					}		
-				</script>
-			</c:forEach>
-		
 
 
 
 			<script>
-					
+   
+   
+   $("#logoutbtn1")
+   .on(
+         "click",
+         function() {
+            location.href = "logoutProc.member";
+         })
 
-                            $("#logoutbtn1")
-                                .on(
-                                "click",
-                                function() {
-                                    location.href = "logoutProc.member";
-                                })
-
-
-                            $("#updatememberbtn")
-                                .on(
-                                "click",
-                                function() {
+   
+                     $("#updatememberbtn")
+                           .on(
+                                 "click",
+                                 function() {
                                     location.href = "page?url=WEB-INF/ModifyMembers.jsp";
-                                })
-                            $("#deleteMembtn")
-                                .on(
-                                "click",
-                                function() {
+                                 })
+                     $("#deleteMembtn")
+                           .on(
+                                 "click",
+                                 function() {
                                     location.href = "page?url=WEB-INF/deleteMem.jsp";
-                                })
-                            $("#pointPagebtn").on("click", function() {
-                                location.href = "page?url=WEB-INF/pay.jsp";
-                            })
-                        </script>
+                                 })
+                     $("#pointPagebtn").on("click", function() {
+                        location.href = "page?url=WEB-INF/pay.jsp";
+                     })
+                  </script>
 
+			<!-- 진향이 마이페이지 폼끝 -->
 
-			<!-- /.content -->
 
 		</div>
+
+
+		<!-- 컨텐츠 끝 -->
+
 		<div class="clearfix"></div>
 		<!-- Footer -->
 		<footer class="site-footer">
 			<div class="footer-inner bg-white">
 				<div class="row">
-					<div class="col-sm-6">Copyright &copy; 2018 Ela Admin</div>
+					<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
 					<div class="col-sm-6 text-right">
-						Designed by <a href="https://colorlib.com">Colorlib</a>
-						<button type="btn" onclick="send()">gggg</button>
-
+						Designed by <a href="https://colorlib.com">1조</a>
 					</div>
 				</div>
 			</div>
 		</footer>
+
 
 		<script
 			src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -624,39 +564,64 @@
 		<script
 			src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 		<script src="assets/js/main.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/flot-charts@0.8.3/excanvas.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/flot-charts@0.8.3/jquery.flot.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.pie.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.time.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.stack.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.resize.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.crosshair.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/flot.curvedlines@1.1.1/curvedLines.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery.flot.tooltip@0.9.0/js/jquery.flot.tooltip.min.js"></script>
-		<script src="assets/js/init/flot-chart-init.js"></script>
-
-
-		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
 		<script>
-                    var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
-                    webSocket.onopen ;
-                    webSocket.onerror ;
-                    webSocket.onmessage = function(event) {
-                      	 location.reload();
-                    };
-                    var send = function(){
-                    	webSocket.send("hi");
-                    }
-          </script>
-		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
+							
+
+							$("#updatememberbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+											})
+							$("#deleteMembtn")
+									.on(
+											"click",
+											function() {
+												location.href = "page?url=WEB-INF/deleteMem.jsp";
+											})
+							$("#pointPagebtn").on("click", function() {
+								location.href = "page?url=WEB-INF/pay.jsp";
+							})
+						</script>
+
+
+
+		<!-- 진향이 마이페이지 폼끝 -->
+
+
+
+		<!-- 컨텐츠 끝 -->
+
+		<div class="clearfix"></div>
+		<!-- Footer -->
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+		<script src="assets/js/main.js"></script>
+
+
+
+
+
+		<!--    ---------------------------------소켓연결  script--------------------------------- -->
+		<script>
+                    
+          if(${user.id != null } ){
+              var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+                webSocket.onopen = function(event){
+                      webSocket.send("hi");
+                };
+                webSocket.onerror ;
+                    
+                 
+          }
+    </script>
+		<!--    ---------------------------------소켓연결  script--------------------------------- -->
 </body>
 </html>

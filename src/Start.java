@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.amanda.project.Controller.MemberController;
 import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DAO.VisitDAO;
 import com.amanda.project.DAO.everythreehoursDAO;
 import com.amanda.project.DTO.ComDTO;
+
 @WebServlet("/Start")
 public class Start extends HttpServlet {
 	public static int count;
@@ -52,7 +54,7 @@ public class Start extends HttpServlet {
 		List<ComDTO> arr = dao.selectSeat_all();
 			//System.out.println(arr.get(1).getIp());
 		request.getServletContext().setAttribute("seat", arr);
-		
+
 		
 		//--------------ㅡmain 이동 ---------------------------------------	
 		request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);

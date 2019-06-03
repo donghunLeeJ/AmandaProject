@@ -34,20 +34,17 @@ import com.amanda.project.DTO.SendMailDTO;
 public class MemberController extends HttpServlet {
 
 	//로그인한 id와 포인트를 맵에 저장시킴
-	public static HashMap<String,Integer>pointmap = new HashMap();//로그인한 id와 포인트를 맵에 저장시킨다.
-
+	public static HashMap<String,Integer>pointmap = new HashMap();//로그인한 id와 포인트를 map에 저장시킨다.
+	public static HashMap<String,String>useridseat = new HashMap();//로그인하는 순간 id와 사용자가 정한 자리번호를 map에 저장시킨다.
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String cmd = request.getRequestURI().substring(request.getContextPath().length()+1);
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;UTF-8");
-		MemberDAO dao=new MemberDAO();
-
+		MemberDAO dao = new MemberDAO();
 		SendMailDAO sdao = new SendMailDAO();
-
 		ComDAO cDao = new ComDAO();
-
-
 
 		switch(cmd) {
 
@@ -59,6 +56,7 @@ public class MemberController extends HttpServlet {
 			int login;
 			try {
 				login = dao.checklogin(loginid, dao.testSHA256(loginpw));
+
 	if(login==1) {
 					if(loginid.equals("admin"))  //관리자인 경우 admincharcontroller로 이동후 main접속 하기
 					{
@@ -67,14 +65,13 @@ public class MemberController extends HttpServlet {
 						rd.forward(request, response);					
 					}
 					else {
+
 					MemberDTO user = dao.select_user(loginid);
-
 					//pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
-					pointmap.put(loginid, user.getPoint());	
-
-					//pointmap에 담긴 point값을 세션에 저장시킨다.(이후 페이지가 이동할 때마다 세션을 이렇게 초기화시켜야 하는데 아직 구현 못했음)
-					request.setAttribute("login", login);
-					request.getSession().setAttribute("point", pointmap.get(loginid));										
+					pointmap.put(loginid, user.getPoint());					
+									
+				
+					request.setAttribute("login", login);													
 					request.getSession().setAttribute("user", dao.select_user(loginid));
 
 					//로그인한 순간 사용자의 포인트를 1초마다 1씩 감소시키는 스레드(timertask)를 생성				
@@ -103,18 +100,28 @@ public class MemberController extends HttpServlet {
 					//각각 timertask클래스 변수 , 스레드가 작동하기까지 대기 시간,반복 주기를 나타냄
 					//(반복주기에서 1000은 1초와 같다.)
 					time.schedule(timertask,1,1000);
-					String ip = request.getRemoteAddr();			
+				
+					//String ip = "192.168.60.27";
+				   String ip = request.getRemoteAddr();			
 					System.out.println(ip);
 
 					if(cDao.seatOn(ip)>0) {
 						ComDTO cDto = cDao.seatNum_get(ip);
 						System.out.println(cDto.getOnOff());
+
+								
+						//useridseat에 로그인한 사용자의 id(key)를 기준으로 자리번호를 담는다.
+						//(이는 나중에 seat페이지에서 key값과 value값으로 사용된다.)
+						useridseat.put(loginid, cDto.getSeatNum());	
+						request.getServletContext().setAttribute("UserSeatNum", useridseat);				 	
+
+
 						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
 					}
-					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
-					rd.forward(request, response);							
-					}
 					
+					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/loginProc.jsp");
+					rd.forward(request, response);							
+
 
 				}else if(login == -1){
 
@@ -220,20 +227,25 @@ public class MemberController extends HttpServlet {
 
 			try {
 
-
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 				String id=dto.getId();
 
 				//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
 				dao.PointUpdate(pointmap.get(id), id);		
 
-				cDao.seatOff(request.getRemoteAddr());	
+				cDao.seatOff(request.getRemoteAddr());
+				//cDao.seatOff("192.168.60.27");
+				cDao.resetId(request.getRemoteAddr());
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
-
-				//로그아웃하는 순간 해시맵에 담긴 모든 값들을 리셋시킨다.
+			
+				//로그아웃하는 순간 hashmap에 담긴 로그아웃한 사용자 데이터를 리셋시킨다.
 				pointmap.remove(id);
-
+				useridseat.remove(id);
+								
+			  //remove연산으로 인해 로그아웃한 사용자의 자리가 비었으므로 다시 useridseat를 세팅해 준다.
+				request.getServletContext().setAttribute("UserSeatNum", useridseat);
+					
 				request.getSession().invalidate();		
 				request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
 
@@ -351,11 +363,8 @@ public class MemberController extends HttpServlet {
 
 			}
 
-
-
 		}
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
