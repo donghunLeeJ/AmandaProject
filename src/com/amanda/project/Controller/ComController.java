@@ -31,8 +31,26 @@ public class ComController extends HttpServlet {
 		 	
 	    	int userpoint = MemberController.pointmap.get(id);   	
 	    	pw.print(userpoint); //로그인한 유저가 가진 남은 포인트를 출력시킨다.   	
-	    	   	        	
-	    }	    	
+	    	   	        	    	
+	    }else if(command.equals("/UsersTime.com")){
+	    	
+	    	//seat페이지에서만 사용하는 컨트롤러
+	    	//먼저 seat페이지에서 각각 로그인한 사용자의 id를 받아오면(ajax)
+	    	//그 id를 key값으로 사용하는 pointmap에서 각 사용자당 남은 포인트를 뽑아올 수 있다.
+	    	String userid = request.getParameter("userid");  
+	    	
+	    	if(MemberController.pointmap.get(userid) == null){
+	    		 
+		    	pw.print(-1);//만일 어떤 사용자가 갑자기 로그아웃을 해서 map에 데이터가 사라졌을 경우 seat.jsp에 -1을 보내서 반복을 중지시킨다.  
+		    	
+	    	}else {
+	    		
+	    		//정상적으로 pointmap에 로그인한 사용자의 데이터가 남아있다면 그 사용자의 포인트를 seat에 보낸다.
+	    	  	int userpoint = MemberController.pointmap.get(userid);   	
+		    	pw.print(userpoint);  
+	    		
+	    	}
+	    }    
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

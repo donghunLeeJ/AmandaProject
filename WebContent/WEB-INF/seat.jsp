@@ -78,9 +78,12 @@
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
-               <li class="menu-item-has-children dropdown"><a
+              
+                     <li id=menu class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/manu.jsp"> <i
                      class="menu-icon fa fa-table"></i>메뉴
+               </a></li>
+              
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
@@ -657,60 +660,118 @@
                     webSocket.onmessage = function(event) {
                       	 location.reload();
                     };
-                    var send = function(){
-                    	webSocket.send("hi");
-                    }
+                  
           </script>
 		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
      
+     
+     
+     
+     
    		  <c:forEach var="i" items="${seat }">
 				<script>
-					if(${i.onOff }==1){
-						$('#seat${i.seatNum}').css('background-color','red');}										
+				if(${i.onOff }==1){
+				$('#seat${i.seatNum}').css('background-color','red');
+				//$("#seat${i.seatNum} h4").append("${i.id }");	
+				}										
 				</script>
 			</c:forEach>
      
      
-  <script>
+        
+ <!--hashmap 사용 예시 -->    
+  <c:forEach var="i" items="${UserSeatNum}"> 
+       
+ <script>   
+ 
+  //여기가 유저 각각의 id와 시간을 따로 보여주기 위한 로직
+  //1.먼저 서버의 hashmap useridseat에 저장된 각 유저의 id(key값)와 자리(value)값을 알아야 하며
+  //2.SeatTime함수의 갯수는 현재 로그인 중인 유저의 수만큼 있어야 하고 함수명이 서로 달라야 한다(여기선 자리번호로 구별했음)
+  
+  //만일 seat의 자리번호와 useridseat에서 뽑아온 자리번호가 서로 같다면?
+  if($("#seat${i.value}>h4").text() == ${i.value}){
+		
+ 	 function SeatTime${i.value}(){//같은 이름의 함수가 생겨선 안되므로 자리번호를 함수명 뒤에 달아주었음  
+ 		   	 	 
+ 		 $.ajax({  
+ 		    	 
+ 		         url: 'UsersTime.com',
+ 		         type: 'POST',
+ 		         
+ 		       //pointmap에 담긴 로그인한 사용자 각각의 포인트에 접근하기 위해 id(useridseat의 key값)를 UsersTime.com컨트롤러로 보낸다.
+ 		         data:{userid:'${i.key}'}
+ 		          
+ 		 }).done(function(point){
+ 			     	   
+ 		      m = (Math.floor(point/60)) + "분 "; 
+ 		      var msg = "<font color='green'>" + m +"</font>";
+ 		         
+ 		 $("#seat${i.value}>h4").html("${i.key}님의 남은 시간 :" + msg);//i.key는 자리별로 로그인한 유저id임	
+ 		 				 	
+ 		 //만일 사용자의 포인트가 다 떨어졌을 경우 반복을 중지시키고 자리색깔을 본래의 색깔로 바꾼다.
+ 		  if(point == 0){
+ 			 		 
+ 		 $("#seat${i.value}").css('background-color','white'); 
+ 		 $("#seat${i.value}>h4").html("${i.value} <br> <br>");	    
+ 		  clearInterval(tid);
+ 		   
+ 		//만일 어떤 사용자가 포인트도 다 사용하지 않았는데 갑자기 로그아웃할 경우 반복을 중지시키고 자리색깔을 본래의 색깔로 바꾼다.
+ 		 }else if(point == -1){
+ 			 
+ 			 $("#seat${i.value}").css('background-color','white'); 
+ 	 		 $("#seat${i.value}>h4").html("${i.value} <br> <br>");	    
+ 	 		  clearInterval(tid);			 
+ 		 } 
+	 				 			 	
+ 		})
+ 		
+ 	  }	   			
+ 	 
+ 	   setTimeout(SeatTime${i.value}());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
+ 	   function TimerStart(){ tid=setInterval('SeatTime${i.value}()',1000) };
+ 	   TimerStart();	
+ }
+		
+</script>							
+</c:forEach>
+
+
+
+  <c:choose> 
+    <c:when test="${user != null }">
+     <script>
+	
+	  //5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수	  
+			function msg_time(){  
+ 		   
+ 		   $.ajax({  
+ 		    	 
+ 		         url: 'usertime.com',
+ 		         type: 'POST'
+ 		          
+ 		 }).done(function(point){
+ 			 		       	   	 			 	
+ 		      if (point == 300){      
+ 		    	  
+ 		         alert("선불시간이 5분 남았습니다.");
+ 		         
+ 		      }else if(point == 0){
+ 		    	  
+ 		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+ 		    	  location.href = "logoutProc.member";
+ 		    	  clearInterval(tid); 		    	  
+ 		      }   
+ 		 });	   	     
+ 	   }	   			
+ 	 
+ 	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
+ 	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
+ 	   TimerStart();	
+			 
+   </script>    
+  </c:when>
+ </c:choose> 
      
-  //만일 자리번호랑 사용자가 정한 자리번호 값이 서로 같다면?
-     if($("#seat${UserSeatNum}>h4").text() == ${UserSeatNum}){
-    		
-    	 function msg_time(){  
-    		   
-    		   $.ajax({  
-    		    	 
-    		         url: 'usertime.com',
-    		         type: 'POST'
-    		          
-    		 }).done(function(point){
-    			 		       	   
-    		      m = (Math.floor(point/60)) + "분 "; 
-    		      var msg = "<font color='green'>" + m +"</font>";
-    		         
-    		 	$("#seat${UserSeatNum}>h4").html("${user.name }님의 남은 시간 :" + msg);	
-    		 			 	
-    		      if (point == 300){      
-    		    	  
-    		         alert("선불시간이 5분 남았습니다.");
-    		         
-    		      }else if(point == 0){
-    		    	  
-    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
-    		    	  location.href = "logoutProc.member";
-    		    	  clearInterval(tid); 
-    		    	  
-    		      }   
-    		 });	   	     
-    	   }	   			
-    	 
-    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
-    	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
-    	   TimerStart();	
-    }
-         
-     </script>
-     
-   
+  
 </body>
 </html>

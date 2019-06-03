@@ -565,13 +565,14 @@
 <script>
 	var id = "${user.id }";
 	var paid_amount = 1;
+	var namd = null;
 	$("#pay1000").on("click",function(){
 	IMP.init('imp96545220'); 
 	IMP.request_pay({
 	    pg : 'inicis', // version 1.1.0부터 지원.
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
+	    name : 'AmandaPC 1000원 충전',
 	    amount : 1000,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
@@ -583,12 +584,16 @@
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
 	        paid_amount = rsp.paid_amount;
+	        name = rsp.name;
+	        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
+	        
+	      	
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	   
 	});
 	})
 	$("#pay2000").on("click",function(){
@@ -597,7 +602,7 @@
 	    pg : 'inicis', // version 1.1.0부터 지원.
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
+	    name : 'AmandaPC 2000원 충전',
 	    amount : 2000,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
@@ -609,12 +614,14 @@
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
 	        paid_amount = rsp.paid_amount;
+	        name = rsp.name;
+	        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	   
 	});
 	})
 	$("#pay3000").on("click",function(){
@@ -623,7 +630,7 @@
 	    pg : 'inicis', // version 1.1.0부터 지원.
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
+	    name : 'AmandaPC 3000원 충전',
 	    amount : 3000,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
@@ -635,21 +642,25 @@
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
 	        paid_amount = rsp.paid_amount;
+	        name = rsp.name;
+	        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	   
 	});
 	})
+	
+	
 	$("#pay5000").on("click",function(){
 	IMP.init('imp96545220'); 
 	IMP.request_pay({
 	    pg : 'inicis', // version 1.1.0부터 지원.
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
+	    name : 'AmandaPC 5000원 충전',
 	    amount : 5000,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
@@ -661,12 +672,14 @@
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
 	        paid_amount = rsp.paid_amount;
+	        name = rsp.name;
+	        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	    
 	});
 	})
 	$("#pay10000").on("click",function(){
@@ -675,7 +688,7 @@
 	    pg : 'inicis', // version 1.1.0부터 지원.
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
+	    name : 'AmandaPC 10000원 충전',
 	    amount : 10000,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
@@ -687,12 +700,14 @@
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
 	        paid_amount = rsp.paid_amount;
+	        name = rsp.name;
+	        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	   
 	});
 	})
 	$("#pay20000").on("click",function(){
@@ -701,7 +716,7 @@
 	    pg : 'inicis', // version 1.1.0부터 지원.
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'AmandaPC',
+	    name : 'AmandaPC 20000원 충전',
 	    amount : 20000,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '구매자이름',
@@ -713,12 +728,14 @@
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
 	        paid_amount = rsp.paid_amount;
+	        name = rsp.name;
+	        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
 	    alert(msg);
-	    location.href = "time.pay?id="+id+"&amount="+paid_amount;
+	    
 	});
 	})
 	
