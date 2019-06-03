@@ -312,10 +312,30 @@ var chart = new Chart(ctx, {
 
 });
 </script>
+<script> /*메시지  */
+ var webSocket = new WebSocket('ws://192.168.60.29:8080/Mission/broadcasting');
+									    webSocket.onerror = function(event) {
+     									// onError(event)
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  										if("${user.name}"=="관리자"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; 
+       											var contents = msg[1];
+       											 var who2=msg[2];
+       											
+     								 if(who!="관리자"&&who2=="admin"){
+    								window.open("reply.message?who="+who+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 }
+    											}
+  											
+  										  }		 
 
-
-
-
+</script>
 
 
 			<!-- 					여기부터 진향이가 만든 로그인폼 -->
@@ -559,19 +579,19 @@ var chart = new Chart(ctx, {
 
 
 
-		<!--    ---------------------------------소켓연결  script--------------------------------- -->
-		<script>
+<!-- 		<!--    ---------------------------------소켓연결  script--------------------------------- --> -->
+<!-- 		<script> -->
                     
-          if(${user.id != null } ){
-              var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
-                webSocket.onopen = function(event){
-                      webSocket.send("hi");
-                };
-                webSocket.onerror ;
+//           if(${user.id != null } ){
+//               var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+//                 webSocket.onopen = function(event){
+//                       webSocket.send("hi");
+//                 };
+//                 webSocket.onerror ;
                     
                  
-          }
-    </script>
+//           }
+<!--     </script> -->
 		<!--    ---------------------------------소켓연결  script--------------------------------- -->
 </body>
 </html>

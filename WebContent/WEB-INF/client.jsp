@@ -27,7 +27,7 @@
 </body>
     <script type="text/javascript">
         var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('ws://192.168.60.29:8080/Fork/broadcasting');
+        var webSocket = new WebSocket('ws://192.168.60.29:8080/Mission/broadcasting');
         var inputMessage = document.getElementById('inputMessage');
     webSocket.onerror = function(event) {
       onError(event)
