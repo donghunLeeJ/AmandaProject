@@ -10,18 +10,7 @@ import com.amanda.project.DTO.MemberDTO;
 import com.amanda.project.DTO.VisitDTO;
 import com.amanda.start.Start;
 //최근 5일 방문자 수 insert하기 
-public class VisitDAO extends TimerTask{
-	public void run() {
-		try {
-			int result=Vtime(new VisitDTO(Start.count));
-		System.out.println("ok");
-		Start.count=0;
-		System.out.println("dao실행"+result);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+public class VisitDAO {
 		private Connection connect() throws Exception{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -32,13 +21,11 @@ public class VisitDAO extends TimerTask{
 			return con;
 		}
 
-		public int Vtime(VisitDTO dto) throws Exception{				
-			String sql = "insert into Visit values(default,?)";
+		public int insertVisit(){				
+			String sql = "insert into Visit values(default,1)";
 			try( Connection con = this.connect();	
 					PreparedStatement pstat = con.prepareStatement(sql);
 					){
-				pstat.setInt(1, dto.getVcount());
-				
 				int result = pstat.executeUpdate();
 				con.commit();
 				return result;
@@ -47,6 +34,54 @@ public class VisitDAO extends TimerTask{
 				return -1;
 			}
 		}
-	
+		public int totalVisit(){				
+			String sql = "select count(vcount) from visit";
+			try( Connection con = this.connect();	
+					PreparedStatement pstat = con.prepareStatement(sql);
+					){
+				ResultSet rs = pstat.executeQuery();
+				rs.next();
+				int result = rs.getInt(1);
+				return result;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return -1;
+			}
+		}
+		public int weeklyVisit(int num){				
+			String sql = "select sum(vcount) from visit where today between trunc(sysdate-?) and sysdate-?";
+			try( Connection con = this.connect();	
+					PreparedStatement pstat = con.prepareStatement(sql);
+					){
+				pstat.setInt(1, num);
+				pstat.setInt(2, num);
+				ResultSet rs = pstat.executeQuery();
+				
+				rs.next();
+				int result = rs.getInt(1);
+				
+				return result;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return -1;
+			}
+		}
+		public int timelyVisit(int num){				
+			String sql = "select sum(vcount) from visit where today between sysdate-?-1/24 and sysdate-?/24";
+			try( Connection con = this.connect();	
+					PreparedStatement pstat = con.prepareStatement(sql);
+					){
+				pstat.setInt(1, num);
+				pstat.setInt(2, num);
+				ResultSet rs = pstat.executeQuery();
+				
+				rs.next();
+				int result = rs.getInt(1);
+				return result;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return -1;
+			}
+		}
 	
 }

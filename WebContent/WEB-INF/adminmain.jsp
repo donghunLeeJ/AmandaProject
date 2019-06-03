@@ -88,7 +88,7 @@
 							class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a
-						href="Board.board?currentPage=1"> <i
+						href="member.manage"> <i
 							class="menu-icon fa fa-th"></i>고객관리
 					</a></li>
 					
@@ -121,17 +121,22 @@
 					<div class="card-body">
 						<h4 class="mb-3">오늘의 누적 방문자수</h4>
 						<canvas id="myChart"></canvas>
+						<h4 class="mb-3">매출 조회</h4>
+						<select class="selectpicker" id="selected">
+							<optgroup label="매출액">
+								<option>월 별 매출액</option>
+								<option>주간 매출액</option>
+							</optgroup>
+							<optgroup label="종류별">
+								<option>메뉴별 매출액 </option>
+								<option>회원별 매출액</option>
+							</optgroup>
+						</select>
+						<button class="btn btn-primary" id="searchAjax"> 조회 </button>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 ">
-				<div class="card">
-					<div class="card-body">
-						<h4 class="mb-3">3시간전 방문자수</h4>
-						<canvas id="myChart2"></canvas>
-					</div>
-				</div>
-			</div>
+			
 			<div class="col-lg-6">
 				<div class="card">
 					<div class="card-body">
@@ -556,22 +561,5 @@ var chart = new Chart(ctx, {
 		<script src="assets/js/main.js"></script>
 
 
-
-
-
-		<!--    ---------------------------------소켓연결  script--------------------------------- -->
-		<script>
-                    
-          if(${user.id != null } ){
-              var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
-                webSocket.onopen = function(event){
-                      webSocket.send("hi");
-                };
-                webSocket.onerror ;
-                    
-                 
-          }
-    </script>
-		<!--    ---------------------------------소켓연결  script--------------------------------- -->
 </body>
 </html>

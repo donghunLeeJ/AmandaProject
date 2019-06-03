@@ -27,6 +27,7 @@ public class MemberManageController extends HttpServlet {
 			
 			
 				request.setAttribute("result", dao.show_member());
+				request.setAttribute("blresult",dao.show_blacklist());
 				request.getRequestDispatcher("WEB-INF/membermanage.jsp").forward(request, response);
 		}
 		
@@ -38,7 +39,7 @@ public class MemberManageController extends HttpServlet {
 			dao.addblacklist(reason, num);//member테이블 blackcheck,blackreason 컬럼 변경
 			
 			request.setAttribute("blresult",dao.show_blacklist());//블랙리스트 올라간 사람 보여주기
-			request.getRequestDispatcher("WEB-INF/membermanage/jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/membermanage.jsp").forward(request, response);
 			
 		}
 	}

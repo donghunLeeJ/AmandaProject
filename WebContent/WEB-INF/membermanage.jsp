@@ -151,17 +151,7 @@
 										<i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
 									</button>
 									<div class="dropdown-menu" aria-labelledby="notification">
-										<p class="red">You have 3 Notification</p>
-										<a class="dropdown-item media" href="#"> <i
-											class="fa fa-check"></i>
-											<p>Server #1 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-info"></i>
-											<p>Server #2 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-warning"></i>
-											<p>Server #3 overloaded.</p>
-										</a>
+							
 									</div>
 								</div>
 
@@ -171,43 +161,7 @@
 										aria-expanded="false">
 										<i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
 									</button>
-									<div class="dropdown-menu" aria-labelledby="message">
-										<p class="red">You have 4 Mails</p>
-										<a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/1.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jonathan Smith</span> <span
-													class="time float-right">Just now</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/2.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jack Sanders</span> <span
-													class="time float-right">5 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/3.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Cheryl Wheeler</span> <span
-													class="time float-right">10 minutes ago</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/4.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Rachel Santos</span> <span
-													class="time float-right">15 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a>
-									</div>
-								</div>
+							
 							</div>
 							<!--  mypage 사람 사진-->
 							<div class="user-area  float-right">
@@ -527,282 +481,45 @@
 		<script
 			src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 		<script src="assets/js/main.js"></script>
-		<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
-			type="text/javascript"></script>
-		<script type="text/javascript"
-			src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-		<script>
-			$("#updatememberbtn").on("click", function() {
-				location.href = "page?url=WEB-INF/ModifyMembers.jsp";
-			})
-			$("#deleteMembtn").on("click", function() {
-				location.href = "page?url=WEB-INF/deleteMem.jsp";
-			})
-			$("#pointPagebtn").on("click", function() {
-				location.href = "page?url=WEB-INF/pay.jsp";
-			})
-		</script>
-
-		<script>
-			var id = "${user.id }";
-			var paid_amount = 1;
-			$("#pay1000")
-					.on(
-							"click",
-							function() {
-								IMP.init('imp96545220');
-								IMP
-										.request_pay(
-												{
-													pg : 'inicis', // version 1.1.0부터 지원.
-													pay_method : 'card',
-													merchant_uid : 'merchant_'
-															+ new Date()
-																	.getTime(),
-													name : 'AmandaPC',
-													amount : 1000,
-													buyer_email : 'iamport@siot.do',
-													buyer_name : '구매자이름',
-													buyer_tel : '010-1234-5678',
-													buyer_addr : '서울특별시 강남구 삼성동',
-													buyer_postcode : '123-456',
-													m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-												},
-												function(rsp) {
-													if (rsp.success) {
-														var msg = '결제가 완료되었습니다.';
-														paid_amount = rsp.paid_amount;
-													} else {
-														var msg = '결제에 실패하였습니다.';
-														msg += '에러내용 : '
-																+ rsp.error_msg;
-													}
-													alert(msg);
-													location.href = "time.pay?id="
-															+ id
-															+ "&amount="
-															+ paid_amount;
-												});
-							})
-			$("#pay2000")
-					.on(
-							"click",
-							function() {
-								IMP.init('imp96545220');
-								IMP
-										.request_pay(
-												{
-													pg : 'inicis', // version 1.1.0부터 지원.
-													pay_method : 'card',
-													merchant_uid : 'merchant_'
-															+ new Date()
-																	.getTime(),
-													name : 'AmandaPC',
-													amount : 2000,
-													buyer_email : 'iamport@siot.do',
-													buyer_name : '구매자이름',
-													buyer_tel : '010-1234-5678',
-													buyer_addr : '서울특별시 강남구 삼성동',
-													buyer_postcode : '123-456',
-													m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-												},
-												function(rsp) {
-													if (rsp.success) {
-														var msg = '결제가 완료되었습니다.';
-														paid_amount = rsp.paid_amount;
-													} else {
-														var msg = '결제에 실패하였습니다.';
-														msg += '에러내용 : '
-																+ rsp.error_msg;
-													}
-													alert(msg);
-													location.href = "time.pay?id="
-															+ id
-															+ "&amount="
-															+ paid_amount;
-												});
-							})
-			$("#pay3000")
-					.on(
-							"click",
-							function() {
-								IMP.init('imp96545220');
-								IMP
-										.request_pay(
-												{
-													pg : 'inicis', // version 1.1.0부터 지원.
-													pay_method : 'card',
-													merchant_uid : 'merchant_'
-															+ new Date()
-																	.getTime(),
-													name : 'AmandaPC',
-													amount : 3000,
-													buyer_email : 'iamport@siot.do',
-													buyer_name : '구매자이름',
-													buyer_tel : '010-1234-5678',
-													buyer_addr : '서울특별시 강남구 삼성동',
-													buyer_postcode : '123-456',
-													m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-												},
-												function(rsp) {
-													if (rsp.success) {
-														var msg = '결제가 완료되었습니다.';
-														paid_amount = rsp.paid_amount;
-													} else {
-														var msg = '결제에 실패하였습니다.';
-														msg += '에러내용 : '
-																+ rsp.error_msg;
-													}
-													alert(msg);
-													location.href = "time.pay?id="
-															+ id
-															+ "&amount="
-															+ paid_amount;
-												});
-							})
-			$("#pay5000")
-					.on(
-							"click",
-							function() {
-								IMP.init('imp96545220');
-								IMP
-										.request_pay(
-												{
-													pg : 'inicis', // version 1.1.0부터 지원.
-													pay_method : 'card',
-													merchant_uid : 'merchant_'
-															+ new Date()
-																	.getTime(),
-													name : 'AmandaPC',
-													amount : 5000,
-													buyer_email : 'iamport@siot.do',
-													buyer_name : '구매자이름',
-													buyer_tel : '010-1234-5678',
-													buyer_addr : '서울특별시 강남구 삼성동',
-													buyer_postcode : '123-456',
-													m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-												},
-												function(rsp) {
-													if (rsp.success) {
-														var msg = '결제가 완료되었습니다.';
-														paid_amount = rsp.paid_amount;
-													} else {
-														var msg = '결제에 실패하였습니다.';
-														msg += '에러내용 : '
-																+ rsp.error_msg;
-													}
-													alert(msg);
-													location.href = "time.pay?id="
-															+ id
-															+ "&amount="
-															+ paid_amount;
-												});
-							})
-			$("#pay10000")
-					.on(
-							"click",
-							function() {
-								IMP.init('imp96545220');
-								IMP
-										.request_pay(
-												{
-													pg : 'inicis', // version 1.1.0부터 지원.
-													pay_method : 'card',
-													merchant_uid : 'merchant_'
-															+ new Date()
-																	.getTime(),
-													name : 'AmandaPC',
-													amount : 10000,
-													buyer_email : 'iamport@siot.do',
-													buyer_name : '구매자이름',
-													buyer_tel : '010-1234-5678',
-													buyer_addr : '서울특별시 강남구 삼성동',
-													buyer_postcode : '123-456',
-													m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-												},
-												function(rsp) {
-													if (rsp.success) {
-														var msg = '결제가 완료되었습니다.';
-														paid_amount = rsp.paid_amount;
-													} else {
-														var msg = '결제에 실패하였습니다.';
-														msg += '에러내용 : '
-																+ rsp.error_msg;
-													}
-													alert(msg);
-													location.href = "time.pay?id="
-															+ id
-															+ "&amount="
-															+ paid_amount;
-												});
-							})
-			$("#pay20000")
-					.on(
-							"click",
-							function() {
-								IMP.init('imp96545220');
-								IMP
-										.request_pay(
-												{
-													pg : 'inicis', // version 1.1.0부터 지원.
-													pay_method : 'card',
-													merchant_uid : 'merchant_'
-															+ new Date()
-																	.getTime(),
-													name : 'AmandaPC',
-													amount : 20000,
-													buyer_email : 'iamport@siot.do',
-													buyer_name : '구매자이름',
-													buyer_tel : '010-1234-5678',
-													buyer_addr : '서울특별시 강남구 삼성동',
-													buyer_postcode : '123-456',
-													m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-												},
-												function(rsp) {
-													if (rsp.success) {
-														var msg = '결제가 완료되었습니다.';
-														paid_amount = rsp.paid_amount;
-													} else {
-														var msg = '결제에 실패하였습니다.';
-														msg += '에러내용 : '
-																+ rsp.error_msg;
-													}
-													alert(msg);
-													location.href = "time.pay?id="
-															+ id
-															+ "&amount="
-															+ paid_amount;
-												});
-							})
-
-			//5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수				
-			function msg_time() {
-
-				$.ajax({
-
-					url : 'usertime.com',
-					type : 'POST'
-
-				}).done(function(point) {
-
-					if (point == 300) {
-
-						alert("선불시간이 5분 남았습니다.");
-
-					} else if (point == 0) {
-
-						alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
-						location.href = "logoutProc.member";
-						clearInterval(tid);
-					}
-				});
-			}
-
-			setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
-			function TimerStart() {
-				tid = setInterval('msg_time()', 1000)
-			};
-			TimerStart();
-		</script>
+		
+<%-- 	<c:choose>  --%>
+<%--     <c:when test="${user != null }"> --%>
+<!--       <script> -->
+//  	     function msg_time(){  
+//           $.ajax({             
+//                    url: 'usertime.com', //ComController에 있는 usertime으로 이동함
+//                    type: 'POST'
+                    
+//            }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
+                         
+//               $("#point").html(point);
+                       
+//                 m = (Math.floor(point/60)) + "분 "; 
+//                 var msg = "<font color='red'>" + m +"</font>";
+                
+//                $("#timeout").html(msg);
+                                 
+//                 if (point == 300){    
+                   
+//                    alert("선불시간이 5분 남았습니다.");  
+                   
+//                 }else if(point == 0){
+                   
+//                    alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+//                    location.href = "logoutProc.member";
+//                    clearInterval(tid);       
+//                 }                               
+//            });           
+//           }
+                
+                                 
+//           setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
+//           function TimerStart(){tid=setInterval('msg_time()',1000) };
+//           TimerStart();                          
+            
+<!--    </script>     -->
+<%--   </c:when> --%>
+<%--  </c:choose>                      --%>
+		
 </body>
 </html>

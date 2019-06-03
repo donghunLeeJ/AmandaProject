@@ -230,11 +230,11 @@ public class MemberController extends HttpServlet {
 
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 				String id=dto.getId();
-				int hour = dto.getPoint() - pointmap.get(id);
+//				int hour = dto.getPoint() - pointmap.get(id);
 				//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
 				
-				dao.PointUpdate(pointmap.get(id), id);		
-				dao.usehourUpdate(hour, id); 
+//				dao.PointUpdate(pointmap.get(id), id);		
+//				dao.usehourUpdate(hour, id); 
 				cDao.seatOff(request.getRemoteAddr());
 				//cDao.seatOff("192.168.60.27");
 				cDao.resetId(request.getRemoteAddr());
