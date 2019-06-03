@@ -63,8 +63,15 @@ public class MemberController extends HttpServlet {
 
 
 				if(login==1) {
-
-
+					if(loginid.equals("admin"))  //관리자인 경우 admincharcontroller로 이동후 main접속 하기
+					{
+						
+						RequestDispatcher rd=request.getRequestDispatcher("adminchart.visit");
+						rd.forward(request, response);					
+						
+						
+					}
+					else {
 					MemberDTO user = dao.select_user(loginid);
 
 					//pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
@@ -111,8 +118,8 @@ public class MemberController extends HttpServlet {
 					}
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 					rd.forward(request, response);							
-
-
+					}
+					
 
 				}else if(login == -1){
 
