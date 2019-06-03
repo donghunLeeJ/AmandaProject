@@ -63,8 +63,9 @@
 .card-text {
 	text-align: left;
 }
-#div2{
-	text-align:center;
+
+#div2 {
+	text-align: center;
 }
 </style>
 </head>
@@ -268,17 +269,17 @@
 							</thead>
 							<tbody>
 								<c:forEach var="dto" items="${result }">
-								<form action="toblack.manage" id="memberinfo">
-								<tr>
-									<th name="memnum">${dto.mem_seq }</th>
-									<td name="memname">${dto.name }</td>
-									<td name="memid">${dto.id }</td>
-									<td name="memphone">${dto.phone }</td>
-									<td name="memusehour">${dto.usehour }</td>
-									<td><button type="button" class="btn btn-dark"
-									data-toggle="modal" data-target="#resonModal" id="movebtn">블랙</button></td>
-								</tr>
-								</form>
+									<form action="toblack.manage" id="memberinfo">
+										<tr>
+											<th id="memnum">${dto.mem_seq }</th>
+											<td id="memname">${dto.name }</td>
+											<td id="memid">${dto.id }</td>
+											<td id="memphone">${dto.phone }</td>
+											<td id="memusehour">${dto.usehour }</td>
+											<td><button type="button" class="btn btn-dark movebtn"
+													data-toggle="modal" data-target="#resonModal">블랙</button></td>
+										</tr>
+									</form>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -293,17 +294,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th>1</th>
-									<td>박상준</td>
-									<td>바보</td>
-								</tr>
+								<c:forEach var="bl" items="${blresult }">
+									<tr>
+										<th>${bl.mem_seq}</th>
+										<td>${bl.name }</td>
+										<td>${bl.blackreason }</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 			</div>
+
 			<div class="modal fade" id="resonModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -317,20 +321,16 @@
 						</div>
 
 						<div class="modal-body">
-							<form action="toblack.manage" id="reasonform" method="post">
+							<form action="toblack.manage" class="reasonform" method="post">
 								<div class="form-group">
 									<label for="exampleFormControlInput1">사유</label> <input
 										type="text" class="form-control" id="blreason"
-										placeholder="사유를 입력하세요" required name="blackreson">
-										<input
-										type="text" class="form-control" id="blnum"
-										name="blacknum" value="" readonly>
-										<input
-										type="text" class="form-control" id="blname"
-										name="blackname" value="" readonly>
+										name="blackreson" placeholder="사유를 입력하세요" required> <input
+										type="text" class="form-control" id="blnum" name="blacknum"
+										readonly>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" id="reasonsubmit">확인</button>
+									<button type="button" class="btn btn-primary reasonsubmit">확인</button>
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">취소</button>
 								</div>
@@ -341,12 +341,13 @@
 				</div>
 			</div>
 			<script>
-				$("#reasonsubmit").on("click",function(){
-					document.getElementById("reasonform").submit();
+				$(".reasonsubmit").on("click",function(){
+					$(".reasonform").submit();
 				})
-// 				$("#movebtn").on("click",function(){
-// 					document.getElementById("memberinfo").submit();
-// 				})
+				$(".movebtn").on("click",function(){
+					$("#blnum").val($(this).parent().parent().find("th:nth-child(1)").html());
+		
+				})
 			</script>
 
 

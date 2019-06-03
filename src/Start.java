@@ -20,7 +20,6 @@ public class Start extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ComDAO dao = new ComDAO();
 		List<ComDTO> arr = dao.selectSeat_all();
-//		System.out.println(arr.get(1).getIp());
 		request.getServletContext().setAttribute("seat", arr);
 		request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		

@@ -129,7 +129,7 @@ public class MemberDAO {
 	/** 회원가입 메서드*/
 
 	public int joinmember(MemberDTO dto) throws Exception{
-		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default,?,?,?,default)";
+		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default,?,?,?,default,default,default)";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -252,7 +252,46 @@ public class MemberDAO {
 		}
 	}
 	
-
+	public int addblacklist(String reason,int num) {
+		String sql = "update member set blackcheck='y', blackreason=? where mem_seq=?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+				pstat.setString(1, reason);
+				pstat.setInt(2, num);
+				
+				int result = pstat.executeUpdate();
+				con.commit();
+				return result;
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public List<MemberDTO> show_blacklist() {
+		List<MemberDTO> list = new ArrayList<>();
+		String sql = "select mem_seq,name,blackreason from member where blackcheck='y'";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			while(rs.next()) {
+				int num = rs.getInt(1);
+				String name = rs.getString(2);
+				String reason = rs.getString(3);
+				MemberDTO dto = new MemberDTO(num,name,reason);
+				list.add(dto);
+			}
+			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
 
 

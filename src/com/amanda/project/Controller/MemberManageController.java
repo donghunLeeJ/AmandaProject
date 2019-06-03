@@ -14,12 +14,17 @@ import com.amanda.project.DAO.MemberDAO;
 public class MemberManageController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf8");
+		response.setCharacterEncoding("utf8");
+		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		
+		MemberDAO dao = new MemberDAO();
+		
 		if(command.equals("/member.manage")) {
-			MemberDAO dao = new MemberDAO();
+			
 			
 				request.setAttribute("result", dao.show_member());
 				request.getRequestDispatcher("WEB-INF/membermanage.jsp").forward(request, response);
@@ -27,13 +32,14 @@ public class MemberManageController extends HttpServlet {
 		
 		else if(command.equals("/toblack.manage")){
 			
-			int num = Integer.parseInt(request.getParameter("memnum"));
-			String name = request.getParameter("memname");
-			String id = request.getParameter("memid");
-			String phone = request.getParameter("memphone");
-			int usehour = Integer.parseInt(request.getParameter("memusehour"));
+			String reason = request.getParameter("blackreson");//블랙 사유
+			int num = Integer.parseInt(request.getParameter("blacknum"));//블랙하는 회원번호
 			
-			System.out.println(num + " : " + name + " : " + id + " : " + phone + " : " + usehour);
+			dao.addblacklist(reason, num);//member테이블 blackcheck,blackreason 컬럼 변경
+			
+			request.setAttribute("blresult",dao.show_blacklist());//블랙리스트 올라간 사람 보여주기
+			request.getRequestDispatcher("WEB-INF/membermanage/jsp").forward(request, response);
+			
 		}
 	}
 

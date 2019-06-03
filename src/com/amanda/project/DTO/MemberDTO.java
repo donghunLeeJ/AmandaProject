@@ -13,6 +13,8 @@ public class MemberDTO {
 	private String address1;
 	private String address2;
 	private int usehour;
+	private String blackcheck;
+	private String blackreason;
 	
 	public MemberDTO() {}
 	
@@ -24,6 +26,14 @@ public class MemberDTO {
 		this.name = name;
 		this.phone = phone;
 		this.usehour = usehour;
+	}
+
+	
+	public MemberDTO(int mem_seq, String name, String blackreason) {
+		super();
+		this.mem_seq = mem_seq;
+		this.name = name;
+		this.blackreason = blackreason;
 	}
 
 
@@ -61,7 +71,7 @@ public class MemberDTO {
 		this.address2 = address2;
 		this.usehour = usehour;
 	}
-
+	
 
 	public MemberDTO(String id, String pw, String email, String phone) {
 		super();
@@ -113,6 +123,27 @@ public class MemberDTO {
 		this.name = name;
 		this.phone = phone;
 		this.usehour = usehour;
+	}
+	
+	
+	public MemberDTO(int mem_seq, String id, String pw, String name, String birth, String email, String phone,
+			int point, String postcode, String address1, String address2, int usehour, String blackcheck,
+			String blackreason) {
+		super();
+		this.mem_seq = mem_seq;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.birth = birth;
+		this.email = email;
+		this.phone = phone;
+		this.point = point;
+		this.postcode = postcode;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.usehour = usehour;
+		this.blackcheck = blackcheck;
+		this.blackreason = blackreason;
 	}
 
 
@@ -191,6 +222,26 @@ public class MemberDTO {
 
 	public void setUsehour(int usehour) {
 		this.usehour = usehour;
+	}
+
+
+	public String getBlackcheck() {
+		return blackcheck;
+	}
+
+
+	public void setBlackcheck(String blackcheck) {
+		this.blackcheck = blackcheck;
+	}
+
+
+	public String getBlackreason() {
+		return blackreason;
+	}
+
+
+	public void setBlackreason(String blackreason) {
+		this.blackreason = blackreason;
 	}
 	
 	
