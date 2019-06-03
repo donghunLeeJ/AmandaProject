@@ -32,7 +32,7 @@ public class ComController extends HttpServlet {
 	    	int userpoint = MemberController.pointmap.get(id);   	
 	    	pw.print(userpoint); //로그인한 유저가 가진 남은 포인트를 출력시킨다.   	
 	    	   	        	    	
-	    }if(command.equals("/UsersTime.com")){
+	    }else if(command.equals("/UsersTime.com")){
 	    	
 	    	//seat페이지에서만 사용하는 컨트롤러
 	    	//먼저 seat페이지에서 각각 로그인한 사용자의 id를 받아오면(ajax)

@@ -99,16 +99,14 @@ public class MemberController extends HttpServlet {
 					if(cDao.seatOn(ip)>0) {
 						ComDTO cDto = cDao.seatNum_get(ip);
 						System.out.println(cDto.getOnOff());
-//<<<<<<< master
+
 								
 						//useridseat에 로그인한 사용자의 id(key)를 기준으로 자리번호를 담는다.
 						//(이는 나중에 seat페이지에서 key값과 value값으로 사용된다.)
 						useridseat.put(loginid, cDto.getSeatNum());	
 						request.getServletContext().setAttribute("UserSeatNum", useridseat);				 	
-//=======//해결 못함
-						cDao.setId(loginid, ip);
-						request.getServletContext().setAttribute("UserSeatNum", cDto.getSeatNum());//로그인한 사용자의 자리번호를 담는다(자기 자리의 남은 시간을 표현할 때 사용함)	
-//>>>>>>> master
+
+
 						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
 					}
 					

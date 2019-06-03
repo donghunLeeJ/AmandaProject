@@ -664,12 +664,16 @@
           </script>
 		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
      
+     
+     
+     
+     
    		  <c:forEach var="i" items="${seat }">
 				<script>
-					if(${i.onOff }==1){
-						$('#seat${i.seatNum}').css('background-color','red');
-						$("#seat${i.seatNum} h4").append("${i.id }");	
-					}										
+				if(${i.onOff }==1){
+				$('#seat${i.seatNum}').css('background-color','red');
+				//$("#seat${i.seatNum} h4").append("${i.id }");	
+				}										
 				</script>
 			</c:forEach>
      
@@ -698,7 +702,7 @@
  		         data:{userid:'${i.key}'}
  		          
  		 }).done(function(point){
- 			 		       	   
+ 			     	   
  		      m = (Math.floor(point/60)) + "분 "; 
  		      var msg = "<font color='green'>" + m +"</font>";
  		         

@@ -395,7 +395,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" type="button"
-										id="reinputpw">비밀번호재설정</button>
+										id="reinputpw">비밀번호찾기</button>
 									<button type="button" class="btn btn-primary" type="button"
 										id="joinMem">회원가입</button>
 									<button type="button" class="btn btn-primary" id="login">login</button>
