@@ -59,17 +59,12 @@ public class MemberController extends HttpServlet {
 			int login;
 			try {
 				login = dao.checklogin(loginid, dao.testSHA256(loginpw));
-
-
-
-				if(login==1) {
+	if(login==1) {
 					if(loginid.equals("admin"))  //관리자인 경우 admincharcontroller로 이동후 main접속 하기
 					{
 						
 						RequestDispatcher rd=request.getRequestDispatcher("adminchart.visit");
 						rd.forward(request, response);					
-						
-						
 					}
 					else {
 					MemberDTO user = dao.select_user(loginid);

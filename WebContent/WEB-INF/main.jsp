@@ -597,7 +597,7 @@ $("#timeout").html("${user.name }님의 남은 시간은 <font color='red'>" + m
          <div class="row">
             <div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
             <div class="col-sm-6 text-right">
-               Designed by <a href="https://colorlib.com">1조 ${count}</a>
+               Designed by <a href="https://colorlib.com">1조 </a>
             </div>
          </div>
       </div>
