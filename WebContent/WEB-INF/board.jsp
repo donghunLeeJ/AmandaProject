@@ -330,23 +330,23 @@
 											<th
 												class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2">글
 												번호
-											</td>
+											</th>
 											<th
 												class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1">글
 												제목
-											</td>
+											</th>
 											<th
 												class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성자
 											
-											</td>
+											</th>
 											<th
 												class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성
 												시간
-											</td>
+											</th>
 											<th
 												class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">조회
 												수
-											</td>
+											</th>
 										</tr>
 									</thead>
 									<tbody>
