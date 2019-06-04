@@ -13,11 +13,11 @@
    ${result}
       > 0) {
          alert("메뉴 수정이 완료되었습니다.");
-         location.href = "MenuAdmin.admin";
+         location.href = "select.admin";
 
       } else {
          alert("메뉴 수정에 실패했습니다.");
-         location.href = "MenuAdmin.admin";
+         location.href = "select.admin";
 
       }
    </script>
