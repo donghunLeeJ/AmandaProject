@@ -111,24 +111,22 @@
       <nav class="navbar navbar-expand-sm navbar-default">
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-             <li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
+               <li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+                     class="menu-icon fa fa-laptop"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
                <li class="menu-item-has-children dropdown"><a
-               	    href="select.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-              		 </a></li>
+                  href="select.admin"> <i class="menu-icon fa fa-table"></i>메뉴
+               </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
                      class="menu-icon fa fa-th"></i>고객의소리
                </a></li>
-              <li class="menu-item-has-children dropdown"><a
-						href="member.manage"> <i
-							class="menu-icon fa fa-th"></i>고객관리
-					</a></li>
+               <li class="menu-item-has-children dropdown"><a
+                  href="member.manage"> <i class="menu-icon fa fa-th"></i>고객관리
+               </a></li>
             </ul>
          </div>
       </nav>
@@ -338,7 +336,7 @@
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="menuModalModalLabel">메뉴 수정</h5>
+                  <h4 class="modal-title" id="menuModalModalLabel"><b>메뉴 수정</b></h4>
                   <button type="button" class="close" data-dismiss="modal"
                      aria-label="Close">
                      <span aria-hidden="true">&times;</span>
@@ -347,47 +345,71 @@
                <div class="modal-body">
                   <form action="MenuHeaderEdit.admin" id="headerForm" method="post">
                      <div class="form-group">
-                        <label for="exampleFormControlInput1">상단 제목 수정</label> <input
+                        <label for="exampleFormControlInput1"><b>상단 제목 수정</b></label> <input
                            type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
-                           required name="menuHeaderTop">
+                           required name="menuHeaderTop" value="${top}">
                      </div>
                      <div class="form-group">
-                        <label for="exampleFormControlInput1">첫 번째 메뉴</label> <select name="firstHeaderMenu">
+                        <label for="exampleFormControlInput1"><b>첫 번째 메뉴</b></label> <select
+                           name="firstHeaderMenu">
                            <c:forEach var="topDto" items="${list}">
-                              <option>${topDto.menuName}</option>
+                              <c:choose>
+                                 <c:when test="${food1Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
                            </c:forEach>
                         </select> <input type="text" class="form-control" placeholder="메뉴 설명"
-                           required name="menuDesc1">
+                           required name="menuDesc1" value="${food1Desc }">
                      </div>
                      <div class="form-group">
-                        <label for="exampleFormControlInput1">두 번째 메뉴</label> <select name="secondHeaderMenu">
+                        <label for="exampleFormControlInput1"><b>두 번째 메뉴</b></label> <select
+                           name="secondHeaderMenu">
                            <c:forEach var="topDto" items="${list}">
-                              <option>${topDto.menuName}</option>
+                              <c:choose>
+                                 <c:when test="${food2Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
                            </c:forEach>
                         </select> <input type="text" class="form-control" placeholder="메뉴 설명"
-                           required name="menuDesc2">
+                           required name="menuDesc2" value="${food2Desc }">
                      </div>
                      <div class="form-group">
-                        <label for="exampleFormControlInput1">세 번째 메뉴</label> <select name="thirdHeaderMenu">
+                        <label for="exampleFormControlInput1"><b>세 번째 메뉴</b></label> <select
+                           name="thirdHeaderMenu">
                            <c:forEach var="topDto" items="${list}">
-                              <option>${topDto.menuName}</option>
+                              <c:choose>
+                                 <c:when test="${food3Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
                            </c:forEach>
                         </select> <input type="text" class="form-control" placeholder="메뉴 설명"
-                           required name="menuDesc3">
+                           required name="menuDesc3" value="${food3Desc }">
                      </div>
                      <div class="form-group">
-                        <label for="exampleFormControlInput1">하단 알림 문구 수정 1</label> <input
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 1</b></label> <input
                            type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
-                           required name="menuHeaderBot1">
+                           required name="menuHeaderBot1" value="${bot1 }">
                      </div>
                      <div class="form-group">
-                        <label for="exampleFormControlInput1">하단 알림 문구 수정 2</label> <input
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 2</b></label> <input
                            type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
-                           required name="menuHeaderBot2">
+                           required name="menuHeaderBot2" value="${bot2}">
                      </div>
                      <div class="modal-footer">
-                        <button class="btn btn-info"
-                           id="menuHeaderComplete">수정 완료</button>
+                        <button class="btn btn-info" id="menuHeaderComplete">수정
+                           완료</button>
                         <button type="button" class="btn btn-secondary"
                            data-dismiss="modal">닫기</button>
                      </div>
@@ -443,15 +465,16 @@
             $("#menuImgEdit").change(function() {
                readURL(this);
             });
-            
-            function PreviewImage() {
-                 var oFReader = new FileReader();
-                 oFReader.readAsDataURL(document.getElementById("menuImgEdit").files[0]);
 
-                 oFReader.onload = function (oFREvent) {
-                     document.getElementById("newImg").src = oFREvent.target.result;
-                 };
-             };
+            function PreviewImage() {
+               var oFReader = new FileReader();
+               oFReader.readAsDataURL(document
+                     .getElementById("menuImgEdit").files[0]);
+
+               oFReader.onload = function(oFREvent) {
+                  document.getElementById("newImg").src = oFREvent.target.result;
+               };
+            };
 
             $(".menuEditBtn").on(
                   "click",
@@ -625,14 +648,13 @@
                            placeholder="비밀번호 입력하시오" required name="loginpw">
                      </div>
                      <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" type="button"
-										id="findId">아이디 찾기</button>
                         <button type="button" class="btn btn-primary" type="button"
-                           id="reinputpw">비밀번호 찾기</button>
+                           id="reinputpw">비밀번호재설정</button>
                         <button type="button" class="btn btn-primary" type="button"
                            id="joinMem">회원가입</button>
                         <button type="button" class="btn btn-primary" id="login">login</button>
-                       
+                        <button type="button" class="btn btn-secondary"
+                           data-dismiss="modal">Close</button>
                      </div>
                   </form>
                </div>
@@ -640,14 +662,6 @@
          </div>
       </div>
       <script>
-      $("#findId").on("click",function(){
-
-   		location.href = "page?url=WEB-INF/modifyid.jsp";
-   		})
-   		
-                         $("#reinputpw").on("click",function(){
-                         location.href = "page?url=WEB-INF/modifypassword.jsp";
-                         })
          $("#reinputpw").on("click", function() {
             location.href = "page?url=WEB-INF/modifypassword.jsp";
          })
@@ -740,9 +754,13 @@
 
 
       <script>
-         $("#logoutbtn1").on("click", function() {
-            location.href = "logoutProc.member";
-         })
+	      $("#logoutbtn1").on("click",function() {
+                if(${user.id == 'admin' }){
+                	location.href = "adminlogoutProc.member";	
+                }else{
+                	location.href = "logoutProc.member";	
+                }
+         });
 
          $("#updatememberbtn").on("click", function() {
             location.href = "page?url=WEB-INF/ModifyMembers.jsp";

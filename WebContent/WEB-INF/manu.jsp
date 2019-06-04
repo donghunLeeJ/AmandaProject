@@ -370,7 +370,7 @@
                            <div class="card">
                               <div class="card-header">
                               <strong class="card-title pl-2">
-                                    지금까지 이런메뉴는 없었다!! </strong>
+                                    	지금까지 이런메뉴는 없었다!! </strong>
                                 <button type="button" class="close" data-dismiss="modal"
                                     aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -400,7 +400,9 @@
                                        <p>${dto.menuPrice}</p>
                                     </div>
                                     <div class="modal-footer">
+                             <c:if test="${user != null }">
                              <button class = "btn btn-info" id="menu${dto.menu_seq }">결제하기 </button> 
+                             </c:if>
                           	 <button type="button" class="btn btn-secondary"
                               data-dismiss="modal">닫기</button>
                         </div>
@@ -595,9 +597,15 @@
       <script>
       
       
-         $("#logoutbtn1").on("click", function() {
-            location.href = "logoutProc.member";
-         })
+      $("#logoutbtn1").on("click",function() {
+                if(${user.id == 'admin' }){
+                	location.href = "adminlogoutProc.member";	
+                }else{
+                	location.href = "logoutProc.member";	
+                }
+            	 
+             });
+
 
          $("#updatememberbtn").on("click", function() {
             location.href = "page?url=WEB-INF/ModifyMembers.jsp";

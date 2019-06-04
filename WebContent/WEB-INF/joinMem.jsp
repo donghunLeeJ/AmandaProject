@@ -288,7 +288,7 @@
                     <div class="col-lg-10">
                         <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
                         <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
-                        <input required type="text" class="form-control readonly" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
                         <input type="button" value="우편번호 찾기" id="search">
                     </div>
                     
@@ -461,8 +461,13 @@
 	.on(
 			"click",
 			function() {
-				location.href = "logoutProc.member";
-			})
+	            if(${user.id == 'admin' }){
+	            	location.href = "adminlogoutProc.member";	
+	            }else{
+	            	location.href = "logoutProc.member";	
+	            }
+	        	 
+	         })
 
 	
 							$("#updatememberbtn")

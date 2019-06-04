@@ -58,10 +58,11 @@ public class MemberController extends HttpServlet {
 				checkPw = dao.checklogin(loginid);
 
 				if(checkPw.equals(dao.testSHA256(loginpw))) {
-					//로그인성공
+					
 					if(loginid.equals("admin"))  //관리자인 경우 admincharcontroller로 이동후 main접속 하기
 					{
 						request.getSession().setAttribute("user", dao.select_user(loginid));
+						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
 						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/adminmain.jsp");
 						rd.forward(request, response);					
 					}else {
@@ -218,13 +219,13 @@ public class MemberController extends HttpServlet {
 
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 				String id=dto.getId();
+				System.out.println(id);
 				int hour = dto.getPoint() - pointmap.get(id);
 				//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
 
 				dao.PointUpdate(pointmap.get(id), id);		
 				dao.usehourUpdate(hour, id); 
 				cDao.seatOff(request.getRemoteAddr());
-				//cDao.seatOff("192.168.60.27");
 				cDao.resetId(request.getRemoteAddr());
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
@@ -245,13 +246,23 @@ public class MemberController extends HttpServlet {
 			}
 
 			break;	
-
+		case "adminlogoutProc.member" :
+			
+			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
+			String id=dto.getId();
+		
+			request.getSession().invalidate();		
+			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
+			
+			
+			
+			break;
 
 
 
 		case "resetpwProc.member" :
 			//비밀번호재설정
-			String id = request.getParameter("checkid");//입력받은 id값
+			id = request.getParameter("checkid");//입력받은 id값
 			String email = request.getParameter("checkemail");//입력받은 email값
 			int result = dao.existMember(id, email);//있으면 return 1,없으면 0, 에러면 -1
 			if(result == 1) {
