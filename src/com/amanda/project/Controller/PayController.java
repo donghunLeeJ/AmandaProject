@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.amanda.project.DAO.ComDAO;
 import com.amanda.project.DAO.MemberDAO;
+import com.amanda.project.DAO.MenuDAO;
 import com.amanda.project.DAO.PayDAO;
 
 
@@ -22,16 +23,36 @@ public class PayController extends HttpServlet {
 		MemberDAO dao=new MemberDAO();
 		ComDAO cDao = new ComDAO();
 		PayDAO pdao = new PayDAO();
-		switch(cmd) {
+
+		MenuDAO menuDAO= new MenuDAO();
 		
-		case "time.pay" :
+
+		
+		if(cmd.equals("time.pay")) {
 			String id = request.getParameter("id");
-			int point=Integer.parseInt(request.getParameter("amount"));
-			System.out.println(pdao.update_point(id, point));
+			int price=Integer.parseInt(request.getParameter("amount"));
+			String name = request.getParameter("name");
+			System.out.println(pdao.update_point(id, price));
+			pdao.pay_table_insert(id, price);
 			request.getSession().setAttribute("user", dao.select_user(id));
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-		break;
+		
+		}else if(cmd.equals("menu.pay")) {
+			String id=request.getParameter("id");
+			String name = request.getParameter("name");
+			int price=Integer.parseInt(request.getParameter("amount"));
+			System.out.println("pay");
+			System.out.println(id);
+			System.out.println(name);
+			System.out.println(price);
+			pdao.pay_table_insert(id, price);
+			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+		
 		}
+
+		
+	
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

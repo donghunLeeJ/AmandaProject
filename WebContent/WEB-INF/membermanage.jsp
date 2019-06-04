@@ -1,122 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
-
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>게시판</title>
+<title>Main</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-
-<link rel="stylesheet"
-   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<link
-   href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
-   rel="stylesheet">
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+   href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
 <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-<link rel="stylesheet"
-   href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
-
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <link
-   href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
-   rel='stylesheet' type='text/css'>
+   href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css"
+   rel="stylesheet">
+<link
+   href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
+   rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
+
 
 <style>
-#footer {
-   text-align: right;
-   padding: 0px;
-}
-
-.myrow {
-   margin-left: 0px;
-   margin-right: 0px;
-}
-
-#wrapper {
-   margin-top: 20px;
-   padding: 0px;
-}
-
-#upload, #toList {
-   margin: 0px;
-}
-
-#footer {
-   text-align: right;
-   padding: 0px;
-}
-
-footer {
-   margin-top: 20px;
-   padding-left: 15px;
-   padding-right: 15px;
-   padding-left: 15px;
-}
-
-header {
-   padding-left: 15px;
-   padding-right: 15px;
-}
-
-#text {
-   height: 600px;
-   margin: 0px;
-}
-
-#contents {
-   margin: 0px;
-   padding: 0px;
-   width: 100%;
+#remember {
+   width: 35%;
    height: 100%;
+   margin: 0px;
 }
 
-#title {
-   margin-left: 10px;
-   width: 70%;
+.modal-footer {
+   box-sizing: border-box;
 }
 
-#titleWrapper {
-   margin-left: 10px;
-   margin-top: 10px;
-   margin-bottom: 10px;
-   width: 100%;
+.modal-body1 {
+   padding: 1px;
 }
+
+.card-header {
+   color: gray;
+   background-color: #bbe3e3;
+}
+
+.card-text {
+   text-align: left;
+}
+
 </style>
 </head>
-<body>
-   <!-- Left Panel -->
 
+<body>
+   <!-- 왼쪽 네비 시작 -->
    <aside id="left-panel" class="left-panel">
       <nav class="navbar navbar-expand-sm navbar-default">
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-               <c:choose>
+              <c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
@@ -126,62 +83,39 @@ header {
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 					</c:choose>
-               <li class="menu-item-has-children dropdown"><a
-                  href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
-               </a></li>
-               <c:choose>
+					
+					<li class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fa fa-cogs"></i>잔여좌석
+					</a></li>
+					
+					<c:choose>
               		<c:when test="${user.id == 'admin' }">
                		<li class="menu-item-has-children dropdown"><a
                	    href="select.admin"> <i
                      class="menu-icon fa fa-table"></i>메뉴
               		 </a></li>
               		 </c:when>
-              		 <c:when test="${user.id != 'admin' }">
-               		<li class="menu-item-has-children dropdown"><a
-               	    href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-              		 </a></li>
-              		 </c:when>
-           		</c:choose>
-               <li class="menu-item-has-children dropdown"><a
-                  href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
-               </a></li>
-               <c:choose>
-                  <c:when test="${user == null }">
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                     <script>
-                        $("#charge").on("click", function() {
-                           alert("로그인 후 이용가능합니다.");
-                        })
-                     </script>
-                  </c:when>
-                  <c:when test="${user.id == 'admin' }">
-                     	<li class="menu-item-has-children dropdown"><a
+        
+               		</c:choose>
+					<li class="menu-item-has-children dropdown"><a
+						href="Board.board?currentPage=1"> <i
+							class="menu-icon fa fa-th"></i>고객의소리
+					</a></li>
+					
+					<li class="menu-item-has-children dropdown"><a
 						href="member.manage"> <i
 							class="menu-icon fa fa-th"></i>고객관리
 					</a></li>
-                  </c:when>
-                  <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                  </c:otherwise>
-               </c:choose>
-
             </ul>
          </div>
       </nav>
    </aside>
-
+   <!-- 왼쪽 네비 끝 -->
+   <!-- 상단 검색바 마이페이지 등등 시작 -->
    <div id="right-panel" class="right-panel">
-
       <!-- Header-->
-    <header id="header" class="header">
+      <header id="header" class="header">
          <div class="top-left">
             <div class="navbar-header">
                <a class="navbar-brand" href="./"><img src="images/logo.png"
@@ -209,8 +143,6 @@ header {
                            </form>
                         </div>
 
-
-
                         <div class="dropdown for-notification">
                            <button class="btn btn-secondary dropdown-toggle" type="button"
                               id="notification" data-toggle="dropdown" aria-haspopup="true"
@@ -218,17 +150,7 @@ header {
                               <i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
                            </button>
                            <div class="dropdown-menu" aria-labelledby="notification">
-                              <p class="red">You have 3 Notification</p>
-                              <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-check"></i>
-                                 <p>Server #1 overloaded.</p>
-                              </a> <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-info"></i>
-                                 <p>Server #2 overloaded.</p>
-                              </a> <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-warning"></i>
-                                 <p>Server #3 overloaded.</p>
-                              </a>
+                     
                            </div>
                         </div>
 
@@ -238,10 +160,7 @@ header {
                               aria-expanded="false">
                               <i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
                            </button>
-                           <div class="dropdown-menu" aria-labelledby="message">
-                                                     
-                           </div>
-                        </div>
+                     
                      </div>
                      <!--  mypage 사람 사진-->
                      <div class="user-area  float-right">
@@ -281,41 +200,134 @@ header {
             </c:otherwise>
          </c:choose>
       </header>
-      <!-- /header -->
-
-      <div class="content">
+      <!--       상단 네비 끝 -->
+      <!-- Content 시작 -->
+      <div class="breadcrumbs">
+			<div class="breadcrumbs-inner">
+				<div class="row m-0">
+					<div class="col-sm-4">
+						<div class="page-header float-left">
+							<div class="page-title">
+								<h1><b>회원정보</b></h1>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8"></div>
+				</div>
+			</div>
+		</div>
+      <div class="content ">
+         <!-- Animated -->
          <div class="animated fadeIn">
-            <div class="card">
+            <!-- Widgets  -->
+            <div class="row myrow">
+               <div class="col-lg-6">
+                  <table class="table table-striped table-bordered col-lg-12"
+                     id="membertable">
+                     <thead>
+                        <tr>
+                           <th>번호</th>
+                           <th>이름</th>
+                           <th>아이디</th>
+                           <th>핸드폰</th>
+                           <th>사용시간</th>
+                           <th>선택</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <c:forEach var="dto" items="${result }">
+                           <form action="toblack.manage" id="memberinfo">
+                              <tr>
+                                 <th id="memnum">${dto.mem_seq }</th>
+                                 <td id="memname">${dto.name }</td>
+                                 <td id="memid">${dto.id }</td>
+                                 <td id="memphone">${dto.phone }</td>
+                                 <td id="memusehour">${dto.usehour }</td>
+                                 <td><button type="button" class="btn btn-dark movebtn"
+                                       data-toggle="modal" data-target="#resonModal">블랙</button></td>
+                              </tr>
+                           </form>
+                        </c:forEach>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="col-lg-6">
+                  <table class="table table-striped table-bordered" id="blacktable">
+                     <thead>
+                        <tr>
+                           <th style="width:70px;">번호</th>
+                           <th>이름</th>
+                           <th style="width:350px;">사유</th>
+                           <th>선택</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <c:forEach var="bl" items="${blresult }">
+                           <form action="cancelblack.manage">
+                           <tr>
+                              <th><input type="text" value="${bl.mem_seq}" name="blacknumber"
+                              style="background-color:#00000000; border:none; width:70px;" readonly></th>
+                              <td>${bl.name }</td>
+                              <td style="width:350px;">${bl.blackreason }</td>
+                              <td><button class="btn btn-primary">블랙취소</button>
+                           </tr>
+                           </form>
+                        </c:forEach>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="clearfix"></div>
+         </div>
 
-               <form action="BoardWrite.board" id="formWrite" method="post">
-                  <div class="card-header">
-                     <strong class="card-title">제목 : <input type="text"
-                        id="title" name="title" required></strong>
+         <div class="modal fade" id="resonModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">사유작성</h5>
+                     <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
                   </div>
-                  <div class="card-body">
-                     <div class="container" id="wrapper">
-                        <div id="text">
-                           <textarea id="contents" name="contents"></textarea>
-                           <input type="text" id="path" name="path">
+
+                  <div class="modal-body">
+                     <form action="toblack.manage" class="reasonform" method="post">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">사유</label> <input
+                              type="text" class="form-control" id="blreason"
+                              name="blackreson" placeholder="사유를 입력하세요" maxlength="30" required> 
+                              <input
+                              type="text" class="form-control" id="blnum" name="blacknum"
+                              readonly>
                         </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary reasonsubmit">확인</button>
+                           <button type="button" class="btn btn-secondary"
+                              data-dismiss="modal">취소</button>
+                        </div>
+                     </form>
 
-                        <footer>
-                           <div class="row">
-                              <div class="col-lg-12 col-md-12 col-sm-12" id="footer">
-
-                                 <input type="button" id="upload" value="작성하기"
-                                    class="btn btn-secondary"> <input type="button"
-                                    id="toList" value="목록으로" class="btn btn-secondary">
-                              </div>
-                           </div>
-                        </footer>
-                     </div>
                   </div>
-               </form>
+               </div>
             </div>
          </div>
-         
-         
+         <script>
+            $(".reasonsubmit").on("click",function(){
+               $(".reasonform").submit();
+            })
+            $(".movebtn").on("click",function(){
+               $("#blnum").val($(this).parent().parent().find("th:nth-child(1)").html());
+      
+            })
+         </script>
+
+
+
+
+
+         <!--                여기부터 진향이가 만든 로그인폼 -->
          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -327,7 +339,6 @@ header {
                         <span aria-hidden="true">&times;</span>
                      </button>
                   </div>
-
                   <div class="modal-body">
                      <form action="loginProc.member" id="form" method="post">
                         <div class="form-group">
@@ -350,27 +361,22 @@ header {
                               data-dismiss="modal">Close</button>
                         </div>
                      </form>
-
                   </div>
                </div>
             </div>
          </div>
-
-
          <script>
-                           $("#reinputpw").on("click",function(){
-                           location.href = "page?url=WEB-INF/modifypassword.jsp";
-                           })
-
-                           $("#joinMem").on("click",function() {
-                           location.href = "page?url=WEB-INF/joinMem.jsp";
-                           })
-                           document.getElementById("login").onclick = function() {
-                           document.getElementById("form").submit();
-                           }
-                           //                            로그인 버튼과 회원가입 버튼의 script
-  		 </script>
-
+            $("#reinputpw").on("click", function() {
+               location.href = "page?url=WEB-INF/modifypassword.jsp";
+            })
+            $("#joinMem").on("click", function() {
+               location.href = "page?url=WEB-INF/joinMem.jsp";
+            })
+            document.getElementById("login").onclick = function() {
+               document.getElementById("form").submit();
+            }
+            //                            로그인 버튼과 회원가입 버튼의 script
+         </script>
 
          <!--                   진향이 로그인폼끝 -->
          <!--                         진향이 마이페이지 폼 -->
@@ -453,147 +459,48 @@ header {
 
 
          <script>
-   
-   $("#logoutbtn1")
-   .on(
-         "click",
-         function() {
-            location.href = "logoutProc.member";
-         })
-                        $("#updatememberbtn")
-                           .on(
-                                 "click",
-                                 function() {
-                                    location.href = "page?url=WEB-INF/ModifyMembers.jsp";
-                                 })
-                     $("#deleteMembtn")
-                           .on(
-                                 "click",
-                                 function() {
-                                    location.href = "page?url=WEB-INF/deleteMem.jsp";
-                                 })
-                     $("#pointPagebtn").on("click", function() {
-                        location.href = "page?url=WEB-INF/pay.jsp";
-                     })
-                  </script>
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-      </div>
-      <div class="clearfix"></div>
+            $("#logoutbtn1").on("click", function() {
+               location.href = "logoutProc.member";
+            })
 
+            $("#updatememberbtn").on("click", function() {
+               location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+            })
+            $("#deleteMembtn").on("click", function() {
+               location.href = "page?url=WEB-INF/deleteMem.jsp";
+            })
+            $("#pointPagebtn").on("click", function() {
+               location.href = "page?url=WEB-INF/pay.jsp";
+            })
+         </script>
+         <!-- 진향이 마이페이지 폼끝 -->
+      </div>
+
+      <!-- 컨텐츠 끝 -->
+
+      <div class="clearfix"></div>
+      <!-- Footer -->
       <footer class="site-footer">
          <div class="footer-inner bg-white">
             <div class="row">
-               <div class="col-sm-6 text-left">Copyright &copy; Amanda</div>
-               <div class="col-sm-6 text-right">Designed by Amanda</div>
+               <div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
+               <div class="col-sm-6 text-right">
+                  Designed by <a href="https://colorlib.com">1조</a>
+               </div>
             </div>
          </div>
       </footer>
 
-   </div>
+      <script
+         src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+      <script
+         src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+      <script
+         src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+      <script
+         src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+      <script src="assets/js/main.js"></script>
 
-   <script
-      src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-   <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-   <script
-      src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-   <script src="assets/js/main.js"></script>
-
-
-   <script>
-      document.getElementById("toList").onclick = function() {
-         var result = confirm("작성중이던 게시물이 삭제됩니다. 정말 나가시겠습니까?");
-         if (result) {
-            location.href = "Board.board?currentPage=1";
-         }
-      }
-
-      window.addEventListener("beforeunload", function(event) {
-         event.preventDefault();
-         $.ajax({
-            url : "ImageDel.board",
-            type : "POST"
-         });
-      });
-
-      $(function() {
-         $("#contents").summernote({
-            placeholder : '글을 입력해주세요.',
-            tabsize : 2,
-            height : 100, // 기본 높이값
-            minHeight : 545, // 최소 높이값(null은 제한 없음)
-            maxHeight : 545, // 최대 높이값(null은 제한 없음)
-            focus : true, // 페이지가 열릴때 포커스를 지정함
-            lang : 'ko-KR',
-            //onlmageUpload callback함수 -> 미설정시 data형태로 에디터 그대로 삽입
-            callbacks : {
-               onImageUpload : function(files, editor, welEditable) {
-                  for (var i = 0; i < files.length; i++) {
-                     sendFile(files[i], this);
-                  }
-               }
-            }
-         });
-         $("#path").hide();
-         function sendFile(file, editor) {
-            var data = new FormData();
-            data.append('file', file);
-            $.ajax({
-               url : "ImageUpload.board",
-               type : "POST",
-               data : data,
-               dataType : "json",
-               cache : false,
-               contentType : false,
-               enctype : "multipart/form-data",
-               processData : false,
-               success : function(resp) {
-                  $(".note-editable").append("<img src='"+resp.url+"'>");
-                  $("#path").val(resp.path);
-               },
-               fail : function(resp) {
-                  console.log(resp.url);
-               }
-            });
-
-         }
-
-         $("#upload").on(
-               "click",
-               function() {
-                  $("#contents").val($(".note-editable").html());
-                  if ($("#contents").val() == "<p><br></p>") {
-                     alert("게시글을 작성해주세요.");
-                  } else if ($("#title").val() == "") {
-                     alert("제목을 작성해주세요.");
-                  } else if ($("#contents").val() != "<p><br></p>"
-                        && $("#title").val() != "") {
-                     $.ajax({
-                        url : "Upload.board",
-                        type : "POST"
-                     });
-                     $("#formWrite").submit();
-                  }
-               })
-
-      });
       
-	
-  
-   </script>
-
 </body>
 </html>

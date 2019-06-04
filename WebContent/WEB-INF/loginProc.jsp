@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-this is New Project
+
+
+	<script>
+		alert("로그인에 성공하였습니다");
+		location.href = "page?url=WEB-INF/main.jsp";
+	
+	
+	</script>
 </body>
 </html>

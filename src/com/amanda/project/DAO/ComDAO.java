@@ -62,7 +62,7 @@ public class ComDAO {
 			List<ComDTO> arr = new ArrayList();
 			ResultSet rs=pstat.executeQuery();
 			while(rs.next()) {
-				ComDTO dto = new ComDTO(rs.getString(1),rs.getString(2),rs.getString(3));
+				ComDTO dto = new ComDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
 				arr.add(dto);
 			}
 			return arr;
@@ -70,6 +70,24 @@ public class ComDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public int selectSeat(){
+		String sql="select count(*) from pcComputer where comUseCheck = 1 ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			
+			List<ComDTO> arr = new ArrayList();
+			ResultSet rs=pstat.executeQuery();
+			rs.next();
+			int result = rs.getInt(1);
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 	
 	
@@ -98,6 +116,52 @@ public class ComDAO {
 			pstat.setString(1, ip );
 			int rs=pstat.executeUpdate();
 			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int setId(String id , String ip){
+		String sql="update pcComputer set user_id = ? where comIp = ? ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			pstat.setString(1, id );
+			pstat.setString(2, ip );
+			int rs=pstat.executeUpdate();
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int resetId(String ip){
+		String sql="update pcComputer set user_id = '' where comIp = ? ";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			pstat.setString(1, ip );
+			int rs=pstat.executeUpdate();
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}public int usedSeat(){
+		String sql="select count(comusecheck) from pccomputer where COMUSECHECK = '1'";
+		try (	Connection con=ds.getConnection();
+				PreparedStatement pstat=con.prepareStatement(sql);
+
+				)
+		{
+			ResultSet rs = pstat.executeQuery();
+			rs.next();
+			int result =  rs.getInt(1);
+			return result;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

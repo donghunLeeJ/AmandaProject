@@ -51,6 +51,10 @@
    border-radius: 10px;
 }
 
+#menuAdd {
+   text-align: center;
+}
+
 #caroWrapper {
    display: flex;
    justify-content: center;
@@ -79,6 +83,22 @@
 .card-text {
    text-align: left;
 }
+
+.cardTitle {
+   float: left;
+   width: 40%;
+}
+
+.cardButt {
+   float: left;
+   width: 60%;
+   text-align: right;
+}
+
+.headerWrapper {
+   overflow: hidden;
+}
+
 .myspan {
    text-align: center;
 }
@@ -91,38 +111,24 @@
       <nav class="navbar navbar-expand-sm navbar-default">
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-               <li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-                     class="menu-icon fa fa-laptop"></i>Home </a></li>
+             <li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+							class="menu-icon fa fa-laptop"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
-                <li class="menu-item-has-children dropdown"><a
-                  href="ClientSelect.admin"> <i
+               <li class="menu-item-has-children dropdown"><a
+               	    href="select.admin"> <i
                      class="menu-icon fa fa-table"></i>메뉴
-               </a></li>
+              		 </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
                      class="menu-icon fa fa-th"></i>고객의소리
                </a></li>
-               <c:choose>
-                  <c:when test="${user == null }">
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                     <script>
-                        $("#charge").on("click", function() {
-                           alert("로그인 후 이용가능합니다.");
-                        })
-                     </script>
-                  </c:when>
-                  <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                  </c:otherwise>
-               </c:choose>
+              <li class="menu-item-has-children dropdown"><a
+						href="member.manage"> <i
+							class="menu-icon fa fa-th"></i>고객관리
+					</a></li>
             </ul>
          </div>
       </nav>
@@ -269,7 +275,9 @@
             <div class="card">
                <div class="card-header" id="cardHeader">
                   <strong class="card-title mb-3"><h1>
-                        <span id="todaysMenu">${top }</span>
+                        <span id="todaysMenu">${top }</span> <input type="button"
+                           value="수정" class="btn btn-info" data-toggle="modal"
+                           data-target="#menuHeaderModal" id="menuHeader">
                      </h1></strong>
 
                </div>
@@ -325,17 +333,86 @@
             </div>
          </div>
       </div>
-
+      <div class="modal fade" id="menuHeaderModal" tabindex="-1"
+         role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="menuModalModalLabel">메뉴 수정</h5>
+                  <button type="button" class="close" data-dismiss="modal"
+                     aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="MenuHeaderEdit.admin" id="headerForm" method="post">
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1">상단 제목 수정</label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderTop">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1">첫 번째 메뉴</label> <select name="firstHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <option>${topDto.menuName}</option>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc1">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1">두 번째 메뉴</label> <select name="secondHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <option>${topDto.menuName}</option>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc2">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1">세 번째 메뉴</label> <select name="thirdHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <option>${topDto.menuName}</option>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc3">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1">하단 알림 문구 수정 1</label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderBot1">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1">하단 알림 문구 수정 2</label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderBot2">
+                     </div>
+                     <div class="modal-footer">
+                        <button class="btn btn-info"
+                           id="menuHeaderComplete">수정 완료</button>
+                        <button type="button" class="btn btn-secondary"
+                           data-dismiss="modal">닫기</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
       <!-- Content 시작 -->
       <div class="content">
          <div class="animated fadeIn">
             <div class="row">
+
                <c:forEach var="dto" items="${list}">
                   <div class="col-md-4 col-sm-6">
                      <div class="card">
                         <div class="card-header headerWrapper">
                            <div class="cardTitle">
                               <strong class="card-title mb-3">${dto.menuName}</strong>
+                           </div>
+                           <div class="cardButt">
+                              <input type="button" value="변경"
+                                 class="btn btn-info mr-2 menuEditBtn" data-toggle="modal"
+                                 data-target="#menuEditModal"><input type="button"
+                                 value="삭제" class="btn btn-info menuDelBtn">
                            </div>
                         </div>
                         <div class="card-body">
@@ -354,6 +431,173 @@
                </c:forEach>
             </div>
          </div>
+         <script>
+            function readURL(input) {
+               var reader = new FileReader();
+               reader.onload = function(e) {
+                  $("#newImg").attr("src", e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+            }
+
+            $("#menuImgEdit").change(function() {
+               readURL(this);
+            });
+            
+            function PreviewImage() {
+                 var oFReader = new FileReader();
+                 oFReader.readAsDataURL(document.getElementById("menuImgEdit").files[0]);
+
+                 oFReader.onload = function (oFREvent) {
+                     document.getElementById("newImg").src = oFREvent.target.result;
+                 };
+             };
+
+            $(".menuEditBtn").on(
+                  "click",
+                  function() {
+                     $("#menuTitleEdit").val(
+                           $(this).parent().parent().find(
+                                 "div:nth-child(1)").find(
+                                 "strong:nth-child(1)").html());
+                     $("#menuDescEdit").val(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "h5:nth-child(2)").html());
+                     $("#menuPriceEdit").val(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "span:nth-child(3)").html());
+                     $("#menuNoEdit").val(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "input:nth-child(4)").val());
+                     $("#originMenuImg").html(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "div:nth-child(1)").html());
+
+                  });
+
+            $(".menuDelBtn").on(
+                  "click",
+                  function() {
+                     var result = confirm("메뉴를 삭제하시겠습니까?");
+                     if (result) {
+                        location.href = "MenuDel.admin?menu_seq="
+                              + $(this).parent().parent().parent()
+                                    .find("div:nth-child(2)").find(
+                                          "div:nth-child(1)")
+                                    .find("input:nth-child(4)")
+                                    .val();
+                     }
+                  });
+         </script>
+         <div class="modal fade" id="menuEditModal" tabindex="-1"
+            role="dialog" aria-labelledby="menuEditModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="menuEditModalLabel">메뉴 수정</h5>
+                     <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="MenuUpdate.admin" id="updateForm" method="post"
+                        enctype="multipart/form-data">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 이름</label> <input
+                              type="text" class="form-control" required name="menuTitleEdit"
+                              id="menuTitleEdit">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 설명</label> <input
+                              type="text" class="form-control" required name="menuDescEdit"
+                              id="menuDescEdit">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 가격</label> <input
+                              type="number" class="form-control" required
+                              name="menuPriceEdit" id="menuPriceEdit">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">기존 이미지</label>
+                           <div id="originMenuImg"></div>
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">변경 이미지</label> <input
+                              type="file" name="menuImgEdit" id="menuImgEdit" class="mt-2">
+
+                           <img id="newImg" src="#" alt="변경 이미지 미설정" /> <input
+                              type="hidden" name="menuNoEdit" id="menuNoEdit">
+                        </div>
+                        <div class="modal-footer">
+                           <button class="btn btn-info">수정완료</button>
+                           <button type="button" class="btn btn-secondary"
+                              data-dismiss="modal">닫기</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div id="menuAdd">
+            <input type="button" value="메뉴 추가" class="btn btn-info mr-2"
+               data-toggle="modal" data-target="#menuAddModal" id="loginbtn">
+         </div>
+
+         <div class="modal fade" id="menuAddModal" tabindex="-1" role="dialog"
+            aria-labelledby="menuAddModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="menuAddModalLabel">신규 메뉴</h5>
+                     <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="MenuAdd.admin" id="addForm" method="post"
+                        enctype="multipart/form-data">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 이름</label> <input
+                              type="text" class="form-control" placeholder="메뉴명을 입력해주세요."
+                              required name="menuTitleAdd">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 설명</label> <input
+                              type="text" class="form-control" placeholder="메뉴 설명을 입력해주세요."
+                              required name="menuDescAdd">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 가격</label> <input
+                              type="number" class="form-control"
+                              placeholder="메뉴 가격을 입력해주세요." required name="menuPriceAdd">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 이미지</label> <input
+                              type="file" required name="menuImgAdd" class="mt-2">
+                        </div>
+                        <div class="modal-footer">
+                           <button class="btn btn-info">추가하기</button>
+                           <button type="button" class="btn btn-secondary"
+                              data-dismiss="modal">닫기</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+
          <!-- .row -->
       </div>
       <!--                여기부터 진향이가 만든 로그인폼 -->

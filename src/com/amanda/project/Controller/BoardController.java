@@ -273,8 +273,13 @@ public class BoardController extends HttpServlet {
 				}
 			}else if(command.equals("/Upload.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
-				files.setFlag(true);
-				files.setFiles(null);
+				try{
+					files.setFlag(true);
+					files.setFiles(null);
+				}catch(Exception e) {
+					System.out.println("그림 안넣음");
+				}
+				
 				request.getSession().setAttribute("files", null);
 			}
 
