@@ -35,7 +35,8 @@
    rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
 
 
@@ -347,11 +348,47 @@
                               <span>${dto.menuPrice}</span>원 <input type="hidden"
                                  value="${dto.menu_seq}">
                            </div>
+                           <button class = "btn" id="menu${dto.menu_seq }">결제하기 </button> 
                            <hr>
                         </div>
                      </div>
                   </div>
-               </c:forEach>
+                  <script>
+                  $("#menu${dto.menu_seq }").on("click",function(){
+                		IMP.init('imp96545220'); 
+                		IMP.request_pay({
+                		    pg : 'inicis', // version 1.1.0부터 지원.
+                		    pay_method : 'card',
+                		    merchant_uid : 'merchant_' + new Date().getTime(),
+                		    name : '${dto.menuName}',
+                		    amount : '${dto.menuPrice}',
+                		    buyer_email : 'iamport@siot.do',
+                		    buyer_name : '구매자이름',
+                		    buyer_tel : '010-1234-5678',
+                		    buyer_addr : '서울특별시 강남구 삼성동',
+                		    buyer_postcode : '123-456',
+                		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+                		}, function(rsp) {
+                		    if ( rsp.success ) {
+                		        var msg = '결제가 완료되었습니다.';
+                		        paid_amount = rsp.paid_amount;
+                		        name = rsp.name;
+                		        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
+                		    } else {
+                		        var msg = '결제에 실패하였습니다.';
+                		        msg += '에러내용 : ' + rsp.error_msg;
+                		    }
+                		    alert(msg);
+                		   
+                		});
+                		})
+                  
+                  
+                  
+                  
+                  
+                  </script>
+              </c:forEach>
             </div>
          </div>
          <!-- .row -->
