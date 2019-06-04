@@ -41,7 +41,7 @@ public class Start extends HttpServlet {
 	      request.getServletContext().setAttribute("UserSeatNum", MemberController.useridseat);
 	      request.setAttribute("seatUsed", dao.usedSeat());
 	      request.getServletContext().setAttribute("seat", arr);
-	      request.getRequestDispatcher("WebContent/WEB-INF/main.jsp").forward(request, response);
+	      request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
 		
 
