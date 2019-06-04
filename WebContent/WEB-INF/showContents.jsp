@@ -449,7 +449,7 @@
 
 								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_time">${repldto.repl_time}</div>
 							</div>
-							<c:if test="${id==repldto.repl_writer }">
+							<c:if test="${user.id==repldto.repl_writer }">
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
 										id="replButts">
@@ -466,7 +466,7 @@
 				$(".replEditCompl").hide();
 				$(".hide").hide();
 				
-				if(${id==repldto.repl_writer }){
+				if(${user.id==repldto.repl_writer }){
 					$(".modiRepl").on("click",function(){
 						document.getElementById("repl_text").readOnly=false;
 						$(this).parent().find("input:nth-child(1)").show();
