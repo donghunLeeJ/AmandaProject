@@ -64,9 +64,6 @@
    text-align: left;
 }
 
-#div2 {
-   text-align: center;
-}
 </style>
 </head>
 
@@ -205,6 +202,20 @@
       </header>
       <!--       상단 네비 끝 -->
       <!-- Content 시작 -->
+      <div class="breadcrumbs">
+			<div class="breadcrumbs-inner">
+				<div class="row m-0">
+					<div class="col-sm-4">
+						<div class="page-header float-left">
+							<div class="page-title">
+								<h1><b>회원정보</b></h1>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8"></div>
+				</div>
+			</div>
+		</div>
       <div class="content ">
          <!-- Animated -->
          <div class="animated fadeIn">
@@ -240,7 +251,7 @@
                      </tbody>
                   </table>
                </div>
-               <div class="col-lg-6" id="div3">
+               <div class="col-lg-6">
                   <table class="table table-striped table-bordered" id="blacktable">
                      <thead>
                         <tr>
