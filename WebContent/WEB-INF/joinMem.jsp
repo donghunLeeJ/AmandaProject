@@ -286,9 +286,9 @@
                 
                  <label for="inputPhoneNumber" class="col-lg-2 control-label">주소 입력</label>
                     <div class="col-lg-10">
-                        <input required type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호" readonly >
-                        <input required type="text" class="form-control" id="Address1" name="address1" placeholder="주소" readonly>
-                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소"><br>
+                        <input required type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호" readonly required>
+                        <input required type="text" class="form-control" id="Address1" name="address1" placeholder="주소" readonly required>
+                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" required><br>
                         <input type="button" value="우편번호 찾기" id="search">
                     </div>
                     

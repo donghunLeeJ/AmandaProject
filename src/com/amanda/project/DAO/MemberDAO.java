@@ -53,25 +53,22 @@ public class MemberDAO {
 		return SHA;
 	}
 	/** 디비 값을 확인하고 로그인을 진행하는 메서드*/
-	public int checklogin(String id,String pw)throws Exception{
-		String sql="select * from Member where id= ? and pw= ? ";
+	public String checklogin(String id)throws Exception{
+		String sql="select pw from Member where id= ?";
 		try (	Connection con=ds.getConnection();
 				PreparedStatement pstat=con.prepareStatement(sql);
 
 				)
 		{
 			pstat.setString(1, id );
-			pstat.setString(2, pw);
 			ResultSet rs=pstat.executeQuery();
-			if(rs.next()) {
-				return 1;
-			}else {
-				return -1;
-			}
+			rs.next();
+			String result = rs.getString(1);
+			return result;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			return 0;
+			return "아이디 없음";
 		}
 	}
 	/** session에 값을 저장하기 위한 메서드*/
@@ -128,7 +125,7 @@ public class MemberDAO {
 
 	/** 회원가입 메서드*/
 
-	public int joinmember(MemberDTO dto) throws Exception{
+	public int joinmember(MemberDTO dto){
 		String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,default,?,?,?,default,default,default)";
 		try(
 				Connection con = ds.getConnection();
@@ -143,11 +140,13 @@ public class MemberDAO {
 			pstat.setString(7, dto.getPostcode());
 			pstat.setString(8, dto.getAddress1());
 			pstat.setString(9, dto.getAddress2());
-
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		return -1;
 	}
 	/** 회원탈퇴 메서드*/
 	public int delete(String id, String pw) {

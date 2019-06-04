@@ -9,8 +9,12 @@
 </head>
 <body>
 	<script>
-		alert("회원가입이 완료되었습니다.")
-		location.href = "page?url=WEB-INF/main.jsp"
+		if(${result == 1}){
+			alert("회원가입이 완료되었습니다.")
+			location.href = "page?url=WEB-INF/main.jsp"
+		}
+		
+	
 	</script>
 </body>
 </html>
