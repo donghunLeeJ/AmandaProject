@@ -33,7 +33,7 @@ public class PayController extends HttpServlet {
 			int price=Integer.parseInt(request.getParameter("amount"));
 			String name = request.getParameter("name");
 			System.out.println(pdao.update_point(id, price));
-			menuDAO.insertMenu(id, name, price);
+			pdao.pay_table_insert(id, price);
 			request.getSession().setAttribute("user", dao.select_user(id));
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
@@ -45,7 +45,7 @@ public class PayController extends HttpServlet {
 			System.out.println(id);
 			System.out.println(name);
 			System.out.println(price);
-			menuDAO.insertMenu(id,name,price);
+			pdao.pay_table_insert(id, price);
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
 		}

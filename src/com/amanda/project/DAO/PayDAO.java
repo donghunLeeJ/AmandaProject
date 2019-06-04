@@ -47,7 +47,7 @@ public class PayDAO {
 		}
 		return SHA;
 	}
-	/** 디비 값을 확인하고 로그인을 진행하는 메서드*/
+
 	public int update_point(String id,int point){
 		String sql="update member set point = point + ? where id = ? ";
 		try (	Connection con=ds.getConnection();
