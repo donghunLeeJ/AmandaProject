@@ -304,64 +304,51 @@
                               <button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
                               <button type="button" class="btn btn-primary" id="msg">msg</button>
 
-                              <script>
-                              //msg보내는 소켓 및 버튼
-                               var webSocket = new WebSocket('ws://192.168.60.20/AmandaProject/broadcasting');
-                               webSocket.onerror = function(event) {
-                                 onError(event)
-                                     };
-                                 webSocket.onmessage = function(event) {
-                                    onMessage(event)
-                                  };
-                                if("${user.name}"=="관리자"){
-                                  function onMessage(event) {
-                                    var msg = event.data.split(":");
-                                       var who = msg[0]; 
-                                        var contents = msg[1];
-                                         var who2=msg[2];
-                                        
-                             	 if(who!="admin"&&who2=="admin"){
-                       		     window.open("reply.message?who="+who+"&&content="+contents, "",
-                      		     "width=500px,height=300px");
-                     	               }
-                                     }
-                                   
-                                  }       
-                              
-                                else{
-                                  function onMessage(event) {
-                                    var msg = event.data.split(":");
-                                       var who = msg[0]; //admin
-                                        var contents = msg[1];
-                                         var who2=msg[2]; //clinet이름                                                                
-                              if("${user.name}"==who2&&who=="admin") 
-                             {
-                            window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
-                           "width=500px,height=300px");
-                                    
-                              }
-                              
-                           }
-                          
-                          }   
-                          //메시지 끝
-                          
-                           $("#logoutbtn")
-                           .on(
-                                 "click",
-                                 function() {
-                                    location.href = "logoutProc.member";
-                                 })
-                                 $("#msg")
-                           .on(
-                                 "click",
-                                 function() {
-                                    
-                                    window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
-                                 
-                                 })
+                             		<script>
+										//msg보내는 소켓 및 버튼
+										 var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+									    webSocket.onerror = function(event) {
+     									 
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  									 
+  									 
+  										if("${user.id}"!="admin"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; //admin
+       											var contents = msg[1];
+       											 var who2=msg[2]; //clinet이름      											    							
+     								 if("${user.id}"==who2&&who=="admin") 
+     								{
+    								window.open("replytoclient.message?who="+who2+"&&content="+contents,"",
+									"location=no, directories=no,width=500px,height=300px");
+     										 
+     								 }
+     								 
+     							 }
+     							
+  								}	
+  								//메시지 끝
+  								
+									$("#logoutbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "logoutProc.member";
+											})
+											$("#msg")
+									.on(
+											"click",
+											function() {
+												
+												window.open("page?url=WEB-INF/newmessage.jsp","","width=500px,height=300px");
+											
+											})
 
-                                                                                          
+											                                                         
                            </script>
                         </c:otherwise>
                         </c:choose>

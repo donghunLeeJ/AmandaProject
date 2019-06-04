@@ -24,7 +24,7 @@
 </body>
   <script type="text/javascript">
         var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('ws://192.168.60.20/AmandaProject/broadcasting');
+        var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
         var inputMessage = document.getElementById('inputMessage');
    
    
@@ -32,7 +32,7 @@
       alert(event.data);
     }
     function send() {
-        webSocket.send("${user.name}:"+inputMessage.value+":admin");
+        webSocket.send("${user.id}:"+inputMessage.value+":admin");
         inputMessage.value = "";
         window.close();
     }
