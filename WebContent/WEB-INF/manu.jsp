@@ -381,13 +381,14 @@
                            placeholder="비밀번호 입력하시오" required name="loginpw">
                      </div>
                      <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" type="button"
+										id="findId">아이디 찾기</button>
                         <button type="button" class="btn btn-primary" type="button"
-                           id="reinputpw">비밀번호재설정</button>
+                           id="reinputpw">비밀번호 찾기</button>
                         <button type="button" class="btn btn-primary" type="button"
                            id="joinMem">회원가입</button>
                         <button type="button" class="btn btn-primary" id="login">login</button>
-                        <button type="button" class="btn btn-secondary"
-                           data-dismiss="modal">Close</button>
+                        
                      </div>
                   </form>
                </div>
@@ -395,6 +396,11 @@
          </div>
       </div>
       <script>
+      $("#findId").on("click",function(){
+
+  		location.href = "page?url=WEB-INF/modifyid.jsp";
+  		})
+  		
          $("#reinputpw").on("click", function() {
             location.href = "page?url=WEB-INF/modifypassword.jsp";
          })
@@ -487,6 +493,8 @@
 
 
       <script>
+      
+      
          $("#logoutbtn1").on("click", function() {
             location.href = "logoutProc.member";
          })
