@@ -20,7 +20,17 @@
 											<div class="mx-auto d-block">
 												
 												<h5 class="mt-2 mb-1">
-													<b>보낸 사람:${who}</b>
+													<b>보낸 사람:${who}
+													
+							<%@ page import = "java.util.Calendar" %>
+<%
+Calendar cal = Calendar.getInstance();%>
+ 
+(<%= cal.get(Calendar.YEAR) %>-<%= cal.get(Calendar.MONTH)+1 %>-<%= cal.get(Calendar.DATE) %>
+<%= cal.get(Calendar.HOUR) %>:<%= cal.get(Calendar.MINUTE) %>:<%= cal.get(Calendar.SECOND) %>)
+																			
+													
+													</b>
 												</h5>
 											</div>
 											<hr>
@@ -32,7 +42,7 @@
 											</form>
 											
 											<script>
-											  var webSocket = new WebSocket('ws://192.168.60.20/AmandaProject/broadcasting');
+											  var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
 											function onError(event) {
 										      alert(event.data);
 										    }
