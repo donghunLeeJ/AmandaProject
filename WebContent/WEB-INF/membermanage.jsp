@@ -509,7 +509,30 @@
       <script
          src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
       <script src="assets/js/main.js"></script>
+<!--  메시지-->
+      <script>
+ var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+									    webSocket.onerror = function(event) {
+     									// onError(event)
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  										if("${user.name}"=="관리자"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; 
+       											var contents = msg[1];
+       											 var who2=msg[2];
+       											
+     								 if(who!="관리자"&&who2=="admin"){
+    								window.open("reply.message?who="+who+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 }
+    											}
+  											
+  										  }		 
 
-      
+</script>
 </body>
 </html>

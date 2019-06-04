@@ -204,6 +204,7 @@
                               </a>
                            </div>
                         </div>
+                         <button type="button" class="btn btn-primary" id="msg">msg</button>
                      </div>
                      <!--  mypage 사람 사진-->
                      <div class="user-area  float-right">
@@ -779,7 +780,44 @@
 	   
 	</script>
 	
-     
+       <!--메시지  -->
+    	<script>
+										//msg보내는 소켓 및 버튼
+										 var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+									    webSocket.onerror = function(event) {
+     									 onError(event)
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  									 
+  									 
+  										if("${user.id}"!="admin"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; //admin
+       											var contents = msg[1];
+       											 var who2=msg[2]; //clinet이름      											    							
+     								 if("${user.id}"==who2&&who=="admin") 
+     								{
+    								window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 
+     								 }
+     								 
+     							 }
+     							
+  								}	
+  										
+  										$("#msg")
+  										.on(
+  												"click",
+  												function() {
+  													
+  													window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
+  												
+  												})
+     </script>
      
      
    
