@@ -27,8 +27,17 @@ public class MemberDTO {
 		this.phone = phone;
 		this.usehour = usehour;
 	}
-
 	
+	
+	public MemberDTO(int mem_seq, String name, String id, String blackreason) {
+		super();
+		this.mem_seq = mem_seq;
+		this.name = name;
+		this.id = id;
+		this.blackreason = blackreason;
+	}
+
+
 	public MemberDTO(int mem_seq, String name, String blackreason) {
 		super();
 		this.mem_seq = mem_seq;

@@ -63,10 +63,39 @@
 .card-text {
 	text-align: left;
 }
+
+.rows {
+	overflow: hidden;
+}
+
+.myrow {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#numtext {
+	margin: 0px;
+	width: 40px;
+}
+
+table {
+	text-align: center;
+	table-layout: fixed;
+}
+
+table td, table th {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#reasonsector {
+	overflow: hidden;
+}
 </style>
 </head>
 
 <body>
+
 	<!-- 왼쪽 네비 시작 -->
 	<aside id="left-panel" class="left-panel">
 		<nav class="navbar navbar-expand-sm navbar-default">
@@ -108,6 +137,7 @@
 			</div>
 		</nav>
 	</aside>
+
 	<!-- 왼쪽 네비 끝 -->
 	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
@@ -215,81 +245,72 @@
 				</div>
 			</div>
 		</div>
-		<div class="content ">
+		<div class="content row">
 			<!-- Animated -->
-			<div class="animated fadeIn">
-				<!-- Widgets  -->
-				<div class="row myrow">
-					<div class="col-lg-6 card ml-4">
-						<div class="card-body">
-							<table class="table table-striped table-bordered col-lg-12"
-								id="membertable">
-								<thead>
+			<!-- 				<div class="animated fadeIn"> -->
+			<!-- Widgets  -->
+			<div class="row">
+				<div class="col-lg-6">
+					<table class="table" id="membertable">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>이름</th>
+								<th>아이디</th>
+								<th>핸드폰</th>
+								<th class="d-none d-lg-block">사용시간</th>
+								<th>선택</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="dto" items="${result }">
+								<form action="toblack.manage" id="memberinfo">
 									<tr>
-										<th>번호</th>
-										<th>이름</th>
-										<th>아이디</th>
-										<th>핸드폰</th>
-										<th class="d-none d-lg-block">사용시간</th>
-										<th>선택</th>
+										<td id="memnum">${dto.mem_seq }</td>
+										<td id="memname">${dto.name }</td>
+										<td id="memid">${dto.id }</td>
+										<td id="memphone">${dto.phone }</td>
+										<td class="d-none d-lg-block" style="border: none;"
+											id="memusehour">${dto.usehour }</td>
+										<td><button type="button" class="btn btn-dark movebtn"
+												data-toggle="modal" data-target="#resonModal">블랙</button></td>
 									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="dto" items="${result }">
-										<form action="toblack.manage" id="memberinfo">
-											<tr>
-												<th id="memnum">${dto.mem_seq }</th>
-												<td id="memname">${dto.name }</td>
-												<td id="memid">${dto.id }</td>
-												<td id="memphone">${dto.phone }</td>
-												<td class="d-none d-lg-block" style="border: none;"
-													id="memusehour">${dto.usehour }</td>
-												<td><button type="button" class="btn btn-dark movebtn"
-														data-toggle="modal" data-target="#resonModal">블랙</button></td>
-											</tr>
-										</form>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-
-
-					</div>
-					<div class="col-lg-5 card ml-5">
-
-						<div class="card-body">
-							<table class="table table-striped table-bordered col-lg-12"
-								id="blacktable">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>이름</th>
-										<th>사유</th>
-										<th>선택</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="bl" items="${blresult }">
-										<form action="cancelblack.manage">
-											<tr>
-												<th><input type="text" value="${bl.mem_seq}"
-													name="blacknumber"
-													style="background-color: #00000000; border: none;" readonly></th>
-												<td>${bl.name }</td>
-												<td>${bl.blackreason }</td>
-												<td><button class="btn btn-primary">블랙취소</button>
-											</tr>
-										</form>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-
-
-					</div>
+								</form>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
-				<div class="clearfix"></div>
+				<div class="col-lg-6">
+					<table class="table" id="blacktable">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>이름</th>
+								<th>아이디</th>
+								<th>사유</th>
+								<th>선택</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="bl" items="${blresult }">
+								<form action="cancelblack.manage">
+									<tr>
+										<td><input type="text" value="${bl.mem_seq}"
+											name="blacknumber" id="numtext"
+											style="background-color: #00000000; border: none;" readonly></td>
+										<td>${bl.name }</td>
+										<td>${bl.id }</td>
+										<td>${bl.blackreason }</td>
+										<td><button class="btn btn-primary">블랙취소</button>
+									</tr>
+								</form>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
+			<div class="clearfix"></div>
+			<!-- 				</div> -->
 
 			<div class="modal fade" id="resonModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -306,14 +327,16 @@
 						<div class="modal-body">
 							<form action="toblack.manage" class="reasonform" method="post">
 								<div class="form-group">
-									<label for="exampleFormControlInput1">사유</label> <input
+									<label for="exampleFormControlInput1">사유</label> 
+									<input
 										type="text" class="form-control" id="blreason"
 										name="blackreson" placeholder="사유를 입력하세요(15자 이내)"
-										maxlength="15" required> <input type="text"
+										maxlength="15" required> 
+										<input type="text"
 										class="form-control" id="blnum" name="blacknum" readonly>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary reasonsubmit">확인</button>
+									<button class="btn btn-primary reasonsubmit">확인</button>
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">취소</button>
 								</div>
@@ -324,18 +347,15 @@
 				</div>
 			</div>
 			<script>
-				$(".reasonsubmit").on("click", function() {
-					$(".reasonform").submit();
-				})
-				$(".movebtn").on(
-						"click",
-						function() {
-							$("#blnum").val(
-									$(this).parent().parent().find(
-											"th:nth-child(1)").html());
+					$(".movebtn").on(
+							"click",
+							function() {
+								$("#blnum").val(
+										$(this).parent().parent().find(
+												"td:nth-child(1)").html());
 
-						})
-			</script>
+							})
+				</script>
 
 
 
@@ -380,17 +400,17 @@
 				</div>
 			</div>
 			<script>
-				$("#reinputpw").on("click", function() {
-					location.href = "page?url=WEB-INF/modifypassword.jsp";
-				})
-				$("#joinMem").on("click", function() {
-					location.href = "page?url=WEB-INF/joinMem.jsp";
-				})
-				document.getElementById("login").onclick = function() {
-					document.getElementById("form").submit();
-				}
-				//                            로그인 버튼과 회원가입 버튼의 script
-			</script>
+					$("#reinputpw").on("click", function() {
+						location.href = "page?url=WEB-INF/modifypassword.jsp";
+					})
+					$("#joinMem").on("click", function() {
+						location.href = "page?url=WEB-INF/joinMem.jsp";
+					})
+					document.getElementById("login").onclick = function() {
+						document.getElementById("form").submit();
+					}
+					//                            로그인 버튼과 회원가입 버튼의 script
+				</script>
 
 			<!--                   진향이 로그인폼끝 -->
 			<!--                         진향이 마이페이지 폼 -->
@@ -469,10 +489,11 @@
 					</div>
 				</div>
 			</div>
+		</div>
 
 
 
-			<script>
+		<script>
 				$("#logoutbtn1").on("click", function() {
 					location.href = "logoutProc.member";
 				})
@@ -487,32 +508,31 @@
 					location.href = "page?url=WEB-INF/pay.jsp";
 				})
 			</script>
-			<!-- 진향이 마이페이지 폼끝 -->
-		</div>
+		<!-- 진향이 마이페이지 폼끝 -->
+	</div>
 
-		<!-- 컨텐츠 끝 -->
+	<!-- 컨텐츠 끝 -->
 
-		<div class="clearfix"></div>
-		<!-- Footer -->
-		<footer class="site-footer">
-			<div class="footer-inner bg-white">
-				<div class="row">
-					<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
-					<div class="col-sm-6 text-right">
-						Designed by <a href="https://colorlib.com">1조</a>
-					</div>
+	<!-- Footer -->
+	<footer class="site-footer">
+		<div class="footer-inner bg-white">
+			<div class="row">
+				<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
+				<div class="col-sm-6 text-right">
+					Designed by <a href="https://colorlib.com">1조</a>
 				</div>
 			</div>
-		</footer>
+		</div>
+	</footer>
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-		<script src="assets/js/main.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+	<script src="assets/js/main.js"></script>
 </body>
 </html>

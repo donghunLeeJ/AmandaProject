@@ -230,7 +230,7 @@ public class MemberDAO {
 	
 	public List<MemberDTO> show_member() {
 		List<MemberDTO> list = new ArrayList<>();
-		String sql = "select mem_seq,id,name,phone,usehour from member where blackcheck='n'";
+		String sql = "select mem_seq,id,name,phone,usehour from member where blackcheck='n' and id not in('admin')";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -273,7 +273,7 @@ public class MemberDAO {
 	
 	public List<MemberDTO> show_blacklist() {
 		List<MemberDTO> list = new ArrayList<>();
-		String sql = "select mem_seq,name,blackreason from member where blackcheck='y'";
+		String sql = "select mem_seq,name,id,blackreason from member where blackcheck='y'";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -282,8 +282,9 @@ public class MemberDAO {
 			while(rs.next()) {
 				int num = rs.getInt(1);
 				String name = rs.getString(2);
-				String reason = rs.getString(3);
-				MemberDTO dto = new MemberDTO(num,name,reason);
+				String id = rs.getString(3);
+				String reason = rs.getString(4);
+				MemberDTO dto = new MemberDTO(num,name,id,reason);
 				list.add(dto);
 			}
 			return list;
