@@ -41,9 +41,9 @@ public class Start extends HttpServlet {
 	      request.getServletContext().setAttribute("UserSeatNum", MemberController.useridseat);
 	      request.setAttribute("seatUsed", dao.usedSeat());
 	      request.getServletContext().setAttribute("seat", arr);
-	      request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+	      request.getRequestDispatcher("WebContent/WEB-INF/main.jsp").forward(request, response);
 		
-		//--------------ㅡmain 이동 ---------------------------------------	
+		
 
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
