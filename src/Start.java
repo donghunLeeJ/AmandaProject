@@ -18,15 +18,15 @@ public class Start extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ComDAO cdao = new ComDAO();
-		List<ComDTO> arr = cdao.selectSeat_all();
+		//ComDAO cdao = new ComDAO();
+		//List<ComDTO> arr = cdao.selectSeat_all();
 //		System.out.println(arr.get(1).getIp());
 
-		request.getServletContext().setAttribute("seat", arr);
-		int usedSeat = cdao.selectSeat();
-		System.out.println(usedSeat);
+		//request.getServletContext().setAttribute("seat", arr);
+		//int usedSeat = cdao.selectSeat();
+		
 		request.getSession().setAttribute("user", null);
-		request.getServletContext().setAttribute("seatUsed", usedSeat );
+		//request.getServletContext().setAttribute("seatUsed", usedSeat );
 		request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
 	}

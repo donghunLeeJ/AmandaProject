@@ -178,9 +178,40 @@ public class MemberDAO {
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			MemberDTO dto = new MemberDTO(id,email);
+			
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, dto.getEmail());
+			
 			ResultSet rs=pstat.executeQuery();
+			System.out.println(rs.next());
+			if(rs.next()) {
+				return 1;
+			}else {
+				return 0;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	
+	
+	
+	public int findid(String name,String birth, String email) {
+		String sql = "select id from member where name=? and birth=? and email=?";
+		
+		try(
+				Connection con = this.db_connect();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			
+			pstat.setString(1,name);
+			pstat.setString(2, birth);
+			pstat.setString(3, email);
+			
+			ResultSet rs=pstat.executeQuery();
+			
 			
 			if(rs.next()) {
 				return 1;
@@ -192,6 +223,8 @@ public class MemberDAO {
 			return -1;
 		}
 	}
+	
+	
 
 	public int PointUpdate(int point , String id) throws Exception{
 		String sql = "update member set point=? where id=?";

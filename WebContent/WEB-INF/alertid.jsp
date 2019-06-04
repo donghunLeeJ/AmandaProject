@@ -10,7 +10,7 @@
 <body>
 	<script>
 		alert("회원정보가 없습니다")
-		location.href = "page?url=WEB-INF/modifypassword.jsp";
+		location.href = "page?url=WEB-INF/modifyid.jsp";
 	</script>
 </body>
 </html>

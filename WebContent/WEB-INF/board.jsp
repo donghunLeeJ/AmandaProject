@@ -443,8 +443,10 @@
 								placeholder="비밀번호 입력하시오" required name="loginpw">
 						</div>
 						<div class="modal-footer">
+						<button type="button" class="btn btn-primary" type="button"
+									id="reinputid">아이디 찾기</button>
 							<button type="button" class="btn btn-primary" type="button"
-									id="reinputpw">비밀번호재설정</button>
+									id="reinputpw">비밀번호찾기</button>
 							<button type="button" class="btn btn-primary" type="button"
 								id="joinMem">회원가입</button>
 							<button type="button" class="btn btn-primary" id="login">login</button>
@@ -457,6 +459,9 @@
 		</div>
 	</div>
 	<script>
+	$("#reinputid").on("click",function(){
+		location.href = "page?url=WEB-INF/modifyid.jsp";
+		})
 									$("#reinputpw").on("click",function(){
 									location.href = "page?url=WEB-INF/modifypassword.jsp";
 									})
