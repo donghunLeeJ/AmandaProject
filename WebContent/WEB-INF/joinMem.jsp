@@ -43,7 +43,7 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/seat.jsp"> <i
