@@ -308,7 +308,7 @@
 
                              		<script>
 										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+										 var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
 									    webSocket.onerror = function(event) {
      									 
    											 };
@@ -329,7 +329,12 @@
 									"location=no, directories=no,width=500px,height=300px");
      										 
      								 }
-     								 
+     								 else if("admin"==who&&who2=="all")
+     								 {
+     									 console.log("kk");
+     									window.open("all.message?content="+contents,"",
+    									"location=no, directories=no,width=500px,height=300px");
+     									  }
      							 }
      							
   								}	
