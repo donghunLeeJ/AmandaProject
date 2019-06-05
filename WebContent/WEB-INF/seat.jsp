@@ -74,15 +74,15 @@
             <ul class="nav navbar-nav">
                	<c:choose>
 					<c:when test="${user.id != 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 				</c:choose>
-               <li class="menu-item-has-children dropdown"><a
+               <li class="active"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
@@ -648,7 +648,7 @@
 						</script>
      <!-- 	---------------------------------소켓연결  script--------------------------------- -->
 		<script>
-                    var webSocket = new WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+                    var webSocket = new WebSocket('ws://192.168.60.20/websocketendpoint');
                     webSocket.onopen ;
                     webSocket.onerror ;
                     webSocket.onmessage = function(event) {
@@ -684,6 +684,9 @@
   //2.SeatTime함수의 갯수는 현재 로그인 중인 유저의 수만큼 있어야 하고 함수명이 서로 달라야 한다(여기선 자리번호로 구별했음)
   
   //만일 seat의 자리번호와 useridseat에서 뽑아온 자리번호가 서로 같다면?
+		 console.log($("#seat${i.value}>h4").text() == ${i.value});
+  
+  
   if($("#seat${i.value}>h4").text() == ${i.value}){
 		
  	 function SeatTime${i.value}(){//같은 이름의 함수가 생겨선 안되므로 자리번호를 함수명 뒤에 달아주었음  
@@ -703,9 +706,9 @@
  		         
  		 $("#seat${i.value}>h4").html("${i.key}님의 남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
  		if("${user.id}"=="admin"){
- 		 $("#seat${i.value}>h4").append("<button class='idmsg'>msg</button>");
+ 		 $("#seat${i.value}>h4").append("<button id='${i.key}'>msg</button>");
  		}
- 		 $(".idmsg")
+ 		 $("#${i.key}")
 		.on(
 				"click",
 				function() {
@@ -787,7 +790,7 @@
  <!-- 메시지  -->  
   			<script>
 										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
+										 var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
 									    webSocket.onerror = function(event) {
      									 onError(event)
    											 };

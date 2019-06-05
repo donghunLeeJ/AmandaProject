@@ -27,7 +27,15 @@ public class ComController extends HttpServlet {
 	    if(command.equals("/usertime.com")) {
 	    		   
 	    	MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
-		 	String id=dto.getId();
+	    	System.out.println(dto);
+	    	String id = null;
+	    	try {
+	    		id=dto.getId();	
+	    	}catch(Exception e) {
+	    		
+	    	}
+	    	
+		 	
 		 	
 		 	//만일 사용자가 pc방이 아닌 다른 기기에서 로그인했을 경우
             //로그인한 사람의 id와 포인트값을 저장하는 pointmap에 데이터가 저장되지 않으므로 값이 null이 나오게 된다.

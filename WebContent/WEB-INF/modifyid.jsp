@@ -86,7 +86,7 @@
 
 
 
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
 
 
 

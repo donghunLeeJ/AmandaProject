@@ -103,11 +103,11 @@ table td, table th {
             <ul class="nav navbar-nav">
               <c:choose>
 					<c:when test="${user.id != 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 					</c:choose>
@@ -133,10 +133,8 @@ table td, table th {
 						href="Board.board?currentPage=1"> <i
 							class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
-
-
 					
-					<li class="menu-item-has-children dropdown"><a
+					<li class="active"><a
 						href="member.manage"> <i
 							class="menu-icon fa fa-th"></i>고객관리
 					</a></li>

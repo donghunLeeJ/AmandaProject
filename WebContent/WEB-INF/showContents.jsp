@@ -158,13 +158,13 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<c:choose>
+		     	<c:choose>
 					<c:when test="${user.id != 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 					</c:choose>
@@ -186,7 +186,7 @@
               		 </a></li>
               		 </c:when>
            		</c:choose>
-               <li class="menu-item-has-children dropdown"><a
+               <li class="active"><a
                   href="Board.board?currentPage=1"> <i
                      class="menu-icon fa fa-th"></i>고객의소리
                </a></li>
@@ -357,130 +357,148 @@
 		</header>
 		<!-- /header -->
 		<div class="content">
-			<div class="animated fadeIn">
-				<div class="card">
+			  <div class="animated fadeIn">
+            <div class="card">
 
-					<div class="card-header">
-						<strong class="card-title"> <header>
-								<div class="row">
-									<div class="col-lg-8 col-md-8 col-sm-8 col-8 titleWrapper"
-										id="titlerow">
-										제목 : <input type="text" id="title" readonly
-											value="${dto.title}">
-									</div>
-									<div class="col-lg-4 col-md-4 col-sm-4 col-4 titleWrapper">
-										<div class="row">
-											<div class="col-lg-4 d-none d-lg-block" id="writerrow">글쓴이
-												:</div>
-											<div class="col-lg-8 col-md-12 col-sm-12 col-12">
-												<input type="text" id="writer" readonly
-													value="${dto.writer}">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-4 d-none d-lg-block" id="daterow">작성일시
-												:</div>
-											<div class="col-lg-8 col-md-12 col-sm-12 col-12">
-												<input type="text" id="writeDate" readonly
-													value="${dto.writeDate}">
-											</div>
-										</div>
-									</div>
-								</div>
-							</header></strong>
-					</div>
-					<div class="card-body">
-						<div class="container" id="wrapper">
-							<main id="main">
-							<div id="text">
-								<div id="contents" name="contents">${dto.contents}</div>
-							</div>
-							</main>
-						</div>
-					</div>
+               <div class="card-header">
+                  <strong class="card-title"> <header>
+                        <div class="row">
+                           <div class="col-lg-8 col-md-8 col-sm-8 col-8 titleWrapper"
+                              id="titlerow">
+                              제목 : <input type="text" id="title" readonly
+                                 value="${dto.title}">
+                           </div>
+                           <div class="col-lg-4 col-md-4 col-sm-4 col-4 titleWrapper">
+                              <div class="row">
+                                 <div class="col-lg-4 d-none d-lg-block" id="writerrow">글쓴이
+                                    :</div>
+                                 <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                                    <input type="text" id="writer" readonly
+                                       value="${dto.writer}">
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-lg-4 d-none d-lg-block" id="daterow">작성일시
+                                    :</div>
+                                 <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                                    <input type="text" id="writeDate" readonly
+                                       value="${dto.writeDate}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </header></strong>
+               </div>
+               <div class="card-body">
+                  <div class="container" id="wrapper">
+                     <main id="main">
+                     <div id="text">
+                        <div id="contents" name="contents">${dto.contents}</div>
+                     </div>
+                     </main>
+                  </div>
+               </div>
 
-				</div>
-				<footer>
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
+            </div>
+            <footer>
+               <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12" id="footer">
 
-							<c:if test="${user.id==writer }">
-								<input type="button" id="modify" value="수정하기"
-									class="btn btn-secondary">
-								<input type="button" id="delete" value="글 삭제"
-									class="btn btn-secondary">
-							</c:if>
+                     <c:if test="${user.id==writer }">
+                        <input type="button" id="modify" value="수정하기"
+                           class="btn btn-secondary">
+                        <input type="button" id="delete" value="글 삭제"
+                           class="btn btn-secondary">
+                     </c:if>
+                     <c:if test="${user.id == 'admin' }">
+                        <input type="button" id="delete" value="글 삭제"
+                           class="btn btn-secondary">
+                     </c:if>
+                     <c:if test="${user != null }">
+                        <input type="button" id="showReplBox" value="댓글달기"
+                           class="btn btn-secondary">
 
-							<c:if test="${user != null }">
-								<input type="button" id="showReplBox" value="댓글달기"
-									class="btn btn-secondary">
+                     </c:if>
+                     <input type="button" id="toList" value="목록으로"
+                        class="btn btn-secondary">
 
-							</c:if>
-							<input type="button" id="toList" value="목록으로"
-								class="btn btn-secondary">
+                  </div>
+               </div>
+            </footer>
+            <form action="Reply.board" id="replForm">
+               <div class="row" id="replBox">
+                  <input type="text" value="${no}" name="contents_no"
+                     id="contents_no">
+                  <textarea id="repl" name="repl_contents"></textarea>
+                  <input type="button" id="replButt" value="등록하기"
+                     class="btn btn-secondary">
+               </div>
+            </form>
+            <div id="replHeader">
+               <h4>댓글</h4>
+            </div>
+            <div id="replContentsBox">
+               <c:forEach var="repldto" items="${replList}">
+                  <form action="ReplEdit.board">
+                     <div class="row" id="eachRepl">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_writer">${repldto.repl_writer}</div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                           <input type="text" id="repl_text" name="repl_contents"
+                              value="${repldto.repl_contents}" readonly> <input
+                              type="text" class="hide" name="contents_no"
+                              value="${repldto.contents_no}"> <input type="text"
+                              class="hide" name="repl_seq" value="${repldto.repl_seq}">
+                           <input type="text" class="hide" id="path">
+                        </div>
 
-						</div>
-					</div>
-				</footer>
-				<form action="Reply.board" id="replForm">
-					<div class="row" id="replBox">
-						<input type="text" value="${no}" name="contents_no"
-							id="contents_no">
-						<textarea id="repl" name="repl_contents"></textarea>
-						<input type="button" id="replButt" value="등록하기"
-							class="btn btn-secondary">
-					</div>
-				</form>
-				<div id="replHeader">
-					<h4>댓글</h4>
-				</div>
-				<div id="replContentsBox">
-					<c:forEach var="repldto" items="${replList}">
-						<form action="ReplEdit.board">
-							<div class="row" id="eachRepl">
-								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_writer">${repldto.repl_writer}</div>
-								<div class="col-lg-8 col-md-8 col-sm-8 col-8">
-									<input type="text" id="repl_text" name="repl_contents"
-										value="${repldto.repl_contents}" readonly> <input
-										type="text" class="hide" name="contents_no"
-										value="${repldto.contents_no}"> <input type="text"
-										class="hide" name="repl_seq" value="${repldto.repl_seq}">
-									<input type="text" class="hide" id="path">
-								</div>
-
-								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_time">${repldto.repl_time}</div>
-							</div>
-							<c:if test="${user.id==repldto.repl_writer }">
-								<div class="row">
-									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
-										id="replButts">
-										<input type="submit" class="replEditCompl btn btn-secondary"
-											value="수정완료" style="margin-right: 4px;"><input
-											type="button" value="수정" class="modiRepl btn btn-secondary">
-										<input type="button" value="삭제"
-											class="delRepl btn btn-secondary">
-									</div>
-								</div>
-							</c:if>
-						</form>
-						<script>
-				$(".replEditCompl").hide();
-				$(".hide").hide();
-				
-				if(${user.id==repldto.repl_writer }){
-					$(".modiRepl").on("click",function(){
-						document.getElementById("repl_text").readOnly=false;
-						$(this).parent().find("input:nth-child(1)").show();
-						$(this).parent("div").parent("div").parent("form").find("div").find("div:nth-child(2)").find("input:nth-child(1)").focus();
-					})
-					$(".delRepl").on("click",function(){
-						location.href = "ReplDelete.board?repl_seq="+${repldto.repl_seq}+"&contents_no="+${repldto.contents_no};
-					})
-				}
-				</script>
-					</c:forEach>
-				</div>
-			</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_time">${repldto.repl_time}</div>
+                     </div>
+                     <c:if test="${user.id==repldto.repl_writer }">
+                        <div class="row">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-12"
+                              id="replButts">
+                              <input type="submit" class="replEditCompl btn btn-secondary"
+                                 value="수정완료" style="margin-right: 4px;"><input
+                                 type="button" value="수정" class="modiRepl btn btn-secondary">
+                              <input type="button" value="삭제"
+                                 class="delRepl btn btn-secondary">
+                           </div>
+                        </div>
+                     </c:if>
+                     <c:if test="${user.id == 'admin' }">
+                        <div class="row">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-12"
+                              id="replButts">
+                              <input type="button" value="삭제"
+                                 class="delRepl btn btn-secondary">
+                           </div>
+                        </div>
+                     </c:if>
+                  </form>
+                  <script>
+            $(".replEditCompl").hide();
+            $(".hide").hide();
+            
+            if(${user.id==repldto.repl_writer }){
+               $(".modiRepl").on("click",function(){
+                  document.getElementById("repl_text").readOnly=false;
+                  $(this).parent().find("input:nth-child(1)").show();
+                  $(this).parent("div").parent("div").parent("form").find("div").find("div:nth-child(2)").find("input:nth-child(1)").focus();
+               })
+               $(".delRepl").on("click",function(){
+                  location.href = "ReplDelete.board?repl_seq="+${repldto.repl_seq}+"&contents_no="+${repldto.contents_no};
+               })
+            }
+            if(${user.id == 'admin' }){
+               $(".delRepl").on("click",function(){
+                  location.href = "ReplDelete.board?repl_seq="+${repldto.repl_seq}+"&contents_no="+${repldto.contents_no};
+               })
+            }
+            </script>
+               </c:forEach>
+            </div>
+         </div>
+			
 
 			<div class="clearfix"></div>
 

@@ -24,7 +24,7 @@
 </body>
   <script type="text/javascript">
       
-        var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
+        var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
         var inputMessage = document.getElementById('inputMessage');
    
    
