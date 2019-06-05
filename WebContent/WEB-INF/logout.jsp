@@ -13,7 +13,7 @@
 	<script>
 	alert("로그아웃 되었습니다");
 	
-	location.href = "page?url=WEB-INF/main.jsp";
+	location.replace("page?url=WEB-INF/main.jsp");
 	</script>
 	<!-- 	---------------------------------소켓연결  script--------------------------------- -->
 </body>

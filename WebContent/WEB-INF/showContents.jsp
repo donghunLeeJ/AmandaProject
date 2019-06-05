@@ -220,9 +220,9 @@
 			</div>
 		</nav>
 	</aside>
-
+	<!-- 왼쪽 네비 끝 -->
+	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
-
 		<!-- Header-->
 		<header id="header" class="header">
 			<div class="top-left">
@@ -252,70 +252,12 @@
 									</form>
 								</div>
 
-								<div class="dropdown for-notification">
-									<button class="btn btn-secondary dropdown-toggle" type="button"
-										id="notification" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="notification">
-										<p class="red">You have 3 Notification</p>
-										<a class="dropdown-item media" href="#"> <i
-											class="fa fa-check"></i>
-											<p>Server #1 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-info"></i>
-											<p>Server #2 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-warning"></i>
-											<p>Server #3 overloaded.</p>
-										</a>
-									</div>
-								</div>
-
-								<div class="dropdown for-message">
-									<button class="btn btn-secondary dropdown-toggle" type="button"
-										id="message" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="message">
-										<p class="red">You have 4 Mails</p>
-										<a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/1.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jonathan Smith</span> <span
-													class="time float-right">Just now</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/2.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jack Sanders</span> <span
-													class="time float-right">5 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/3.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Cheryl Wheeler</span> <span
-													class="time float-right">10 minutes ago</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/4.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Rachel Santos</span> <span
-													class="time float-right">15 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a>
-									</div>
-								</div>
+								<c:choose>
+                        <c:when test="${user.id ne 'admin'}">
+								<button type="button" class="btn btn-primary" id="msg">msg</button>
+								</c:when>
+							
+						</c:choose>		
 							</div>
 							<!--  mypage 사람 사진-->
 							<div class="user-area  float-right">
@@ -404,14 +346,14 @@
                <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12" id="footer">
 
-                     <c:if test="${user.id==writer }">
+                     <c:if test="${user.id == writer }">
                         <input type="button" id="modify" value="수정하기"
                            class="btn btn-secondary">
                         <input type="button" id="delete" value="글 삭제"
                            class="btn btn-secondary">
                      </c:if>
                      <c:if test="${user.id == 'admin' }">
-                        <input type="button" id="delete" value="글 삭제"
+                        <input type="button" id="admindelete" value="글 삭제"
                            class="btn btn-secondary">
                      </c:if>
                      <c:if test="${user != null }">
@@ -423,6 +365,47 @@
                         class="btn btn-secondary">
 
                   </div>
+                  <script type="text/javascript">
+
+              	$("#contents_no").hide();
+              	$("#replBox").hide();
+              	$("#showReplBox").on("click",function(){
+              		$("#replBox").slideDown(500,"");
+              	});
+              	$("#replButt").on("click",function(){
+              		if($("#repl").val()==""){
+              			alert("댓글을 입력해주세요.");
+              		}else{
+              			$("#replForm").submit();
+              		}
+              	});
+              	
+              		document.getElementById("toList").onclick = function() {
+              			location.href = "Board.board?currentPage=1";
+              		};	
+              		
+              		if(${user.id == writer }){
+              		document.getElementById("modify").onclick = function() {
+              			location.href = "ContentsEdit.board?no="+${no};
+              		};
+              		
+              		document.getElementById("delete").onclick = function() {
+              			var result = confirm("정말 삭제하시겠습니까?");
+              			if (result) {
+              				location.href = "BoardDel.board?no="+${no};
+              			}
+              		};
+              		
+              		$("#admindelete").on("click",function(){
+              			var result = confirm("정말 삭제하시겠습니까?");
+              			if (result) {
+              				location.href = "BoardDel.board?no="+${no};
+              			}
+              		});
+              		}              
+                  </script>
+                  
+                  
                </div>
             </footer>
             <form action="Reply.board" id="replForm">
@@ -763,38 +746,7 @@
 	<script src="assets/js/main.js"></script>
 
 
-	<script>
 	
-	$("#contents_no").hide();
-	$("#replBox").hide();
-	$("#showReplBox").on("click",function(){
-		$("#replBox").slideDown(500,"");
-	})
-	$("#replButt").on("click",function(){
-		if($("#repl").val()==""){
-			alert("댓글을 입력해주세요.");
-		}else{
-			$("#replForm").submit();
-		}
-	})
-	
-		document.getElementById("toList").onclick = function() {
-			location.href = "Board.board?currentPage=1";
-		}	
-		
-		if(${user.id == writer }){
-		document.getElementById("modify").onclick = function() {
-			location.href = "ContentsEdit.board?no="+${no};
-		}
-		document.getElementById("delete").onclick = function() {
-			var result = confirm("정말 삭제하시겠습니까?");
-			if (result) {
-				location.href = "BoardDel.board?no="+${no};
-			}
-		}
-		}
-	</script>
-		
 		
  <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
   <c:choose> 

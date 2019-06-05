@@ -32,6 +32,20 @@ public class PayController extends HttpServlet {
 			
 			String id = request.getParameter("id");
 			int price=Integer.parseInt(request.getParameter("amount"));
+			if(price == 1000) {
+				price = 3600;
+			}else if(price == 2000) {
+				price = 7200;
+			}else if(price == 3000) {
+				price = 10800;
+			}else if(price == 5000) {
+				price = 19800;
+			}else if(price == 10000) {
+				price = 39600;
+			}else if(price == 20000) {
+				price = 82800;
+			}
+			
 			String name = request.getParameter("name");
 			System.out.println(pdao.update_point(id, price));
 			pdao.pay_table_insert(id, price);

@@ -520,7 +520,10 @@
 
 
          <script>
-   
+         history.pushState(null, null, "#noback");
+         $(window).bind("hashchange", function(){
+           history.pushState(null, null, "#noback");
+         });
    $("#logoutbtn1")
    .on(
          "click",
@@ -575,6 +578,10 @@
       <script
          src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
       <script src="assets/js/main.js"></script>
+
+
+
+	
 	
 <c:choose> 
     <c:when test="${user != null }">
