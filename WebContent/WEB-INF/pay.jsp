@@ -809,6 +809,12 @@
 									"width=500px,height=300px");
      										 
      								 }
+     								 else if("admin"==who&&who2=="all")
+     								 {
+     									 console.log("kk");
+     									window.open("all.message?content="+contents,"",
+    									"location=no, directories=no,width=500px,height=300px");
+     									  }
      								 
      							 }
      							

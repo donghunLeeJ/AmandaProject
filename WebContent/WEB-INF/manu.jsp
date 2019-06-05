@@ -439,6 +439,11 @@
                 		        paid_amount = rsp.paid_amount;
                 		        name = rsp.name;
                 		        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
+                		        /* 관리자에게 메시지 보내기  */
+                		       
+     								
+                		                        		        
+                		        
                 		    } else {
                 		        var msg = '결제에 실패하였습니다.';
                 		        msg += '에러내용 : ' + rsp.error_msg;
@@ -680,6 +685,12 @@
 									"width=500px,height=300px");
      										 
      								 }
+     								 else if("admin"==who&&who2=="all")
+     								 {
+     									 console.log("kk");
+     									window.open("all.message?content="+contents,"",
+    									"location=no, directories=no,width=500px,height=300px");
+     									  }
      								 
      							 }
      							
