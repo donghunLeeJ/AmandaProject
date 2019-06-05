@@ -118,6 +118,7 @@
                      <script>
                      $("#charge").on("click",function(){
                         alert("로그인 후 이용가능합니다.");   
+                        $("#loginbtn").trigger("click");
                      })
                   </script>
                   </c:when>
@@ -164,73 +165,15 @@
                            </form>
                         </div>
 
-                        <div class="dropdown for-notification">
-                           <button class="btn btn-secondary dropdown-toggle" type="button"
-                              id="notification" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false">
-                              <i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
-                           </button>
-                           <div class="dropdown-menu" aria-labelledby="notification">
-                              <p class="red">You have 3 Notification</p>
-                              <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-check"></i>
-                                 <p>Server #1 overloaded.</p>
-                              </a> <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-info"></i>
-                                 <p>Server #2 overloaded.</p>
-                              </a> <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-warning"></i>
-                                 <p>Server #3 overloaded.</p>
-                              </a>
-                           </div>
-                        </div>
-
-                        <div class="dropdown for-message">
-                           <button class="btn btn-secondary dropdown-toggle" type="button"
-                              id="message" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false">
-                              <i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
-                           </button>
-                           <div class="dropdown-menu" aria-labelledby="message">
-                              <p class="red">You have 4 Mails</p>
-                              <a class="dropdown-item media" href="#"> <span
-                                 class="photo media-left"><img alt="avatar"
-                                    src="images/avatar/1.jpg"></span>
-                                 <div class="message media-body">
-                                    <span class="name float-left">Jonathan Smith</span> <span
-                                       class="time float-right">Just now</span>
-                                    <p>Hello, this is an example msg</p>
-                                 </div>
-                              </a> <a class="dropdown-item media" href="#"> <span
-                                 class="photo media-left"><img alt="avatar"
-                                    src="images/avatar/2.jpg"></span>
-                                 <div class="message media-body">
-                                    <span class="name float-left">Jack Sanders</span> <span
-                                       class="time float-right">5 minutes ago</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                 </div>
-                              </a> <a class="dropdown-item media" href="#"> <span
-                                 class="photo media-left"><img alt="avatar"
-                                    src="images/avatar/3.jpg"></span>
-                                 <div class="message media-body">
-                                    <span class="name float-left">Cheryl Wheeler</span> <span
-                                       class="time float-right">10 minutes ago</span>
-                                    <p>Hello, this is an example msg</p>
-                                 </div>
-                              </a> <a class="dropdown-item media" href="#"> <span
-                                 class="photo media-left"><img alt="avatar"
-                                    src="images/avatar/4.jpg"></span>
-                                 <div class="message media-body">
-                                    <span class="name float-left">Rachel Santos</span> <span
-                                       class="time float-right">15 minutes ago</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                 </div>
-                              </a>
-                           </div>
-                        </div>
-                        <c:if test="${user.id ne 'admin'}">
+					<c:choose>
+                        <c:when test="${user.id ne 'admin'}">
 								<button type="button" class="btn btn-primary" id="msg">msg</button>
-								</c:if> 
+								</c:when>
+							 <c:otherwise>
+									<button type="button" class="btn btn-secondary" id="allmsg">전체msg</button>
+								</c:otherwise>
+						</c:choose>		
+								
                      </div>
                      <!--  mypage 사람 사진-->
                      <div class="user-area  float-right">
@@ -485,33 +428,40 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="loginProc.member" id="form" method="post">
-						<div class="form-group">
-							<label for="exampleFormControlInput1">ID</label> <input
-								type="text" class="form-control" id="joinemail"
-								placeholder="ID를 입력하시오" required name="loginid">
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Password</label> <input
-								type="password" class="form-control" id="joinpassword"
-								placeholder="비밀번호 입력하시오" required name="loginpw">
-						</div>
-						<div class="modal-footer">
-						<button type="button" class="btn btn-primary" type="button"
+					 <form action="loginProc.member" id="form" name="formname" method="post">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">ID</label> <input
+                              type="text" class="form-control" id="joinemail"
+                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">Password</label> <input
+                              type="password" class="form-control" id="joinpassword"
+                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" type="button"
 										id="findId">아이디 찾기</button>
-							<button type="button" class="btn btn-primary" type="button"
-									id="reinputpw">비밀번호 찾기</button>
-							<button type="button" class="btn btn-primary" type="button"
-								id="joinMem">회원가입</button>
-							<button type="button" class="btn btn-primary" id="login">login</button>
-							
-						</div>
-					</form>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="reinputpw">비밀번호 찾기</button>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="joinMem">회원가입</button>
+                           <button type="submit" class="btn btn-primary" id="login">login</button>
+                          
+                        </div>
+                     </form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
+	
+	//엔터 입력시 로그인
+    function press(f){ if(f.keyCode == 13){  
+   	 formname.submit();  
+   	 } }
+	
+	
 	$("#findId").on("click",function(){
 
  		location.href = "page?url=WEB-INF/modifyid.jsp";
@@ -751,7 +701,7 @@
  		 $("#seat${i.value}").css('background-color','white'); 
  		 $("#seat${i.value}>h4").html("${i.value} <br> <br>");	    
  		  clearInterval(tid);
- 		   
+ 	
  		//만일 어떤 사용자가 포인트도 다 사용하지 않았는데 갑자기 로그아웃할 경우 반복을 중지시키고 자리색깔을 본래의 색깔로 바꾼다.
  		 }else if(point == -1){
  			 
@@ -814,7 +764,7 @@
  <!-- 메시지  -->  
   			<script>
 										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+										 var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
 									    webSocket.onerror = function(event) {
      									 onError(event)
    											 };
@@ -832,7 +782,9 @@
     								window.open("reply.message?who="+who+"&&content="+contents, "",
 									"width=500px,height=300px");
      										 }
+     								
     											}
+  										 
   											
   										  }		 
   									 
@@ -848,6 +800,12 @@
 									"width=500px,height=300px");
      										 
      								 }
+     								else if("admin"==who&&who2=="all")
+    								 {
+    									 console.log("kk");
+    									window.open("all.message?content="+contents,"",
+   									"location=no, directories=no,width=500px,height=300px");
+    									  }
      								 
      							 }
      							
@@ -868,7 +826,14 @@
 												window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
 											
 											})
-
+$("#allmsg")
+									.on(
+											"click",
+											function() {
+												
+												window.open("page?url=WEB-INF/allnewmessage.jsp", "","width=500px,height=300px");
+											
+											})
 											                                                         
                            </script>
 

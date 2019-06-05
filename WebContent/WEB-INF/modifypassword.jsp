@@ -70,6 +70,7 @@
 						<script>
 							$("#charge").on("click",function(){
 								alert("로그인 후 이용가능합니다.");	
+								$("#loginbtn").trigger("click");
 							})
 						</script>
 					</c:when>
@@ -396,34 +397,41 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form" method="post">
-													<div class="form-group">
-														<label for="exampleFormControlInput1">ID</label> <input
-															type="text" class="form-control" id="joinemail"
-															placeholder="ID를 입력하시오" required name="loginid">
-													</div>
-													<div class="form-group">
-														<label for="exampleFormControlInput1">Password</label> <input
-															type="password" class="form-control" id="joinpassword"
-															placeholder="비밀번호 입력하시오" required name="loginpw">
-													</div>
-													<div class="modal-footer">
-													<button type="button" class="btn btn-primary" type="button"
+												 <form action="loginProc.member" id="form" name="formname" method="post">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">ID</label> <input
+                              type="text" class="form-control" id="joinemail"
+                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">Password</label> <input
+                              type="password" class="form-control" id="joinpassword"
+                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" type="button"
 										id="findId">아이디 찾기</button>
-														<button type="button" class="btn btn-primary" type="button"
-															id="reinputpw">비밀번호 찾기</button>
-														<button type="button" class="btn btn-primary"
-															type="button" id="joinMem">회원가입</button>
-														<button type="button" class="btn btn-primary" id="login">login</button>
-														
-													</div>
-												</form>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="reinputpw">비밀번호 찾기</button>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="joinMem">회원가입</button>
+                           <button type="submit" class="btn btn-primary" id="login">login</button>
+                          
+                        </div>
+                     </form>
 											</div>
 										</div>
 									</div>
 								</div>
 
 								<script>
+								
+								//엔터 입력시 로그인
+						         function press(f){ if(f.keyCode == 13){  
+						        	 formname.submit();  
+						        	 } }
+								
+								
 								$("#findId").on("click",function(){
 
 						     		location.href = "page?url=WEB-INF/modifyid.jsp";

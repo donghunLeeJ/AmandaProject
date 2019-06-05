@@ -14,21 +14,21 @@
 		<div class="card">
 										<div class="card-header">
 											<strong class="card-title pl-2">
-												Message </strong>
+											공지Message </strong>
 										</div>
 										<div class="card-body">
 											<div class="mx-auto d-block">
 												
 												<h5 class="mt-2 mb-1">
-													<b>보낸 사람:${who}
-													
-							<%@ page import = "java.util.Calendar" %>
+													<b>보낸사람:관리자
+														<%@ page import = "java.util.Calendar" %>
+
 <%
-Calendar cal = Calendar.getInstance();%>
+Calendar cal = Calendar.getInstance();
+%>
  
 (<%= cal.get(Calendar.YEAR) %>-<%= cal.get(Calendar.MONTH)+1 %>-<%= cal.get(Calendar.DATE) %>
 <%= cal.get(Calendar.HOUR) %>:<%= cal.get(Calendar.MINUTE) %>:<%= cal.get(Calendar.SECOND) %>)
-																			
 													
 													</b>
 												</h5>
@@ -36,21 +36,17 @@ Calendar cal = Calendar.getInstance();%>
 											<hr>
 											<div class="card-text">
 												${text}	
-												<form action="page?url=WEB-INF/main.jsp" id="form">
-												<input type="text" placeholder="reply" id="reply">
-												 <input type="submit" value="send" onclick="send()">				
+												<form action="page?url=WEB-INF/main.jsp" id="form"> 												
+													 
 											</form>
 											
 											<script>
-											  var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
+											
+										        var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
 											function onError(event) {
 										      alert(event.data);
 										    }
-										    function send() {
-										        webSocket.send("admin:"+reply.value+":${who}");
-										        reply.value = "";
-										        window.close();
-										    }
+										  
 											</script>
 											
 											</div>
