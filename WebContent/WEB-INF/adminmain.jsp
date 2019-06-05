@@ -179,27 +179,27 @@
 			
 			var ctx1 = document.getElementById("barChart1");
 		    //    ctx.height = 200;
-		    var myChart = new Chart( ctx1, {
+		    var myChart1 = new Chart( ctx1, {
 		        type: 'bar',
 		        data: {
 		            labels: [ , , , , , ,  ],
-		            datasets: [
+		            datasets:[ 
 		                {
 		                    label: "방문자 수",
 		                    data: [ , , , , , ,  ],
 		                    borderColor: "rgba(0, 194, 146, 0.9)",
 		                    borderWidth: "0",
 		                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-		                            },
-		                    ]
+		                            }],
+		                    
 		        },
 		        options: {
 		            scales: {
 		                yAxes: [{
 		                    ticks: {
 		                       min:0,
-		                        max:1000,
-		                        stepSize: 100
+		                        max:500,
+		                        stepSize: 10
 		                    }
 		                   }]
 		            }
@@ -207,27 +207,27 @@
 		    } );
 			var ctx2 = document.getElementById("barChart2");
 		    //    ctx.height = 200;
-		    var myChart = new Chart( ctx2, {
+		    var myChart2 = new Chart( ctx2, {
 		        type: 'bar',
 		        data: {
 		            labels: [ , , , , , ,  ],
-		            datasets: [
+		            datasets:[ 
 		                {
 		                    label: "매출액",
 		                    data: [ , , , , , ,  ],
 		                    borderColor: "rgba(0, 194, 146, 0.9)",
 		                    borderWidth: "0",
 		                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-		                            },
-		                    ]
+		                            }],
+		                    
 		        },
 		        options: {
 		            scales: {
 		                yAxes: [{
 		                    ticks: {
 		                       min:0,
-		                        max:1000,
-		                        stepSize: 100
+		                        max:1000000,
+		                        stepSize: 100000
 		                    }
 		                   }]
 		            }
@@ -242,37 +242,13 @@
 					data : {
 						what : $("#selected1").val(),
 						how : "how"
-						
 					}
 				}).done(function(rsp){
 					var arr = JSON.parse(rsp);
+					myChart1.data.labels=[arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0];
+					myChart1.data.datasets[0].data =[arr.amount.amount6,arr.amount.amount5,arr.amount.amount4,arr.amount.amount3,arr.amount.amount2,arr.amount.amount1,arr.amount.amount0];
+					myChart1.update();
 					
-					var myChart = new Chart( ctx1, {
-				        type: 'bar',
-				        data: {
-				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
-				            datasets: [
-				                {
-				                    label: "방문자수",
-				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
-				                    borderColor: "rgba(0, 194, 146, 0.9)",
-				                    borderWidth: "0",
-				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-				                            },
-				                    ]
-				        },
-				        options: {
-				            scales: {
-				                yAxes: [{
-				                    ticks: {
-				                       min:0,
-				                        max:100,
-				                        stepSize: 10
-				                    }
-				                   }]
-				            }
-				        }
-				    } );
 				
 				}) 
 				
@@ -288,34 +264,11 @@
 					}
 				}).done(function(rsp){
 					var arr = JSON.parse(rsp);
-					
+					myChart2.data.labels=[arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0];
+					myChart2.data.datasets[0].data =[arr.amount.amount6,arr.amount.amount5,arr.amount.amount4,arr.amount.amount3,arr.amount.amount2,arr.amount.amount1,arr.amount.amount0];
+					myChart2.update();
 				    //    ctx.height = 200;
-				    var myChart = new Chart( ctx2, {
-				        type: 'bar',
-				        data: {
-				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
-				            datasets: [
-				                {
-				                    label: "매출액",
-				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
-				                    borderColor: "rgba(0, 194, 146, 0.9)",
-				                    borderWidth: "0",
-				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-				                            },
-				                    ]
-				        },
-				        options: {
-				            scales: {
-				                yAxes: [{
-				                    ticks: {
-				                       min:0,
-				                        max:500000,
-				                        stepSize: 50000
-				                    }
-				                   }]
-				            }
-				        }
-				    } );
+				  
 				
 				}) 
 				

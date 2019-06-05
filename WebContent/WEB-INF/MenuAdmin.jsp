@@ -111,13 +111,13 @@
       <nav class="navbar navbar-expand-sm navbar-default">
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-               <li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+               <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
                      class="menu-icon fa fa-laptop"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
-               <li class="menu-item-has-children dropdown"><a
+               <li class="active"><a
                   href="select.admin"> <i class="menu-icon fa fa-table"></i>메뉴
                </a></li>
                <li class="menu-item-has-children dropdown"><a
@@ -754,13 +754,9 @@
 
 
       <script>
-	      $("#logoutbtn1").on("click",function() {
-                if(${user.id == 'admin' }){
-                	location.href = "adminlogoutProc.member";	
-                }else{
-                	location.href = "logoutProc.member";	
-                }
-         });
+         $("#logoutbtn1").on("click", function() {
+            location.href = "logoutProc.member";
+         })
 
          $("#updatememberbtn").on("click", function() {
             location.href = "page?url=WEB-INF/ModifyMembers.jsp";
@@ -799,7 +795,10 @@
          src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
       <script src="assets/js/main.js"></script>
       <script>
-         $("#updatememberbtn").on("click", function() {
+        
+      
+      
+      		$("#updatememberbtn").on("click", function() {
             location.href = "page?url=WEB-INF/ModifyMembers.jsp";
          })
          $("#deleteMembtn").on("click", function() {

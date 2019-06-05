@@ -468,14 +468,16 @@
 
 
          <script>
-         function() {
-             if(${user.id == 'admin' }){
-             	location.href = "adminlogoutProc.member";	
-             }else{
-             	location.href = "logoutProc.member";	
-             }
-         	 
-          })
+         
+         $("#logoutbtn1").on("click",
+               function() {
+                  if(${user.id == 'admin' }){
+                  	location.href = "adminlogoutProc.member";	
+                  }else{
+                  	location.href = "logoutProc.member";	
+                  }
+              	 
+               })
 
             $("#updatememberbtn").on("click", function() {
                location.href = "page?url=WEB-INF/ModifyMembers.jsp";

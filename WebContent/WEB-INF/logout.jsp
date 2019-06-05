@@ -12,11 +12,7 @@
 <body>
 	<script>
 	alert("로그아웃 되었습니다");
-	var webSocket = new	WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
-	webSocket.onopen = function(){
-		webSocket.send("hi"); 
-	} ;
-	webSocket.onerror ; 
+	
 	location.href = "page?url=WEB-INF/main.jsp";
 	</script>
 	<!-- 	---------------------------------소켓연결  script--------------------------------- -->

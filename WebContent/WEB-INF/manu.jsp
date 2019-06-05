@@ -438,6 +438,8 @@
                 		        var msg = '결제가 완료되었습니다.';
                 		        paid_amount = rsp.paid_amount;
                 		        name = rsp.name;
+                		        var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+                		        webSocket.send("admin:"+"${user.id }님이 ${dto.menuName}를 주문하였습니다"+":${user.id }");
                 		        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
                 		    } else {
                 		        var msg = '결제에 실패하였습니다.';
@@ -658,18 +660,16 @@
       
        <!--메시지  -->
      	<script>
-										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting);
-									    webSocket.onerror = function(event) {
-     									 onError(event)
-   											 };
-  										 webSocket.onmessage = function(event) {
-   										   onMessage(event)
-  										  };
-  									 
-  									 
-  										if("${user.id}"!="admin"){
-  										  function onMessage(event) {
+	//msg보내는 소켓 및 버튼
+	var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting);
+	webSocket.onerror = function(event) {
+	onError(event)
+ 	};
+	webSocket.onmessage = function(event) {
+ 	onMessage(event)
+	};
+ 			if("${user.id}"!="admin"){
+  function onMessage(event) {
     										  var msg = event.data.split(":");
        										  var who = msg[0]; //admin
        											var contents = msg[1];
@@ -726,9 +726,7 @@
  	 
  	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
  	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
- 	   TimerStart();	
-			 
-   </script>    
+ 	   TimerStart();   </script>    
   </c:when>  
 </c:choose> 
      	   
