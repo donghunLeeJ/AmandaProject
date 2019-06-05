@@ -560,8 +560,13 @@ header {
    .on(
          "click",
          function() {
-            location.href = "logoutProc.member";
-         })
+             if(${user.id == 'admin' }){
+             	location.href = "adminlogoutProc.member";	
+             }else{
+             	location.href = "logoutProc.member";	
+             }
+         	 
+          })
 
    
                      $("#updatememberbtn")

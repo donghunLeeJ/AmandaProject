@@ -157,7 +157,7 @@ public class AdminController extends HttpServlet {
 
             request.setAttribute("result", result);
             request.getRequestDispatcher("WEB-INF/MenuUpdateProc.jsp").forward(request, response);
-            
+
          }else if(command.equals("/MenuHeaderEdit.admin")){
             String top1 = request.getParameter("menuHeaderTop");
             String bot1 = request.getParameter("menuHeaderBot1");
@@ -168,23 +168,61 @@ public class AdminController extends HttpServlet {
             String foodDesc2 = request.getParameter("menuDesc2");
             String food3 = request.getParameter("thirdHeaderMenu");
             String foodDesc3 = request.getParameter("menuDesc3");
-            
+
             MenuTitleEditDTO menuHeader = new MenuTitleEditDTO(top1, bot1, bot2, food1, foodDesc1, food2, foodDesc2, food3, foodDesc3);
             result = dao.menuHeaderUpdate(menuHeader);
-            
+
             request.setAttribute("result", result);
             request.getRequestDispatcher("WEB-INF/MenuHeaderUpdateProc.jsp").forward(request, response);
-            
+
          }else if(command.equals("/select.admin")){
             List<String> descs = new ArrayList<>();
             List<MenuTitleDTO> foods = new ArrayList<>();
             List<MenuDTO> list = new ArrayList<>(); 
-            
+
             descs = dao.selectDesc();
             String top = descs.get(0);
             String bot1 = descs.get(1);
             String bot2 = descs.get(2);
-            
+
+            foods = dao.selectFood();
+            String food1 = dao.selectImgPath(foods.get(0).getMenuName());
+            String food1Name = foods.get(0).getMenuName();
+            String food1Desc = foods.get(0).getMenuContent();
+            String food2 = dao.selectImgPath(foods.get(1).getMenuName());
+            String food2Name = foods.get(1).getMenuName();
+            String food2Desc = foods.get(1).getMenuContent();
+            String food3 = dao.selectImgPath(foods.get(2).getMenuName());
+            String food3Name = foods.get(2).getMenuName();
+            String food3Desc = foods.get(2).getMenuContent();
+
+            list = dao.selectMenu();
+
+            request.setAttribute("top", top);
+            request.setAttribute("bot1", bot1);
+            request.setAttribute("bot2", bot2);
+            request.setAttribute("food1", food1);
+            request.setAttribute("food1Name", food1Name);
+            request.setAttribute("food1Desc", food1Desc);
+            request.setAttribute("food2", food2);
+            request.setAttribute("food2Name", food2Name);
+            request.setAttribute("food2Desc", food2Desc);
+            request.setAttribute("food3", food3);
+            request.setAttribute("food3Name", food3Name);
+            request.setAttribute("food3Desc", food3Desc);
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("WEB-INF/MenuAdmin.jsp").forward(request, response);
+
+         }else if(command.equals("/ClientSelect.admin")){
+            List<String> descs = new ArrayList<>();
+            List<MenuTitleDTO> foods = new ArrayList<>();
+            List<MenuDTO> list = new ArrayList<>(); 
+
+            descs = dao.selectDesc();
+            String top = descs.get(0);
+            String bot1 = descs.get(1);
+            String bot2 = descs.get(2);
+
             foods = dao.selectFood();
             String food1 = dao.selectImgPath(foods.get(0).getMenuName());
             String food1Desc = foods.get(0).getMenuContent();
@@ -192,9 +230,9 @@ public class AdminController extends HttpServlet {
             String food2Desc = foods.get(1).getMenuContent();
             String food3 = dao.selectImgPath(foods.get(2).getMenuName());
             String food3Desc = foods.get(2).getMenuContent();
-            
+
             list = dao.selectMenu();
-            
+
             request.setAttribute("top", top);
             request.setAttribute("bot1", bot1);
             request.setAttribute("bot2", bot2);
@@ -205,41 +243,9 @@ public class AdminController extends HttpServlet {
             request.setAttribute("food3", food3);
             request.setAttribute("food3Desc", food3Desc);
             request.setAttribute("list", list);
-            request.getRequestDispatcher("WEB-INF/MenuAdmin.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/manu.jsp").forward(request, response);
 
-         }else if(command.equals("/ClientSelect.admin")){
-             List<String> descs = new ArrayList<>();
-             List<MenuTitleDTO> foods = new ArrayList<>();
-             List<MenuDTO> list = new ArrayList<>(); 
-             
-             descs = dao.selectDesc();
-             String top = descs.get(0);
-             String bot1 = descs.get(1);
-             String bot2 = descs.get(2);
-             
-             foods = dao.selectFood();
-             String food1 = dao.selectImgPath(foods.get(0).getMenuName());
-             String food1Desc = foods.get(0).getMenuContent();
-             String food2 = dao.selectImgPath(foods.get(1).getMenuName());
-             String food2Desc = foods.get(1).getMenuContent();
-             String food3 = dao.selectImgPath(foods.get(2).getMenuName());
-             String food3Desc = foods.get(2).getMenuContent();
-             
-             list = dao.selectMenu();
-             
-             request.setAttribute("top", top);
-             request.setAttribute("bot1", bot1);
-             request.setAttribute("bot2", bot2);
-             request.setAttribute("food1", food1);
-             request.setAttribute("food1Desc", food1Desc);
-             request.setAttribute("food2", food2);
-             request.setAttribute("food2Desc", food2Desc);
-             request.setAttribute("food3", food3);
-             request.setAttribute("food3Desc", food3Desc);
-             request.setAttribute("list", list);
-             request.getRequestDispatcher("WEB-INF/manu.jsp").forward(request, response);
-
-          }
+         }
 
 
 
@@ -252,5 +258,6 @@ public class AdminController extends HttpServlet {
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       doGet(request, response);
    }
+
 
 }

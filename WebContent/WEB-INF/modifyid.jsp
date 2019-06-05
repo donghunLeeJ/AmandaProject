@@ -931,20 +931,12 @@
 														<button type="button" class="btn btn-secondary"
 															data-dismiss="modal">Close</button>
 													</div>
-
 												</form>
-
 											</div>
-
 										</div>
-
 									</div>
-
 								</div>
-
-
 						<script>
-
 						 $("#checkbirth").datepicker({
 
 							  showOn: "both", // 버튼과 텍스트 필드 모두 캘린더를 보여준다.
@@ -970,12 +962,9 @@
 
 
 						 $("img.ui-datepicker-trigger").remove();//ddatepicker 이미지 지우기
-
-
-							$("#updatememberbtn")
+						 $("#updatememberbtn")
 									.on(
-											"click",
-											
+										"click",
 											function() {
 												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
 											})

@@ -345,17 +345,79 @@
                         <div class="card-body">
                            <div class="mx-auto d-block myspan">
                               <div>
-                                 <img src="${dto.imgPath}" alt="">
+                                 <img data-toggle="modal" data-target="#menuModal${dto.menu_seq }" src="${dto.imgPath}" alt="">
                               </div>
                               <h5 class="text-sm-center mt-2 mb-1">${dto.menuDesc}</h5>
                               <span>${dto.menuPrice}</span>원 <input type="hidden"
                                  value="${dto.menu_seq}">
-                           </div>
-                           <button class = "btn" id="menu${dto.menu_seq }">결제하기 </button> 
+                           </div>  
                            <hr>
                         </div>
                      </div>
                   </div>
+                 
+                  
+                 
+                 
+           <div class="modal fade" id="menuModal${dto.menu_seq }" tabindex="-1"
+            role="dialog" aria-labelledby="exampleModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-body1">
+                   
+                        <div class="form-group m-0 p-0">
+                           <div class="card">
+                              <div class="card-header">
+                              <strong class="card-title pl-2">
+                                    	지금까지 이런메뉴는 없었다!! </strong>
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="card-body">
+                                 <div class="mx-auto d-block">
+                                    <img class="rounded-circle mx-auto d-block"
+                                       src="${dto.imgPath}" alt="profile image" width="130px">
+                                    <h5 class="text-center mt-2 mb-1">
+                                       <b></b>
+                                    </h5>
+                                    <!-- <div class="location text-center">Lv. 일반회원</div> -->
+                                 </div>
+                                 <hr>
+                                 <div class="card-text">
+                                    <div>
+                                       <b>이름 </b>
+                                       <p>${dto.menuName}</p>
+                                    </div>
+                                     <div>
+                                       <b>설명</b>
+                                       <p>${dto.menuDesc}</p>
+                                    </div>
+                                    <div>
+                                       <b>가격</b>
+                                       <p>${dto.menuPrice}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                             <c:if test="${user != null }">
+                             <button class = "btn btn-info" id="menu${dto.menu_seq }">결제하기 </button> 
+                             </c:if>
+                          	 <button type="button" class="btn btn-secondary"
+                              data-dismiss="modal">닫기</button>
+                        </div>
+                                   
+                                   
+                                 
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                   </div>
+               </div>
+            </div>
+         </div>
+                  
                   <script>
                   $("#menu${dto.menu_seq }").on("click",function(){
                 		IMP.init('imp96545220'); 
@@ -535,9 +597,15 @@
       <script>
       
       
-         $("#logoutbtn1").on("click", function() {
-            location.href = "logoutProc.member";
-         })
+      $("#logoutbtn1").on("click",function() {
+                if(${user.id == 'admin' }){
+                	location.href = "adminlogoutProc.member";	
+                }else{
+                	location.href = "logoutProc.member";	
+                }
+            	 
+             });
+
 
          $("#updatememberbtn").on("click", function() {
             location.href = "page?url=WEB-INF/ModifyMembers.jsp";

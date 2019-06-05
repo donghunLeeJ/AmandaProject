@@ -267,7 +267,7 @@
                 <div class="form-group" id="divBirth">
                     <label for="inputBirth" class="col-lg-2 control-label">생년월일</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="birth" name="joinmemberbirth" data-rule-required="true"  placeholder="ex)19000101" maxlength="15" readonly>
+                        <input type="text" class="form-control readonly" id="birth" name="joinmemberbirth" data-rule-required="true"  placeholder="ex)19000101" maxlength="15" >
                     </div>
                 </div>
 
@@ -286,9 +286,9 @@
                 
                  <label for="inputPhoneNumber" class="col-lg-2 control-label">주소 입력</label>
                     <div class="col-lg-10">
-                        <input required type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호" readonly required>
-                        <input required type="text" class="form-control" id="Address1" name="address1" placeholder="주소" readonly required>
-                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" required><br>
+                        <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
+                        <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
+                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
                         <input type="button" value="우편번호 찾기" id="search">
                     </div>
                     
@@ -299,6 +299,12 @@
                 </div>
             </form>
         </div>
+     <script>
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
+    });
+</script>
+        
         <!-- 						진향이 로그인폼끝 -->
         <div class="modal fade" id="exampleModal" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLabel"
@@ -455,8 +461,13 @@
 	.on(
 			"click",
 			function() {
-				location.href = "logoutProc.member";
-			})
+	            if(${user.id == 'admin' }){
+	            	location.href = "adminlogoutProc.member";	
+	            }else{
+	            	location.href = "logoutProc.member";	
+	            }
+	        	 
+	         })
 
 	
 							$("#updatememberbtn")
