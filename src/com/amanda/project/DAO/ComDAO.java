@@ -168,4 +168,29 @@ public class ComDAO {
 		return -1;
 	}
 	
+	//만일 사용자가 pc방 컴퓨터가 아닌 다른 기기로 로그인을 했는지 아닌지를 체크하는 메소드임
+		public int UserSeatIpCheck(String loginIp){
+
+			String sql = "select comip from pccomputer";
+
+			try(
+					Connection con=ds.getConnection();
+					PreparedStatement pstat=con.prepareStatement(sql);
+					ResultSet rs = pstat.executeQuery();
+					
+					){
+
+				while(rs.next()){
+					
+					//만일 pc방컴퓨터로 로그인했을 경우 리턴값 0을 반환시킨다.
+					if(loginIp.equals(rs.getString("comip"))){return 0;}	
+					
+				}
+								
+			}catch (Exception e){e.printStackTrace();}
+			
+		  //pc방컴퓨터가 아닌 다른 기기로 로그인했을 경우 리턴값 1을 반환시킨다.
+			return 1;			
+		}
+		
 }

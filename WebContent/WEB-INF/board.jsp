@@ -711,7 +711,7 @@
 											                                                         
                            </script>
 
- <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
+  <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
   <c:choose> 
     <c:when test="${(user != null) && (user.id != 'admin')}">
       
@@ -734,16 +734,20 @@
  		    	  
  		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
  		    	  location.href = "logoutProc.member";
- 		    	  clearInterval(tid); 		    	  
+ 		    	  clearInterval(tid); 	
+ 		    	  
+ 		      }else if(point == -1){
+ 		    	  
+ 		    	 clearInterval(tid); 		
+ 		    	     	  
  		      }   
+ 		      		      
  		 });	   	     
  	   }	   			
  	 
  	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
  	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
- 	   TimerStart();	
-			 
-   </script>    
+ 	   TimerStart();   </script>    
   </c:when>  
 </c:choose> 
 
