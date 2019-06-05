@@ -199,7 +199,7 @@
 		                    ticks: {
 		                       min:0,
 		                        max:500,
-		                        stepSize: 10
+		                        stepSize: 50
 		                    }
 		                   }]
 		            }

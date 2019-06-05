@@ -442,24 +442,17 @@
                 		        var msg = '결제가 완료되었습니다.';
                 		        paid_amount = rsp.paid_amount;
                 		        name = rsp.name;
-                		      
-                		     
-                		       
-                		        /* 관리자에게 메시지 보내기  */
+                  		        /* 관리자에게 메시지 보내기  */
                 		    } else {
                 		        var msg = '결제에 실패하였습니다.';
                 		        msg += '에러내용 : ' + rsp.error_msg;
                 		    }
                 		    alert(msg);
-                		    var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
-       		     			
-                		    function send() {
+                		    var webSocket = new WebSocket('ws://192.168.60.20:8080/AmandaProject1/broadcasting');
+       		       		    function send() {
        	    			 		webSocket.send("admin:"+"${user.id }님이 ${dto.menuName}를 주문하였습니다"+":${user.id }");
        	    		 		}
-                		    
-                		    
-                		    
-                		    location.href = "menu.pay?id="+id+"&amount="+paid_amount+"&name="+name;
+                  		    location.href = "menu.pay?id="+id+"&amount="+paid_amount+"&name="+name;
                 		});
                 		})
                                   
