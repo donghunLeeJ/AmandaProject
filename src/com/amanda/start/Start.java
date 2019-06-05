@@ -43,7 +43,7 @@ public class Start extends HttpServlet {
 	      request.getServletContext().setAttribute("seat", arr);
 	      request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
-		
+		sssssssssssssssssss
 
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
