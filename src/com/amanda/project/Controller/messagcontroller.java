@@ -45,6 +45,16 @@
 	  RequestDispatcher  rd=request.getRequestDispatcher("WEB-INF/allclient.jsp"); rd.forward(request,response); //admin에게 보내기 
  
 	  } 
+  
+  else if(command.equals("/idbyclient.message")){//받을때 String
+		
+	  String who=request.getParameter("who");
+	
+	  request.setAttribute("who",who); 
+	  RequestDispatcher  rd=request.getRequestDispatcher("WEB-INF/idbyclient.jsp");
+	  rd.forward(request,response); //admin에게 보내기 
+ 
+	  } 
   } catch(Exception e) { e.printStackTrace();} }
   
   
