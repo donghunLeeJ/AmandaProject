@@ -30,7 +30,6 @@ public class MenuTitleDTO {
    }
    public void setMenuKind(String menuKind) {
       this.menuKind = menuKind;
-   }
-   
+   }  
    
 }

@@ -82,5 +82,5 @@ public class MenuTitleEditDTO {
       this.foodDesc3 = foodDesc3;
    }
 
-
 }
+

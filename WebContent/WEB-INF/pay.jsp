@@ -99,7 +99,7 @@
                   </script>
                   </c:when>
                   <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
+                     <li id="charge" class="active"><a
                         href="page?url=WEB-INF/pay.jsp"> <i
                            class="menu-icon fa fa-tasks"></i>충전하기
                      </a></li>

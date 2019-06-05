@@ -1,6 +1,7 @@
 package com.amanda.project.DTO;
 
 public class MenuDTO {
+
    private int menu_seq;
    private String imgPath;
    private String realPath;
@@ -53,8 +54,7 @@ public class MenuDTO {
    }
    public void setMenuPrice(int menuPrice) {
       this.menuPrice = menuPrice;
-   }
-   
-   
+   }   
 
 }
+
