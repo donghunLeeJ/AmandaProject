@@ -102,7 +102,8 @@ public class MemberController extends HttpServlet {
 						//String ip = "192.168.60.27";
 						String ip = request.getRemoteAddr();			
 						System.out.println(ip);
-
+						System.out.println(ip);
+						
 						if(cDao.seatOn(ip)>0) {
 							ComDTO cDto = cDao.seatNum_get(ip);
 							System.out.println(cDto.getOnOff());
@@ -217,12 +218,14 @@ public class MemberController extends HttpServlet {
 			try {
 
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
-				String id=dto.getId();
-				//				int hour = dto.getPoint() - pointmap.get(id);
+				String id = dto.getId();
+				
+				int hour = dto.getPoint() - pointmap.get(id);
 				//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
 
-				//				dao.PointUpdate(pointmap.get(id), id);		
-				//				dao.usehourUpdate(hour, id); 
+				dao.PointUpdate(pointmap.get(id), id);		
+				dao.usehourUpdate(hour, id); 
+				
 				cDao.seatOff(request.getRemoteAddr());
 				//cDao.seatOff("192.168.60.27");
 				cDao.resetId(request.getRemoteAddr());

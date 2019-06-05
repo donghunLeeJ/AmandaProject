@@ -29,12 +29,17 @@ public class PayController extends HttpServlet {
 
 		
 		if(cmd.equals("time.pay")) {
+			
 			String id = request.getParameter("id");
 			int price=Integer.parseInt(request.getParameter("amount"));
 			String name = request.getParameter("name");
 			System.out.println(pdao.update_point(id, price));
 			pdao.pay_table_insert(id, price);
 			request.getSession().setAttribute("user", dao.select_user(id));
+			
+			int userPoint = MemberController.pointmap.get(id); //현재 로그인중인 사용자의 포인트값을 꺼낸다			
+			MemberController.pointmap.put(id, userPoint + price);//그 포인트값에 결제로 추가된 포인트를 더해준다.		
+			
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
 		}else if(cmd.equals("menu.pay")) {
