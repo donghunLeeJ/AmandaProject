@@ -424,6 +424,7 @@
                   var paid_amount;
                   var name;
                   $("#menu${dto.menu_seq }").on("click",function(){
+
                       IMP.init('imp96545220'); 
                       IMP.request_pay({
                           pg : 'inicis', // version 1.1.0부터 지원.
@@ -462,9 +463,7 @@
                           location.href = "menu.pay?id="+id+"&amount="+paid_amount+"&name="+name;
                   
                   
-                  
-                  
-                  
+
                   </script>
               </c:forEach>
             </div>

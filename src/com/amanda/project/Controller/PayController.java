@@ -44,6 +44,7 @@ public class PayController extends HttpServlet {
 		
 		}else if(cmd.equals("menu.pay")) {
 			String id=request.getParameter("id");
+
 	         String name = request.getParameter("name");
 	         int price=Integer.parseInt(request.getParameter("amount"));
 	         System.out.println("pay");
@@ -53,6 +54,7 @@ public class PayController extends HttpServlet {
 	         pdao.menu_pay_table_insert(id, price, name);
 	         request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
+
 		}
 
 		
