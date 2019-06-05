@@ -699,8 +699,11 @@
  		      m = (Math.floor(point/60)) + "분 "; 
  		      var msg = "<font color='green'>" + m +"</font>";
  		         
- 		 $("#seat${i.value}>h4").html("${i.key}님의 남은 시간 :" + msg +"<button class='idmsg'>msg</button>");//i.key는 자리별로 로그인한 유저id임	
- 		$(".idmsg")
+ 		 $("#seat${i.value}>h4").html("${i.key}님의 남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
+ 		if("${user.id}"=="admin"){
+ 		 $("#seat${i.value}>h4").append("<button class='idmsg'>msg</button>");
+ 		}
+ 		 $(".idmsg")
 		.on(
 				"click",
 				function() {
