@@ -255,7 +255,7 @@ public class MemberDAO {
 	
 	public List<MemberDTO> show_member() {
 		List<MemberDTO> list = new ArrayList<>();
-		String sql = "select mem_seq,id,name,phone,usehour from member where blackcheck='n'";
+		String sql = "select mem_seq,id,name,birth,email,phone,point,address1,address2,usehour from member where blackcheck='n' and id not in('admin')";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -265,12 +265,48 @@ public class MemberDAO {
 				int num = rs.getInt(1);
 				String id = rs.getString(2);
 				String name = rs.getString(3);
-				String phone = rs.getString(4);
-				int usehour = rs.getInt(5);
-				MemberDTO dto = new MemberDTO(num,id,name,phone,usehour);
+				String birth = rs.getString(4);
+				String email = rs.getString(5);
+				String phone = rs.getString(6);
+				int point = rs.getInt(7);
+				String address1 = rs.getString(8);
+				String address2 = rs.getString(9);
+				int usehour = rs.getInt(10);
+				
+				MemberDTO dto = new MemberDTO(num,id,name,birth,email,phone,point,address1,address2,usehour);
 				list.add(dto);
 			}
 			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public MemberDTO show_memberInfo(int paramNum) {
+		String sql = "select mem_seq,id,name,birth,email,phone,point,address1,address2,usehour from member where mem_seq=?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				
+				){
+			pstat.setInt(1, paramNum);
+			ResultSet rs = pstat.executeQuery();
+			if(rs.next()) {
+				int num = rs.getInt(1);
+				String id = rs.getString(2);
+				String name = rs.getString(3);
+				String birth = rs.getString(4);
+				String email = rs.getString(5);
+				String phone = rs.getString(6);
+				int point = rs.getInt(7);
+				String address1 = rs.getString(8);
+				String address2 = rs.getString(9);
+				int usehour = rs.getInt(10);				
+				MemberDTO dto = new MemberDTO(num,id,name,birth,email,phone,point,address1,address2,usehour);
+				return dto;
+			}
+			return null;
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
@@ -298,7 +334,7 @@ public class MemberDAO {
 	
 	public List<MemberDTO> show_blacklist() {
 		List<MemberDTO> list = new ArrayList<>();
-		String sql = "select mem_seq,name,blackreason from member where blackcheck='y'";
+		String sql = "select mem_seq,name,id,blackreason from member where blackcheck='y'";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -307,8 +343,9 @@ public class MemberDAO {
 			while(rs.next()) {
 				int num = rs.getInt(1);
 				String name = rs.getString(2);
-				String reason = rs.getString(3);
-				MemberDTO dto = new MemberDTO(num,name,reason);
+				String id = rs.getString(3);
+				String reason = rs.getString(4);
+				MemberDTO dto = new MemberDTO(num,name,id,reason);
 				list.add(dto);
 			}
 			return list;

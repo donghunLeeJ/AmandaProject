@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -12,28 +12,28 @@
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+	href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+	href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
 
 <link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+	href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 <link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
 <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <link
-   href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css"
-   rel="stylesheet">
+	href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css"
+	rel="stylesheet">
 <link
-   href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
-   rel="stylesheet">
+	href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css"
+	rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -42,32 +42,60 @@
 
 <style>
 #remember {
-   width: 35%;
-   height: 100%;
-   margin: 0px;
+	width: 35%;
+	height: 100%;
+	margin: 0px;
 }
 
 .modal-footer {
-   box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .modal-body1 {
-   padding: 1px;
+	padding: 1px;
 }
 
 .card-header {
-   color: gray;
-   background-color: #bbe3e3;
+	color: gray;
+	background-color: #bbe3e3;
 }
 
 .card-text {
-   text-align: left;
+	text-align: left;
 }
 
+.rows {
+	overflow: hidden;
+}
+
+.myrow {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#numtext {
+	margin: 0px;
+	width: 40px;
+}
+
+table {
+	text-align: center;
+	table-layout: fixed;
+}
+
+table td, table th {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#reasonsector {
+	overflow: hidden;
+}
 </style>
 </head>
 
 <body>
+
    <!-- 왼쪽 네비 시작 -->
    <aside id="left-panel" class="left-panel">
       <nav class="navbar navbar-expand-sm navbar-default">
@@ -84,10 +112,12 @@
 					</c:when>
 					</c:choose>
 					
+
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
+
 					
 					<c:choose>
               		<c:when test="${user.id == 'admin' }">
@@ -98,10 +128,13 @@
               		 </c:when>
         
                		</c:choose>
+
 					<li class="menu-item-has-children dropdown"><a
 						href="Board.board?currentPage=1"> <i
 							class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
+
+
 					
 					<li class="menu-item-has-children dropdown"><a
 						href="member.manage"> <i
@@ -203,12 +236,15 @@
       <!--       상단 네비 끝 -->
       <!-- Content 시작 -->
       <div class="breadcrumbs">
+
 			<div class="breadcrumbs-inner">
 				<div class="row m-0">
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title">
-								<h1><b>회원정보</b></h1>
+								<h1>
+									<b>회원정보</b>
+								</h1>
 							</div>
 						</div>
 					</div>
@@ -216,6 +252,7 @@
 				</div>
 			</div>
 		</div>
+
       <div class="content ">
          <!-- Animated -->
          <div class="animated fadeIn">
@@ -548,5 +585,6 @@
   										  }		 
 
 </script>
+
 </body>
 </html>
