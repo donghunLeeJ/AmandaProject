@@ -42,9 +42,7 @@ public class Start extends HttpServlet {
 	      request.getSession().setAttribute("seatUsed", dao.usedSeat());
 	      request.getServletContext().setAttribute("seat", arr);
 	      request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-		
-		
-
+	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

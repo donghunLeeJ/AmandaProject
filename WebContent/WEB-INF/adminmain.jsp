@@ -116,18 +116,74 @@
 	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
-		<header id="header" class="header">
-			<div class="top-left">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="./"><img src="images/logo.png"
-						alt="Logo"></a> <a class="navbar-brand hidden"
-						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
-						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
-						class="fa fa-bars"></i></a>
-				</div>
-			</div>
-			
-		</header>
+		 <header id="header" class="header">
+         <div class="top-left">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="./"><img src="images/logo.png"
+                  alt="Logo"></a> <a class="navbar-brand hidden"
+                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+                  class="fa fa-bars"></i></a>
+            </div>
+         </div>
+         <c:choose>
+            <c:when test="${user != null }">
+               <div class="top-right">
+                  <div class="header-menu">
+                     <div class="header-left">
+                        <button class="search-trigger">
+                           <i class="fa fa-search"></i>
+                        </button>
+                        <div class="form-inline">
+                           <form class="search-form">
+                              <input class="form-control mr-sm-2" type="text"
+                                 placeholder="Search ..." aria-label="Search">
+                              <button class="search-close" type="submit">
+                                 <i class="fa fa-close"></i>
+                              </button>
+                           </form>
+                        </div>
+
+								
+                     </div>
+                     <!--  mypage 사람 사진-->
+                     <div class="user-area  float-right">
+                        <a href="#" class="active" data-toggle="modal"
+                           aria-haspopup="true" aria-expanded="false"
+                           data-target="#exampleModal1"> <img
+                           class="user-avatar rounded-circle" src="images/admin.jpg"
+                           alt="profile"></a>
+                     </div>
+                  </div>
+               </div>
+            </c:when>
+            <c:otherwise>
+               <div class="top-right">
+                  <div class="header-menu">
+                     <div class="header-left">
+                        <button class="search-trigger">
+                           <i class="fa fa-search"></i>
+                        </button>
+                        <div class="form-inline">
+                           <form class="search-form">
+                              <input class="form-control mr-sm-2" type="text"
+                                 placeholder="Search ..." aria-label="Search">
+                              <button class="search-close" type="submit">
+                                 <i class="fa fa-close"></i>
+                              </button>
+                           </form>
+                        </div>
+                        <div class="dropdown for-notification">
+                           <button type="button"
+                              class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
+                              data-target="#exampleModal" id="loginbtn">login</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </c:otherwise>
+         </c:choose>
+      </header>
 		<!--       상단 네비 끝 -->
 		<!-- Content 시작 -->
 		<div class="content">
@@ -403,14 +459,16 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button id="deleteMembtn" type="button"
-										class="btn btn-outline-info" data-dismiss="modal">회원
-										탈퇴</button>
-									<button id="pointPagebtn" type="button"
-										class="btn btn-outline-info" data-dismiss="modal">포인트
-										충전</button>
-									<button id="updatememberbtn" type="button"
-										class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+									   <c:if test="${user.id != 'admin' }">
+                           <button id="deleteMembtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">회원
+                    		 탈퇴</button>
+                           <button id="pointPagebtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">포인트
+                           	   충전</button>
+                           <button id="updatememberbtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+                              </c:if>
 									<button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
 
 								</div>

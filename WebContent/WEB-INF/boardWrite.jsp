@@ -447,6 +447,7 @@ header {
                            </div>
                         </div>
                         <div class="modal-footer">
+                            <c:if test="${user.id != 'admin' }">
                            <button id="deleteMembtn" type="button"
                               class="btn btn-outline-info" data-dismiss="modal">회원
                               탈퇴</button>
@@ -455,6 +456,7 @@ header {
                               충전</button>
                            <button id="updatememberbtn" type="button"
                               class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+                              </c:if>
                            <button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
 
                         </div>

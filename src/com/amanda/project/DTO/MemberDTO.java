@@ -27,8 +27,33 @@ public class MemberDTO {
 		this.phone = phone;
 		this.usehour = usehour;
 	}
+	
+	
+	public MemberDTO(int mem_seq, String name, String id, String blackreason) {
+		super();
+		this.mem_seq = mem_seq;
+		this.name = name;
+		this.id = id;
+		this.blackreason = blackreason;
+	}
 
 	
+	public MemberDTO(int mem_seq, String id, String name, String birth, String email, String phone, int point,
+			String address1, String address2, int usehour) {
+		super();
+		this.mem_seq = mem_seq;
+		this.id = id;
+		this.name = name;
+		this.birth = birth;
+		this.email = email;
+		this.phone = phone;
+		this.point = point;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.usehour = usehour;
+	}
+
+
 	public MemberDTO(int mem_seq, String name, String blackreason) {
 		super();
 		this.mem_seq = mem_seq;

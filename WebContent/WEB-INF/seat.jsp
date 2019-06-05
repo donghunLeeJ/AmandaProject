@@ -165,7 +165,7 @@
                            </form>
                         </div>
 
-					<c:choose>
+						<c:choose>
                         <c:when test="${user.id ne 'admin'}">
 								<button type="button" class="btn btn-primary" id="msg">msg</button>
 								</c:when>
@@ -225,13 +225,16 @@
 							<h4>
 								1 <br> <br>
 							</h4>
+							
+						
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
 						<div id="seat2" class="card" style="height: 80%; background-color: white">
 							<h4>
 								2 <br> <br>
-							</h4>
+															</h4>
+														
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
@@ -242,6 +245,7 @@
 							<h4>
 								3 <br> <br>
 							</h4>
+							
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
@@ -543,14 +547,16 @@
                            </div>
                         </div>
                         <div class="modal-footer">
+                             <c:if test="${user.id != 'admin' }">
                            <button id="deleteMembtn" type="button"
                               class="btn btn-outline-info" data-dismiss="modal">회원
-                              탈퇴</button>
+                              	탈퇴</button>
                            <button id="pointPagebtn" type="button"
                               class="btn btn-outline-info" data-dismiss="modal">포인트
-                              충전</button>
+                              	충전</button>
                            <button id="updatememberbtn" type="button"
                               class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+                              </c:if>
                            <button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
 
                         </div>
@@ -659,7 +665,9 @@
    		  <c:forEach var="i" items="${seat }">
 				<script>
 				if(${i.onOff }==1){
-				$('#seat${i.seatNum}').css('background-color','red');				
+				$('#seat${i.seatNum}').css('background-color','red');	
+				
+				
 				}										
 				</script>
 			</c:forEach>
@@ -693,8 +701,19 @@
  		      m = (Math.floor(point/60)) + "분 "; 
  		      var msg = "<font color='green'>" + m +"</font>";
  		         
- 		 $("#seat${i.value}>h4").html("${i.key}님의 남은 시간 :" + msg);//i.key는 자리별로 로그인한 유저id임	
- 		 				 	
+ 		 $("#seat${i.value}>h4").html("${i.key}님의 남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
+ 		if("${user.id}"=="admin"){
+ 		 $("#seat${i.value}>h4").append("<button class='idmsg'>msg</button>");
+ 		}
+ 		 $(".idmsg")
+		.on(
+				"click",
+				function() {
+					
+					window.open("idbyclient.message?who=${i.key}","","width=500px,height=300px");
+				
+				})
+		 	
  		 //만일 사용자의 포인트가 다 떨어졌을 경우 반복을 중지시키고 자리색깔을 본래의 색깔로 바꾼다.
  		  if(point == 0){
  			 		 

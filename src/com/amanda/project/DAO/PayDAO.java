@@ -85,22 +85,24 @@ public class PayDAO {
 		return -1;
 	}
 	public int menu_pay_table_insert (String id,int point,String menu){
-		String sql="insert into point_charge values(point_seq.nextval,?,?,sysdate,?) ";
-		try (	Connection con=ds.getConnection();
-				PreparedStatement pstat=con.prepareStatement(sql);
 
-				)
-		{
-			pstat.setString(1, menu);
-			pstat.setInt(2, point);
-			pstat.setString(3, id);
-			
-			int result = pstat.executeUpdate();
+	      String sql="insert into point_charge values(point_seq.nextval,?,?,sysdate,?) ";
+	      try (   Connection con=ds.getConnection();
+	            PreparedStatement pstat=con.prepareStatement(sql);
 
-			return result;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
+	            )
+	      {
+	         pstat.setString(1, menu);
+	         pstat.setInt(2, point);
+	         pstat.setString(3, id);
+	         
+	         int result = pstat.executeUpdate();
+
+	         return result;
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return -1;
+	   }
+
 }
