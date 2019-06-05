@@ -420,6 +420,9 @@
          </div>
                   
                   <script>
+                  var id = "${user.id }";
+                  var paid_amount;
+                  var name;
                   $("#menu${dto.menu_seq }").on("click",function(){
                 		IMP.init('imp96545220'); 
                 		IMP.request_pay({
@@ -439,27 +442,27 @@
                 		        var msg = '결제가 완료되었습니다.';
                 		        paid_amount = rsp.paid_amount;
                 		        name = rsp.name;
-                		        var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
-                		        webSocket.send("admin:"+"${user.id }님이 ${dto.menuName}를 주문하였습니다"+":${user.id }");
-                		        location.href = "time.pay?id="+id+"&amount="+paid_amount+"&name="+name;
-                		        /* 관리자에게 메시지 보내기  */
+                		      
+                		     
                 		       
-     								
-                		                        		        
-                		        
+                		        /* 관리자에게 메시지 보내기  */
                 		    } else {
                 		        var msg = '결제에 실패하였습니다.';
                 		        msg += '에러내용 : ' + rsp.error_msg;
                 		    }
                 		    alert(msg);
-                		   
+                		    var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+       		     			
+                		    function send() {
+       	    			 		webSocket.send("admin:"+"${user.id }님이 ${dto.menuName}를 주문하였습니다"+":${user.id }");
+       	    		 		}
+                		    
+                		    
+                		    
+                		    location.href = "menu.pay?id="+id+"&amount="+paid_amount+"&name="+name;
                 		});
                 		})
-                  
-                  
-                  
-                  
-                  
+                                  
                   </script>
               </c:forEach>
             </div>

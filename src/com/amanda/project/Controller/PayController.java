@@ -50,9 +50,8 @@ public class PayController extends HttpServlet {
 			System.out.println(id);
 			System.out.println(name);
 			System.out.println(price);
-			pdao.pay_table_insert(id, price);
+			pdao.menu_pay_table_insert(id, price, name);
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
-		
 		}
 
 		
