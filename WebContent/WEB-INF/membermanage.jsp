@@ -523,7 +523,7 @@
       <script src="assets/js/main.js"></script>
 <!--  메시지-->
       <script>
- var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+ var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
 									    webSocket.onerror = function(event) {
      									// onError(event)
    											 };

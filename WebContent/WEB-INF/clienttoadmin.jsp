@@ -42,7 +42,7 @@ Calendar cal = Calendar.getInstance();
 											
 											<script>
 											
-										        var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+										        var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
 											function onError(event) {
 										      alert(event.data);
 										    }

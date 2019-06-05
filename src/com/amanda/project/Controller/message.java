@@ -19,7 +19,7 @@ public class message {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         System.out.println(session);
-    	System.out.println("¸Þ¼¼Áö"+message);
+    	System.out.println("ë©”ì‹œì§€"+message);
         synchronized(clients) {
             for(Session client : clients) {
                 if(!client.equals(session)) {
