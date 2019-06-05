@@ -159,61 +159,59 @@
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<c:choose>
-					<c:when test="${user.id != 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					</c:when>
-					<c:when test="${user.id == 'admin' }">
-					<li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					</c:when>
+						<c:when test="${user.id != 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/main.jsp"><i
+									class="menu-icon fa fa-laptop"></i>Home </a></li>
+						</c:when>
+						<c:when test="${user.id == 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/adminmain.jsp"><i
+									class="menu-icon fa fa-laptop"></i>Home </a></li>
+						</c:when>
 					</c:choose>
-               <li class="menu-item-has-children dropdown"><a
-                  href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
-               </a></li>
-               <c:choose>
-              		<c:when test="${user.id == 'admin' }">
-               		<li class="menu-item-has-children dropdown"><a
-               	    href="select.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-              		 </a></li>
-              		 </c:when>
-              		 <c:when test="${user.id != 'admin' }">
-               		<li class="menu-item-has-children dropdown"><a
-               	    href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-              		 </a></li>
-              		 </c:when>
-           		</c:choose>
-               <li class="menu-item-has-children dropdown"><a
-                  href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
-               </a></li>
-               <c:choose>
-                  <c:when test="${user == null }">
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                     <script>
+					<li class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fa fa-cogs"></i>잔여좌석
+					</a></li>
+					<c:choose>
+						<c:when test="${user.id == 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="select.admin"> <i class="menu-icon fa fa-table"></i>메뉴
+							</a></li>
+						</c:when>
+						<c:when test="${user.id != 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="ClientSelect.admin"> <i class="menu-icon fa fa-table"></i>메뉴
+							</a></li>
+						</c:when>
+					</c:choose>
+					<li class="active"><a href="Board.board?currentPage=1"> <i
+							class="menu-icon fa fa-th"></i>고객의소리
+					</a></li>
+					<c:choose>
+						<c:when test="${user == null }">
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+							<script>
                         $("#charge").on("click", function() {
                            alert("로그인 후 이용가능합니다.");
                         })
                      </script>
-                  </c:when>
-                  <c:when test="${user.id == 'admin' }">
-                     	<li class="menu-item-has-children dropdown"><a
-						href="member.manage"> <i
-							class="menu-icon fa fa-th"></i>고객관리
-					</a></li>
-                  </c:when>
-                  <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                  </c:otherwise>
-               </c:choose>
+						</c:when>
+						<c:when test="${user.id == 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="member.manage"> <i class="menu-icon fa fa-th"></i>고객관리
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/pay.jsp"> <i
+									class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+						</c:otherwise>
+					</c:choose>
 
 				</ul>
 			</div>
@@ -409,7 +407,10 @@
 								<input type="button" id="delete" value="글 삭제"
 									class="btn btn-secondary">
 							</c:if>
-
+							<c:if test="${user.id == 'admin' }">
+								<input type="button" id="delete" value="글 삭제"
+									class="btn btn-secondary">
+							</c:if>
 							<c:if test="${user != null }">
 								<input type="button" id="showReplBox" value="댓글달기"
 									class="btn btn-secondary">
@@ -461,6 +462,15 @@
 									</div>
 								</div>
 							</c:if>
+							<c:if test="${user.id == 'admin' }">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
+										id="replButts">
+										<input type="button" value="삭제"
+											class="delRepl btn btn-secondary">
+									</div>
+								</div>
+							</c:if>
 						</form>
 						<script>
 				$(".replEditCompl").hide();
@@ -476,21 +486,15 @@
 						location.href = "ReplDelete.board?repl_seq="+${repldto.repl_seq}+"&contents_no="+${repldto.contents_no};
 					})
 				}
+				if(${user.id == 'admin' }){
+					$(".delRepl").on("click",function(){
+						location.href = "ReplDelete.board?repl_seq="+${repldto.repl_seq}+"&contents_no="+${repldto.contents_no};
+					})
+				}
 				</script>
 					</c:forEach>
 				</div>
 			</div>
-
-			<div class="clearfix"></div>
-
-			<footer class="site-footer">
-				<div class="footer-inner bg-white">
-					<div class="row">
-						<div class="col-sm-6 text-left">Copyright &copy; Amanda</div>
-						<div class="col-sm-6 text-right">Designed by Amanda</div>
-					</div>
-				</div>
-			</footer>
 
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -651,22 +655,22 @@
                   </script>
 			<!-- 진향이 마이페이지 폼끝 -->
 
-</div>
-			<!-- 컨텐츠 끝 -->
+		</div>
+		<!-- 컨텐츠 끝 -->
 
-			<div class="clearfix"></div>
-			<!-- Footer -->
-			<footer class="site-footer">
-				<div class="footer-inner bg-white">
-					<div class="row">
-						<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
-						<div class="col-sm-6 text-right">
-							Designed by <a href="https://colorlib.com">1조</a>
-						</div>
+		<div class="clearfix"></div>
+		<!-- Footer -->
+		<footer class="site-footer">
+			<div class="footer-inner bg-white">
+				<div class="row">
+					<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
+					<div class="col-sm-6 text-right">
+						Designed by <a href="https://colorlib.com">1조</a>
 					</div>
 				</div>
-			</footer>
-		
+			</div>
+		</footer>
+
 	</div>
 
 
@@ -741,19 +745,27 @@
 		}	
 		
 		if(${user.id == writer }){
-		document.getElementById("modify").onclick = function() {
-			location.href = "ContentsEdit.board?no="+${no};
-		}
-		document.getElementById("delete").onclick = function() {
-			var result = confirm("정말 삭제하시겠습니까?");
-			if (result) {
-				location.href = "BoardDel.board?no="+${no};
+			document.getElementById("modify").onclick = function() {
+				location.href = "ContentsEdit.board?no="+${no};
+			}
+			document.getElementById("delete").onclick = function() {
+				var result = confirm("정말 삭제하시겠습니까?");
+				if (result) {
+					location.href = "BoardDel.board?no="+${no};
+				}
 			}
 		}
+		if(${user.id == 'admin' }){
+			document.getElementById("delete").onclick = function() {
+				var result = confirm("정말 삭제하시겠습니까?");
+				if (result) {
+					location.href = "BoardDel.board?no="+${no};
+				}
+			}
 		}
 	</script>
-		
-		
+
+
 	<c:choose>
 		<c:when test="${user != null }">
 			<script>
@@ -790,7 +802,7 @@
 			</script>
 		</c:when>
 	</c:choose>
-		
-		
+
+
 </body>
 </html>

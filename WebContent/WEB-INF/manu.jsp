@@ -91,13 +91,13 @@
       <nav class="navbar navbar-expand-sm navbar-default">
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-               <li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+               <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
                      class="menu-icon fa fa-laptop"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
-                <li class="menu-item-has-children dropdown"><a
+                <li class="active"><a
                   href="ClientSelect.admin"> <i
                      class="menu-icon fa fa-table"></i>메뉴
                </a></li>
