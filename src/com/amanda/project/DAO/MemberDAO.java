@@ -230,7 +230,7 @@ public class MemberDAO {
 	
 	public List<MemberDTO> show_member() {
 		List<MemberDTO> list = new ArrayList<>();
-		String sql = "select mem_seq,id,name,phone,usehour from member where blackcheck='n' and id not in('admin')";
+		String sql = "select mem_seq,id,name,birth,email,phone,point,address1,address2,usehour from member where blackcheck='n' and id not in('admin')";
 		try(
 				Connection con = ds.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -240,12 +240,48 @@ public class MemberDAO {
 				int num = rs.getInt(1);
 				String id = rs.getString(2);
 				String name = rs.getString(3);
-				String phone = rs.getString(4);
-				int usehour = rs.getInt(5);
-				MemberDTO dto = new MemberDTO(num,id,name,phone,usehour);
+				String birth = rs.getString(4);
+				String email = rs.getString(5);
+				String phone = rs.getString(6);
+				int point = rs.getInt(7);
+				String address1 = rs.getString(8);
+				String address2 = rs.getString(9);
+				int usehour = rs.getInt(10);
+				
+				MemberDTO dto = new MemberDTO(num,id,name,birth,email,phone,point,address1,address2,usehour);
 				list.add(dto);
 			}
 			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public MemberDTO show_memberInfo(int paramNum) {
+		String sql = "select mem_seq,id,name,birth,email,phone,point,address1,address2,usehour from member where mem_seq=?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				
+				){
+			pstat.setInt(1, paramNum);
+			ResultSet rs = pstat.executeQuery();
+			if(rs.next()) {
+				int num = rs.getInt(1);
+				String id = rs.getString(2);
+				String name = rs.getString(3);
+				String birth = rs.getString(4);
+				String email = rs.getString(5);
+				String phone = rs.getString(6);
+				int point = rs.getInt(7);
+				String address1 = rs.getString(8);
+				String address2 = rs.getString(9);
+				int usehour = rs.getInt(10);				
+				MemberDTO dto = new MemberDTO(num,id,name,birth,email,phone,point,address1,address2,usehour);
+				return dto;
+			}
+			return null;
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;

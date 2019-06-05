@@ -247,106 +247,213 @@ table td, table th {
 		</div>
 		<div class="content row">
 			<!-- Animated -->
-			<!-- 				<div class="animated fadeIn"> -->
-			<!-- Widgets  -->
-			<div class="row">
-				<div class="col-lg-6">
-					<table class="table" id="membertable">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>이름</th>
-								<th>아이디</th>
-								<th>핸드폰</th>
-								<th class="d-none d-lg-block">사용시간</th>
-								<th>선택</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="dto" items="${result }">
-								<form action="toblack.manage" id="memberinfo">
-									<tr>
-										<td id="memnum">${dto.mem_seq }</td>
-										<td id="memname">${dto.name }</td>
-										<td id="memid">${dto.id }</td>
-										<td id="memphone">${dto.phone }</td>
-										<td class="d-none d-lg-block" style="border: none;"
-											id="memusehour">${dto.usehour }</td>
-										<td><button type="button" class="btn btn-dark movebtn"
-												data-toggle="modal" data-target="#resonModal">블랙</button></td>
-									</tr>
-								</form>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-lg-6">
-					<table class="table" id="blacktable">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>이름</th>
-								<th>아이디</th>
-								<th>사유</th>
-								<th>선택</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="bl" items="${blresult }">
-								<form action="cancelblack.manage">
-									<tr>
-										<td><input type="text" value="${bl.mem_seq}"
-											name="blacknumber" id="numtext"
-											style="background-color: #00000000; border: none;" readonly></td>
-										<td>${bl.name }</td>
-										<td>${bl.id }</td>
-										<td>${bl.blackreason }</td>
-										<td><button class="btn btn-primary">블랙취소</button>
-									</tr>
-								</form>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-			<!-- 				</div> -->
+			<div class="animated fadeIn">
+				<!-- Widgets  -->
+					<div class="row">
 
-			<div class="modal fade" id="resonModal" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">사유작성</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+						<div class="col-lg-6">
+							<table class="table" id="membertable">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>이름</th>
+										<th>아이디</th>
+										<th>사용시간</th>
+										<th>선택</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="dto" items="${result }">
+										<form action="toblack.manage">
+											<tr>
+												<td id="memnum">${dto.mem_seq }</td>
+												<td id="memname">${dto.name }</td>
+												<td id="memid">${dto.id }</td>
+												<td>${dto.usehour }</td>
+												<td>
+													<button type="button"
+														class="btn btn-info btn-sm infobtn showInfo"
+														data-toggle="modal" data-target="#memberInfoModal">Info</button>
+													<button type="button" class="btn btn-dark btn-sm movebtn"
+														data-toggle="modal" data-target="#resonModal">블랙</button>
+												</td>
+											</tr>
+										</form>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
+						<div class="col-lg-6">
+							<table class="table" id="blacktable">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>이름</th>
+										<th>아이디</th>
+										<th>사유</th>
+										<th>선택</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="bl" items="${blresult }">
+										<form action="cancelblack.manage">
+											<tr>
+												<td><input type="text" value="${bl.mem_seq}"
+													name="blacknumber" id="numtext"
+													style="background-color: #00000000; border: none;" readonly></td>
+												<td>${bl.name }</td>
+												<td>${bl.id }</td>
+												<td>${bl.blackreason }</td>
+												<td><button class="btn btn-primary">블랙취소</button>
+											</tr>
+										</form>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<!-- 			블랙리스트 사유작성모달 -->
+				<div class="modal fade" id="resonModal" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">사유작성</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
 
-						<div class="modal-body">
-							<form action="toblack.manage" class="reasonform" method="post">
-								<div class="form-group">
-									<label for="exampleFormControlInput1">사유</label> 
-									<input
-										type="text" class="form-control" id="blreason"
-										name="blackreson" placeholder="사유를 입력하세요(15자 이내)"
-										maxlength="15" required> 
-										<input type="text"
-										class="form-control" id="blnum" name="blacknum" readonly>
-								</div>
-								<div class="modal-footer">
-									<button class="btn btn-primary reasonsubmit">확인</button>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">취소</button>
-								</div>
-							</form>
+							<div class="modal-body">
+								<form action="toblack.manage" class="reasonform" method="post">
+									<div class="form-group">
+										<label for="exampleFormControlInput1">사유</label> <input
+											type="text" class="form-control" id="blreason"
+											name="blackreson" placeholder="사유를 입력하세요(15자 이내)"
+											maxlength="15" required> <input type="text"
+											class="form-control" id="blnum" name="blacknum" readonly>
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-primary reasonsubmit">확인</button>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">취소</button>
+									</div>
+								</form>
 
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<script>
+
+				<!-- 			회원 정보보기 모달 -->
+				<div class="modal fade" id="memberInfoModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel1"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-body1">
+								<form>
+									<div class="form-group m-0 p-0">
+										<div class="card">
+											<div class="card-header">
+												<i class="fa fa-user"></i><strong class="card-title pl-2">
+													회원정보 </strong>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="card-body">
+												<div class="mx-auto d-block">
+													<h5 class="text-center mt-2 mb-1">
+														<b id="member_id"> </b>
+													</h5>
+													<!-- <div class="location text-center">Lv. 일반회원</div> -->
+												</div>
+												<hr>
+												<div class="card-text">
+													<div>
+														<b>회원번호 </b>
+														<p id="member_seq"></p>
+													</div>
+													<div>
+														<b>이름 </b>
+														<p id="member_name"></p>
+													</div>
+													<div>
+														<b>생년월일</b>
+														<p id="member_birth"></p>
+													</div>
+													<div>
+														<b>이메일</b>
+														<p id="member_email"></p>
+													</div>
+													<div>
+														<b>핸드폰번호</b>
+														<p id="member_phone"></p>
+													</div>
+													<div>
+														<b>잔여포인트</b>
+														<p id="member_point"></p>
+													</div>
+													<div>
+														<b>주소</b>
+														<p id="member_addr1"></p>
+														<p id="member_addr2"></p>
+													</div>
+													<div>
+														<b>사용시간 </b>
+														<p id="member_time"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">닫기</button>
+									</div>
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					$(".showInfo").on(
+							"click",
+							function() {
+								$.ajax({
+									url : "showinfo.manage",
+									type : "POST",
+									data : {
+										member_seq : $(this).parent().parent()
+												.find("td:nth-child(1)").html()
+									},
+									dataType : "json",
+									success : function(resp) {
+										console.log(resp);
+										$("#member_id").html(resp.id + " 님");
+										$("#member_seq").html(resp.seq);
+										$("#member_name").html(resp.name);
+										$("#member_birth").html(resp.birth);
+										$("#member_email").html(resp.email);
+										$("#member_phone").html(resp.phone);
+										$("#member_point").html(resp.point);
+										$("#member_addr1").html(resp.addr1);
+										$("#member_addr2").html(resp.addr2);
+										$("#member_time").html(resp.time);
+									},
+									fail : function(resp) {
+										console.log("fail");
+									}
+								});
+							})
+
 					$(".movebtn").on(
 							"click",
 							function() {
@@ -361,45 +468,46 @@ table td, table th {
 
 
 
-			<!--                여기부터 진향이가 만든 로그인폼 -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form action="loginProc.member" id="form" method="post">
-								<div class="form-group">
-									<label for="exampleFormControlInput1">ID</label> <input
-										type="text" class="form-control" id="joinemail"
-										placeholder="ID를 입력하시오" required name="loginid">
-								</div>
-								<div class="form-group">
-									<label for="exampleFormControlInput1">Password</label> <input
-										type="password" class="form-control" id="joinpassword"
-										placeholder="비밀번호 입력하시오" required name="loginpw">
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" type="button"
-										id="reinputpw">비밀번호재설정</button>
-									<button type="button" class="btn btn-primary" type="button"
-										id="joinMem">회원가입</button>
-									<button type="button" class="btn btn-primary" id="login">login</button>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Close</button>
-								</div>
-							</form>
+				<!--                여기부터 진향이가 만든 로그인폼 -->
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="loginProc.member" id="form" method="post">
+									<div class="form-group">
+										<label for="exampleFormControlInput1">ID</label> <input
+											type="text" class="form-control" id="joinemail"
+											placeholder="ID를 입력하시오" required name="loginid">
+									</div>
+									<div class="form-group">
+										<label for="exampleFormControlInput1">Password</label> <input
+											type="password" class="form-control" id="joinpassword"
+											placeholder="비밀번호 입력하시오" required name="loginpw">
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary" type="button"
+											id="reinputpw">비밀번호재설정</button>
+										<button type="button" class="btn btn-primary" type="button"
+											id="joinMem">회원가입</button>
+										<button type="button" class="btn btn-primary" id="login">login</button>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<script>
+				<script>
 					$("#reinputpw").on("click", function() {
 						location.href = "page?url=WEB-INF/modifypassword.jsp";
 					})
@@ -412,88 +520,88 @@ table td, table th {
 					//                            로그인 버튼과 회원가입 버튼의 script
 				</script>
 
-			<!--                   진향이 로그인폼끝 -->
-			<!--                         진향이 마이페이지 폼 -->
-			<div class="modal fade" id="exampleModal1" tabindex="-1"
-				role="dialog" aria-labelledby="exampleModalLabel1"
-				aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-body1">
-							<form>
-								<div class="form-group m-0 p-0">
-									<div class="card">
-										<div class="card-header">
-											<i class="fa fa-user"></i><strong class="card-title pl-2">
-												My Page </strong>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="card-body">
-											<div class="mx-auto d-block">
-												<img class="rounded-circle mx-auto d-block"
-													src="images/admin.jpg" alt="profile image" width="130px">
-												<h5 class="text-center mt-2 mb-1">
-													<b>${user.id} 님</b>
-												</h5>
-												<!-- <div class="location text-center">Lv. 일반회원</div> -->
+				<!--                   진향이 로그인폼끝 -->
+				<!--                         진향이 마이페이지 폼 -->
+				<div class="modal fade" id="exampleModal1" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel1"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-body1">
+								<form>
+									<div class="form-group m-0 p-0">
+										<div class="card">
+											<div class="card-header">
+												<i class="fa fa-user"></i><strong class="card-title pl-2">
+													My Page </strong>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
 											</div>
-											<hr>
-											<div class="card-text">
-												<div>
-													<b>이름 </b>
-													<p>${user.name}</p>
+											<div class="card-body">
+												<div class="mx-auto d-block">
+													<img class="rounded-circle mx-auto d-block"
+														src="images/admin.jpg" alt="profile image" width="130px">
+													<h5 class="text-center mt-2 mb-1">
+														<b>${user.id} 님</b>
+													</h5>
+													<!-- <div class="location text-center">Lv. 일반회원</div> -->
 												</div>
-												<div>
-													<b>생년월일</b>
-													<p>${user.birth}</p>
-												</div>
-												<div>
-													<b>이메일</b>
-													<p>${user.email}</p>
-												</div>
-												<div>
-													<b>핸드폰번호</b>
-													<p>${user.phone}</p>
-												</div>
-												<div>
-													<b>잔여포인트</b>
-													<p>${user.point}</p>
-												</div>
-												<div>
-													<b>주소</b>
-													<p>${user.address1 }</p>
-													<p>${user.address2 }</p>
+												<hr>
+												<div class="card-text">
+													<div>
+														<b>이름 </b>
+														<p>${user.name}</p>
+													</div>
+													<div>
+														<b>생년월일</b>
+														<p>${user.birth}</p>
+													</div>
+													<div>
+														<b>이메일</b>
+														<p>${user.email}</p>
+													</div>
+													<div>
+														<b>핸드폰번호</b>
+														<p>${user.phone}</p>
+													</div>
+													<div>
+														<b>잔여포인트</b>
+														<p>${user.point}</p>
+													</div>
+													<div>
+														<b>주소</b>
+														<p>${user.address1 }</p>
+														<p>${user.address2 }</p>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="modal-footer">
-									<button id="deleteMembtn" type="button"
-										class="btn btn-outline-info" data-dismiss="modal">회원
-										탈퇴</button>
-									<button id="pointPagebtn" type="button"
-										class="btn btn-outline-info" data-dismiss="modal">포인트
-										충전</button>
-									<button id="updatememberbtn" type="button"
-										class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-									<button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
+									<div class="modal-footer">
+										<button id="deleteMembtn" type="button"
+											class="btn btn-outline-info" data-dismiss="modal">회원
+											탈퇴</button>
+										<button id="pointPagebtn" type="button"
+											class="btn btn-outline-info" data-dismiss="modal">포인트
+											충전</button>
+										<button id="updatememberbtn" type="button"
+											class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+										<button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
 
-								</div>
-							</form>
+									</div>
+								</form>
 
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			
 
 
 
-		<script>
+			<script>
 				$("#logoutbtn1").on("click", function() {
 					location.href = "logoutProc.member";
 				})
@@ -508,9 +616,9 @@ table td, table th {
 					location.href = "page?url=WEB-INF/pay.jsp";
 				})
 			</script>
-		<!-- 진향이 마이페이지 폼끝 -->
+			<!-- 진향이 마이페이지 폼끝 -->
+		</div>
 	</div>
-
 	<!-- 컨텐츠 끝 -->
 
 	<!-- Footer -->
