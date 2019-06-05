@@ -67,7 +67,6 @@
 						<script>
 							$("#charge").on("click",function(){
 								alert("로그인 후 이용가능합니다.");	
-								$("#loginbtn").trigger("click");
 							})
 						</script>
 					</c:when>
@@ -268,7 +267,7 @@
                 <div class="form-group" id="divBirth">
                     <label for="inputBirth" class="col-lg-2 control-label">생년월일</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control readonly" id="birth" name="joinmemberbirth" data-rule-required="true"  placeholder="ex)19000101" maxlength="15" >
+                        <input type="text" class="form-control" id="birth" name="joinmemberbirth" data-rule-required="true"  placeholder="ex)19000101" maxlength="15" readonly>
                     </div>
                 </div>
 
@@ -287,9 +286,9 @@
                 
                  <label for="inputPhoneNumber" class="col-lg-2 control-label">주소 입력</label>
                     <div class="col-lg-10">
-                        <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
-                        <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
-                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        <input required type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호" readonly >
+                        <input required type="text" class="form-control" id="Address1" name="address1" placeholder="주소" readonly>
+                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소"><br>
                         <input type="button" value="우편번호 찾기" id="search">
                     </div>
                     
@@ -300,12 +299,6 @@
                 </div>
             </form>
         </div>
-     <script>
-    $(".readonly").on('keydown paste', function(e){
-        e.preventDefault();
-    });
-</script>
-        
         <!-- 						진향이 로그인폼끝 -->
         <div class="modal fade" id="exampleModal" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLabel"
@@ -321,41 +314,34 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form" name="formname" method="post">
-                        <div class="form-group">
-                           <label for="exampleFormControlInput1">ID</label> <input
-                              type="text" class="form-control" id="joinemail"
-                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
-                        </div>
-                        <div class="form-group">
-                           <label for="exampleFormControlInput1">Password</label> <input
-                              type="password" class="form-control" id="joinpassword"
-                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" type="button"
-										id="findId">아이디 찾기</button>
-                           <button type="button" class="btn btn-primary" type="button"
-                              id="reinputpw">비밀번호 찾기</button>
-                           <button type="button" class="btn btn-primary" type="button"
-                              id="joinMem">회원가입</button>
-                           <button type="submit" class="btn btn-primary" id="login">login</button>
-                          
-                        </div>
-                     </form>
+												<form action="loginProc.member" id="form" method="post">
+													<div class="form-group">
+														<label for="exampleFormControlInput1">ID</label> <input
+															type="text" class="form-control" id="joinemail"
+															placeholder="ID를 입력하시오" required name="loginid">
+													</div>
+													<div class="form-group">
+														<label for="exampleFormControlInput1">Password</label> <input
+															type="password" class="form-control" id="joinpassword"
+															placeholder="비밀번호 입력하시오" required name="loginpw">
+													</div>
+													<div class="modal-footer">
+														<div id="remember">
+															<input type="checkbox">자동로그인
+														</div>
+														<button type="button" class="btn btn-primary"
+															type="button" id="joinMem">회원가입</button>
+														<button type="button" class="btn btn-primary" id="login">login</button>
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Close</button>
+													</div>
+												</form>
 											</div>
 										</div>
 									</div>
 								</div>
 
 								<script>
-								
-								
-								//엔터 입력시 로그인
-						         function press(f){ if(f.keyCode == 13){  
-						        	 formname.submit();  
-						        	 } }
-								
 									$("#joinMem").on("click",function() {
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
@@ -469,13 +455,8 @@
 	.on(
 			"click",
 			function() {
-	            if(${user.id == 'admin' }){
-	            	location.href = "adminlogoutProc.member";	
-	            }else{
-	            	location.href = "logoutProc.member";	
-	            }
-	        	 
-	         })
+				location.href = "logoutProc.member";
+			})
 
 	
 							$("#updatememberbtn")

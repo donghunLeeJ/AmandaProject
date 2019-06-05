@@ -29,25 +29,32 @@ public class PayController extends HttpServlet {
 
 		
 		if(cmd.equals("time.pay")) {
+			
 			String id = request.getParameter("id");
 			int price=Integer.parseInt(request.getParameter("amount"));
 			String name = request.getParameter("name");
 			System.out.println(pdao.update_point(id, price));
-			menuDAO.insertMenu(id, name, price);
+			pdao.pay_table_insert(id, price);
 			request.getSession().setAttribute("user", dao.select_user(id));
+			
+			int userPoint = MemberController.pointmap.get(id); //현재 로그인중인 사용자의 포인트값을 꺼낸다			
+			MemberController.pointmap.put(id, userPoint + price);//그 포인트값에 결제로 추가된 포인트를 더해준다.		
+			
 			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
 		}else if(cmd.equals("menu.pay")) {
 			String id=request.getParameter("id");
-			String name = request.getParameter("name");
-			int price=Integer.parseInt(request.getParameter("amount"));
-			System.out.println("pay");
-			System.out.println(id);
-			System.out.println(name);
-			System.out.println(price);
-			menuDAO.insertMenu(id,name,price);
-			request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
+
+	         String name = request.getParameter("name");
+	         int price=Integer.parseInt(request.getParameter("amount"));
+	         System.out.println("pay");
+	         System.out.println(id);
+	         System.out.println(name);
+	         System.out.println(price);
+	         pdao.menu_pay_table_insert(id, price, name);
+	         request.getRequestDispatcher("WEB-INF/main.jsp").forward(request, response);
 		
+
 		}
 
 		

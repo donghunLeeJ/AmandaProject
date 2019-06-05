@@ -80,14 +80,17 @@
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
+              
                <li class="menu-item-has-children dropdown"><a
-                  href="page?url=WEB-INF/manu.jsp"> <i
+                  href="ClientSelect.admin"> <i
                      class="menu-icon fa fa-table"></i>메뉴
                </a></li>
+              
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
                      class="menu-icon fa fa-th"></i>고객의소리
                </a></li>
+               
                <c:choose>
                   <c:when test="${user == null }">
                      <li id="charge" class="menu-item-has-children dropdown"><a
@@ -96,7 +99,11 @@
                      <script>
 
                      $("#charge").on("click",function(){
-                        alert("로그인 후 이용가능합니다.");   
+                         alert("로그인 후 이용가능합니다.");
+                         $("#loginbtn").trigger("click");
+
+                         
+                        
                      })
                   </script>
 
@@ -276,9 +283,11 @@
                         <c:choose>
                            <c:when test="${user == null }">
                               <script>
-                              if(${login== -1}){
+                              if(${login== 0}){
                             	  alert("아이디가 없습니다 ");
                             	  loaction.href=    "page?url=WEB-INF/main.jsp";
+                              }else if(${login== -1}){
+                            	  alert("비밀번호가 일치하지 않습니다.")
                               }
                        		 </script>
 	                          <h3 class="card-title">충전/로그인/개인정보</h3>
@@ -301,108 +310,61 @@
                               <button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
                               <button type="button" class="btn btn-primary" id="msg">msg</button>
 
-                              <script>
-                              //msg보내는 소켓 및 버튼
-                               var webSocket = new WebSocket('ws://192.168.60.20/AmandaProject/broadcasting');
-                               webSocket.onerror = function(event) {
-                                 onError(event)
-                                     };
-                                 webSocket.onmessage = function(event) {
-                                    onMessage(event)
-                                  };
-                                if("${user.name}"=="관리자"){
-                                  function onMessage(event) {
-                                    var msg = event.data.split(":");
-                                       var who = msg[0]; 
-                                        var contents = msg[1];
-                                         var who2=msg[2];
-                                        
-                             	 if(who!="admin"&&who2=="admin"){
-                       		     window.open("reply.message?who="+who+"&&content="+contents, "",
-                      		     "width=500px,height=300px");
-                     	               }
-                                     }
-                                   
-                                  }       
-                              
-                                else{
-                                  function onMessage(event) {
-                                    var msg = event.data.split(":");
-                                       var who = msg[0]; //admin
-                                        var contents = msg[1];
-                                         var who2=msg[2]; //clinet이름                                                                
-                              if("${user.name}"==who2&&who=="admin") 
-                             {
-                            window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
-                           "width=500px,height=300px");
-                                    
-                              }
-                              
-                           }
-                          
-                          }   
-                          //메시지 끝
-                          
-                           $("#logoutbtn")
-                           .on(
-                                 "click",
-                                 function() {
-                                    location.href = "logoutProc.member";
-                                 })
-                                 $("#msg")
-                           .on(
-                                 "click",
-                                 function() {
-                                    
-                                    window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
-                                 
-                                 })
+                             		<script>
+										//msg보내는 소켓 및 버튼
+										 var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
+									    webSocket.onerror = function(event) {
+     									 
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  									 
+  									 
+  										if("${user.id}"!="admin"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; //admin
+       											var contents = msg[1];
+       											 var who2=msg[2]; //clinet이름      											    							
+     								 if("${user.id}"==who2&&who=="admin") 
+     								{
+    								window.open("replytoclient.message?who="+who2+"&&content="+contents,"",
+									"location=no, directories=no,width=500px,height=300px");
+     										 
+     								 }
+     								 else if("admin"==who&&who2=="all")
+     								 {
+     									 console.log("kk");
+     									window.open("all.message?content="+contents,"",
+    									"location=no, directories=no,width=500px,height=300px");
+     									  }
+     							 }
+     							
+  								}	
+  								//메시지 끝
+  								
+									$("#logoutbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "logoutProc.member";
+											})
+											$("#msg")
+									.on(
+											"click",
+											function() {
+												
+												window.open("page?url=WEB-INF/newmessage.jsp","","width=500px,height=300px");
+											
+											})
 
-                                                                                          
+											                                                         
                            </script>
                         </c:otherwise>
                         </c:choose>
                                                  
-    <c:choose> 
-    <c:when test="${user != null }">
-     <script>
-   
-     function msg_time(){  
-         
-         $.ajax({             
-                   url: 'usertime.com', //ComController에 있는 usertime으로 이동함
-                   type: 'POST'
-                    
-           }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
-                         
-              $("#point").html(point);
-                       
-                m = (Math.floor(point/60)) + "분 "; 
-                var msg = "<font color='red'>" + m +"</font>";
-                
-               $("#timeout").html(msg);
-                                 
-                if (point == 300){    
-                   
-                   alert("선불시간이 5분 남았습니다.");  
-                   
-                }else if(point == 0){
-                   
-                   alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
-                   location.href = "logoutProc.member";
-                   clearInterval(tid);       
-                }                               
-           });           
-          }
-                
-                                 
-          setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
-          function TimerStart(){tid=setInterval('msg_time()',1000) };
-          TimerStart();                          
-            
-   </script>    
-  </c:when>
- </c:choose>                     
+                  
   
                      </div>
                   </div>
@@ -443,25 +405,26 @@
                   </div>
 
                   <div class="modal-body">
-                     <form action="loginProc.member" id="form" method="post">
+                      <form action="loginProc.member" id="form" name="formname" method="post">
                         <div class="form-group">
                            <label for="exampleFormControlInput1">ID</label> <input
                               type="text" class="form-control" id="joinemail"
-                              placeholder="ID를 입력하시오" required name="loginid">
+                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
                         </div>
                         <div class="form-group">
                            <label for="exampleFormControlInput1">Password</label> <input
                               type="password" class="form-control" id="joinpassword"
-                              placeholder="비밀번호 입력하시오" required name="loginpw">
+                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
                         </div>
                         <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" type="button"
+										id="findId">아이디 찾기</button>
                            <button type="button" class="btn btn-primary" type="button"
-                              id="reinputpw">비밀번호재설정</button>
+                              id="reinputpw">비밀번호 찾기</button>
                            <button type="button" class="btn btn-primary" type="button"
                               id="joinMem">회원가입</button>
-                           <button type="button" class="btn btn-primary" id="login">login</button>
-                           <button type="button" class="btn btn-secondary"
-                              data-dismiss="modal">Close</button>
+                           <button type="submit" class="btn btn-primary" id="login">login</button>
+                          
                         </div>
                      </form>
 
@@ -472,6 +435,17 @@
 
 
          <script>
+         //엔터 입력시 로그인
+         function press(f){ if(f.keyCode == 13){  
+        	 formname.submit();  
+        	 } }
+
+         
+         $("#findId").on("click",function(){
+
+     		location.href = "page?url=WEB-INF/modifyid.jsp";
+     		})
+     		
                            $("#reinputpw").on("click",function(){
                            location.href = "page?url=WEB-INF/modifypassword.jsp";
                            })
@@ -572,8 +546,13 @@
    .on(
          "click",
          function() {
-            location.href = "logoutProc.member";
-         })
+             if(${user.id == 'admin' }){
+             	location.href = "adminlogoutProc.member";	
+             }else{
+             	location.href = "logoutProc.member";	
+             }
+         	 
+          })
                         $("#updatememberbtn")
                            .on(
                                  "click",
@@ -617,6 +596,59 @@
       <script
          src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
       <script src="assets/js/main.js"></script>
+
+
+
+<c:choose> 
+    <c:when test="${user != null }">
+     <script>
+	
+     function msg_time(){  
+		   
+    	  $.ajax({  	    	 
+    		         url: 'usertime.com', //ComController에 있는 usertime으로 이동함
+    		         type: 'POST'
+    		          
+    		 }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
+    		         		
+    			 $("#point").html(point);
+    		       	   
+    		      m = (Math.floor(point/60)) + "분 "; 
+    		      var msg = "<font color='red'>" + m +"</font>";
+    		      
+    		     $("#timeout").html(msg);
+    		                       
+    		      if (point == 300){    
+    		    	  
+    		         alert("선불시간이 5분 남았습니다.");  
+    		         
+    		      }else if(point == 0){
+    		    	  
+    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+    		    	  location.href = "logoutProc.member";
+    		    	  clearInterval(tid);       
+    		      }   	     	                 
+    		 });   	     
+    	   }
+    	   		
+    	  								
+    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
+    	   function TimerStart(){tid=setInterval('msg_time()',1000) };
+    	   TimerStart();                          
+    	  
+    	   var webSocket = new	WebSocket('ws://192.168.60.20/WebSocket/websocketendpoint');
+    		webSocket.onopen = function(){
+    			webSocket.send("hi"); 
+    		} ;
+    		webSocket.onerror;   
+   </script>    
+  </c:when>
+ </c:choose>                
+
+
+
+
+
 
 </body>
 </html>

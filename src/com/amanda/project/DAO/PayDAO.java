@@ -47,7 +47,7 @@ public class PayDAO {
 		}
 		return SHA;
 	}
-	/** 디비 값을 확인하고 로그인을 진행하는 메서드*/
+
 	public int update_point(String id,int point){
 		String sql="update member set point = point + ? where id = ? ";
 		try (	Connection con=ds.getConnection();
@@ -84,4 +84,25 @@ public class PayDAO {
 		}
 		return -1;
 	}
+	public int menu_pay_table_insert (String id,int point,String menu){
+
+	      String sql="insert into point_charge values(point_seq.nextval,?,?,sysdate,?) ";
+	      try (   Connection con=ds.getConnection();
+	            PreparedStatement pstat=con.prepareStatement(sql);
+
+	            )
+	      {
+	         pstat.setString(1, menu);
+	         pstat.setInt(2, point);
+	         pstat.setString(3, id);
+	         
+	         int result = pstat.executeUpdate();
+
+	         return result;
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return -1;
+	   }
+
 }

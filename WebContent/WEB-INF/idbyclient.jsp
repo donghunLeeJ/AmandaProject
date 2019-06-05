@@ -32,7 +32,7 @@
       alert(event.data);
     }
     function send() {
-        webSocket.send("${user.id}:"+inputMessage.value+":admin");
+        webSocket.send("admin:"+inputMessage.value+":${who}");
         inputMessage.value = "";
         window.close();
     }

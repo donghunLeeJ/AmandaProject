@@ -73,20 +73,36 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
+					<c:choose>
+					<c:when test="${user.id != 'admin' }">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
+					</c:when>
+					<c:when test="${user.id == 'admin' }">
+					<li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+							class="menu-icon fa fa-laptop"></i>Home </a></li>
+					</c:when>
+					</c:choose>
+					
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fa fa-cogs"></i>잔여좌석
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/manu.jsp"> <i
-							class="menu-icon fa fa-table"></i>메뉴
-					</a></li>
+					
+					<c:choose>
+              		<c:when test="${user.id == 'admin' }">
+               		<li class="menu-item-has-children dropdown"><a
+               	    href="select.admin"> <i
+                     class="menu-icon fa fa-table"></i>메뉴
+              		 </a></li>
+              		 </c:when>
+        
+               		</c:choose>
 					<li class="menu-item-has-children dropdown"><a
 						href="Board.board?currentPage=1"> <i
 							class="menu-icon fa fa-th"></i>고객의소리
 					</a></li>
+					
 					<li class="menu-item-has-children dropdown"><a
 						href="member.manage"> <i
 							class="menu-icon fa fa-th"></i>고객관리
@@ -159,9 +175,66 @@
 			</div>
 			<!-- /# column -->
 
-
-
 			<script>
+			
+			var ctx1 = document.getElementById("barChart1");
+		    //    ctx.height = 200;
+		    var myChart1 = new Chart( ctx1, {
+		        type: 'bar',
+		        data: {
+		            labels: [ , , , , , ,  ],
+		            datasets:[ 
+		                {
+		                    label: "방문자 수",
+		                    data: [ , , , , , ,  ],
+		                    borderColor: "rgba(0, 194, 146, 0.9)",
+		                    borderWidth: "0",
+		                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+		                            }],
+		                    
+		        },
+		        options: {
+		            scales: {
+		                yAxes: [{
+		                    ticks: {
+		                       min:0,
+		                        max:500,
+		                        stepSize: 10
+		                    }
+		                   }]
+		            }
+		        }
+		    } );
+			var ctx2 = document.getElementById("barChart2");
+		    //    ctx.height = 200;
+		    var myChart2 = new Chart( ctx2, {
+		        type: 'bar',
+		        data: {
+		            labels: [ , , , , , ,  ],
+		            datasets:[ 
+		                {
+		                    label: "매출액",
+		                    data: [ , , , , , ,  ],
+		                    borderColor: "rgba(0, 194, 146, 0.9)",
+		                    borderWidth: "0",
+		                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+		                            }],
+		                    
+		        },
+		        options: {
+		            scales: {
+		                yAxes: [{
+		                    ticks: {
+		                       min:0,
+		                        max:1000000,
+		                        stepSize: 100000
+		                    }
+		                   }]
+		            }
+		        }
+		    } );
+			
+			
 			$("#searchAjax1").on("click",function(){
 				$.ajax({
 					type:"get",
@@ -169,38 +242,13 @@
 					data : {
 						what : $("#selected1").val(),
 						how : "how"
-						
 					}
 				}).done(function(rsp){
 					var arr = JSON.parse(rsp);
-					var ctx = document.getElementById( "barChart1" );
-				    //    ctx.height = 200;
-				    var myChart = new Chart( ctx, {
-				        type: 'bar',
-				        data: {
-				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
-				            datasets: [
-				                {
-				                    label: "방문자수",
-				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
-				                    borderColor: "rgba(0, 194, 146, 0.9)",
-				                    borderWidth: "0",
-				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-				                            },
-				                    ]
-				        },
-				        options: {
-				            scales: {
-				                yAxes: [{
-				                    ticks: {
-				                       min:0,
-				                        max:100,
-				                        stepSize: 10
-				                    }
-				                   }]
-				            }
-				        }
-				    } );
+					myChart1.data.labels=[arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0];
+					myChart1.data.datasets[0].data =[arr.amount.amount6,arr.amount.amount5,arr.amount.amount4,arr.amount.amount3,arr.amount.amount2,arr.amount.amount1,arr.amount.amount0];
+					myChart1.update();
+					
 				
 				}) 
 				
@@ -216,94 +264,16 @@
 					}
 				}).done(function(rsp){
 					var arr = JSON.parse(rsp);
-					var ctx = document.getElementById( "barChart2" );
+					myChart2.data.labels=[arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0];
+					myChart2.data.datasets[0].data =[arr.amount.amount6,arr.amount.amount5,arr.amount.amount4,arr.amount.amount3,arr.amount.amount2,arr.amount.amount1,arr.amount.amount0];
+					myChart2.update();
 				    //    ctx.height = 200;
-				    var myChart = new Chart( ctx, {
-				        type: 'bar',
-				        data: {
-				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
-				            datasets: [
-				                {
-				                    label: "매출액",
-				                    data: [ arr.amount.amount6,arr.amount.amount5 ,arr.amount.amount4 ,arr.amount.amount3 ,arr.amount.amount2 , arr.amount.amount1, arr.amount.amount0 ],
-				                    borderColor: "rgba(0, 194, 146, 0.9)",
-				                    borderWidth: "0",
-				                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-				                            },
-				                    ]
-				        },
-				        options: {
-				            scales: {
-				                yAxes: [{
-				                    ticks: {
-				                       min:0,
-				                        max:500000,
-				                        stepSize: 50000
-				                    }
-				                   }]
-				            }
-				        }
-				    } );
+				  
 				
 				}) 
 				
 			})
-				var ctx = document.getElementById("barChart1");
-			    //    ctx.height = 200;
-			    var myChart = new Chart( ctx, {
-			        type: 'bar',
-			        data: {
-			            labels: [ , , , , , ,  ],
-			            datasets: [
-			                {
-			                    label: "방문자 수",
-			                    data: [ , , , , , ,  ],
-			                    borderColor: "rgba(0, 194, 146, 0.9)",
-			                    borderWidth: "0",
-			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-			                            },
-			                    ]
-			        },
-			        options: {
-			            scales: {
-			                yAxes: [{
-			                    ticks: {
-			                       min:0,
-			                        max:1000,
-			                        stepSize: 100
-			                    }
-			                   }]
-			            }
-			        }
-			    } );
-			var ctx = document.getElementById("barChart2");
-			    //    ctx.height = 200;
-			    var myChart = new Chart( ctx, {
-			        type: 'bar',
-			        data: {
-			            labels: [ , , , , , ,  ],
-			            datasets: [
-			                {
-			                    label: "매출액",
-			                    data: [ , , , , , ,  ],
-			                    borderColor: "rgba(0, 194, 146, 0.9)",
-			                    borderWidth: "0",
-			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-			                            },
-			                    ]
-			        },
-			        options: {
-			            scales: {
-			                yAxes: [{
-			                    ticks: {
-			                       min:0,
-			                        max:1000,
-			                        stepSize: 100
-			                    }
-			                   }]
-			            }
-			        }
-			    } );
+				
 			
 			</script>
 		<!-- 					여기부터 진향이가 만든 로그인폼 -->
@@ -332,13 +302,14 @@
 										placeholder="비밀번호 입력하시오" required name="loginpw">
 								</div>
 								<div class="modal-footer">
+								<button type="button" class="btn btn-primary" type="button"
+										id="findId">아이디 찾기</button>
 									<button type="button" class="btn btn-primary" type="button"
 										id="reinputpw">비밀번호찾기</button>
 									<button type="button" class="btn btn-primary" type="button"
 										id="joinMem">회원가입</button>
 									<button type="button" class="btn btn-primary" id="login">login</button>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Close</button>
+									
 								</div>
 							</form>
 
@@ -349,6 +320,15 @@
 
 
 			<script>
+			$("#findId").on("click",function(){
+
+	     		location.href = "page?url=WEB-INF/modifyid.jsp";
+	     		})
+	     		
+	                           $("#reinputpw").on("click",function(){
+	                           location.href = "page?url=WEB-INF/modifypassword.jsp";
+	                           })
+			
 									$("#reinputpw").on("click",function(){
 									location.href = "page?url=WEB-INF/modifypassword.jsp";
 									})
@@ -450,7 +430,12 @@
    .on(
          "click",
          function() {
-            location.href = "logoutProc.member";
+            if(${user.id == 'admin' }){
+            	location.href = "adminlogoutProc.member";	
+            }else{
+            	location.href = "logoutProc.member";	
+            }
+        	 
          })
 
    
@@ -525,8 +510,31 @@
 
 
 		<!-- 진향이 마이페이지 폼끝 -->
+<!--메시지  -->
+<script>
+ var webSocket = new WebSocket('ws://192.168.60.29:8080/AmandaProject1/broadcasting');
+									    webSocket.onerror = function(event) {
+     									// onError(event)
+   											 };
+  										 webSocket.onmessage = function(event) {
+   										   onMessage(event)
+  										  };
+  										if("${user.name}"=="관리자"){
+  										  function onMessage(event) {
+    										  var msg = event.data.split(":");
+       										  var who = msg[0]; 
+       											var contents = msg[1];
+       											 var who2=msg[2];
+       											
+     								 if(who!="관리자"&&who2=="admin"){
+    								window.open("reply.message?who="+who+"&&content="+contents, "",
+									"width=500px,height=300px");
+     										 }
+    											}
+  											
+  										  }		 
 
-
+</script>
 
 		<!-- 컨텐츠 끝 -->
 

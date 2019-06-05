@@ -35,8 +35,7 @@
    rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
 
 
 
@@ -50,6 +49,10 @@
    padding-left: 20px;
    padding-right: 20px;
    border-radius: 10px;
+}
+
+#menuAdd {
+   text-align: center;
 }
 
 #caroWrapper {
@@ -80,6 +83,22 @@
 .card-text {
    text-align: left;
 }
+
+.cardTitle {
+   float: left;
+   width: 40%;
+}
+
+.cardButt {
+   float: left;
+   width: 60%;
+   text-align: right;
+}
+
+.headerWrapper {
+   overflow: hidden;
+}
+
 .myspan {
    text-align: center;
 }
@@ -92,39 +111,22 @@
       <nav class="navbar navbar-expand-sm navbar-default">
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-               <li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+               <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
                      class="menu-icon fa fa-laptop"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fa fa-cogs"></i>잔여좌석
                </a></li>
-                <li class="menu-item-has-children dropdown"><a
-                  href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
+               <li class="active"><a
+                  href="select.admin"> <i class="menu-icon fa fa-table"></i>메뉴
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
                      class="menu-icon fa fa-th"></i>고객의소리
                </a></li>
-               <c:choose>
-                  <c:when test="${user == null }">
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                     <script>
-                        $("#charge").on("click", function() {
-                           alert("로그인 후 이용가능합니다.");
-                           $("#loginbtn").trigger("click");
-                        })
-                     </script>
-                  </c:when>
-                  <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                  </c:otherwise>
-               </c:choose>
+               <li class="menu-item-has-children dropdown"><a
+                  href="member.manage"> <i class="menu-icon fa fa-th"></i>고객관리
+               </a></li>
             </ul>
          </div>
       </nav>
@@ -225,9 +227,6 @@
                               </a>
                            </div>
                         </div>
-                        	<c:if test="${user.id ne 'admin'}">
-								<button type="button" class="btn btn-primary" id="msg">msg</button>
-								</c:if>
                      </div>
                      <!--  mypage 사람 사진-->
                      <div class="user-area  float-right">
@@ -274,7 +273,9 @@
             <div class="card">
                <div class="card-header" id="cardHeader">
                   <strong class="card-title mb-3"><h1>
-                        <span id="todaysMenu">${top }</span>
+                        <span id="todaysMenu">${top }</span> <input type="button"
+                           value="수정" class="btn btn-info" data-toggle="modal"
+                           data-target="#menuHeaderModal" id="menuHeader">
                      </h1></strong>
 
                </div>
@@ -330,11 +331,98 @@
             </div>
          </div>
       </div>
-
+      <div class="modal fade" id="menuHeaderModal" tabindex="-1"
+         role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="menuModalModalLabel"><b>메뉴 수정</b></h4>
+                  <button type="button" class="close" data-dismiss="modal"
+                     aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="MenuHeaderEdit.admin" id="headerForm" method="post">
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>상단 제목 수정</b></label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderTop" value="${top}">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>첫 번째 메뉴</b></label> <select
+                           name="firstHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <c:choose>
+                                 <c:when test="${food1Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc1" value="${food1Desc }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>두 번째 메뉴</b></label> <select
+                           name="secondHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <c:choose>
+                                 <c:when test="${food2Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc2" value="${food2Desc }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>세 번째 메뉴</b></label> <select
+                           name="thirdHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <c:choose>
+                                 <c:when test="${food3Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc3" value="${food3Desc }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 1</b></label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderBot1" value="${bot1 }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 2</b></label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderBot2" value="${bot2}">
+                     </div>
+                     <div class="modal-footer">
+                        <button class="btn btn-info" id="menuHeaderComplete">수정
+                           완료</button>
+                        <button type="button" class="btn btn-secondary"
+                           data-dismiss="modal">닫기</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
       <!-- Content 시작 -->
       <div class="content">
          <div class="animated fadeIn">
             <div class="row">
+
                <c:forEach var="dto" items="${list}">
                   <div class="col-md-4 col-sm-6">
                      <div class="card">
@@ -342,132 +430,197 @@
                            <div class="cardTitle">
                               <strong class="card-title mb-3">${dto.menuName}</strong>
                            </div>
+                           <div class="cardButt">
+                              <input type="button" value="변경"
+                                 class="btn btn-info mr-2 menuEditBtn" data-toggle="modal"
+                                 data-target="#menuEditModal"><input type="button"
+                                 value="삭제" class="btn btn-info menuDelBtn">
+                           </div>
                         </div>
                         <div class="card-body">
                            <div class="mx-auto d-block myspan">
                               <div>
-                                 <img data-toggle="modal" data-target="#menuModal${dto.menu_seq }" src="${dto.imgPath}" alt="">
+                                 <img src="${dto.imgPath}" alt="">
                               </div>
                               <h5 class="text-sm-center mt-2 mb-1">${dto.menuDesc}</h5>
                               <span>${dto.menuPrice}</span>원 <input type="hidden"
                                  value="${dto.menu_seq}">
-                           </div>  
+                           </div>
                            <hr>
                         </div>
                      </div>
                   </div>
-                 
-                  
-                 
-                 
-           <div class="modal fade" id="menuModal${dto.menu_seq }" tabindex="-1"
-            role="dialog" aria-labelledby="exampleModalLabel1"
+               </c:forEach>
+            </div>
+         </div>
+         <script>
+            function readURL(input) {
+               var reader = new FileReader();
+               reader.onload = function(e) {
+                  $("#newImg").attr("src", e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+            }
+
+            $("#menuImgEdit").change(function() {
+               readURL(this);
+            });
+
+            function PreviewImage() {
+               var oFReader = new FileReader();
+               oFReader.readAsDataURL(document
+                     .getElementById("menuImgEdit").files[0]);
+
+               oFReader.onload = function(oFREvent) {
+                  document.getElementById("newImg").src = oFREvent.target.result;
+               };
+            };
+
+            $(".menuEditBtn").on(
+                  "click",
+                  function() {
+                     $("#menuTitleEdit").val(
+                           $(this).parent().parent().find(
+                                 "div:nth-child(1)").find(
+                                 "strong:nth-child(1)").html());
+                     $("#menuDescEdit").val(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "h5:nth-child(2)").html());
+                     $("#menuPriceEdit").val(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "span:nth-child(3)").html());
+                     $("#menuNoEdit").val(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "input:nth-child(4)").val());
+                     $("#originMenuImg").html(
+                           $(this).parent().parent().parent().find(
+                                 "div:nth-child(2)").find(
+                                 "div:nth-child(1)").find(
+                                 "div:nth-child(1)").html());
+
+                  });
+
+            $(".menuDelBtn").on(
+                  "click",
+                  function() {
+                     var result = confirm("메뉴를 삭제하시겠습니까?");
+                     if (result) {
+                        location.href = "MenuDel.admin?menu_seq="
+                              + $(this).parent().parent().parent()
+                                    .find("div:nth-child(2)").find(
+                                          "div:nth-child(1)")
+                                    .find("input:nth-child(4)")
+                                    .val();
+                     }
+                  });
+         </script>
+         <div class="modal fade" id="menuEditModal" tabindex="-1"
+            role="dialog" aria-labelledby="menuEditModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
-                  <div class="modal-body1">
-                   
-                        <div class="form-group m-0 p-0">
-                           <div class="card">
-                              <div class="card-header">
-                              <strong class="card-title pl-2">
-                                    	지금까지 이런메뉴는 없었다!! </strong>
-                                <button type="button" class="close" data-dismiss="modal"
-                                    aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                 </button>
-                              </div>
-                              <div class="card-body">
-                                 <div class="mx-auto d-block">
-                                    <img class="rounded-circle mx-auto d-block"
-                                       src="${dto.imgPath}" alt="profile image" width="130px">
-                                    <h5 class="text-center mt-2 mb-1">
-                                       <b></b>
-                                    </h5>
-                                    <!-- <div class="location text-center">Lv. 일반회원</div> -->
-                                 </div>
-                                 <hr>
-                                 <div class="card-text">
-                                    <div>
-                                       <b>이름 </b>
-                                       <p>${dto.menuName}</p>
-                                    </div>
-                                     <div>
-                                       <b>설명</b>
-                                       <p>${dto.menuDesc}</p>
-                                    </div>
-                                    <div>
-                                       <b>가격</b>
-                                       <p>${dto.menuPrice}</p>
-                                    </div>
-                                    <div class="modal-footer">
-                             <c:if test="${user != null }">
-                             <button class = "btn btn-info" id="menu${dto.menu_seq }">결제하기 </button> 
-                             </c:if>
-                          	 <button type="button" class="btn btn-secondary"
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="menuEditModalLabel">메뉴 수정</h5>
+                     <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="MenuUpdate.admin" id="updateForm" method="post"
+                        enctype="multipart/form-data">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 이름</label> <input
+                              type="text" class="form-control" required name="menuTitleEdit"
+                              id="menuTitleEdit">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 설명</label> <input
+                              type="text" class="form-control" required name="menuDescEdit"
+                              id="menuDescEdit">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 가격</label> <input
+                              type="number" class="form-control" required
+                              name="menuPriceEdit" id="menuPriceEdit">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">기존 이미지</label>
+                           <div id="originMenuImg"></div>
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">변경 이미지</label> <input
+                              type="file" name="menuImgEdit" id="menuImgEdit" class="mt-2">
+
+                           <img id="newImg" src="#" alt="변경 이미지 미설정" /> <input
+                              type="hidden" name="menuNoEdit" id="menuNoEdit">
+                        </div>
+                        <div class="modal-footer">
+                           <button class="btn btn-info">수정완료</button>
+                           <button type="button" class="btn btn-secondary"
                               data-dismiss="modal">닫기</button>
                         </div>
-                                   
-                                   
-                                 
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                   </div>
+                     </form>
+                  </div>
                </div>
             </div>
          </div>
-                  
-                  <script>
-                  var id = "${user.id }";
-                  var paid_amount;
-                  var name;
-                  $("#menu${dto.menu_seq }").on("click",function(){
 
-                      IMP.init('imp96545220'); 
-                      IMP.request_pay({
-                          pg : 'inicis', // version 1.1.0부터 지원.
-                          pay_method : 'card',
-                          merchant_uid : 'merchant_' + new Date().getTime(),
-                          name : '${dto.menuName}',
-                          amount : '${dto.menuPrice}',
-                          buyer_email : 'iamport@siot.do',
-                          buyer_name : '구매자이름',
-                          buyer_tel : '010-1234-5678',
-                          buyer_addr : '서울특별시 강남구 삼성동',
-                          buyer_postcode : '123-456',
-                          m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-                      }, function(rsp) {
-                          if ( rsp.success ) {
-                              var msg = '결제가 완료되었습니다.';
-                              paid_amount = rsp.paid_amount;
-                              name = rsp.name;
-                            
-                           
-                             
-                              /* 관리자에게 메시지 보내기  */
-                          } else {
-                              var msg = '결제에 실패하였습니다.';
-                              msg += '에러내용 : ' + rsp.error_msg;
-                          }
-                          alert(msg);
-                          var webSocket = new WebSocket('ws://192.168.60.20:8080/AmandaProject1/broadcasting');
-                           
-                          function send() {
-                              webSocket.send("admin:"+"${user.id }님이 ${dto.menuName}를 주문하였습니다"+":${user.id }");
-                           }
-                          
-                          
-                          
-                          location.href = "menu.pay?id="+id+"&amount="+paid_amount+"&name="+name;
-                  
-                  
+         <div id="menuAdd">
+            <input type="button" value="메뉴 추가" class="btn btn-info mr-2"
+               data-toggle="modal" data-target="#menuAddModal" id="loginbtn">
+         </div>
 
-                  </script>
-              </c:forEach>
+         <div class="modal fade" id="menuAddModal" tabindex="-1" role="dialog"
+            aria-labelledby="menuAddModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="menuAddModalLabel">신규 메뉴</h5>
+                     <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="MenuAdd.admin" id="addForm" method="post"
+                        enctype="multipart/form-data">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 이름</label> <input
+                              type="text" class="form-control" placeholder="메뉴명을 입력해주세요."
+                              required name="menuTitleAdd">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 설명</label> <input
+                              type="text" class="form-control" placeholder="메뉴 설명을 입력해주세요."
+                              required name="menuDescAdd">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 가격</label> <input
+                              type="number" class="form-control"
+                              placeholder="메뉴 가격을 입력해주세요." required name="menuPriceAdd">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">메뉴 이미지</label> <input
+                              type="file" required name="menuImgAdd" class="mt-2">
+                        </div>
+                        <div class="modal-footer">
+                           <button class="btn btn-info">추가하기</button>
+                           <button type="button" class="btn btn-secondary"
+                              data-dismiss="modal">닫기</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
             </div>
          </div>
+
          <!-- .row -->
       </div>
       <!--                여기부터 진향이가 만든 로그인폼 -->
@@ -517,11 +670,6 @@
      	 } }
       
       
-      $("#findId").on("click",function(){
-
-  		location.href = "page?url=WEB-INF/modifyid.jsp";
-  		})
-  		
          $("#reinputpw").on("click", function() {
             location.href = "page?url=WEB-INF/modifypassword.jsp";
          })
@@ -614,17 +762,9 @@
 
 
       <script>
-      
-      
-      $("#logoutbtn1").on("click",function() {
-                if(${user.id == 'admin' }){
-                	location.href = "adminlogoutProc.member";	
-                }else{
-                	location.href = "logoutProc.member";	
-                }
-            	 
-             });
-
+         $("#logoutbtn1").on("click", function() {
+            location.href = "logoutProc.member";
+         })
 
          $("#updatememberbtn").on("click", function() {
             location.href = "page?url=WEB-INF/ModifyMembers.jsp";
@@ -663,7 +803,10 @@
          src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
       <script src="assets/js/main.js"></script>
       <script>
-         $("#updatememberbtn").on("click", function() {
+        
+      
+      
+      		$("#updatememberbtn").on("click", function() {
             location.href = "page?url=WEB-INF/ModifyMembers.jsp";
          })
          $("#deleteMembtn").on("click", function() {
@@ -675,87 +818,32 @@
       </script>
       
       
-       <!--메시지  -->
-     	<script>
-
-										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
+      
+      <!--메시지   -->
+      
+      <script>
+ var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
 									    webSocket.onerror = function(event) {
-     									 onError(event)
+     									// onError(event)
    											 };
   										 webSocket.onmessage = function(event) {
    										   onMessage(event)
   										  };
-  									 
-  									 
-  										if("${user.id}"!="admin"){
+  										if("${user.id}"=="admin"){
   										  function onMessage(event) {
-
     										  var msg = event.data.split(":");
-       										  var who = msg[0]; //admin
+       										  var who = msg[0]; 
        											var contents = msg[1];
-       											 var who2=msg[2]; //clinet이름      											    							
-     								 if("${user.name}"==who2&&who=="admin") 
-     								{
-    								window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
+       											 var who2=msg[2];
+       											
+     								 if(who!="관리자"&&who2=="admin"){
+    								window.open("reply.message?who="+who+"&&content="+contents, "",
 									"width=500px,height=300px");
-     										 
-     								 }
-     								 else if("admin"==who&&who2=="all")
-     								 {
-     									 console.log("kk");
-     									window.open("all.message?content="+contents,"",
-    									"location=no, directories=no,width=500px,height=300px");
-     									  }
-     								 
-     							 }
-     							
-  								}
-  										
-  										$("#msg")
-  										.on(
-  												"click",
-  												function() {
-  													
-  													window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
-  												
-  												})
-  								</script>
-  
-    
-   <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
-  <c:choose> 
-    <c:when test="${(user != null) && (user.id != 'admin')}">
-      
-       <script>
-	
-			function msg_time(){  
- 		   
- 		   $.ajax({  
- 		    	 
- 		         url: 'usertime.com',
- 		         type: 'POST'
- 		          
- 		 }).done(function(point){
- 			 		       	   	 			 	
- 		      if (point == 300){      
- 		    	  
- 		         alert("선불시간이 5분 남았습니다.");
- 		         
- 		      }else if(point == 0){
- 		    	  
- 		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
- 		    	  location.href = "logoutProc.member";
- 		    	  clearInterval(tid); 		    	  
- 		      }   
- 		 });	   	     
- 	   }	   			
- 	 
- 	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
- 	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
- 	   TimerStart();   </script>    
-  </c:when>  
-</c:choose> 
-     	   
+     										 }
+    											}
+  											
+  										  }		 
+
+</script>
 </body>
 </html>

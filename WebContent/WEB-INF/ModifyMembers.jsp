@@ -53,11 +53,11 @@
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fa fa-cogs" ></i>잔여좌석
 					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/manu.jsp"> <i
-							class="menu-icon fa fa-table"></i>메뉴
-					</a></li>
-
+					  <li class="menu-item-has-children dropdown"><a
+                	  href="ClientSelect.admin"> <i
+                     class="menu-icon fa fa-table"></i>메뉴
+               		</a></li>
+              
 					<li class="menu-item-has-children dropdown"><a href="Board.board?currentPage=1"> 
 					<i class="menu-icon fa fa-th"></i>고객의소리
 					<c:choose>
@@ -70,6 +70,7 @@
 						<script>
 							$("#charge").on("click",function(){
 								alert("로그인 후 이용가능합니다.");	
+								$("#loginbtn").trigger("click");
 							})
 						</script>
 					</c:when>
@@ -383,8 +384,13 @@
 	.on(
 			"click",
 			function() {
-				location.href = "logoutProc.member";
-			})
+	            if(${user.id == 'admin' }){
+	            	location.href = "adminlogoutProc.member";	
+	            }else{
+	            	location.href = "logoutProc.member";	
+	            }
+	        	 
+	         })
 
 	
 							$("#updatememberbtn")
@@ -420,34 +426,41 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form" method="post">
-													<div class="form-group">
-														<label for="exampleFormControlInput1">ID</label> <input
-															type="text" class="form-control" id="joinemail"
-															placeholder="ID를 입력하시오" required name="loginid">
-													</div>
-													<div class="form-group">
-														<label for="exampleFormControlInput1">Password</label> <input
-															type="password" class="form-control" id="joinpassword"
-															placeholder="비밀번호 입력하시오" required name="loginpw">
-													</div>
-													<div class="modal-footer">
-														<div id="remember">
-															<input type="checkbox">자동로그인
-														</div>
-														<button type="button" class="btn btn-primary"
-															type="button" id="joinMem">회원가입</button>
-														<button type="button" class="btn btn-primary" id="login">login</button>
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Close</button>
-													</div>
-												</form>
+												 <form action="loginProc.member" id="form" name="formname" method="post">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">ID</label> <input
+                              type="text" class="form-control" id="joinemail"
+                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">Password</label> <input
+                              type="password" class="form-control" id="joinpassword"
+                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" type="button"
+										id="findId">아이디 찾기</button>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="reinputpw">비밀번호 찾기</button>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="joinMem">회원가입</button>
+                           <button type="submit" class="btn btn-primary" id="login">login</button>
+                          
+                        </div>
+                     </form>
 											</div>
 										</div>
 									</div>
 								</div>
 
 								<script>
+								
+								//엔터 입력시 로그인
+						         function press(f){ if(f.keyCode == 13){  
+						        	 formname.submit();  
+						        	 } }
+								
+								
 									$("#joinMem").on("click",function() {
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
@@ -474,35 +487,7 @@
 
 			}
 		}
-		
-			
-		//5분(포인트 300)이 되면 경고창을 날림/포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수				
-		function msg_time(){  
-		   
-		   $.ajax({  
-		    	 
-		         url: 'usertime.com',
-		         type: 'POST'
-		          
-		 }).done(function(point){
-			 		       	   	 			 	
-		      if (point == 300){      
-		    	  
-		         alert("선불시간이 5분 남았습니다.");
-		         
-		      }else if(point == 0){
-		    	  
-		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
-		    	  location.href = "logoutProc.member";
-		    	  clearInterval(tid); 		    	  
-		      }   
-		 });	   	     
-	   }	   			
-	 
-	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
-	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
-	   TimerStart();	
-			
+					
 	</script>
         
     <div class="clearfix"></div>
@@ -531,6 +516,43 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="assets/js/main.js"></script>
+
+
+ <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
+  <c:choose> 
+    <c:when test="${(user != null) && (user.id != 'admin')}">
+      
+       <script>
+	
+			function msg_time(){  
+ 		   
+ 		   $.ajax({  
+ 		    	 
+ 		         url: 'usertime.com',
+ 		         type: 'POST'
+ 		          
+ 		 }).done(function(point){
+ 			 		       	   	 			 	
+ 		      if (point == 300){      
+ 		    	  
+ 		         alert("선불시간이 5분 남았습니다.");
+ 		         
+ 		      }else if(point == 0){
+ 		    	  
+ 		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+ 		    	  location.href = "logoutProc.member";
+ 		    	  clearInterval(tid); 		    	  
+ 		      }   
+ 		 });	   	     
+ 	   }	   			
+ 	 
+ 	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
+ 	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
+ 	   TimerStart();	
+			 
+   </script>    
+  </c:when>  
+</c:choose> 
 
 
 </body>

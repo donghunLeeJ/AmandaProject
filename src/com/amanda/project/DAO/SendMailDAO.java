@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.amanda.project.DTO.MemberDTO;
 import com.amanda.project.DTO.SendMailDTO;
 
 public class SendMailDAO extends Authenticator{
@@ -45,6 +46,35 @@ public class SendMailDAO extends Authenticator{
 		return rannum;
 		
 	}
+	
+	
+	public String MemberId(String name,String birth,String email ) {
+		MemberDAO dao = new MemberDAO();
+		MemberDTO mdto = new MemberDTO();
+		String sql = "select id from member where name=? and birth=? and email=?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, name);
+			pstat.setString(2, birth);
+			pstat.setString(3, email);
+
+			ResultSet result = pstat.executeQuery();
+
+			if(result.next()) {
+				String id = result.getString("id");
+				return id;
+
+			}else {
+				return null;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public int pwcheck_insert(SendMailDTO dto) {
 		String sql = "insert into subinfo values(?,?,?,default)";
 		try(

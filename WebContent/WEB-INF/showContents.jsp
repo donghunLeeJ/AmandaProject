@@ -158,38 +158,64 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
+					<c:choose>
+					<c:when test="${user.id != 'admin' }">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fa fa-cogs"></i>잔여좌석
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/manu.jsp"> <i
-							class="menu-icon fa fa-table"></i>메뉴
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="Board.board?currentPage=1"> <i
-							class="menu-icon fa fa-th"></i>고객의소리
-					</a></li>
-					<c:choose>
-						<c:when test="${user == null }">
-							<li id="charge" class="menu-item-has-children dropdown"><a
-								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
-							</a></li>
-							<script>
-                     $("#charge").on("click",function(){
-                        alert("로그인 후 이용가능합니다.");   
-                     })
-                  </script>
-						</c:when>
-						<c:otherwise>
-							<li id="charge" class="menu-item-has-children dropdown"><a
-								href="page?url=WEB-INF/pay.jsp"> <i
-									class="menu-icon fa fa-tasks"></i>충전하기
-							</a></li>
-						</c:otherwise>
+					</c:when>
+					<c:when test="${user.id == 'admin' }">
+					<li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
+							class="menu-icon fa fa-laptop"></i>Home </a></li>
+					</c:when>
 					</c:choose>
+               <li class="menu-item-has-children dropdown"><a
+                  href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+                     class="menu-icon fa fa-cogs"></i>잔여좌석
+               </a></li>
+               <c:choose>
+              		<c:when test="${user.id == 'admin' }">
+               		<li class="menu-item-has-children dropdown"><a
+               	    href="select.admin"> <i
+                     class="menu-icon fa fa-table"></i>메뉴
+              		 </a></li>
+              		 </c:when>
+              		 <c:when test="${user.id != 'admin' }">
+               		<li class="menu-item-has-children dropdown"><a
+               	    href="ClientSelect.admin"> <i
+                     class="menu-icon fa fa-table"></i>메뉴
+              		 </a></li>
+              		 </c:when>
+           		</c:choose>
+               <li class="menu-item-has-children dropdown"><a
+                  href="Board.board?currentPage=1"> <i
+                     class="menu-icon fa fa-th"></i>고객의소리
+               </a></li>
+               <c:choose>
+                  <c:when test="${user == null }">
+                     <li id="charge" class="menu-item-has-children dropdown"><a
+                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+                     </a></li>
+                     <script>
+                        $("#charge").on("click", function() {
+                           alert("로그인 후 이용가능합니다.");
+                           $("#loginbtn").trigger("click");
+                        })
+                     </script>
+                  </c:when>
+                  <c:when test="${user.id == 'admin' }">
+                     	<li class="menu-item-has-children dropdown"><a
+						href="member.manage"> <i
+							class="menu-icon fa fa-th"></i>고객관리
+					</a></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li id="charge" class="menu-item-has-children dropdown"><a
+                        href="page?url=WEB-INF/pay.jsp"> <i
+                           class="menu-icon fa fa-tasks"></i>충전하기
+                     </a></li>
+                  </c:otherwise>
+               </c:choose>
+
 				</ul>
 			</div>
 		</nav>
@@ -424,7 +450,7 @@
 
 								<div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_time">${repldto.repl_time}</div>
 							</div>
-							<c:if test="${id==repldto.repl_writer }">
+							<c:if test="${user.id==repldto.repl_writer }">
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
 										id="replButts">
@@ -441,7 +467,7 @@
 				$(".replEditCompl").hide();
 				$(".hide").hide();
 				
-				if(${id==repldto.repl_writer }){
+				if(${user.id==repldto.repl_writer }){
 					$(".modiRepl").on("click",function(){
 						document.getElementById("repl_text").readOnly=false;
 						$(this).parent().find("input:nth-child(1)").show();
@@ -479,32 +505,48 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form action="loginProc.member" id="form" method="post">
-								<div class="form-group">
-									<label for="exampleFormControlInput1">ID</label> <input
-										type="text" class="form-control" id="joinemail"
-										placeholder="ID를 입력하시오" required name="loginid">
-								</div>
-								<div class="form-group">
-									<label for="exampleFormControlInput1">Password</label> <input
-										type="password" class="form-control" id="joinpassword"
-										placeholder="비밀번호 입력하시오" required name="loginpw">
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" type="button"
-										id="reinputpw">비밀번호재설정</button>
-									<button type="button" class="btn btn-primary" type="button"
-										id="joinMem">회원가입</button>
-									<button type="button" class="btn btn-primary" id="login">login</button>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Close</button>
-								</div>
-							</form>
+							 <form action="loginProc.member" id="form" name="formname" method="post">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">ID</label> <input
+                              type="text" class="form-control" id="joinemail"
+                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">Password</label> <input
+                              type="password" class="form-control" id="joinpassword"
+                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" type="button"
+										id="findId">아이디 찾기</button>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="reinputpw">비밀번호 찾기</button>
+                           <button type="button" class="btn btn-primary" type="button"
+                              id="joinMem">회원가입</button>
+                           <button type="submit" class="btn btn-primary" id="login">login</button>
+                          
+                        </div>
+                     </form>
 						</div>
 					</div>
 				</div>
 			</div>
 			<script>
+			
+			//엔터 입력시 로그인
+	         function press(f){ if(f.keyCode == 13){  
+	        	 formname.submit();  
+	        	 } }
+			
+			
+			$("#findId").on("click",function(){
+
+	     		location.href = "page?url=WEB-INF/modifyid.jsp";
+	     		})
+	     		
+	                           $("#reinputpw").on("click",function(){
+	                           location.href = "page?url=WEB-INF/modifypassword.jsp";
+	                           })
 									$("#reinputpw").on("click",function(){
 									location.href = "page?url=WEB-INF/modifypassword.jsp";
 									})
@@ -604,8 +646,13 @@
    .on(
          "click",
          function() {
-            location.href = "logoutProc.member";
-         })
+             if(${user.id == 'admin' }){
+             	location.href = "adminlogoutProc.member";	
+             }else{
+             	location.href = "logoutProc.member";	
+             }
+         	 
+          })
 
    
                      $("#updatememberbtn")
@@ -729,42 +776,41 @@
 	</script>
 		
 		
-	<c:choose>
-		<c:when test="${user != null }">
-			<script>
-				//5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수				
-				function msg_time() {
-
-					$.ajax({
-
-						url : 'usertime.com',
-						type : 'POST'
-
-					}).done(function(point) {
-
-						if (point == 300) {
-
-							alert("선불시간이 5분 남았습니다.");
-
-						} else if (point == 0) {
-
-							alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
-							location.href = "logoutProc.member";
-							clearInterval(tid);
-						}
-					});
-				}
-
-				setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
-				function TimerStart() {
-					
-					tid = setInterval('msg_time()', 1000)
-				};
-				TimerStart();
-				
-			</script>
-		</c:when>
-	</c:choose>
+<!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
+  <c:choose> 
+    <c:when test="${(user != null) && (user.id != 'admin')}">
+      
+       <script>
+	
+			function msg_time(){  
+ 		   
+ 		   $.ajax({  
+ 		    	 
+ 		         url: 'usertime.com',
+ 		         type: 'POST'
+ 		          
+ 		 }).done(function(point){
+ 			 		       	   	 			 	
+ 		      if (point == 300){      
+ 		    	  
+ 		         alert("선불시간이 5분 남았습니다.");
+ 		         
+ 		      }else if(point == 0){
+ 		    	  
+ 		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+ 		    	  location.href = "logoutProc.member";
+ 		    	  clearInterval(tid); 		    	  
+ 		      }   
+ 		 });	   	     
+ 	   }	   			
+ 	 
+ 	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
+ 	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
+ 	   TimerStart();	
+			 
+   </script>    
+  </c:when>  
+</c:choose> 
 		
 		
 </body>
