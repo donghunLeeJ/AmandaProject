@@ -605,8 +605,15 @@
     		    	  
     		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
     		    	  location.href = "logoutProc.member";
-    		    	  clearInterval(tid);       
-    		      }   	     	                 
+    		    	  clearInterval(tid);   
+    		    	  
+    		      }else if(point == -1){
+    		    	     		    	 
+    		    	  $("#point").html(${user.point}); 		    	  
+    		    	  $("#timeout").html( "<font color='red'>" + (Math.floor(${user.point}/60))+ "분 " +"</font>");      		    	  		    	 	  
+    		    	  clearInterval(tid);     
+    		    	  
+    		      }   	     	                   		      		      
     		 });   	     
     	   }
     	   		

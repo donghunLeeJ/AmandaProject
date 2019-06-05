@@ -25,13 +25,24 @@ public class ComController extends HttpServlet {
 		
 		//ajax를 받아 1초마다 실시간으로 페이지에 포인트(시간)을 출력시켜주는 컨트롤러
 	    if(command.equals("/usertime.com")) {
-	    	
+	    		   
 	    	MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 		 	String id=dto.getId();
 		 	
-	    	int userpoint = MemberController.pointmap.get(id);   	
-	    	pw.print(userpoint); //로그인한 유저가 가진 남은 포인트를 출력시킨다.   	
-	    	   	        	    	
+		 	//만일 사용자가 pc방이 아닌 다른 기기에서 로그인했을 경우
+            //로그인한 사람의 id와 포인트값을 저장하는 pointmap에 데이터가 저장되지 않으므로 값이 null이 나오게 된다.
+		 	//그 경우 ajax반복을 하지 않도록 -1를 출력시킨다.
+		 	if(MemberController.pointmap.get(id) == null){
+		 		
+		 		pw.print(-1);
+		 		
+		 	}else {
+		 	 	
+		    	int userpoint = MemberController.pointmap.get(id);   	
+		    	pw.print(userpoint); //로그인한 유저가 가진 남은 포인트를 출력시킨다	
+		 	}
+		 
+		 	
 	    }else if(command.equals("/UsersTime.com")){
 	    	
 	    	//seat페이지에서만 사용하는 컨트롤러

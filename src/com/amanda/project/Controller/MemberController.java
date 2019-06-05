@@ -67,12 +67,21 @@ public class MemberController extends HttpServlet {
 						rd.forward(request, response);					
 					}else {
 
-						MemberDTO user = dao.select_user(loginid);
-						//pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
-						pointmap.put(loginid, user.getPoint());					
+						MemberDTO user = dao.select_user(loginid);			
 						request.setAttribute("login", 1);													
 						request.getSession().setAttribute("user", dao.select_user(loginid));
 
+
+						//String ip = "192.168.60.27";
+						String ip = request.getRemoteAddr();			
+						System.out.println(ip);
+						System.out.println(ip);
+						
+					if(cDao.UserSeatIpCheck(ip) == 0){	
+						
+					   //pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
+						pointmap.put(loginid, user.getPoint());		
+						
 						//로그인한 순간 사용자의 포인트를 1초마다 1씩 감소시키는 스레드(timertask)를 생성				
 						Timer time = new Timer();
 						TimerTask timertask = new TimerTask() {
@@ -99,12 +108,10 @@ public class MemberController extends HttpServlet {
 						//각각 timertask클래스 변수 , 스레드가 작동하기까지 대기 시간,반복 주기를 나타냄
 						//(반복주기에서 1000은 1초와 같다.)
 						time.schedule(timertask,1,1000);
-
-						//String ip = "192.168.60.27";
-						String ip = request.getRemoteAddr();			
-						System.out.println(ip);
-						System.out.println(ip);
+					}
 						
+								
+					
 						if(cDao.seatOn(ip)>0) {
 							ComDTO cDto = cDao.seatNum_get(ip);
 							System.out.println(cDto.getOnOff());
@@ -215,23 +222,32 @@ public class MemberController extends HttpServlet {
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 
 				String id = dto.getId();
-				int hour = dto.getPoint() - pointmap.get(id);
-				//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
+	
+				
+			//만일 로그인한 사용자가 pc방에서 로그아웃 했을 경우 작동하는 코드임	
+			if(!(pointmap.get(id) == null)){
+				
+				 int hour = dto.getPoint() - pointmap.get(id);
+					//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
 
-				dao.PointUpdate(pointmap.get(id), id);		
-				dao.usehourUpdate(hour, id); 
+					dao.PointUpdate(pointmap.get(id), id);		
+					dao.usehourUpdate(hour, id); 
+					
+					//로그아웃하는 순간 hashmap에 담긴 로그아웃한 사용자 데이터를 리셋시킨다.
+					pointmap.remove(id);
+					useridseat.remove(id);
 
-				cDao.seatOff(request.getRemoteAddr());
+
+					//remove연산으로 인해 로그아웃한 사용자의 자리가 비었으므로 다시 useridseat를 세팅해 준다.
+					request.getServletContext().setAttribute("UserSeatNum", useridseat);
+			}	
+    		  				
+			
+				//cDao.seatOff("192.168.60.27");
+			    cDao.seatOff(request.getRemoteAddr());
 				cDao.resetId(request.getRemoteAddr());
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
-
-				//로그아웃하는 순간 hashmap에 담긴 로그아웃한 사용자 데이터를 리셋시킨다.
-				pointmap.remove(id);
-				useridseat.remove(id);
-
-				//remove연산으로 인해 로그아웃한 사용자의 자리가 비었으므로 다시 useridseat를 세팅해 준다.
-				request.getServletContext().setAttribute("UserSeatNum", useridseat);
 
 				request.getSession().invalidate();		
 				request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
