@@ -742,8 +742,14 @@
  		    	  
  		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
  		    	  location.href = "logoutProc.member";
- 		    	  clearInterval(tid); 		    	  
+ 		    	  clearInterval(tid); 	
+ 		    	  
+ 		      }else if(point == -1){
+ 		    	  
+ 		    	 clearInterval(tid); 		
+ 		    	     	  
  		      }   
+ 		      		      
  		 });	   	     
  	   }	   			
  	 
