@@ -175,9 +175,66 @@
 			</div>
 			<!-- /# column -->
 
-
-
 			<script>
+			
+			var ctx1 = document.getElementById("barChart1");
+		    //    ctx.height = 200;
+		    var myChart = new Chart( ctx1, {
+		        type: 'bar',
+		        data: {
+		            labels: [ , , , , , ,  ],
+		            datasets: [
+		                {
+		                    label: "방문자 수",
+		                    data: [ , , , , , ,  ],
+		                    borderColor: "rgba(0, 194, 146, 0.9)",
+		                    borderWidth: "0",
+		                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+		                            },
+		                    ]
+		        },
+		        options: {
+		            scales: {
+		                yAxes: [{
+		                    ticks: {
+		                       min:0,
+		                        max:1000,
+		                        stepSize: 100
+		                    }
+		                   }]
+		            }
+		        }
+		    } );
+			var ctx2 = document.getElementById("barChart2");
+		    //    ctx.height = 200;
+		    var myChart = new Chart( ctx2, {
+		        type: 'bar',
+		        data: {
+		            labels: [ , , , , , ,  ],
+		            datasets: [
+		                {
+		                    label: "매출액",
+		                    data: [ , , , , , ,  ],
+		                    borderColor: "rgba(0, 194, 146, 0.9)",
+		                    borderWidth: "0",
+		                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+		                            },
+		                    ]
+		        },
+		        options: {
+		            scales: {
+		                yAxes: [{
+		                    ticks: {
+		                       min:0,
+		                        max:1000,
+		                        stepSize: 100
+		                    }
+		                   }]
+		            }
+		        }
+		    } );
+			
+			
 			$("#searchAjax1").on("click",function(){
 				$.ajax({
 					type:"get",
@@ -189,9 +246,8 @@
 					}
 				}).done(function(rsp){
 					var arr = JSON.parse(rsp);
-					var ctx = document.getElementById( "barChart1" );
-				    //    ctx.height = 200;
-				    var myChart = new Chart( ctx, {
+					
+					var myChart = new Chart( ctx1, {
 				        type: 'bar',
 				        data: {
 				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
@@ -232,9 +288,9 @@
 					}
 				}).done(function(rsp){
 					var arr = JSON.parse(rsp);
-					var ctx = document.getElementById( "barChart2" );
+					
 				    //    ctx.height = 200;
-				    var myChart = new Chart( ctx, {
+				    var myChart = new Chart( ctx2, {
 				        type: 'bar',
 				        data: {
 				            labels: [arr.date.day6,arr.date.day5,arr.date.day4,arr.date.day3,arr.date.day2,arr.date.day1,arr.date.day0],
@@ -264,62 +320,7 @@
 				}) 
 				
 			})
-				var ctx = document.getElementById("barChart1");
-			    //    ctx.height = 200;
-			    var myChart = new Chart( ctx, {
-			        type: 'bar',
-			        data: {
-			            labels: [ , , , , , ,  ],
-			            datasets: [
-			                {
-			                    label: "방문자 수",
-			                    data: [ , , , , , ,  ],
-			                    borderColor: "rgba(0, 194, 146, 0.9)",
-			                    borderWidth: "0",
-			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-			                            },
-			                    ]
-			        },
-			        options: {
-			            scales: {
-			                yAxes: [{
-			                    ticks: {
-			                       min:0,
-			                        max:1000,
-			                        stepSize: 100
-			                    }
-			                   }]
-			            }
-			        }
-			    } );
-			var ctx = document.getElementById("barChart2");
-			    //    ctx.height = 200;
-			    var myChart = new Chart( ctx, {
-			        type: 'bar',
-			        data: {
-			            labels: [ , , , , , ,  ],
-			            datasets: [
-			                {
-			                    label: "매출액",
-			                    data: [ , , , , , ,  ],
-			                    borderColor: "rgba(0, 194, 146, 0.9)",
-			                    borderWidth: "0",
-			                    backgroundColor: "rgba(0, 194, 146, 0.5)"
-			                            },
-			                    ]
-			        },
-			        options: {
-			            scales: {
-			                yAxes: [{
-			                    ticks: {
-			                       min:0,
-			                        max:1000,
-			                        stepSize: 100
-			                    }
-			                   }]
-			            }
-			        }
-			    } );
+				
 			
 			</script>
 		<!-- 					여기부터 진향이가 만든 로그인폼 -->
