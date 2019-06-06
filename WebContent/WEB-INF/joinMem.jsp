@@ -231,12 +231,12 @@
                         <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
                         <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
                         <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
-                        <input type="button" value="우편번호 찾기" id="search">
+                        <input type="button" class="mb-4" value="우편번호 찾기" id="search">
                     </div>
                     
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-outline-success signbt mb-2" id="joinmemberbtn">회원가입</button>
+                        <button type="submit" class="btn btn-outline-info signbt mb-2" id="joinmemberbtn">회원가입</button>
                     </div>
                 </div>
             </form>
@@ -273,14 +273,15 @@
                               type="password" class="form-control" id="joinpassword"
                               placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
                         </div>
+                        <div class=row><button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5" type="button"
+										id="findId">ID 찾기</button>
+                           <button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 " type="button"
+                              id="reinputpw">PW 찾기</button>
+                           <button type="button" class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" type="button"
+                              id="joinMem">회원 가입</button>
+                           <button type="submit" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button></div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" type="button"
-										id="findId">아이디 찾기</button>
-                           <button type="button" class="btn btn-primary" type="button"
-                              id="reinputpw">비밀번호 찾기</button>
-                           <button type="button" class="btn btn-primary" type="button"
-                              id="joinMem">회원가입</button>
-                           <button type="submit" class="btn btn-primary" id="login">login</button>
+                        
                           
                         </div>
                      </form>
