@@ -106,14 +106,17 @@ public class MemberDAO {
 	/** 회원정보수정 메서드*/
 	public int updateMember(MemberDTO dto) throws Exception {
 
-		String sql="update Member set pw=?,email=?,phone=?  where id=? ";
+		String sql="update Member set pw=?,email=?,phone=?,postcode=?,address1=?,address2=?  where id=? ";
 		Connection con=ds.getConnection();
 		PreparedStatement pstat=con.prepareStatement(sql);
 		pstat.setString(1,this.testSHA256(dto.getPw()));
 		pstat.setString(2,dto.getEmail());
 		pstat.setString(3, dto.getPhone());
-		pstat.setString(4, dto.getId());
-
+		pstat.setString(4, dto.getPostcode());
+		pstat.setString(5, dto.getAddress1());
+		pstat.setString(6, dto.getAddress2());
+		pstat.setString(6, dto.getId());
+		
 		int result=pstat.executeUpdate();
 		con.commit();
 		con.close();
@@ -369,6 +372,25 @@ public class MemberDAO {
 	      }catch(Exception e) {
 	         e.printStackTrace();
 	         return 0;
+	      }
+	   }
+	public int checkCode(String id) {
+	      String sql = "select * from subinfo where id = ? ";
+	      try(
+	            Connection con = ds.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ){
+	          pstat.setString(1, id); 
+	    	  ResultSet rs = pstat.executeQuery();
+	           
+	            if(rs.next()) {
+	            	return 1;
+	            }else {
+	            	return 0;
+	            }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         return -1;
 	      }
 	   }
 }

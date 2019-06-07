@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+page?url=WEB-INF/<%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -322,9 +322,10 @@
 									"location=no, directories=no,width=500px,height=300px");
      										 
      								 }
-     								 else if("admin"==who&&who2=="all")
+     								 else if("admin"==who&&who2=="all") 
      								 {
-     									 console.log("kk");
+     									 console.log(who);
+     									 console.log(who2);
      									window.open("all.message?content="+contents,"",
     									"location=no, directories=no,width=500px,height=300px");
      									  }
@@ -333,13 +334,7 @@
   								}	
   								//메시지 끝
   								
-									$("#logoutbtn")
-									.on(
-											"click",
-											function() {
-												location.href = "logoutProc.member";
-											})
-											$("#msg")
+									$("#msg")
 									.on(
 											"click",
 											function() {
@@ -347,7 +342,15 @@
 												window.open("page?url=WEB-INF/newmessage.jsp","","width=500px,height=300px");
 											
 											})
-
+	
+  								
+  								$("#logoutbtn")
+									.on(
+											"click",
+											function() {
+												location.href = "logoutProc.member";
+											})
+										
 											                                                         
                            </script>
                         </c:otherwise>
@@ -495,11 +498,7 @@
                                     <div>
                                        <b>핸드폰번호</b>
                                        <p>${user.phone}</p>
-                                    </div>
-                                    <div>
-                                       <b>잔여포인트</b>
-                                       <p>${user.point}</p>
-                                    </div>
+                                    </div>                                 
                                     <div>
                                        <b>주소</b>
                                        <p>${user.address1 }</p>

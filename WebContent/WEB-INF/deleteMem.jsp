@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <head>
     <meta charset="utf-8">
@@ -144,31 +145,6 @@
             </c:otherwise>
          </c:choose>
       </header>
-
-        <div class="breadcrumbs">
-            <div class="breadcrumbs-inner">
-                <div class="row m-0">
-                    <div class="col-sm-4">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <h1>Dashboard</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Icons</a></li>
-                                    <li class="active">FontAwesome</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="content">
             <h1 align="center">회원탈퇴 페이지 입니다</h1>
@@ -337,11 +313,7 @@
 										<div>
 											<b>핸드폰번호</b>
 											<p>${user.phone}</p>
-										</div>
-										<div>
-											<b>잔여포인트</b>
-											<p>${user.point}</p>
-										</div>
+										</div>										
 									</div>
 								</div>
 							</div>

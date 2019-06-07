@@ -45,11 +45,12 @@
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <style>
+
 #wrapper {
 	margin-top: 50px;
 }
 
-#nav{
+#nav {
 	box-sizing: border-box;
 	text-align: center;
 }
@@ -78,9 +79,11 @@
 	background-color: #00000000;
 	width: 90%;
 }
-.titleLink:hover{
-	cursor:pointer;
+
+.titleLink:hover {
+	cursor: pointer;
 }
+
 #writer {
 	word-wrap: break-word;
 }
@@ -89,20 +92,31 @@
 	height: 50px;
 }
 
-#select, #search{
+#select, #search {
 	height: 30px;
+	padding-left: 5px;
 	margin-left: 10px;
 	margin-top: 10px;
+	margin-left: 10px;
 }
-#searchButt{
+
+#select {
+	margin-left: 10px;
+}
+
+#search {
+	margin-left: 0px;
+}
+
+#searchButt {
 	margin-left: 7px;
 	margin-right: 5px;
 }
+
 .myrow {
 	margin-left: 0px;
 	margin-right: 0px;
 }
-
 </style>
 </head>
 <body>
@@ -112,6 +126,7 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
+
 		     	<c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
@@ -150,11 +165,13 @@
                         href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
+
                         $("#charge").on("click", function() {
                            alert("로그인 후 이용가능합니다.");
                            $("#loginbtn").trigger("click");
                         })
                      </script>
+
                   </c:when>
                   <c:when test="${user.id == 'admin' }">
                      	<li class="menu-item-has-children dropdown"><a
@@ -169,6 +186,7 @@
                      </a></li>
                   </c:otherwise>
                </c:choose>
+
 
 				</ul>
 			</div>
@@ -207,11 +225,11 @@
 								</div>
 
 								<c:choose>
-                        <c:when test="${user.id ne 'admin'}">
-								<button type="button" class="btn btn-primary" id="msg">msg</button>
-								</c:when>
-							
-						</c:choose>		
+									<c:when test="${user.id ne 'admin'}">
+										<button type="button" class="btn btn-primary" id="msg">msg</button>
+									</c:when>
+
+								</c:choose>
 							</div>
 							<!--  mypage 사람 사진-->
 							<div class="user-area  float-right">
@@ -260,7 +278,9 @@
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title">
-								<h1><b>자유 게시판</b></h1>
+								<h1>
+									<b>자유 게시판</b>
+								</h1>
 							</div>
 						</div>
 					</div>
@@ -276,16 +296,26 @@
 						<div class="card">
 							<div class="card-header">
 								<strong class="card-title">
-									<div class="row" id="searchDiv">
-										<form action="BoardSearch.board">
-											<select id="select" name="select"><option>제목</option>
-												<option>작성자</option></select> <input type="text" id="search"
-												name="search"> <input type="text" id="hide"
-												name="currentPage" value="1">
-											<button id="searchButt" class="btn btn-secondary">검색</button>
-											<input type="button" value="전체 글 보기" id="showAll" class="btn btn-secondary">
-										</form>
-									</div>
+
+									<form action="BoardSearch.board">
+										<div id="searchDiv" class="row">
+											<div class="">
+												<select id="select" name="select">
+													<option>제목</option>
+													<option>작성자</option>
+												</select>
+											</div>
+											<div class="col-6 col-sm-5 col-md-4">
+												<input type="text" id="search" name="search"
+													style="width: 100%;"> <input type="hidden"
+													name="currentPage" value="1">
+											</div>
+											<div class="">
+												<button id="searchButt" class="btn btn-secondary mt-2">검색</button>
+											</div>
+										</div>
+									</form>
+
 								</strong>
 							</div>
 							<div class="card-body">
@@ -294,25 +324,20 @@
 									<thead>
 										<tr class="row myrow">
 											<th
-												class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2">글
-												번호
-											</td>
+												class="col-lg-2 col-md-2 col-sm-2 col-5 order-lg-1 order-md-1 order-sm-2 order-2">글
+												번호</th>
 											<th
-												class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1">글
-												제목
-											</td>
+												class="col-lg-4 col-md-4 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1">글
+												제목</th>
 											<th
-												class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성자
-											
-											</td>
+												class="col-lg-2 col-md-2 col-sm-4 col-7 order-md-2 order-sm-2 order-2">작성자
+											</th>
 											<th
-												class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">작성
-												시간
-											</td>
+												class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2 d-none d-sm-block">작성
+												시간</th>
 											<th
-												class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">조회
-												수
-											</td>
+												class="col-lg-2 col-md-2 col-sm-2 col-2 order-md-2 order-sm-2 order-2 d-none d-sm-block">조회
+												수</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -320,18 +345,18 @@
 											<form action="ShowContents.board" id="formContents">
 												<tr class="row myrow">
 													<td
-														class="col-lg-1 col-md-1 col-sm-2 col-2 order-lg-1 order-md-1 order-sm-2 order-2"><input
+														class="col-lg-2 col-md-2 col-sm-2 col-5 order-lg-1 order-md-1 order-sm-2 order-2"><input
 														type="text" id="noInput" name="no"
 														value="${dto.board_seq}" readonly></td>
 													<td
-														class="col-lg-5 col-md-5 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button
+														class="col-lg-4 col-md-4 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button
 															class="titleLink">${dto.title}</button></td>
 													<td
-														class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writer}</td>
+														class="col-lg-2 col-md-2 col-sm-4 col-7 order-md-2 order-sm-2 order-2">${dto.writer}</td>
 													<td
-														class="col-lg-3 col-md-3 col-sm-4 col-4 order-md-2 order-sm-2 order-2">${dto.writeDate}</td>
+														class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2 d-none d-sm-block">${dto.writeDate}</td>
 													<td
-														class="col-lg-1 col-md-1 col-sm-2 col-2 order-md-2 order-sm-2 order-2">${dto.viewCount}</td>
+														class="col-lg-2 col-md-2 col-sm-2 col-2 order-md-2 order-sm-2 order-2 d-none d-sm-block">${dto.viewCount}</td>
 												</tr>
 											</form>
 										</c:forEach>
@@ -340,23 +365,23 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 			<!-- .animated -->
 			<footer>
 				<div>
-					<div id="nav" class="col-lg-12 col-md-12 col-sm-12">
+					<div id="nav" class="col-sm-12">
 						<h5>${navi }</h5>
 					</div>
 				</div>
 				<div>
-					<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
+					<div class="col-12 mt-3" id="footer">
 						<c:if test="${user != null }">
-						<input type="button" id="write" value="글쓰기" class="btn btn-secondary">
+							<input type="button" id="write" value="글쓰기"
+								class="btn btn-secondary">
 						</c:if>
-						 <input type="button"
+						<input type="button" value="전체 글 목록" id="showAll"
+							class="btn btn-secondary"> <input type="button"
 							id="goMain" value="메인 페이지로" class="btn btn-secondary">
 					</div>
 				</div>
@@ -381,47 +406,53 @@
 				</div>
 			</div>
 		</footer>
-					<!-- 					여기부터 진향이가 만든 로그인폼 -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					 <form action="loginProc.member" id="form" name="formname" method="post">
-                        <div class="form-group">
-                           <label for="exampleFormControlInput1">ID</label> <input
-                              type="text" class="form-control" id="joinemail"
-                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
-                        </div>
-                        <div class="form-group">
-                           <label for="exampleFormControlInput1">Password</label> <input
-                              type="password" class="form-control" id="joinpassword"
-                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
-                        </div>
-                        <div class=row><button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5" type="button"
-										id="findId">ID 찾기</button>
-                           <button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 " type="button"
-                              id="reinputpw">PW 찾기</button>
-                           <button type="button" class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" type="button"
-                              id="joinMem">회원 가입</button>
-                           <button type="submit" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button></div>
-                        <div class="modal-footer">
-                        
-                          
-                        </div>
-                     </form>
+		<!-- 					여기부터 진향이가 만든 로그인폼 -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form action="loginProc.member" id="form" name="formname"
+							method="post">
+							<div class="form-group">
+								<label for="exampleFormControlInput1">ID</label> <input
+									type="text" class="form-control" id="joinemail"
+									placeholder="ID를 입력하시오" required name="loginid"
+									onkeypress="press(this.form)">
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Password</label> <input
+									type="password" class="form-control" id="joinpassword"
+									placeholder="비밀번호 입력하시오" required name="loginpw"
+									onkeypress="press(this.form)">
+							</div>
+							<div class=row>
+								<button type="button"
+									class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5"
+									type="button" id="findId">ID 찾기</button>
+								<button type="button"
+									class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 "
+									type="button" id="reinputpw">PW 찾기</button>
+								<button type="button"
+									class="btn btn-outline-info col-6 col-sm-3 mr-sm-2"
+									type="button" id="joinMem">회원 가입</button>
+								<button type="submit"
+									class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button>
+							</div>
+							<div class="modal-footer"></div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script>
+		<script>
 	
 	$(window).on("resize",function(){
 		if($(window).width() >= 752){
@@ -452,6 +483,7 @@
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
 	</script>
+
 								
 	<!-- 						진향이 로그인폼끝 -->
 	<!-- 								진향이 마이페이지 폼 -->
@@ -498,11 +530,7 @@
                                     <div>
                                        <b>핸드폰번호</b>
                                        <p>${user.phone}</p>
-                                    </div>
-                                    <div>
-                                       <b>잔여포인트</b>
-                                       <p>${user.point}</p>
-                                    </div>
+                                    </div>                                  
                                     <div>
                                        <b>주소</b>
                                        <p>
@@ -537,6 +565,7 @@
 
 
          <script>
+
    
    
    $("#logoutbtn1")
@@ -567,8 +596,8 @@
                         location.href = "page?url=WEB-INF/pay.jsp";
                      })
                   </script>
-   <!-- 진향이 마이페이지 폼끝 -->
-       </div>
+		<!-- 진향이 마이페이지 폼끝 -->
+	</div>
 
 
 
@@ -584,24 +613,23 @@
 
 
 	<script>
-		$("#hide").hide();
-		$("#showAll").hide();
-		if ("${showAll}" == "showAll") {
-			$("#showAll").show();
-			$("#showAll").on("click", function() {
-				location.href = "Board.board?currentPage=1";
-			})
-		}
+
+		$("#showAll").on("click", function() {
+			location.href = "Board.board?currentPage=1";
+		})
+
 		document.getElementById("goMain").onclick = function() {
 			location.href = "page?url=WEB-INF/main.jsp"
 		}
+		if("${user.id}"!=""){
 		document.getElementById("write").onclick = function() {
 			location.href = "Write.board"
+		}
 		}
 				   
 	</script>
 	<!--메시지  -->
-	<script>
+		<script>
 										//msg보내는 소켓 및 버튼
 										 var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
 									    webSocket.onerror = function(event) {
@@ -610,7 +638,7 @@
   										 webSocket.onmessage = function(event) {
    										   onMessage(event)
   										  };
-  										if("${user.name}"=="관리자"){
+  										if("${user.id}"=="admin"){
   										  function onMessage(event) {
     										  var msg = event.data.split(":");
        										  var who = msg[0]; 
@@ -638,12 +666,12 @@
 									"width=500px,height=300px");
      										 
      								 }
-     								else if("admin"==who&&who2=="all")
-    								 {
-    									 console.log("kk");
-    									window.open("all.message?content="+contents,"",
-   									"location=no, directories=no,width=500px,height=300px");
-    									  }
+     								 else if("admin"==who&&who2=="all")
+     								 {
+     									 console.log("kk");
+     									window.open("page?url=WEB-INF/allclient.jsp","",
+    									"location=no, directories=no,width=500px,height=300px");
+     									  }
      								 
      							 }
      							
@@ -663,11 +691,11 @@
 											                                                         
                            </script>
 
-  <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
-  <c:choose> 
-    <c:when test="${(user != null) && (user.id != 'admin')}">
-      
-       <script>
+	<!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 -->
+	<c:choose>
+		<c:when test="${(user != null) && (user.id != 'admin')}">
+
+			<script>
 	
 			function msg_time(){  
  		   
@@ -699,9 +727,9 @@
  	 
  	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
  	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
- 	   TimerStart();   </script>    
-  </c:when>  
-</c:choose> 
+ 	   TimerStart();   </script>
+		</c:when>
+	</c:choose>
 
 </body>
 </html>

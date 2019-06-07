@@ -372,6 +372,7 @@
                   var id = "${user.id }";
                   var paid_amount;
                   var name;
+                  var result;
                   $("#menu${dto.menu_seq }").on("click",function(){
 
                 		IMP.init('imp96545220'); 
@@ -392,10 +393,11 @@
                 		        var msg = '결제가 완료되었습니다.';
                 		        paid_amount = rsp.paid_amount;
                 		        name = rsp.name;
+                		        result = "결제 완료";
                 		        var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
-           		       		    function send() {
-           	    			 		webSocket.send("admin:"+"${user.id }님이 ${dto.menuName}를 주문하였습니다"+":${user.id }");
-           	    		 		}
+              					webSocket.onopen = function(){
+              					webSocket.send("${user.id}:"+"${user.id}님이"+name+"을 주문하였습니다:admin"); 
+              					} ;
                 		        location.href = "menu.pay?id="+id+"&amount="+paid_amount+"&name="+name;
                   		        /* 관리자에게 메시지 보내기  */
                 		    } else {
@@ -407,7 +409,12 @@
                   		   
                 		});
                 		})
-
+ 			             		
+                		
+   		
+                		
+                		
+                	
                   </script>
               </c:forEach>
             </div>
@@ -523,11 +530,7 @@
                                  <div>
                                     <b>핸드폰번호</b>
                                     <p>${user.phone}</p>
-                                 </div>
-                                 <div>
-                                    <b>잔여포인트</b>
-                                    <p>${user.point}</p>
-                                 </div>
+                                 </div>                              
                                  <div>
                                     <b>주소</b>
                                     <p>${user.address1 }</p>
@@ -623,12 +626,14 @@
       
       
        <!--메시지  -->
-     	<script>
-
+     	
+ 		<script>
+		//msg보내는 소켓 및 버튼
+		
 										//msg보내는 소켓 및 버튼
-										 var webSocket = new WebSocket('ws://192.168.60.29/broadcasting');
+										 var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
 									    webSocket.onerror = function(event) {
-     									 onError(event)
+     									 
    											 };
   										 webSocket.onmessage = function(event) {
    										   onMessage(event)
@@ -637,36 +642,36 @@
   									 
   										if("${user.id}"!="admin"){
   										  function onMessage(event) {
-
     										  var msg = event.data.split(":");
        										  var who = msg[0]; //admin
        											var contents = msg[1];
        											 var who2=msg[2]; //clinet이름      											    							
-     								 if("${user.name}"==who2&&who=="admin") 
+     								 if("${user.id}"==who2&&who=="admin") 
      								{
-    								window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
-									"width=500px,height=300px");
+    								window.open("replytoclient.message?who="+who2+"&&content="+contents,"",
+									"location=no, directories=no,width=500px,height=300px");
      										 
      								 }
-     								 else if("admin"==who&&who2=="all")
+     								 else if("admin"==who&&who2=="all") 
      								 {
-     									 console.log("kk");
+     									 console.log(who);
+     									 console.log(who2);
      									window.open("all.message?content="+contents,"",
     									"location=no, directories=no,width=500px,height=300px");
      									  }
-     								 
      							 }
      							
-  								}
-  										
-  										$("#msg")
-  										.on(
-  												"click",
-  												function() {
-  													
-  													window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
-  												
-  												})
+  								}	
+  								//메시지 끝
+  								
+									$("#msg")
+									.on(
+											"click",
+											function() {
+												
+												window.open("page?url=WEB-INF/newmessage.jsp","","width=500px,height=300px");
+											
+											})
   								</script>
   
     

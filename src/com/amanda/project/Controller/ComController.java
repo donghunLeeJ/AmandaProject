@@ -26,8 +26,10 @@ public class ComController extends HttpServlet {
 		//ajax를 받아 1초마다 실시간으로 페이지에 포인트(시간)을 출력시켜주는 컨트롤러
 	    if(command.equals("/usertime.com")) {
 	    		   
+
 	    	MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
-	    	System.out.println(dto);
+	    
+
 	    	String id = null;
 	    	try {
 	    		id=dto.getId();	

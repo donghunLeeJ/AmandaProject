@@ -81,7 +81,9 @@ footer {
    padding-right: 15px;
    padding-left: 15px;
 }
-
+#writeBtns{
+	margin-top:80px;
+}
 header {
    padding-left: 15px;
    padding-right: 15px;
@@ -115,7 +117,7 @@ header {
 <body>
    <!-- Left Panel -->
 
-   <aside id="left-panel" class="left-panel">
+  <aside id="left-panel" class="left-panel">
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
@@ -181,109 +183,83 @@ header {
 			</div>
 		</nav>
 	</aside>
-   <div id="right-panel" class="right-panel">
+	<!-- 왼쪽 네비 끝 -->
+	<!-- 상단 검색바 마이페이지 등등 시작 -->
+	<div id="right-panel" class="right-panel">
+		<!-- Header-->
+		<header id="header" class="header">
+			<div class="top-left">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="./"><img src="images/logo.png"
+						alt="Logo"></a> <a class="navbar-brand hidden"
+						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+						class="fa fa-bars"></i></a>
+				</div>
+			</div>
+			<c:choose>
+				<c:when test="${user != null }">
+					<div class="top-right">
+						<div class="header-menu">
+							<div class="header-left">
+								<button class="search-trigger">
+									<i class="fa fa-search"></i>
+								</button>
+								<div class="form-inline">
+									<form class="search-form">
+										<input class="form-control mr-sm-2" type="text"
+											placeholder="Search ..." aria-label="Search">
+										<button class="search-close" type="submit">
+											<i class="fa fa-close"></i>
+										</button>
+									</form>
+								</div>
 
-      <!-- Header-->
-    <header id="header" class="header">
-         <div class="top-left">
-            <div class="navbar-header">
-               <a class="navbar-brand" href="./"><img src="images/logo.png"
-                  alt="Logo"></a> <a class="navbar-brand hidden"
-                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
-                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
-                  class="fa fa-bars"></i></a>
-            </div>
-         </div>
-         <c:choose>
-            <c:when test="${user != null }">
-               <div class="top-right">
-                  <div class="header-menu">
-                     <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
-
-
-
-                        <div class="dropdown for-notification">
-                           <button class="btn btn-secondary dropdown-toggle" type="button"
-                              id="notification" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false">
-                              <i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
-                           </button>
-                           <div class="dropdown-menu" aria-labelledby="notification">
-                              <p class="red">You have 3 Notification</p>
-                              <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-check"></i>
-                                 <p>Server #1 overloaded.</p>
-                              </a> <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-info"></i>
-                                 <p>Server #2 overloaded.</p>
-                              </a> <a class="dropdown-item media" href="#"> <i
-                                 class="fa fa-warning"></i>
-                                 <p>Server #3 overloaded.</p>
-                              </a>
-                           </div>
-                        </div>
-
-                        <div class="dropdown for-message">
-                           <button class="btn btn-secondary dropdown-toggle" type="button"
-                              id="message" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false">
-                              <i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
-                           </button>
-                           <div class="dropdown-menu" aria-labelledby="message">
-                                                     
-                           </div>
-                        </div>
-                     </div>
-                     <!--  mypage 사람 사진-->
-                     <div class="user-area  float-right">
-                        <a href="#" class="active" data-toggle="modal"
-                           aria-haspopup="true" aria-expanded="false"
-                           data-target="#exampleModal1"> <img
-                           class="user-avatar rounded-circle" src="images/admin.jpg"
-                           alt="profile"></a>
-                     </div>
-                  </div>
-               </div>
-            </c:when>
-            <c:otherwise>
-               <div class="top-right">
-                  <div class="header-menu">
-                     <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
-                        <div class="dropdown for-notification">
-                           <button type="button"
-                              class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
-                              data-target="#exampleModal" id="loginbtn">login</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </c:otherwise>
-         </c:choose>
-      </header>
+								<c:choose>
+                        <c:when test="${user.id ne 'admin'}">
+								<button type="button" class="btn btn-primary" id="msg">msg</button>
+								</c:when>
+							
+						</c:choose>		
+							</div>
+							<!--  mypage 사람 사진-->
+							<div class="user-area  float-right">
+								<a href="#" class="active" data-toggle="modal"
+									aria-haspopup="true" aria-expanded="false"
+									data-target="#exampleModal1"> <img
+									class="user-avatar rounded-circle" src="images/admin.jpg"
+									alt="profile"></a>
+							</div>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="top-right">
+						<div class="header-menu">
+							<div class="header-left">
+								<button class="search-trigger">
+									<i class="fa fa-search"></i>
+								</button>
+								<div class="form-inline">
+									<form class="search-form">
+										<input class="form-control mr-sm-2" type="text"
+											placeholder="Search ..." aria-label="Search">
+										<button class="search-close" type="submit">
+											<i class="fa fa-close"></i>
+										</button>
+									</form>
+								</div>
+								<div class="dropdown for-notification">
+									<button type="button"
+										class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
+										data-target="#exampleModal" id="loginbtn">login</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</header>
       <!-- /header -->
 
       <div class="content">
@@ -302,10 +278,9 @@ header {
                            <input type="text" id="path" name="path">
                         </div>
 
-                        <footer>
+                        <footer id="writeBtns">
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12" id="footer">
-
                                  <input type="button" id="upload" value="작성하기"
                                     class="btn btn-secondary"> <input type="button"
                                     id="toList" value="목록으로" class="btn btn-secondary">
@@ -442,11 +417,7 @@ header {
                                     <div>
                                        <b>핸드폰번호</b>
                                        <p>${user.phone}</p>
-                                    </div>
-                                    <div>
-                                       <b>잔여포인트</b>
-                                       <p>${user.point}</p>
-                                    </div>
+                                    </div>                                   
                                     <div>
                                        <b>주소</b>
                                        <p>${user.address1 }</p>
@@ -623,9 +594,71 @@ header {
 
       });
       
-	
+      </script>
+      <!--메시지  -->
+		<script>
+										//msg보내는 소켓 및 버튼
+										 var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
+									    webSocket.onerror = function(event) {
+   									 onError(event)
+ 											 };
+										 webSocket.onmessage = function(event) {
+ 										   onMessage(event)
+										  };
+										if("${user.id}"=="admin"){
+										  function onMessage(event) {
+  										  var msg = event.data.split(":");
+     										  var who = msg[0]; 
+     											var contents = msg[1];
+     											 var who2=msg[2];
+     											
+   								 if(who!="admin"&&who2=="admin"){
+  								window.open("reply.message?who="+who+"&&content="+contents, "",
+									"width=500px,height=300px");
+   										 }
+   								 
+  											}
+											
+										  }		 
+									 
+										else{
+										  function onMessage(event) {
+  										  var msg = event.data.split(":");
+     										  var who = msg[0]; //admin
+     											var contents = msg[1];
+     											 var who2=msg[2]; //clinet이름      											    							
+   								 if("${user.id}"==who2&&who=="admin") 
+   								{
+  								window.open("replytoclient.message?who="+who2+"&&content="+contents, "",
+									"width=500px,height=300px");
+   										 
+   								 }
+   								 else if("admin"==who&&who2=="all")
+   								 {
+   									 console.log("kk");
+   									window.open("page?url=WEB-INF/allclient.jsp","",
+  									"location=no, directories=no,width=500px,height=300px");
+   									  }
+   								 
+   							 }
+   							
+								}	
+								//메시지 끝
+								
+								
+											$("#msg")
+									.on(
+											"click",
+											function() {
+												
+												window.open("page?url=WEB-INF/newmessage.jsp", "","width=500px,height=300px");
+											
+											})
+
+											                                                         
+                         </script>
   
-   </script>
+  
 
   <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
   <c:choose> 
