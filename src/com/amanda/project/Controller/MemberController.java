@@ -72,8 +72,8 @@ public class MemberController extends HttpServlet {
 						request.getSession().setAttribute("user", dao.select_user(loginid));
 
 
-						//String ip = "192.168.60.27";
-						String ip = request.getRemoteAddr();			
+						String ip = "192.168.60.27";
+						//String ip = request.getRemoteAddr();			
 						System.out.println(ip);
 						System.out.println(ip);
 						
@@ -137,6 +137,7 @@ public class MemberController extends HttpServlet {
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
+				response.sendRedirect("error.html");
 				e1.printStackTrace();
 			}	
 
@@ -171,6 +172,7 @@ public class MemberController extends HttpServlet {
 				}
 
 			} catch (Exception e) {
+				response.sendRedirect("error.html");
 				e.printStackTrace();
 			}
 
@@ -208,7 +210,8 @@ public class MemberController extends HttpServlet {
 				}
 
 			} catch (Exception e) {
-
+				
+				response.sendRedirect("error.html");
 				e.printStackTrace();
 			}
 
@@ -243,8 +246,8 @@ public class MemberController extends HttpServlet {
 			}	
     		  				
 			
-				//cDao.seatOff("192.168.60.27");
-			    cDao.seatOff(request.getRemoteAddr());
+				cDao.seatOff("192.168.60.27");
+			    //cDao.seatOff(request.getRemoteAddr());
 				cDao.resetId(request.getRemoteAddr());
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
@@ -253,7 +256,8 @@ public class MemberController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
 
 			} catch (Exception e) {
-
+				
+				response.sendRedirect("error.html");
 				e.printStackTrace();
 			}
 
@@ -284,7 +288,7 @@ public class MemberController extends HttpServlet {
 			}else if(result == 0) {
 				request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//이 창에서 회원아니라고 alert
 			}else {
-				response.sendRedirect("../error.jsp");
+				response.sendRedirect("error.html");
 			}
 			break;
 
@@ -313,7 +317,7 @@ public class MemberController extends HttpServlet {
 
 
 			}else {
-				response.sendRedirect("../error.jsp");
+				response.sendRedirect("error.html");
 			}
 			break;
 
@@ -373,7 +377,7 @@ public class MemberController extends HttpServlet {
 			} catch(Exception e){
 				sdao.pwcheck_delete(saveid, to);
 				e.printStackTrace();
-				response.sendRedirect("../error.jsp");
+				response.sendRedirect("error.html");
 				// 오류 발생시 뒤로 돌아가도록
 				return;
 
@@ -428,7 +432,7 @@ public class MemberController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/emailComplation.jsp").forward(request, response);
 			} catch(Exception e){
 				e.printStackTrace();
-				response.sendRedirect("../error.jsp");
+				response.sendRedirect("error.html");
 				// 오류 발생시 뒤로 돌아가도록
 				return;
 			}

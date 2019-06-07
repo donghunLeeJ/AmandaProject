@@ -55,7 +55,8 @@
 	  rd.forward(request,response); //admin에게 보내기 
  
 	  } 
-  } catch(Exception e) { e.printStackTrace();} }
+  } catch(Exception e) { e.printStackTrace();
+  response.sendRedirect("error.html");} }
   
   
   protected void doPost(HttpServletRequest request, HttpServletResponse
