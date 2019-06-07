@@ -36,7 +36,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 
 <style>
@@ -112,17 +112,17 @@
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
-                     class="menu-icon fa fa-laptop"></i>Home </a></li>
+                     class="menu-icon fas fa-home"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
+                     class="menu-icon fas fa-desktop"></i>잔여좌석
                </a></li>
                <li class="active"><a
-                  href="select.admin"> <i class="menu-icon fa fa-table"></i>메뉴
+                  href="select.admin"> <i class="menu-icon fas fa-concierge-bell"></i>메뉴
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
+                     class="menu-icon fas fa-headset"></i>고객의소리
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="member.manage"> <i class="menu-icon fa fa-th"></i>고객관리
@@ -391,6 +391,14 @@
             </div>
          </div>
          <script>
+         
+         
+         $(window).on("resize",function(){
+				if($(window).width() >= 752){
+					$("#left-panel").css("display","block");
+				}				
+			})
+         
             function readURL(input) {
                var reader = new FileReader();
                reader.onload = function(e) {

@@ -39,6 +39,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 
 <style>
@@ -76,31 +77,31 @@
 					<c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
+							class="menu-icon fas fa-home"></i>Home </a></li>
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
 					<li class="active"><a href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
+							class="menu-icon fas fa-home"></i>Home </a></li>
 					</c:when>
 					</c:choose>
 					
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fa fa-cogs"></i>잔여좌석
+							class="menu-icon fas fa-desktop"></i>잔여좌석
 					</a></li>
 					
 					<c:choose>
               		<c:when test="${user.id == 'admin' }">
                		<li class="menu-item-has-children dropdown"><a
                	    href="select.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
               		 </a></li>
               		 </c:when>
         
                		</c:choose>
 					<li class="menu-item-has-children dropdown"><a
 						href="Board.board?currentPage=1"> <i
-							class="menu-icon fa fa-th"></i>고객의소리
+							class="menu-icon fas fa-headset"></i>고객의소리
 					</a></li>
 					
 					<li class="menu-item-has-children dropdown"><a
@@ -200,7 +201,7 @@
 								<option>최근 일주일</option>
 							</optgroup>
 						</select>
-						<button class="btn btn-primary" id="searchAjax1"> 조회 </button>
+						<button class="btn btn-outline-info" id="searchAjax1"> 조회 </button>
 					</div>
 				</div>
 			</div>
@@ -221,7 +222,7 @@
 								<option>회원별 매출액</option>
 							</optgroup>
 						</select>
-						<button class="btn btn-primary" id="searchAjax2"> 조회 </button>
+						<button class="btn btn-outline-info" id="searchAjax2"> 조회 </button>
 					
 					
 					</div>
@@ -232,6 +233,13 @@
 			<!-- /# column -->
 
 			<script>
+			
+			$(window).on("resize",function(){
+				if($(window).width() >= 752){
+					$("#left-panel").css("display","block");
+				}				
+			})
+			
 			
 			var ctx1 = document.getElementById("barChart1");
 		    //    ctx.height = 200;
@@ -514,10 +522,7 @@
                         location.href = "page?url=WEB-INF/pay.jsp";
                      })
                   </script>
-
 			<!-- 진향이 마이페이지 폼끝 -->
-
-
 		</div>
 
 
@@ -536,16 +541,6 @@
 			</div>
 		</footer>
 
-
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-		<script src="assets/js/main.js"></script>
 		<script>
 							
 

@@ -46,6 +46,9 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
+	
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+	
 
 <style>
 #footer {
@@ -180,39 +183,39 @@ header {
 		     	<c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
+							class="menu-icon fas fa-home"></i>Home </a></li>
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
+							class="menu-icon fas fa-home"></i>Home </a></li>
 					</c:when>
 					</c:choose>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
+                     class="menu-icon fas fa-desktop"></i>잔여좌석
                </a></li>
                <c:choose>
               		<c:when test="${user.id == 'admin' }">
                		<li class="menu-item-has-children dropdown"><a
                	    href="select.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
               		 </a></li>
               		 </c:when>
               		 <c:when test="${user.id != 'admin' }">
                		<li class="menu-item-has-children dropdown"><a
                	    href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
               		 </a></li>
               		 </c:when>
            		</c:choose>
                <li class="active"><a
                   href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
+                     class="menu-icon fas fa-headset"></i>고객의소리
                </a></li>
                <c:choose>
                   <c:when test="${user == null }">
                      <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+                        href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
                         $("#charge").on("click", function() {
@@ -230,7 +233,7 @@ header {
                   <c:otherwise>
                      <li id="charge" class="menu-item-has-children dropdown"><a
                         href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
+                           class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                   </c:otherwise>
                </c:choose>
@@ -479,6 +482,12 @@ header {
 		</div>
 	</div>
 	<script>
+	
+	$(window).on("resize",function(){
+		if($(window).width() >= 752){
+			$("#left-panel").css("display","block");
+		}				
+	})
 	
 	//엔터 입력시 로그인
     function press(f){ if(f.keyCode == 13){  
