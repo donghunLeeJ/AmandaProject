@@ -578,14 +578,14 @@
   										 webSocket.onmessage = function(event) {
    										   onMessage(event)
   										  };
-  										if("${user.name}"=="관리자"){
+  										if("${user.id}"=="admin"){
   										  function onMessage(event) {
     										  var msg = event.data.split(":");
        										  var who = msg[0]; 
        											var contents = msg[1];
        											 var who2=msg[2];
        											
-     								 if(who!="관리자"&&who2=="admin"){
+     								 if(who!="admin"&&who2=="admin"){
     								window.open("reply.message?who="+who+"&&content="+contents, "",
 									"width=500px,height=300px");
      										 }

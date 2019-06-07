@@ -38,6 +38,31 @@ public class MemberDTO {
 	}
 
 	
+	public MemberDTO(String id, String pw, String phone, String postcode, String address1, String address2) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.phone = phone;
+		this.postcode = postcode;
+		this.address1 = address1;
+		this.address2 = address2;
+	}
+	
+
+
+	public MemberDTO(String id, String pw, String email, String phone, String postcode, String address1,
+			String address2) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.email = email;
+		this.phone = phone;
+		this.postcode = postcode;
+		this.address1 = address1;
+		this.address2 = address2;
+	}
+
+
 	public MemberDTO(int mem_seq, String id, String name, String birth, String email, String phone, int point,
 			String address1, String address2, int usehour) {
 		super();
@@ -110,16 +135,7 @@ public class MemberDTO {
 		this.id = id;
 		this.email = email;
 	}
-	public MemberDTO(String id, String pw, String name, String birth, String email, String phone) {
-		super();
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.birth = birth;
-		this.email = email;
-		this.phone = phone;
-	}
-	
+
 	
 	public MemberDTO(String pw, String email, String phone) {
 		super();

@@ -27,7 +27,7 @@ public class ComController extends HttpServlet {
 	    if(command.equals("/usertime.com")) {
 	    		   
 	    	MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
-	    	System.out.println(dto);
+	    
 	    	String id = null;
 	    	try {
 	    		id=dto.getId();	

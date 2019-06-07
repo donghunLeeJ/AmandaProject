@@ -591,7 +591,7 @@
 				   
 	</script>
 	<!--메시지  -->
-	<script>
+		<script>
 										//msg보내는 소켓 및 버튼
 										 var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
 									    webSocket.onerror = function(event) {
@@ -600,7 +600,7 @@
   										 webSocket.onmessage = function(event) {
    										   onMessage(event)
   										  };
-  										if("${user.name}"=="관리자"){
+  										if("${user.id}"=="admin"){
   										  function onMessage(event) {
     										  var msg = event.data.split(":");
        										  var who = msg[0]; 
@@ -628,12 +628,12 @@
 									"width=500px,height=300px");
      										 
      								 }
-     								else if("admin"==who&&who2=="all")
-    								 {
-    									 console.log("kk");
-    									window.open("all.message?content="+contents,"",
-   									"location=no, directories=no,width=500px,height=300px");
-    									  }
+     								 else if("admin"==who&&who2=="all")
+     								 {
+     									 console.log("kk");
+     									window.open("page?url=WEB-INF/allclient.jsp","",
+    									"location=no, directories=no,width=500px,height=300px");
+     									  }
      								 
      							 }
      							

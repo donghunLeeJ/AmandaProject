@@ -58,7 +58,7 @@ public class MemberController extends HttpServlet {
 				checkPw = dao.checklogin(loginid);
 
 				if(checkPw.equals(dao.testSHA256(loginpw))) {
-					
+
 					if(loginid.equals("admin"))  //관리자인 경우 admincharcontroller로 이동후 main접속 하기
 					{
 						request.getSession().setAttribute("user", dao.select_user(loginid));
@@ -76,42 +76,42 @@ public class MemberController extends HttpServlet {
 						String ip = request.getRemoteAddr();			
 						System.out.println(ip);
 						System.out.println(ip);
-						
-					if(cDao.UserSeatIpCheck(ip) == 0){	
-						
-					   //pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
-						pointmap.put(loginid, user.getPoint());		
-						
-						//로그인한 순간 사용자의 포인트를 1초마다 1씩 감소시키는 스레드(timertask)를 생성				
-						Timer time = new Timer();
-						TimerTask timertask = new TimerTask() {
 
-							@Override
-							public void run() {
+						if(cDao.UserSeatIpCheck(ip) == 0){	
 
-								//조건1 : pointmap의 값이 null이 아닌 경우(즉 로그아웃 컨트롤러에서 hashmap을 remove하는 순간 바로 작업이 취소된다.)
-								if(!(pointmap.get(loginid) == null)) {	
+							//pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
+							pointmap.put(loginid, user.getPoint());		
 
-									//조건2 : pointmap에 저장된 포인트의 값이 0보다 큰 경우만 작동함
-									if(pointmap.get(loginid) > 0) {	
-										int point = pointmap.get(loginid) - 1;
-										pointmap.put(loginid, point);}//포인트의 값을 1씩 감소시킨다.						
-								}else{
+							//로그인한 순간 사용자의 포인트를 1초마다 1씩 감소시키는 스레드(timertask)를 생성				
+							Timer time = new Timer();
+							TimerTask timertask = new TimerTask() {
 
-									System.out.println("로그아웃 또는 타임아웃이므로 카운트 초기화");
-									time.cancel();
+								@Override
+								public void run() {
 
-								}															
-							}
-						};	
+									//조건1 : pointmap의 값이 null이 아닌 경우(즉 로그아웃 컨트롤러에서 hashmap을 remove하는 순간 바로 작업이 취소된다.)
+									if(!(pointmap.get(loginid) == null)) {	
 
-						//각각 timertask클래스 변수 , 스레드가 작동하기까지 대기 시간,반복 주기를 나타냄
-						//(반복주기에서 1000은 1초와 같다.)
-						time.schedule(timertask,1,1000);
-					}
-						
-								
-					
+										//조건2 : pointmap에 저장된 포인트의 값이 0보다 큰 경우만 작동함
+										if(pointmap.get(loginid) > 0) {	
+											int point = pointmap.get(loginid) - 1;
+											pointmap.put(loginid, point);}//포인트의 값을 1씩 감소시킨다.						
+									}else{
+
+										System.out.println("로그아웃 또는 타임아웃이므로 카운트 초기화");
+										time.cancel();
+
+									}															
+								}
+							};	
+
+							//각각 timertask클래스 변수 , 스레드가 작동하기까지 대기 시간,반복 주기를 나타냄
+							//(반복주기에서 1000은 1초와 같다.)
+							time.schedule(timertask,1,1000);
+						}
+
+
+
 						if(cDao.seatOn(ip)>0) {
 							ComDTO cDto = cDao.seatNum_get(ip);
 							System.out.println(cDto.getOnOff());
@@ -198,9 +198,12 @@ public class MemberController extends HttpServlet {
 				String pw=request.getParameter("newpw");
 				String email=request.getParameter("newemail");
 				String phone=request.getParameter("phone");
+				String address1=request.getParameter("address1");
+				String address2=request.getParameter("address2");
+				String postcode=request.getParameter("postcode");
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 				String id=dto.getId();
-				int result=dao.updateMember(new MemberDTO(id,pw,email,phone));
+				int result=dao.updateMember(new MemberDTO(id,pw,email,phone,postcode,address1,address2));
 				if(result==1) {
 					System.out.println(result);
 					request.getSession().setAttribute("user", dao.select_user(id));
@@ -222,17 +225,17 @@ public class MemberController extends HttpServlet {
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 
 				String id = dto.getId();
-	
-				
-			//만일 로그인한 사용자가 pc방에서 로그아웃 했을 경우 작동하는 코드임	
-			if(!(pointmap.get(id) == null)){
-				
-				 int hour = dto.getPoint() - pointmap.get(id);
+
+
+				//만일 로그인한 사용자가 pc방에서 로그아웃 했을 경우 작동하는 코드임	
+				if(!(pointmap.get(id) == null)){
+
+					int hour = dto.getPoint() - pointmap.get(id);
 					//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
 
 					dao.PointUpdate(pointmap.get(id), id);		
 					dao.usehourUpdate(hour, id); 
-					
+
 					//로그아웃하는 순간 hashmap에 담긴 로그아웃한 사용자 데이터를 리셋시킨다.
 					pointmap.remove(id);
 					useridseat.remove(id);
@@ -240,11 +243,11 @@ public class MemberController extends HttpServlet {
 
 					//remove연산으로 인해 로그아웃한 사용자의 자리가 비었으므로 다시 useridseat를 세팅해 준다.
 					request.getServletContext().setAttribute("UserSeatNum", useridseat);
-			}	
-    		  				
-			
+				}	
+
+
 				//cDao.seatOff("192.168.60.27");
-			    cDao.seatOff(request.getRemoteAddr());
+				cDao.seatOff(request.getRemoteAddr());
 				cDao.resetId(request.getRemoteAddr());
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
@@ -259,15 +262,15 @@ public class MemberController extends HttpServlet {
 
 			break;	
 		case "adminlogoutProc.member" :
-			
+
 			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("user");
 			String id=dto.getId();
-		
+
 			request.getSession().invalidate();		
 			request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
-			
-			
-			
+
+
+
 			break;
 
 
@@ -275,16 +278,20 @@ public class MemberController extends HttpServlet {
 		case "resetpwProc.member" :
 			//비밀번호재설정
 			id = request.getParameter("checkid");//입력받은 id값
-			String email = request.getParameter("checkemail");//입력받은 email값
-			int result = dao.existMember(id, email);//있으면 return 1,없으면 0, 에러면 -1
-			if(result == 1) {
-				request.setAttribute("id", id);
-				request.setAttribute("email", email);
-				request.getRequestDispatcher("sendemailProc.member").forward(request, response);
-			}else if(result == 0) {
-				request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//이 창에서 회원아니라고 alert
+			if(dao.checkCode(id)==1) {
+				request.getRequestDispatcher("WEB-INF/codealert.jsp").forward(request, response);
 			}else {
-				response.sendRedirect("../error.jsp");
+				String email = request.getParameter("checkemail");//입력받은 email값
+				int result = dao.existMember(id, email);//있으면 return 1,없으면 0, 에러면 -1
+				if(result == 1) {
+					request.setAttribute("id", id);
+					request.setAttribute("email", email);
+					request.getRequestDispatcher("sendemailProc.member").forward(request, response);
+				}else if(result == 0) {
+					request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//이 창에서 회원아니라고 alert
+				}else {
+					response.sendRedirect("../error.jsp");
+				}
 			}
 			break;
 
@@ -294,8 +301,8 @@ public class MemberController extends HttpServlet {
 			//아이디 찾기
 			String name = request.getParameter("checkName");
 			String birth = request.getParameter("checkbirth");
-			email = request.getParameter("checkemail");
-			result = dao.findid(name, birth, email);
+			String email = request.getParameter("checkemail");
+			int result = dao.findid(name, birth, email);
 			System.out.println("result : " +name+birth );
 			System.out.println(result);
 

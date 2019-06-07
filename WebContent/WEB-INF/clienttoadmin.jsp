@@ -9,38 +9,51 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 </head>
 <body>
-		<div class="card">
-										<div class="card-header">
-											<strong class="card-title pl-2">
-												Message </strong>
-										</div>
-										<div class="card-body">
-											<div class="mx-auto d-block">
-												
-												<h5 class="mt-2 mb-1">
-													<b>보낸사람:관리자
-														<%@ page import = "java.util.Calendar" %>
-
+									
+																			
+		<div id="wrapper">
+ <table class="table table-striped ">
+  <thead class="thead ">
+    <tr class="py-0">
+      <th scope="col" class="py-2" colspan="2" >받는 사람 : ${who}</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="col" colspan="2" class="py-2" >보낸 사람 : admin <%@ page import = "java.util.Calendar" %>
 <%
-Calendar cal = Calendar.getInstance();
-%>
+Calendar cal = Calendar.getInstance();%>
  
 (<%= cal.get(Calendar.YEAR) %>-<%= cal.get(Calendar.MONTH)+1 %>-<%= cal.get(Calendar.DATE) %>
-<%= cal.get(Calendar.HOUR) %>:<%= cal.get(Calendar.MINUTE) %>:<%= cal.get(Calendar.SECOND) %>)
-													
-													</b>
-												</h5>
-											</div>
-											<hr>
-											<div class="card-text">
-												${text}	
-												<form action="page?url=WEB-INF/main.jsp" id="form"> 												<input type="text" placeholder="reply" id="reply">
-												 <input type="submit" value="send" onclick="send()"> 	 
-											</form>
-											
-											<script>
+<%= cal.get(Calendar.HOUR) %>:<%= cal.get(Calendar.MINUTE) %>:<%= cal.get(Calendar.SECOND) %>)</th>
+
+    </tr>
+    <tr>
+      <th scope="col" class="py-5" style="width: 70px">내용 :</th>
+      <th>${text}	</th>
+   
+    </tr>
+    <tr>
+      <th scope="col" class="py-0" style="width: 75px;line-height:60px;"  >답장 :</th>
+      <form action="page?url=WEB-INF/main.jsp" id="form">
+      <th><input  class="form-control" type="text" placeholder="reply" id="reply" style="height:100%;width:100%;"></th>
+    </tr>	
+		  <tr>
+		   <th scope="col" class="py-4" style="width: 75px" >보내기</th>
+		   <th><input type="submit" class="btn btn-info" value="send" onclick="send()"></th>
+		   </tr>	
+    
+   
+     </form>	
+		 
+
+																			
+												 				
+			<script>
 											
 										        var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
 											function onError(event) {
@@ -51,10 +64,20 @@ Calendar cal = Calendar.getInstance();
 										        reply.value = "";
 										        window.close();
 										    }  
-											</script>
+											</script>							
 											
-											</div>
-										</div>
-									</div>
+     
+     
+  
+  </tbody>
+</table>
+</div>
+		
+		
+		
+										
 </body>
+									
+									
+
 </html>
