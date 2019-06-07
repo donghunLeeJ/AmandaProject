@@ -78,7 +78,9 @@ footer {
    padding-right: 15px;
    padding-left: 15px;
 }
-
+#writeBtns{
+	margin-top:80px;
+}
 header {
    padding-left: 15px;
    padding-right: 15px;
@@ -299,10 +301,9 @@ header {
                            <input type="text" id="path" name="path">
                         </div>
 
-                        <footer>
+                        <footer id="writeBtns">
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12" id="footer">
-
                                  <input type="button" id="upload" value="작성하기"
                                     class="btn btn-secondary"> <input type="button"
                                     id="toList" value="목록으로" class="btn btn-secondary">
