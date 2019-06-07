@@ -299,11 +299,7 @@
 										<div>
 											<b>핸드폰번호</b>
 											<p>${user.phone}</p>
-										</div>
-										<div>
-											<b>잔여포인트</b>
-											<p>${user.point}</p>
-										</div>
+										</div>										
 									</div>
 								</div>
 							</div>

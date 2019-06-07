@@ -492,11 +492,7 @@ page?url=WEB-INF/<%@ page language="java" contentType="text/html; charset=UTF-8"
                                     <div>
                                        <b>핸드폰번호</b>
                                        <p>${user.phone}</p>
-                                    </div>
-                                    <div>
-                                       <b>잔여포인트</b>
-                                       <p>${user.point}</p>
-                                    </div>
+                                    </div>                                 
                                     <div>
                                        <b>주소</b>
                                        <p>${user.address1 }</p>

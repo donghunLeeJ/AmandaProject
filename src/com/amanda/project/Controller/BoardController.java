@@ -249,7 +249,7 @@ public class BoardController extends HttpServlet {
 					}
 				}catch(Exception e) {
 					e.printStackTrace();
-					response.sendRedirect("error.jsp");
+					response.sendRedirect("error.html");
 				}               
 			}else if(command.equals("/ImageDel.board")) {
 				FilesDTO files = (FilesDTO)request.getSession().getAttribute("files");
