@@ -506,7 +506,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							 <form action="loginProc.member" id="form" name="formname" method="post">
+						<form action="loginProc.member" id="form" name="formname" method="post">
                         <div class="form-group">
                            <label for="exampleFormControlInput1">ID</label> <input
                               type="text" class="form-control" id="joinemail"
@@ -517,18 +517,19 @@
                               type="password" class="form-control" id="joinpassword"
                               placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
                         </div>
+                        <div class=row><button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5" type="button"
+										id="findId">ID 찾기</button>
+                           <button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 " type="button"
+                              id="reinputpw">PW 찾기</button>
+                           <button type="button" class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" type="button"
+                              id="joinMem">회원 가입</button>
+                           <button type="submit" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button></div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" type="button"
-										id="findId">아이디 찾기</button>
-                           <button type="button" class="btn btn-primary" type="button"
-                              id="reinputpw">비밀번호 찾기</button>
-                           <button type="button" class="btn btn-primary" type="button"
-                              id="joinMem">회원가입</button>
-                           <button type="submit" class="btn btn-primary" id="login">login</button>
+                        
                           
                         </div>
-                     </form>
-						</div>
+                     </form>						
+                     </div>
 					</div>
 				</div>
 			</div>
