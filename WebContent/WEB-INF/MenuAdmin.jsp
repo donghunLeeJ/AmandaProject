@@ -36,7 +36,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 
 <style>
@@ -95,298 +95,302 @@
 </head>
 
 <body>
-	<!-- 왼쪽 네비 시작 -->
-	<aside id="left-panel" class="left-panel">
-		<nav class="navbar navbar-expand-sm navbar-default">
-			<div id="main-menu" class="main-menu collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fa fa-cogs"></i>잔여좌석
-					</a></li>
-					<li class="active"><a href="select.admin"> <i
-							class="menu-icon fa fa-table"></i>메뉴
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="Board.board?currentPage=1"> <i
-							class="menu-icon fa fa-th"></i>고객의소리
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="member.manage"> <i class="menu-icon fa fa-th"></i>고객관리
-					</a></li>
-				</ul>
-			</div>
-		</nav>
-	</aside>
-	<!-- 왼쪽 네비 끝 -->
-	<!-- 상단 검색바 마이페이지 등등 시작 -->
-	<div id="right-panel" class="right-panel">
-		<!-- Header-->
-		<header id="header" class="header">
-			<div class="top-left">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="./"><img src="images/logo.png"
-						alt="Logo"></a> <a class="navbar-brand hidden"
-						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
-						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
-						class="fa fa-bars"></i></a>
-				</div>
-			</div>
-			<c:choose>
-				<c:when test="${user != null }">
-					<div class="top-right">
-						<div class="header-menu">
-							<div class="header-left">
-								<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button>
-								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>
+
+   <!-- 왼쪽 네비 시작 -->
+   <aside id="left-panel" class="left-panel">
+      <nav class="navbar navbar-expand-sm navbar-default">
+         <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+               <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
+                     class="menu-icon fas fa-home"></i>Home </a></li>
+               <li class="menu-item-has-children dropdown"><a
+                  href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+                     class="menu-icon fas fa-desktop"></i>잔여좌석
+               </a></li>
+               <li class="active"><a
+                  href="select.admin"> <i class="menu-icon fas fa-concierge-bell"></i>메뉴
+               </a></li>
+               <li class="menu-item-has-children dropdown"><a
+                  href="Board.board?currentPage=1"> <i
+                     class="menu-icon fas fa-headset"></i>고객의소리
+               </a></li>
+               <li class="menu-item-has-children dropdown"><a
+                  href="member.manage"> <i class="menu-icon fa fa-th"></i>고객관리
+               </a></li>
+            </ul>
+         </div>
+      </nav>
+   </aside>
+   <!-- 왼쪽 네비 끝 -->
+   <!-- 상단 검색바 마이페이지 등등 시작 -->
+   <div id="right-panel" class="right-panel">
+      <!-- Header-->
+     <header id="header" class="header">
+         <div class="top-left">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="./"><img src="images/logo.png"
+                  alt="Logo"></a> <a class="navbar-brand hidden"
+                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+                  class="fa fa-bars"></i></a>
+            </div>
+         </div>
+         <c:choose>
+            <c:when test="${user != null }">
+               <div class="top-right">
+                  <div class="header-menu">
+                     <div class="header-left">
+                        <button class="search-trigger">
+                           <i class="fa fa-search"></i>
+                        </button>
+                        <div class="form-inline">
+                           <form class="search-form">
+                              <input class="form-control mr-sm-2" type="text"
+                                 placeholder="Search ..." aria-label="Search">
+                              <button class="search-close" type="submit">
+                                 <i class="fa fa-close"></i>
+                              </button>
+                           </form>
+                        </div>
+
+								
+                     </div>
+                     <!--  mypage 사람 사진-->
+                     <div class="user-area  float-right">
+                        <a href="#" class="active" data-toggle="modal"
+                           aria-haspopup="true" aria-expanded="false"
+                           data-target="#exampleModal1"> <img
+                           class="user-avatar rounded-circle" src="images/admin.jpg"
+                           alt="profile"></a>
+                     </div>
+                  </div>
+               </div>
+            </c:when>
+            <c:otherwise>
+               <div class="top-right">
+                  <div class="header-menu">
+                     <div class="header-left">
+                        <button class="search-trigger">
+                           <i class="fa fa-search"></i>
+                        </button>
+                        <div class="form-inline">
+                           <form class="search-form">
+                              <input class="form-control mr-sm-2" type="text"
+                                 placeholder="Search ..." aria-label="Search">
+                              <button class="search-close" type="submit">
+                                 <i class="fa fa-close"></i>
+                              </button>
+                           </form>
+                        </div>
+                        <div class="dropdown for-notification">
+                           <button type="button"
+                              class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
+                              data-target="#exampleModal" id="loginbtn">login</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </c:otherwise>
+         </c:choose>
+      </header>
+      <!--       상단 네비 끝 -->
+      <!-- 오늘의 메뉴 시작-->
+      <div id="caroWrapper">
+         <div id="caroInner" class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card">
+               <div class="card-header" id="cardHeader">
+                  <strong class="card-title mb-3"><h1>
+                        <span id="todaysMenu">${top }</span> <input type="button"
+                           value="수정" class="btn btn-info" data-toggle="modal"
+                           data-target="#menuHeaderModal" id="menuHeader">
+                     </h1></strong>
+
+               </div>
+               <div class="card-body">
+                  <div class="mx-auto d-block">
+                     <div id="myCarousel" class="carousel slide " data-ride="carousel"
+                        data-interval="4000">
+                        <ol class="carousel-indicators">
+                           <li data-target="#carouselExampleIndicators" data-slide-to="0"
+                              class="active"></li>
+                           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                           <div class="carousel-item active">
+                              <img src="${food1 }" class="d-block w-200 myImg"
+                                 alt="이미지를 찾을 수 없습니다.">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>${food1Desc }</h5>
+                              </div>
+                           </div>
+                           <div class="carousel-item">
+                              <img src="${food2 }" class="d-block w-200 myImg"
+                                 alt="이미지를 찾을 수 없습니다.">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>${food2Desc }</h5>
+                              </div>
+                           </div>
+                           <div class="carousel-item">
+                              <img src="${food3 }" class="d-block w-200 myImg"
+                                 alt="이미지를 찾을 수 없습니다.">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>${food3Desc }</h5>
+                              </div>
+                           </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#myCarousel"
+                           role="button" data-slide="prev"> <span
+                           class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+                           class="sr-only">Previous</span>
+                        </a> <a class="carousel-control-next" href="#myCarousel"
+                           role="button" data-slide="next"> <span
+                           class="carousel-control-next-icon" aria-hidden="true"></span> <span
+                           class="sr-only">Next</span>
+                        </a>
+                     </div>
+                  </div>
+
+                  <h5 class="text-sm-center mt-2 mb-1">${bot1 }</h5>
+                  <div class="location text-sm-center">${bot2 }</div>
+               </div>
+               <hr>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="menuHeaderModal" tabindex="-1"
+         role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="menuModalModalLabel"><b>메뉴 수정</b></h4>
+                  <button type="button" class="close" data-dismiss="modal"
+                     aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="MenuHeaderEdit.admin" id="headerForm" method="post">
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>상단 제목 수정</b></label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderTop" value="${top}">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>첫 번째 메뉴</b></label> <select
+                           name="firstHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <c:choose>
+                                 <c:when test="${food1Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc1" value="${food1Desc }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>두 번째 메뉴</b></label> <select
+                           name="secondHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <c:choose>
+                                 <c:when test="${food2Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc2" value="${food2Desc }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>세 번째 메뉴</b></label> <select
+                           name="thirdHeaderMenu">
+                           <c:forEach var="topDto" items="${list}">
+                              <c:choose>
+                                 <c:when test="${food3Name==topDto.menuName}">
+                                    <option selected>${topDto.menuName}</option>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <option>${topDto.menuName}</option>
+                                 </c:otherwise>
+                              </c:choose>
+                           </c:forEach>
+                        </select> <input type="text" class="form-control" placeholder="메뉴 설명"
+                           required name="menuDesc3" value="${food3Desc }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 1</b></label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderBot1" value="${bot1 }">
+                     </div>
+                     <div class="form-group">
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 2</b></label> <input
+                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
+                           required name="menuHeaderBot2" value="${bot2}">
+                     </div>
+                     <div class="modal-footer">
+                        <button class="btn btn-info" id="menuHeaderComplete">수정
+                           완료</button>
+                        <button type="button" class="btn btn-secondary"
+                           data-dismiss="modal">닫기</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Content 시작 -->
+      <div class="content">
+         <div class="animated fadeIn">
+            <div class="row">
+
+               <c:forEach var="dto" items="${list}">
+                  <div class="col-md-4 col-sm-6">
+                     <div class="card">
+                        <div class="card-header headerWrapper">
+                           <div class="cardTitle">
+                              <strong class="card-title mb-3">${dto.menuName}</strong>
+                           </div>
+                           <div class="cardButt">
+                              <input type="button" value="변경"
+                                 class="btn btn-info mr-2 menuEditBtn" data-toggle="modal"
+                                 data-target="#menuEditModal"><input type="button"
+                                 value="삭제" class="btn btn-info menuDelBtn">
+                           </div>
+                        </div>
+                        <div class="card-body">
+                           <div class="mx-auto d-block myspan">
+                              <div>
+                                 <img src="${dto.imgPath}" alt="">
+                              </div>
+                              <h5 class="text-sm-center mt-2 mb-1">${dto.menuDesc}</h5>
+                              <span>${dto.menuPrice}</span>원 <input type="hidden"
+                                 value="${dto.menu_seq}">
+                           </div>
+                           <hr>
+                        </div>
+                     </div>
+                  </div>
+               </c:forEach>
+            </div>
+         </div>
+         <script>
+         
+         
+         $(window).on("resize",function(){
+				if($(window).width() >= 752){
+					$("#left-panel").css("display","block");
+				}				
+			})
+         
 
 
-							</div>
-							<!--  mypage 사람 사진-->
-							<div class="user-area  float-right">
-								<a href="#" class="active" data-toggle="modal"
-									aria-haspopup="true" aria-expanded="false"
-									data-target="#exampleModal1"> <img
-									class="user-avatar rounded-circle" src="images/admin.jpg"
-									alt="profile"></a>
-							</div>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="top-right">
-						<div class="header-menu">
-							<div class="header-left">
-								<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button>
-								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>
-								<div class="dropdown for-notification">
-									<button type="button"
-										class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
-										data-target="#exampleModal" id="loginbtn">login</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</header>
-		<!--       상단 네비 끝 -->
-		<!-- 오늘의 메뉴 시작-->
-		<div id="caroWrapper">
-			<div id="caroInner" class="col-lg-6 col-md-8 col-sm-12">
-				<div class="card">
-					<div class="card-header" id="cardHeader">
-						<strong class="card-title mb-3"><h1>
-								<span id="todaysMenu">${top }</span> <input type="button"
-									value="수정" class="btn btn-info" data-toggle="modal"
-									data-target="#menuHeaderModal" id="menuHeader">
-							</h1></strong>
-
-					</div>
-					<div class="card-body">
-						<div class="mx-auto d-block">
-							<div id="myCarousel" class="carousel slide " data-ride="carousel"
-								data-interval="4000">
-								<ol class="carousel-indicators">
-									<li data-target="#carouselExampleIndicators" data-slide-to="0"
-										class="active"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-								</ol>
-								<div class="carousel-inner">
-									<div class="carousel-item active">
-										<img src="${food1 }" class="d-block w-200 myImg"
-											alt="이미지를 찾을 수 없습니다.">
-										<div class="carousel-caption d-none d-md-block">
-											<h5>${food1Desc }</h5>
-										</div>
-									</div>
-									<div class="carousel-item">
-										<img src="${food2 }" class="d-block w-200 myImg"
-											alt="이미지를 찾을 수 없습니다.">
-										<div class="carousel-caption d-none d-md-block">
-											<h5>${food2Desc }</h5>
-										</div>
-									</div>
-									<div class="carousel-item">
-										<img src="${food3 }" class="d-block w-200 myImg"
-											alt="이미지를 찾을 수 없습니다.">
-										<div class="carousel-caption d-none d-md-block">
-											<h5>${food3Desc }</h5>
-										</div>
-									</div>
-								</div>
-								<a class="carousel-control-prev" href="#myCarousel"
-									role="button" data-slide="prev"> <span
-									class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-									class="sr-only">Previous</span>
-								</a> <a class="carousel-control-next" href="#myCarousel"
-									role="button" data-slide="next"> <span
-									class="carousel-control-next-icon" aria-hidden="true"></span> <span
-									class="sr-only">Next</span>
-								</a>
-							</div>
-						</div>
-
-						<h5 class="text-sm-center mt-2 mb-1">${bot1 }</h5>
-						<div class="location text-sm-center">${bot2 }</div>
-					</div>
-					<hr>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="menuHeaderModal" tabindex="-1"
-			role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="menuModalModalLabel">
-							<b>메뉴 수정</b>
-						</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form action="MenuHeaderEdit.admin" id="headerForm" method="post">
-							<div class="form-group">
-								<label for="exampleFormControlInput1"><b>상단 제목 수정</b></label> <input
-									type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
-									required name="menuHeaderTop" value="${top}">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1"><b>첫 번째 메뉴</b></label> <select
-									name="firstHeaderMenu">
-									<c:forEach var="topDto" items="${list}">
-										<c:choose>
-											<c:when test="${food1Name==topDto.menuName}">
-												<option selected>${topDto.menuName}</option>
-											</c:when>
-											<c:otherwise>
-												<option>${topDto.menuName}</option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</select> <input type="text" class="form-control" placeholder="메뉴 설명"
-									required name="menuDesc1" value="${food1Desc }">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1"><b>두 번째 메뉴</b></label> <select
-									name="secondHeaderMenu">
-									<c:forEach var="topDto" items="${list}">
-										<c:choose>
-											<c:when test="${food2Name==topDto.menuName}">
-												<option selected>${topDto.menuName}</option>
-											</c:when>
-											<c:otherwise>
-												<option>${topDto.menuName}</option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</select> <input type="text" class="form-control" placeholder="메뉴 설명"
-									required name="menuDesc2" value="${food2Desc }">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1"><b>세 번째 메뉴</b></label> <select
-									name="thirdHeaderMenu">
-									<c:forEach var="topDto" items="${list}">
-										<c:choose>
-											<c:when test="${food3Name==topDto.menuName}">
-												<option selected>${topDto.menuName}</option>
-											</c:when>
-											<c:otherwise>
-												<option>${topDto.menuName}</option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</select> <input type="text" class="form-control" placeholder="메뉴 설명"
-									required name="menuDesc3" value="${food3Desc }">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1"><b>하단 알림 문구 수정
-										1</b></label> <input type="text" class="form-control"
-									placeholder="수정할 문장을 입력해주세요." required name="menuHeaderBot1"
-									value="${bot1 }">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1"><b>하단 알림 문구 수정
-										2</b></label> <input type="text" class="form-control"
-									placeholder="수정할 문장을 입력해주세요." required name="menuHeaderBot2"
-									value="${bot2}">
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-info" id="menuHeaderComplete">수정
-									완료</button>
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">닫기</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Content 시작 -->
-		<div class="content">
-			<div class="animated fadeIn">
-				<div class="row">
-
-					<c:forEach var="dto" items="${list}">
-						<div class="col-lg-4 col-sm-6">
-							<div class="card">
-								<div class="card-header headerWrapper">
-									<div class="row">
-										<div class="cardTitle col-5" style="padding-right:0px;">
-											<strong class="card-title mb-3">${dto.menuName}</strong>
-										</div>
-										<div class="cardButt col-7" style="text-align:right; padding-left:0px;">
-											<input type="button" value="변경"
-												class="btn btn-info mr-2 menuEditBtn col-4" data-toggle="modal"
-												data-target="#menuEditModal" style="padding-left:5px; padding-right:5px;"><input type="button"
-												value="삭제" class="btn btn-info menuDelBtn col-4" style="padding-left:5px; padding-right:5px;">
-										</div>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="mx-auto d-block myspan">
-										<div>
-											<img src="${dto.imgPath}" alt="">
-										</div>
-										<h5 class="text-sm-center mt-2 mb-1">${dto.menuDesc}</h5>
-										<span>${dto.menuPrice}</span>원 <input type="hidden"
-											value="${dto.menu_seq}">
-									</div>
-									<hr>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-			<script>
             function readURL(input) {
                var reader = new FileReader();
                reader.onload = function(e) {

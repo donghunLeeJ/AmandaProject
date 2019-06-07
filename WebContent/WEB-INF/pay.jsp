@@ -37,7 +37,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 
 <style>
@@ -73,25 +73,33 @@
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-                     class="menu-icon fa fa-laptop"></i>Home </a></li>
+                     class="menu-icon fas fa-home"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
+                     class="menu-icon fas fa-desktop"></i>잔여좌석
                </a></li>
                <li class="menu-item-has-children dropdown"><a
               	         href="ClientSelect.admin"> <i
-                         class="menu-icon fa fa-table"></i>메뉴
+                         class="menu-icon fas fa-concierge-bell"></i>메뉴
             	    </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
+                     class="menu-icon fas fa-headset"></i>고객의소리
                </a></li>
                <c:choose>
                   <c:when test="${user == null }">
                      <li id="charge" class="active"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+                        href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
+                     
+                     $(window).on("resize",function(){
+         				if($(window).width() >= 752){
+         					$("#left-panel").css("display","block");
+         				}				
+         			})
+                     
+                     
                      $("#charge").on("click",function(){
                         alert("로그인 후 이용가능합니다.");   
                         $("#loginbtn").trigger("click");
@@ -101,7 +109,7 @@
                   <c:otherwise>
                      <li id="charge" class="active"><a
                         href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
+                           class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                   </c:otherwise>
                </c:choose>

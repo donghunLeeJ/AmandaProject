@@ -26,6 +26,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         
+        <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
         
 <!-- -------------------------------------------------------- -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
@@ -34,6 +35,32 @@
 
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <!-- ------------------------------- -->
+
+<style>
+
+#search{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:20px;
+  font-size:0.8em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#search:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+
+
+
+</style>
+
+
+
 
 
 </head>
@@ -44,23 +71,23 @@
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-                     class="menu-icon fa fa-laptop"></i>Home </a></li>
+                     class="menu-icon fas fa-home"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
+                     class="menu-icon fas fa-desktop"></i>잔여좌석
                </a></li>
                 <li class="menu-item-has-children dropdown"><a
                   href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
+                     class="menu-icon fas fa-headset"></i>고객의소리
                </a></li>
                <c:choose>
                   <c:when test="${user == null }">
                      <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+                        href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
                         $("#charge").on("click", function() {
@@ -72,7 +99,7 @@
                   <c:otherwise>
                      <li id="charge" class="menu-item-has-children dropdown"><a
                         href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
+                           class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                   </c:otherwise>
                </c:choose>
@@ -226,12 +253,12 @@
                     </div>
                 </div>
                 
-                 <label for="inputPhoneNumber" class="col-lg-2 control-label">주소 입력</label>
+                 <label for="inputPhoneNumber" class="col-lg-2 control-label" >주소 입력 </label> <input type="button" class="mb-4" value="우편번호 찾기" id="search">
                     <div class="col-lg-10">
                         <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
                         <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
                         <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
-                        <input type="button" class="mb-4" value="우편번호 찾기" id="search">
+                        
                     </div>
                     
                 <div class="form-group">
@@ -291,6 +318,12 @@
 								</div>
 
 								<script>
+								
+								$(window).on("resize",function(){
+									if($(window).width() >= 752){
+										$("#left-panel").css("display","block");
+									}				
+								})
 								
 								
 								//엔터 입력시 로그인

@@ -37,7 +37,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 
 <style>
@@ -104,18 +104,18 @@ table td, table th {
               <c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
+							class="menu-icon fas fa-home"></i>Home </a></li>
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
+							class="menu-icon fas fa-home"></i>Home </a></li>
 					</c:when>
 					</c:choose>
 					
 
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fa fa-cogs"></i>잔여좌석
+							class="menu-icon fas fa-desktop"></i>잔여좌석
 					</a></li>
 
 					
@@ -123,7 +123,7 @@ table td, table th {
               		<c:when test="${user.id == 'admin' }">
                		<li class="menu-item-has-children dropdown"><a
                	    href="select.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
               		 </a></li>
               		 </c:when>
         
@@ -131,7 +131,7 @@ table td, table th {
 
 					<li class="menu-item-has-children dropdown"><a
 						href="Board.board?currentPage=1"> <i
-							class="menu-icon fa fa-th"></i>고객의소리
+							class="menu-icon fas fa-headset"></i>고객의소리
 					</a></li>
 					
 					<li class="active"><a
@@ -412,6 +412,13 @@ table td, table th {
             </div>
 
             <script>
+            
+            $(window).on("resize",function(){
+				if($(window).width() >= 752){
+					$("#left-panel").css("display","block");
+				}				
+			})
+            
                $(".showInfo").on(
                      "click",
                      function() {

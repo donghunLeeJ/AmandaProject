@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    
 </head>
 <body>
     <aside id="left-panel" class="left-panel">
@@ -27,23 +30,23 @@
          <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                <li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-                     class="menu-icon fa fa-laptop"></i>Home </a></li>
+                     class="menu-icon fas fa-home"></i>Home </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
+                     class="menu-icon fas fa-desktop"></i>잔여좌석
                </a></li>
                 <li class="menu-item-has-children dropdown"><a
                   href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
                </a></li>
                <li class="menu-item-has-children dropdown"><a
                   href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
+                     class="menu-icon fas fa-headset"></i>고객의소리
                </a></li>
                <c:choose>
                   <c:when test="${user == null }">
                      <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+                        href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
                         $("#charge").on("click", function() {
@@ -55,7 +58,7 @@
                   <c:otherwise>
                      <li id="charge" class="menu-item-has-children dropdown"><a
                         href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
+                           class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                   </c:otherwise>
                </c:choose>
@@ -164,7 +167,7 @@
             </div>
        
             <hr/>
-               <form class="form-horizontal" role="form"  action="deleteProc.member">
+               <form class="form-horizontal" role="form" id="deleteForm" action="deleteProc.member">
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디 </label>
                     <div class="col-lg-10">
@@ -174,24 +177,19 @@
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" name="pw"  data-rule-required="true" placeholder="패스워드" maxlength="30">
+                        <input type="password" class="form-control" name="pw"  id="pw" data-rule-required="true" placeholder="패스워드" maxlength="30">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                        <input type="password" class="form-control" id="pwCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
                     </div>
                 </div>
-                
-
-               
-
-                
-               
+                             
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-default">회원탈퇴</button>
+                        <button type="button" class="btn btn-default" id=deletebtn>회원탈퇴</button>
                        
                     </div>
                 </div>
@@ -238,6 +236,26 @@
 		</div>
 	</div>
 	<script>
+	
+	$("#deletebtn").on("click",function(){
+		var pw1 = $("#pw").val();
+		var pw2 = $("#pwCheck").val();
+		
+		console.log(pw1);
+		
+		if(pw1==pw2){
+			$("#deleteForm").submit();
+			
+		}else{
+			alert("패스워드가 다릅니다");
+		}
+	})
+	
+	$(window).on("resize",function(){
+				if($(window).width() >= 752){
+					$("#left-panel").css("display","block");
+				}				
+			})
 	
 	//엔터 입력시 로그인
     function press(f){ if(f.keyCode == 13){  

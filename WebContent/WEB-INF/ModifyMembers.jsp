@@ -24,6 +24,9 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     
      <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -45,94 +48,89 @@
     <!-- Left Panel -->
 
   <!-- 왼쪽 네비 시작 -->
-	 <aside id="left-panel" class="left-panel">
-      <nav class="navbar navbar-expand-sm navbar-default">
-         <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-               <li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-                     class="menu-icon fa fa-laptop"></i>Home </a></li>
-               <li class="menu-item-has-children dropdown"><a
-                  href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
-               </a></li>
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
+							class="menu-icon fas fa-home"></i>Home </a></li>
+					<li class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fas fa-desktop" ></i>잔여좌석
+					</a></li>
+					  <li class="menu-item-has-children dropdown"><a
+                	  href="ClientSelect.admin"> <i
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
+               		</a></li>
               
-               <li class="menu-item-has-children dropdown"><a
-                  href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-               </a></li>
-              
-               <li class="menu-item-has-children dropdown"><a
-                  href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
-               </a></li>
-               
-               <c:choose>
-                  <c:when test="${user == null }">
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                     <script>
+					<li class="menu-item-has-children dropdown"><a href="Board.board?currentPage=1"> 
+					<i class="menu-icon fas fa-headset"></i>고객의소리
+					<c:choose>
+					<c:when test="${user == null }">
+						<li id="charge" class="menu-item-has-children dropdown"><a
+						href="#"> <i
+							class="menu-icon fas fa-coins"></i>충전하기
 
-                     $("#charge").on("click",function(){
-                         alert("로그인 후 이용가능합니다.");
-                         $("#loginbtn").trigger("click");
+					</a></li>
+						<script>
+						
+						$(window).on("resize",function(){
+							if($(window).width() >= 752){
+								$("#left-panel").css("display","block");
+							}				
+						})
+						
+						
+							$("#charge").on("click",function(){
+								alert("로그인 후 이용가능합니다.");	
+								$("#loginbtn").trigger("click");
+							})
+						</script>
+					</c:when>
+					<c:otherwise>
+					<li id="charge" class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/pay.jsp"> <i
+							class="menu-icon fas fa-coins"></i>충전하기
+					</a></li>
+					</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+		</nav>
+	</aside>
+	<!-- 왼쪽 네비 끝 -->
+	<!-- 상단 검색바 마이페이지 등등 시작 -->
+	<div id="right-panel" class="right-panel">
+		<!-- Header-->
+		<header id="header" class="header">
+			<div class="top-left">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="./"><img src="images/logo.png"
+						alt="Logo"></a> <a class="navbar-brand hidden"
+						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+						class="fa fa-bars"></i></a>
+				</div>
+			</div>
+			<c:choose>
+				<c:when test="${user != null }">
+					<div class="top-right">
+						<div class="header-menu">
+							<div class="header-left">
+								<button class="search-trigger">
+									<i class="fa fa-search"></i>
+								</button>
+								<div class="form-inline">
+									<form class="search-form">
+										<input class="form-control mr-sm-2" type="text"
+											placeholder="Search ..." aria-label="Search">
+										<button class="search-close" type="submit">
+											<i class="fa fa-close"></i>
+										</button>
+									</form>
+								</div>
 
-                         
-                        
-                     })
-                  </script>
-
-                  </c:when>
-                  <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                  </c:otherwise>
-               </c:choose>
-            </ul>
-         </div>
-      </nav>
-   </aside>
-   <!-- 왼쪽 네비 끝 -->
-   <!-- 상단 검색바 마이페이지 등등 시작 -->
-   <div id="right-panel" class="right-panel">
-      <!-- Header-->
-      <header id="header" class="header">
-         <div class="top-left">
-            <div class="navbar-header">
-               <a class="navbar-brand" href="./"><img src="images/logo.png"
-                  alt="Logo"></a> <a class="navbar-brand hidden"
-                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
-                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
-                  class="fa fa-bars"></i></a>
-            </div>
-         </div>
-         <c:choose>
-            <c:when test="${user != null }">
-               <div class="top-right">
-                  <div class="header-menu">
-                     <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
-						<c:choose>
-                        <c:when test="${user.id ne 'admin'}">
-								<button type="button" class="btn btn-primary" id="msg">msg</button>
-								</c:when>
-							 <c:otherwise>
-									<button type="button" class="btn btn-secondary" id="allmsg">전체msg</button>
-								</c:otherwise>
-						</c:choose>		
 
 
                      
