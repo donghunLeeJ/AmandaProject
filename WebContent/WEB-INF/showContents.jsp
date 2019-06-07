@@ -353,8 +353,16 @@
                            class="btn btn-secondary">
                      </c:if>
                      <c:if test="${user.id == 'admin' }">
-                        <input type="button" id="admindelete" value="글 삭제"
+                        <input type="button" id="delete" value="글 삭제"
                            class="btn btn-secondary">
+                      <script>
+                           document.getElementById("delete").onclick = function() {
+              			var result = confirm("정말 삭제하시겠습니까?");
+              			if (result) {
+              				location.href = "BoardDel.board?no="+${no};
+              			}
+              		};
+              		</script>
                      </c:if>
                      <c:if test="${user != null }">
                         <input type="button" id="showReplBox" value="댓글달기"
@@ -365,46 +373,7 @@
                         class="btn btn-secondary">
 
                   </div>
-                  <script type="text/javascript">
-
-              	$("#contents_no").hide();
-              	$("#replBox").hide();
-              	$("#showReplBox").on("click",function(){
-              		$("#replBox").slideDown(500,"");
-              	});
-              	$("#replButt").on("click",function(){
-              		if($("#repl").val()==""){
-              			alert("댓글을 입력해주세요.");
-              		}else{
-              			$("#replForm").submit();
-              		}
-              	});
-              	
-              		document.getElementById("toList").onclick = function() {
-              			location.href = "Board.board?currentPage=1";
-              		};	
-              		
-              		if(${user.id == writer }){
-              		document.getElementById("modify").onclick = function() {
-              			location.href = "ContentsEdit.board?no="+${no};
-              		};
-              		
-              		document.getElementById("delete").onclick = function() {
-              			var result = confirm("정말 삭제하시겠습니까?");
-              			if (result) {
-              				location.href = "BoardDel.board?no="+${no};
-              			}
-              		};
-              		
-              		$("#admindelete").on("click",function(){
-              			var result = confirm("정말 삭제하시겠습니까?");
-              			if (result) {
-              				location.href = "BoardDel.board?no="+${no};
-              			}
-              		});
-              		}              
-                  </script>
-                  
+                 
                   
                </div>
             </footer>
@@ -788,7 +757,46 @@
  	   TimerStart();   </script>    
   </c:when>  
 </c:choose> 
-		
+		 <script type="text/javascript">
+
+              	$("#contents_no").hide();
+              	$("#replBox").hide();
+              	$("#showReplBox").on("click",function(){
+              		$("#replBox").slideDown(500,"");
+              	});
+              	$("#replButt").on("click",function(){
+              		if($("#repl").val()==""){
+              			alert("댓글을 입력해주세요.");
+              		}else{
+              			$("#replForm").submit();
+              		}
+              	});
+              	
+              		document.getElementById("toList").onclick = function() {
+              			location.href = "Board.board?currentPage=1";
+              		};	
+              		
+              		if(${user.id == writer }){
+              		document.getElementById("modify").onclick = function() {
+              			location.href = "ContentsEdit.board?no="+${no};
+              		};
+              		
+              		document.getElementById("delete").onclick = function() {
+              			var result = confirm("정말 삭제하시겠습니까?");
+              			if (result) {
+              				location.href = "BoardDel.board?no="+${no};
+              			}
+              		};
+              		
+              		$("#admindelete").on("click",function(){
+              			var result = confirm("정말 삭제하시겠습니까?");
+              			if (result) {
+              				location.href = "BoardDel.board?no="+${no};
+              			}
+              		});
+              		}              
+                  </script>
+                  
 		
 </body>
 </html>
