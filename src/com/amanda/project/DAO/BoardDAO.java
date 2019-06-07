@@ -424,7 +424,7 @@ public class BoardDAO {
 	}
 	
 	public List<ReplDTO> selectRepl(int contents_no) throws Exception{
-		String sql = "select contents_no, repl_seq, repl_writer, repl_contents, repl_time from reply where contents_no = ?";
+		String sql = "select contents_no, repl_seq, repl_writer, repl_contents, repl_time from reply where contents_no = ? order by repl_time";
 
 		try(
 				Connection con = this.connect();	

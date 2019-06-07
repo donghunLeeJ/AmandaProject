@@ -52,7 +52,9 @@
 	text-align: right;
 	padding: 0px;
 }
-
+#writeBtns{
+	margin-top:80px;
+}
 .myrow {
 	margin-left: 0px;
 	margin-right: 0px;
@@ -362,7 +364,7 @@ header {
 								</div>
 								</main>
 
-								<footer>
+								<footer id="writeBtns">
 									<div class="row">
 										<div class=" logo col-lg-12 col-md-12 col-sm-12" id="footer">
 
