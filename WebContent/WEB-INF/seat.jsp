@@ -220,198 +220,220 @@
 			<div class="animated fadeIn">
 				<!-- Widgets  -->
 				<div class="row">
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat1" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat1" class="card" style="height: 100%; background-color: white">
 							<h4>
 								1 <br> <br>
 							</h4>
-							
+							 <div class="d-none d-md-block"></div>
 						
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat2" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat2" class="card" style="height: 100%; background-color: white">
 							<h4>
 								2 <br> <br>
 															</h4>
-														
+							<div class="d-none d-md-block"></div>							
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+					
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat3" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat3" class="card" style="height: 100%; background-color: white">
 							<h4>
 								3 <br> <br>
 							</h4>
-							
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat4" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat4" class="card" style="height: 100%; background-color: white">
 							<h4>
 								4 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat5" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat5" class="card" style="height: 100%; background-color: white">
 							<h4>
 								5 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat6" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat6" class="card" style="height: 100%; background-color: white">
 							<h4>
 								6 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat7" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat7" class="card" style="height: 100%; background-color: white">
 							<h4>
 								7 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
 						
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat8" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat8" class="card" style="height: 100%; background-color: white">
 							<h4>
 								8 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat9" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat9" class="card" style="height: 100%; background-color: white">
 							<h4>
 								9 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat10" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat10" class="card" style="height: 100%; background-color: white">
 							<h4>
 								10 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat11" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat11" class="card" style="height: 100%; background-color: white">
 							<h4>
 								11 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat12" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat12" class="card" style="height: 100%; background-color: white">
 							<h4>
 								12 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
 						
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat13" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat13" class="card" style="height: 100%; background-color: white">
 							<h4>
 								13 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat14" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat14" class="card" style="height: 100%; background-color: white">
 							<h4>
 								14 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat15" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat15" class="card" style="height: 100%; background-color: white">
 							<h4>
 								15 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat16" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat16" class="card" style="height: 100%; background-color: white">
 							<h4>
 								16 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat17" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat17" class="card" style="height: 100%; background-color: white">
 							<h4>
 								17 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
 					
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat18" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat18" class="card" style="height: 100%; background-color: white">
 							<h4>
 								18 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat19" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4"> 
+						<div id="seat19" class="card" style="height: 100%; background-color: white">
 							<h4>
 								19 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat20" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat20" class="card" style="height: 100%; background-color: white">
 							<h4>
 								20 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat21" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat21" class="card" style="height: 100%; background-color: white">
 							<h4>
 								21 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat22" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat22" class="card" style="height: 100%; background-color: white">
 							<h4>
 								22 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
 						
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat23" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat23" class="card" style="height: 100%; background-color: white">
 							<h4>
 								23 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat24" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat24" class="card" style="height: 100%; background-color: white">
 							<h4>
 								24 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-						<div id="seat25" class="card" style="height: 80%; background-color: white">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-2 my-4">
+						<div id="seat25" class="card" style="height: 100%; background-color: white">
 							<h4>
 								25 <br> <br>
 							</h4>
+							<div class="d-none d-md-block"></div>
 						</div>
 					</div>
 				</div>
@@ -704,7 +726,7 @@
  		      m = (Math.floor(point/60)) + "분 "; 
  		      var msg = "<font color='green'>" + m +"</font>";
  		         
- 		 $("#seat${i.value}>h4").html("${i.key}님의 남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
+ 		 $("#seat${i.value}>div").html("${i.key}님의 남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
  		if("${user.id}"=="admin"){
  		 $("#seat${i.value}>h4").append("<button id='${i.key}'>msg</button>");
  		}
@@ -721,14 +743,17 @@
  		  if(point == 0){
  			 		 
  		 $("#seat${i.value}").css('background-color','white'); 
- 		 $("#seat${i.value}>h4").html("${i.value} <br> <br>");	    
+ 		 $("#seat${i.value}>h4").html("${i.value} <br> <br>");
+ 		 $("#seat${i.value}>div").html("");
+ 		 
  		  clearInterval(tid);
  	
  		//만일 어떤 사용자가 포인트도 다 사용하지 않았는데 갑자기 로그아웃할 경우 반복을 중지시키고 자리색깔을 본래의 색깔로 바꾼다.
  		 }else if(point == -1){
  			 
  			 $("#seat${i.value}").css('background-color','white'); 
- 	 		 $("#seat${i.value}>h4").html("${i.value} <br> <br>");	    
+ 	 		 $("#seat${i.value}>h4").html("${i.value} <br> <br>");
+ 	 		 $("#seat${i.value}>div").html("");
  	 		  clearInterval(tid);			 
  		 } 
 	 				 			 	
