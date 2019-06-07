@@ -41,55 +41,55 @@
 
 <style>
 #cardHeader {
-	text-align: center;
+   text-align: center;
 }
 
 #todaysMenu {
-	background-color: white;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-radius: 10px;
+   background-color: white;
+   padding-left: 20px;
+   padding-right: 20px;
+   border-radius: 10px;
 }
 
 #menuAdd {
-	text-align: center;
+   text-align: center;
 }
 
 #caroWrapper {
-	display: flex;
-	justify-content: center;
-	padding-top: 30px;
+   display: flex;
+   justify-content: center;
+   padding-top: 30px;
 }
 
 #remember {
-	width: 35%;
-	height: 100%;
-	margin: 0px;
+   width: 35%;
+   height: 100%;
+   margin: 0px;
 }
 
 .modal-footer {
-	box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 .modal-body1 {
-	padding: 1px;
+   padding: 1px;
 }
 
 .card-header {
-	color: gray;
-	background-color: #bbe3e3;
+   color: gray;
+   background-color: #bbe3e3;
 }
 
 .card-text {
-	text-align: left;
+   text-align: left;
 }
 
 .headerWrapper {
-	overflow: hidden;
+   overflow: hidden;
 }
 
 .myspan {
-	text-align: center;
+   text-align: center;
 }
 </style>
 </head>
@@ -263,7 +263,9 @@
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h4 class="modal-title" id="menuModalModalLabel"><b>메뉴 수정</b></h4>
+                  <h4 class="modal-title" id="menuModalModalLabel">
+                     <b>메뉴 수정</b>
+                  </h4>
                   <button type="button" class="close" data-dismiss="modal"
                      aria-label="Close">
                      <span aria-hidden="true">&times;</span>
@@ -325,14 +327,16 @@
                            required name="menuDesc3" value="${food3Desc }">
                      </div>
                      <div class="form-group">
-                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 1</b></label> <input
-                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
-                           required name="menuHeaderBot1" value="${bot1 }">
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정
+                              1</b></label> <input type="text" class="form-control"
+                           placeholder="수정할 문장을 입력해주세요." required name="menuHeaderBot1"
+                           value="${bot1 }">
                      </div>
                      <div class="form-group">
-                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정 2</b></label> <input
-                           type="text" class="form-control" placeholder="수정할 문장을 입력해주세요."
-                           required name="menuHeaderBot2" value="${bot2}">
+                        <label for="exampleFormControlInput1"><b>하단 알림 문구 수정
+                              2</b></label> <input type="text" class="form-control"
+                           placeholder="수정할 문장을 입력해주세요." required name="menuHeaderBot2"
+                           value="${bot2}">
                      </div>
                      <div class="modal-footer">
                         <button class="btn btn-info" id="menuHeaderComplete">수정
@@ -351,17 +355,19 @@
             <div class="row">
 
                <c:forEach var="dto" items="${list}">
-                  <div class="col-md-4 col-sm-6">
+                  <div class="col-lg-4 col-sm-6">
                      <div class="card">
                         <div class="card-header headerWrapper">
-                           <div class="cardTitle">
-                              <strong class="card-title mb-3">${dto.menuName}</strong>
-                           </div>
-                           <div class="cardButt">
-                              <input type="button" value="변경"
-                                 class="btn btn-info mr-2 menuEditBtn" data-toggle="modal"
-                                 data-target="#menuEditModal"><input type="button"
-                                 value="삭제" class="btn btn-info menuDelBtn">
+                           <div class="row">
+                              <div class="cardTitle col-5" style="padding-right:0px;">
+                                 <strong class="card-title mb-3">${dto.menuName}</strong>
+                              </div>
+                              <div class="cardButt col-7" style="text-align:right; padding-left:0px;">
+                                 <input type="button" value="변경"
+                                    class="btn btn-info mr-2 menuEditBtn col-4" data-toggle="modal"
+                                    data-target="#menuEditModal" style="padding-left:5px; padding-right:5px;"><input type="button"
+                                    value="삭제" class="btn btn-info menuDelBtn col-4" style="padding-left:5px; padding-right:5px;">
+                              </div>
                            </div>
                         </div>
                         <div class="card-body">
@@ -382,15 +388,12 @@
          </div>
          <script>
          
-         
          $(window).on("resize",function(){
 				if($(window).width() >= 752){
 					$("#left-panel").css("display","block");
 				}				
 			})
          
-
-
             function readURL(input) {
                var reader = new FileReader();
                reader.onload = function(e) {

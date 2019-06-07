@@ -1,4 +1,4 @@
-page?url=WEB-INF/<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -80,26 +80,33 @@ page?url=WEB-INF/<%@ page language="java" contentType="text/html; charset=UTF-8"
             <ul class="nav navbar-nav">
                <li class="active"><a href="page?url=WEB-INF/main.jsp"><i
                      class="menu-icon fas fa-home"></i>Home </a></li>
-               <li class="menu-item-has-children dropdown"><a
+               <li class="menu-item-has-children "><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fas fa-desktop"></i>잔여좌석
                </a></li>
               
-               <li class="menu-item-has-children dropdown"><a
+               <li class="menu-item-has-children"><a
                   href="ClientSelect.admin"> <i
                      class="menu-icon fas fa-concierge-bell"></i>메뉴
                </a></li>
               
-               <li class="menu-item-has-children dropdown"><a
+               <li class="menu-item-has-children"><a
                   href="Board.board?currentPage=1"> <i class="menu-icon fas fa-headset"></i>고객의소리
                </a></li>
                
                <c:choose>
                   <c:when test="${user == null }">
-                     <li id="charge" class="menu-item-has-children dropdown"><a
+                     <li id="charge" class="menu-item-has-children"><a
                         href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
+                     
+                     
+                     $(window).on("resize",function(){
+            				if($(window).width() >= 752){
+            					$("#left-panel").css("display","block");
+            				}				
+            			})
 
                      $("#charge").on("click",function(){
                          alert("로그인 후 이용가능합니다.");
@@ -112,7 +119,7 @@ page?url=WEB-INF/<%@ page language="java" contentType="text/html; charset=UTF-8"
 
                   </c:when>
                   <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
+                     <li id="charge" class="menu-item-has-children"><a
                         href="page?url=WEB-INF/pay.jsp"> <i
                            class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
@@ -229,11 +236,8 @@ page?url=WEB-INF/<%@ page language="java" contentType="text/html; charset=UTF-8"
                </div>
                <script>
                
-               $(window).on("resize",function(){
-   				if($(window).width() >= 752){
-   					$("#left-panel").css("display","block");
-   				}				
-   			})
+               
+               
                
                 var ctx = document.getElementById( "doughutChart" );
    				 ctx.height = 150;

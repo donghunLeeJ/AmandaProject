@@ -117,12 +117,6 @@
                      </a></li>
                      <script>
                      
-                     $(window).on("resize",function(){
-         				if($(window).width() >= 752){
-         					$("#left-panel").css("display","block");
-         				}				
-         			})
-                     
                      
                      $("#charge").on("click",function(){
                         alert("로그인 후 이용가능합니다.");   
@@ -490,6 +484,14 @@
 		</div>
 	</div>
 	<script>
+	
+	
+	$(window).on("resize",function(){
+		if($(window).width() >= 752){
+			$("#left-panel").css("display","block");
+		}				
+	})
+	
 	
 	//엔터 입력시 로그인
     function press(f){ if(f.keyCode == 13){  

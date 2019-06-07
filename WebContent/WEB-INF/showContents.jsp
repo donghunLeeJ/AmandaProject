@@ -181,7 +181,7 @@
 		     	<c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fas fa-home"></i>Home </a></li>
+							class="menu-icon fa fa-laptop"></i>Home </a></li>
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
@@ -196,7 +196,7 @@
               		<c:when test="${user.id == 'admin' }">
                		<li class="menu-item-has-children dropdown"><a
                	    href="select.admin"> <i
-                     class="fas fa-concierge-bell"></i>메뉴
+                     class="menu-icon fas fa-concierge-bell"></i>메뉴
               		 </a></li>
               		 </c:when>
               		 <c:when test="${user.id != 'admin' }">
@@ -216,14 +216,6 @@
                         href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
-                     
-                     $(window).on("resize",function(){
-         				if($(window).width() >= 752){
-         					$("#left-panel").css("display","block");
-         				}				
-         			})
-                     
-                     
 
                         $("#charge").on("click", function() {
                            alert("로그인 후 이용가능합니다.");
