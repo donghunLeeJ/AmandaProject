@@ -12,33 +12,33 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 </head>
 <body>
-									
+									<%@ page import = "java.util.Calendar" %>
+<%
+Calendar cal = Calendar.getInstance();%>
+ 
+(<%= cal.get(Calendar.YEAR) %>-<%= cal.get(Calendar.MONTH)+1 %>-<%= cal.get(Calendar.DATE) %>
+<%= cal.get(Calendar.HOUR) %>:<%= cal.get(Calendar.MINUTE) %>:<%= cal.get(Calendar.SECOND) %>)
 																			
 		<div id="wrapper">
  <table class="table table-striped ">
   <thead class="thead ">
     <tr class="py-0">
-      <th scope="col" class="py-2" colspan="2" >받는 사람   admin </th>
+      <th scope="col" class="py-2" colspan="2" >받는 사람 : admin</th>
       
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="col" colspan="2" class="py-2" >보낸 사람     ${who} <%@ page import = "java.util.Calendar" %>
-<%
-Calendar cal = Calendar.getInstance();%>
- 
-(<%= cal.get(Calendar.YEAR) %>-<%= cal.get(Calendar.MONTH)+1 %>-<%= cal.get(Calendar.DATE) %>
-<%= cal.get(Calendar.HOUR) %>:<%= cal.get(Calendar.MINUTE) %>:<%= cal.get(Calendar.SECOND) %>) </th>
+      <th scope="col" colspan="2" class="py-2" >보낸 사람 : ${who} </th>
 
     </tr>
     <tr>
-      <th scope="col" class="py-5" style="width: 70px">내용 </th>
+      <th scope="col" class="py-5" style="width: 70px">내용 :</th>
       <th>${text}	</th>
    
     </tr>
     <tr>
-      <th scope="col" class="py-0" style="width: 75px;line-height:60px;"  >답장    </th>
+      <th scope="col" class="py-0" style="width: 75px;line-height:60px;"  >답장 :</th>
       <form action="page?url=WEB-INF/main.jsp" id="form">
       <th><input  class="form-control" type="text" placeholder="reply" id="reply" style="height:100%;width:100%;"></th>
     </tr>	
@@ -61,10 +61,19 @@ reply.value = "";
 window.close();
 }
 </script>
-	
+																			
+												 				
+										
+											
+     
+     
+  
   </tbody>
 </table>
 </div>
+		
+		
+		
 										
 </body>
 </html>

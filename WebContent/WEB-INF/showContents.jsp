@@ -88,11 +88,20 @@
 	width: 80%;
 }
 
+#writerWrapper {
+	padding-left: 0px;
+}
+
 #writer, #writeDate {
-	margin-left: 10px;
+	margin-left: 0px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	width: 80%;
+}
+
+#writerCol, #dateCol {
+	margin-left: px;
+	padding-right: 0px;
 }
 
 .titleWrapper {
@@ -106,6 +115,7 @@
 
 #writerrow, #daterow {
 	margin-top: 8px;
+	padding: 0px;
 }
 
 #replHeader {
@@ -118,24 +128,31 @@
 	margin-bottom: 100px;
 }
 
-#repl_writer {
+.repl_writer {
 	word-wrap: break-word;
+	font-weight: 600;
 }
 
-#repl_time {
+.repl_time {
 	word-wrap: break-word;
+	color:gray;
 }
 
-#replButts {
+.replButts {
+	margin-top: 5px;
 	text-align: right;
 	padding: 0px;
 }
 
 #eachRepl {
 	margin-top: 20px;
+	background-color: white;
+	padding: 10px;
+	border-radius: 20px;
+	color: darkslategray;
 }
 
-#repl_text {
+.repl_text {
 	width: 100%;
 	border: none;
 	text-aligh: center;
@@ -158,63 +175,61 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-		     	<c:choose>
-					<c:when test="${user.id != 'admin' }">
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					</c:when>
-					<c:when test="${user.id == 'admin' }">
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					</c:when>
+					<c:choose>
+						<c:when test="${user.id != 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/main.jsp"><i
+									class="menu-icon fa fa-laptop"></i>Home </a></li>
+						</c:when>
+						<c:when test="${user.id == 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/adminmain.jsp"><i
+									class="menu-icon fa fa-laptop"></i>Home </a></li>
+						</c:when>
 					</c:choose>
-               <li class="menu-item-has-children dropdown"><a
-                  href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-                     class="menu-icon fa fa-cogs"></i>잔여좌석
-               </a></li>
-               <c:choose>
-              		<c:when test="${user.id == 'admin' }">
-               		<li class="menu-item-has-children dropdown"><a
-               	    href="select.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-              		 </a></li>
-              		 </c:when>
-              		 <c:when test="${user.id != 'admin' }">
-               		<li class="menu-item-has-children dropdown"><a
-               	    href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-              		 </a></li>
-              		 </c:when>
-           		</c:choose>
-               <li class="active"><a
-                  href="Board.board?currentPage=1"> <i
-                     class="menu-icon fa fa-th"></i>고객의소리
-               </a></li>
-               <c:choose>
-                  <c:when test="${user == null }">
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                     <script>
+					<li class="menu-item-has-children dropdown"><a
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fa fa-cogs"></i>잔여좌석
+					</a></li>
+					<c:choose>
+						<c:when test="${user.id == 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="select.admin"> <i class="menu-icon fa fa-table"></i>메뉴
+							</a></li>
+						</c:when>
+						<c:when test="${user.id != 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="ClientSelect.admin"> <i class="menu-icon fa fa-table"></i>메뉴
+							</a></li>
+						</c:when>
+					</c:choose>
+					<li class="active"><a href="Board.board?currentPage=1"> <i
+							class="menu-icon fa fa-th"></i>고객의소리
+					</a></li>
+					<c:choose>
+						<c:when test="${user == null }">
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+							<script>
                         $("#charge").on("click", function() {
                            alert("로그인 후 이용가능합니다.");
                            $("#loginbtn").trigger("click");
                         })
                      </script>
-                  </c:when>
-                  <c:when test="${user.id == 'admin' }">
-                     	<li class="menu-item-has-children dropdown"><a
-						href="member.manage"> <i
-							class="menu-icon fa fa-th"></i>고객관리
-					</a></li>
-                  </c:when>
-                  <c:otherwise>
-                     <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="page?url=WEB-INF/pay.jsp"> <i
-                           class="menu-icon fa fa-tasks"></i>충전하기
-                     </a></li>
-                  </c:otherwise>
-               </c:choose>
+						</c:when>
+						<c:when test="${user.id == 'admin' }">
+							<li class="menu-item-has-children dropdown"><a
+								href="member.manage"> <i class="menu-icon fa fa-th"></i>고객관리
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li id="charge" class="menu-item-has-children dropdown"><a
+								href="page?url=WEB-INF/pay.jsp"> <i
+									class="menu-icon fa fa-tasks"></i>충전하기
+							</a></li>
+						</c:otherwise>
+					</c:choose>
 
 				</ul>
 			</div>
@@ -253,11 +268,11 @@
 								</div>
 
 								<c:choose>
-                        <c:when test="${user.id ne 'admin'}">
-								<button type="button" class="btn btn-primary" id="msg">msg</button>
-								</c:when>
-							
-						</c:choose>		
+									<c:when test="${user.id ne 'admin'}">
+										<button type="button" class="btn btn-primary" id="msg">msg</button>
+									</c:when>
+
+								</c:choose>
 							</div>
 							<!--  mypage 사람 사진-->
 							<div class="user-area  float-right">
@@ -299,63 +314,67 @@
 		</header>
 		<!-- /header -->
 		<div class="content">
-			  <div class="animated fadeIn">
-            <div class="card">
+			<div class="animated fadeIn">
+				<div class="card">
 
-               <div class="card-header">
-                  <strong class="card-title"> <header>
-                        <div class="row">
-                           <div class="col-lg-8 col-md-8 col-sm-8 col-8 titleWrapper"
-                              id="titlerow">
-                              제목 : <input type="text" id="title" readonly
-                                 value="${dto.title}">
-                           </div>
-                           <div class="col-lg-4 col-md-4 col-sm-4 col-4 titleWrapper">
-                              <div class="row">
-                                 <div class="col-lg-4 d-none d-lg-block" id="writerrow">글쓴이
-                                    :</div>
-                                 <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                                    <input type="text" id="writer" readonly
-                                       value="${dto.writer}">
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="col-lg-4 d-none d-lg-block" id="daterow">작성일시
-                                    :</div>
-                                 <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                                    <input type="text" id="writeDate" readonly
-                                       value="${dto.writeDate}">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </header></strong>
-               </div>
-               <div class="card-body">
-                  <div class="container" id="wrapper">
-                     <main id="main">
-                     <div id="text">
-                        <div id="contents" name="contents">${dto.contents}</div>
-                     </div>
-                     </main>
-                  </div>
-               </div>
+					<div class="card-header">
+						<strong class="card-title"> <header>
+								<div class="row">
+									<div class="col-lg-8 col-md-8 col-sm-8 col-12 titleWrapper"
+										id="titlerow">
+										제목 : <input type="text" id="title" readonly
+											value="${dto.title}">
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-12 titleWrapper"
+										id="writerWrapper">
+										<div class="row" style="margin-left: 13px;">
+											<div class="col-lg-4 col-3 d-sm-none d-lg-block"
+												id="writerrow">글쓴이 :</div>
+											<div class="col-lg-8 col-md-12 col-sm-12 col-7"
+												id="writerCol">
+												<input type="text" id="writer" readonly
+													value="${dto.writer}">
+											</div>
+										</div>
+										<div class="row" style="margin-left: 13px;">
+											<div class="col-lg-4 d-none d-lg-block" id="daterow">작성일시
+												:</div>
+											<div
+												class="col-lg-8 col-md-12 col-sm-12 col-12 d-none d-sm-block"
+												id="dateCol">
+												<input type="text" id="writeDate" readonly
+													value="${dto.writeDate}">
+											</div>
+										</div>
+									</div>
+								</div>
+							</header></strong>
+					</div>
+					<div class="card-body">
+						<div class="container" id="wrapper">
+							<main id="main">
+							<div id="text">
+								<div id="contents" name="contents">${dto.contents}</div>
+							</div>
+							</main>
+						</div>
+					</div>
 
-            </div>
-            <footer>
-               <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12" id="footer">
+				</div>
+				<footer>
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12" id="footer">
 
-                     <c:if test="${user.id == writer }">
-                        <input type="button" id="modify" value="수정하기"
-                           class="btn btn-secondary">
-                        <input type="button" id="delete" value="글 삭제"
-                           class="btn btn-secondary">
-                     </c:if>
-                     <c:if test="${user.id == 'admin' }">
-                        <input type="button" id="delete" value="글 삭제"
-                           class="btn btn-secondary">
-                      <script>
+							<c:if test="${user.id == writer }">
+								<input type="button" id="modify" value="수정하기"
+									class="btn btn-secondary">
+								<input type="button" id="delete" value="글 삭제"
+									class="btn btn-secondary">
+							</c:if>
+							<c:if test="${user.id == 'admin' }">
+								<input type="button" id="delete" value="글 삭제"
+									class="btn btn-secondary">
+								<script>
                            document.getElementById("delete").onclick = function() {
               			var result = confirm("정말 삭제하시겠습니까?");
               			if (result) {
@@ -363,79 +382,85 @@
               			}
               		};
               		</script>
-                     </c:if>
-                     <c:if test="${user != null }">
-                        <input type="button" id="showReplBox" value="댓글달기"
-                           class="btn btn-secondary">
+							</c:if>
+							<c:if test="${user != null }">
+								<input type="button" id="showReplBox" value="댓글달기"
+									class="btn btn-secondary">
 
-                     </c:if>
-                     <input type="button" id="toList" value="목록으로"
-                        class="btn btn-secondary">
+							</c:if>
+							<input type="button" id="toList" value="목록으로"
+								class="btn btn-secondary">
 
-                  </div>
-                 
-                  
-               </div>
-            </footer>
-            <form action="Reply.board" id="replForm">
-               <div class="row" id="replBox">
-                  <input type="text" value="${no}" name="contents_no"
-                     id="contents_no">
-                  <textarea id="repl" name="repl_contents"></textarea>
-                  <input type="button" id="replButt" value="등록하기"
-                     class="btn btn-secondary">
-               </div>
-            </form>
-            <div id="replHeader">
-               <h4>댓글</h4>
-            </div>
-            <div id="replContentsBox">
-               <c:forEach var="repldto" items="${replList}">
-                  <form action="ReplEdit.board">
-                     <div class="row" id="eachRepl">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_writer">${repldto.repl_writer}</div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-8">
-                           <input type="text" id="repl_text" name="repl_contents"
-                              value="${repldto.repl_contents}" readonly> <input
-                              type="text" class="hide" name="contents_no"
-                              value="${repldto.contents_no}"> <input type="text"
-                              class="hide" name="repl_seq" value="${repldto.repl_seq}">
-                           <input type="text" class="hide" id="path">
-                        </div>
+						</div>
 
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-2" id="repl_time">${repldto.repl_time}</div>
-                     </div>
-                     <c:if test="${user.id==repldto.repl_writer }">
-                        <div class="row">
-                           <div class="col-lg-12 col-md-12 col-sm-12 col-12"
-                              id="replButts">
-                              <input type="submit" class="replEditCompl btn btn-secondary"
-                                 value="수정완료" style="margin-right: 4px;"><input
-                                 type="button" value="수정" class="modiRepl btn btn-secondary">
-                              <input type="button" value="삭제"
-                                 class="delRepl btn btn-secondary">
-                           </div>
-                        </div>
-                     </c:if>
-                     <c:if test="${user.id == 'admin' }">
-                        <div class="row">
-                           <div class="col-lg-12 col-md-12 col-sm-12 col-12"
-                              id="replButts">
-                              <input type="button" value="삭제"
-                                 class="delRepl btn btn-secondary">
-                           </div>
-                        </div>
-                     </c:if>
-                  </form>
-                  <script>
+
+					</div>
+				</footer>
+				<form action="Reply.board" id="replForm">
+					<div class="row" id="replBox">
+						<input type="text" value="${no}" name="contents_no"
+							id="contents_no">
+						<textarea id="repl" name="repl_contents" maxlength="330"></textarea>
+						<input type="button" id="replButt" value="등록하기"
+							class="btn btn-secondary">
+					</div>
+				</form>
+				<div id="replHeader">
+					<h4>댓글</h4>
+				</div>
+				<div id="replContentsBox">
+					<c:forEach var="repldto" items="${replList}">
+						<form action="ReplEdit.board">
+							<div class="row" id="eachRepl">
+								<div class="col-lg-2 col-md-2 col-sm-4 col-4 repl_writer">${repldto.repl_writer}</div>
+								<div class="col-8">
+									<span id="replSpan">
+										<div class="repl_text" name="repl_contents">${repldto.repl_contents}</div>
+									</span> <input type="text" class="hide" name="contents_no"
+										value="${repldto.contents_no}"> <input type="text"
+										class="hide" name="repl_seq" value="${repldto.repl_seq}">
+									<input type="text" class="hide" id="path">
+								</div>
+
+								<div class="col-lg-2 col-md-2 d-none d-md-block repl_time">${repldto.repl_time}</div>
+							</div>
+							<c:if
+								test="${user.id==repldto.repl_writer && user.id != 'admin' }">
+								<div class="row mt-2">
+									<div class="col-12 replButts">
+										<input type="submit" class="replEditCompl btn btn-secondary"
+											value="수정완료" style="margin-right: 4px;"> <input
+											type="button" value="수정" class="modiRepl btn btn-secondary">
+										<input type="button" value="삭제"
+											class="delRepl btn btn-secondary">
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${user.id == 'admin' }">
+								<div class="row">
+									<div class="col-12 replButts">
+										<c:if test="${repldto.repl_writer == 'admin' }">
+											<input type="submit" class="replEditCompl btn btn-secondary"
+												value="수정완료" style="margin-right: 4px;">
+											<input type="button" value="수정"
+												class="modiRepl btn btn-secondary">
+										</c:if>
+										<input type="button" value="삭제"
+											class="delRepl btn btn-secondary">
+									</div>
+								</div>
+							</c:if>
+						</form>
+						<script>
             $(".replEditCompl").hide();
             $(".hide").hide();
             
             if(${user.id==repldto.repl_writer }){
                $(".modiRepl").on("click",function(){
-                  document.getElementById("repl_text").readOnly=false;
+            	   var repl = $(this).parent().parent().parent().find("div:nth-child(1)").find("div:nth-child(2)").find("span:nth-child(1)").find("div:nth-child(1)").html();
+                  $(this).parent().parent().parent().find("div:nth-child(1)").find("div:nth-child(2)").find("span:nth-child(1)").html('<textarea name="repl_contents" maxlength="330" style="width:100%; height:150px; resize: none;">'+repl+'</textarea>');
                   $(this).parent().find("input:nth-child(1)").show();
-                  $(this).parent("div").parent("div").parent("form").find("div").find("div:nth-child(2)").find("input:nth-child(1)").focus();
+                  $(this).parent("div").parent("div").parent("form").find("div").find("div:nth-child(2)").find("div:nth-child(1)").focus();
                })
                $(".delRepl").on("click",function(){
                   location.href = "ReplDelete.board?repl_seq="+${repldto.repl_seq}+"&contents_no="+${repldto.contents_no};
@@ -447,21 +472,9 @@
                })
             }
             </script>
-               </c:forEach>
-            </div>
-         </div>
-			
-
-			<div class="clearfix"></div>
-
-			<footer class="site-footer">
-				<div class="footer-inner bg-white">
-					<div class="row">
-						<div class="col-sm-6 text-left">Copyright &copy; Amanda</div>
-						<div class="col-sm-6 text-right">Designed by Amanda</div>
-					</div>
+					</c:forEach>
 				</div>
-			</footer>
+			</div>
 
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -475,30 +488,36 @@
 							</button>
 						</div>
 						<div class="modal-body">
-						<form action="loginProc.member" id="form" name="formname" method="post">
-                        <div class="form-group">
-                           <label for="exampleFormControlInput1">ID</label> <input
-                              type="text" class="form-control" id="joinemail"
-                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
-                        </div>
-                        <div class="form-group">
-                           <label for="exampleFormControlInput1">Password</label> <input
-                              type="password" class="form-control" id="joinpassword"
-                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
-                        </div>
-                        <div class=row><button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5" type="button"
-										id="findId">ID 찾기</button>
-                           <button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 " type="button"
-                              id="reinputpw">PW 찾기</button>
-                           <button type="button" class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" type="button"
-                              id="joinMem">회원 가입</button>
-                           <button type="submit" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button></div>
-                        <div class="modal-footer">
-                        
-                          
-                        </div>
-                     </form>						
-                     </div>
+							<form action="loginProc.member" id="form" name="formname"
+								method="post">
+								<div class="form-group">
+									<label for="exampleFormControlInput1">ID</label> <input
+										type="text" class="form-control" id="joinemail"
+										placeholder="ID를 입력하시오" required name="loginid"
+										onkeypress="press(this.form)">
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlInput1">Password</label> <input
+										type="password" class="form-control" id="joinpassword"
+										placeholder="비밀번호 입력하시오" required name="loginpw"
+										onkeypress="press(this.form)">
+								</div>
+								<div class=row>
+									<button type="button"
+										class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5"
+										type="button" id="findId">ID 찾기</button>
+									<button type="button"
+										class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 "
+										type="button" id="reinputpw">PW 찾기</button>
+									<button type="button"
+										class="btn btn-outline-info col-6 col-sm-3 mr-sm-2"
+										type="button" id="joinMem">회원 가입</button>
+									<button type="submit"
+										class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button>
+								</div>
+								<div class="modal-footer"></div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -586,16 +605,16 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									   <c:if test="${user.id != 'admin' }">
-                           <button id="deleteMembtn" type="button"
-                              class="btn btn-outline-info" data-dismiss="modal">회원
-                              	탈퇴</button>
-                           <button id="pointPagebtn" type="button"
-                              class="btn btn-outline-info" data-dismiss="modal">포인트
-                             	 충전</button>
-                           <button id="updatememberbtn" type="button"
-                              class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-                              </c:if>
+									<c:if test="${user.id != 'admin' }">
+										<button id="deleteMembtn" type="button"
+											class="btn btn-outline-info" data-dismiss="modal">회원
+											탈퇴</button>
+										<button id="pointPagebtn" type="button"
+											class="btn btn-outline-info" data-dismiss="modal">포인트
+											충전</button>
+										<button id="updatememberbtn" type="button"
+											class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+									</c:if>
 									<button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
 
 								</div>
@@ -642,22 +661,22 @@
                   </script>
 			<!-- 진향이 마이페이지 폼끝 -->
 
-</div>
-			<!-- 컨텐츠 끝 -->
+		</div>
+		<!-- 컨텐츠 끝 -->
 
-			<div class="clearfix"></div>
-			<!-- Footer -->
-			<footer class="site-footer">
-				<div class="footer-inner bg-white">
-					<div class="row">
-						<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
-						<div class="col-sm-6 text-right">
-							Designed by <a href="https://colorlib.com">1조</a>
-						</div>
+		<div class="clearfix"></div>
+		<!-- Footer -->
+		<footer class="site-footer">
+			<div class="footer-inner bg-white">
+				<div class="row">
+					<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
+					<div class="col-sm-6 text-right">
+						Designed by <a href="https://colorlib.com">1조</a>
 					</div>
 				</div>
-			</footer>
-		
+			</div>
+		</footer>
+
 	</div>
 
 
@@ -712,13 +731,13 @@
 	<script src="assets/js/main.js"></script>
 
 
-	
-		
- <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
-  <c:choose> 
-    <c:when test="${(user != null) && (user.id != 'admin')}">
-      
-       <script>
+
+
+	<!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 -->
+	<c:choose>
+		<c:when test="${(user != null) && (user.id != 'admin')}">
+
+			<script>
 	
 			function msg_time(){  
  		   
@@ -750,10 +769,10 @@
  	 
  	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
  	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
- 	   TimerStart();   </script>    
-  </c:when>  
-</c:choose> 
-		 <script type="text/javascript">
+ 	   TimerStart();   </script>
+		</c:when>
+	</c:choose>
+	<script type="text/javascript">
 
               	$("#contents_no").hide();
               	$("#replBox").hide();
@@ -792,7 +811,7 @@
               		});
               		}              
                   </script>
-                  
-		
+
+
 </body>
 </html>

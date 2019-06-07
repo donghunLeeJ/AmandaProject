@@ -25,6 +25,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    
+     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
 	#pwcheckbox{
 	width:500px;
@@ -43,208 +45,138 @@
     <!-- Left Panel -->
 
   <!-- 왼쪽 네비 시작 -->
-	<aside id="left-panel" class="left-panel">
-		<nav class="navbar navbar-expand-sm navbar-default">
-			<div id="main-menu" class="main-menu collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fa fa-cogs" ></i>잔여좌석
-					</a></li>
-					  <li class="menu-item-has-children dropdown"><a
-                	  href="ClientSelect.admin"> <i
-                     class="menu-icon fa fa-table"></i>메뉴
-               		</a></li>
+	 <aside id="left-panel" class="left-panel">
+      <nav class="navbar navbar-expand-sm navbar-default">
+         <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+               <li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+                     class="menu-icon fa fa-laptop"></i>Home </a></li>
+               <li class="menu-item-has-children dropdown"><a
+                  href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+                     class="menu-icon fa fa-cogs"></i>잔여좌석
+               </a></li>
               
-					<li class="menu-item-has-children dropdown"><a href="Board.board?currentPage=1"> 
-					<i class="menu-icon fa fa-th"></i>고객의소리
-					<c:choose>
-					<c:when test="${user == null }">
-						<li id="charge" class="menu-item-has-children dropdown"><a
-						href="#"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
+               <li class="menu-item-has-children dropdown"><a
+                  href="ClientSelect.admin"> <i
+                     class="menu-icon fa fa-table"></i>메뉴
+               </a></li>
+              
+               <li class="menu-item-has-children dropdown"><a
+                  href="Board.board?currentPage=1"> <i
+                     class="menu-icon fa fa-th"></i>고객의소리
+               </a></li>
+               
+               <c:choose>
+                  <c:when test="${user == null }">
+                     <li id="charge" class="menu-item-has-children dropdown"><a
+                        href="#"> <i class="menu-icon fa fa-tasks"></i>충전하기
+                     </a></li>
+                     <script>
 
-					</a></li>
-						<script>
-							$("#charge").on("click",function(){
-								alert("로그인 후 이용가능합니다.");	
-								$("#loginbtn").trigger("click");
-							})
-						</script>
-					</c:when>
-					<c:otherwise>
-					<li id="charge" class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/pay.jsp"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
-					</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
-		</nav>
-	</aside>
-	<!-- 왼쪽 네비 끝 -->
-	<!-- 상단 검색바 마이페이지 등등 시작 -->
-	<div id="right-panel" class="right-panel">
-		<!-- Header-->
-		<header id="header" class="header">
-			<div class="top-left">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="./"><img src="images/logo.png"
-						alt="Logo"></a> <a class="navbar-brand hidden"
-						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
-						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
-						class="fa fa-bars"></i></a>
-				</div>
-			</div>
-			<c:choose>
-				<c:when test="${user != null }">
-					<div class="top-right">
-						<div class="header-menu">
-							<div class="header-left">
-								<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button>
-								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>
+                     $("#charge").on("click",function(){
+                         alert("로그인 후 이용가능합니다.");
+                         $("#loginbtn").trigger("click");
 
-								<div class="dropdown for-notification">
-									<button class="btn btn-secondary dropdown-toggle" type="button"
-										id="notification" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="notification">
-										<p class="red">You have 3 Notification</p>
-										<a class="dropdown-item media" href="#"> <i
-											class="fa fa-check"></i>
-											<p>Server #1 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-info"></i>
-											<p>Server #2 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-warning"></i>
-											<p>Server #3 overloaded.</p>
-										</a>
-									</div>
-								</div>
+                         
+                        
+                     })
+                  </script>
 
-								<div class="dropdown for-message">
-									<button class="btn btn-secondary dropdown-toggle" type="button"
-										id="message" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="message">
-										<p class="red">You have 4 Mails</p>
-										<a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/1.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jonathan Smith</span> <span
-													class="time float-right">Just now</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/2.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jack Sanders</span> <span
-													class="time float-right">5 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/3.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Cheryl Wheeler</span> <span
-													class="time float-right">10 minutes ago</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/4.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Rachel Santos</span> <span
-													class="time float-right">15 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-							<!--  mypage 사람 사진-->
-							<div class="user-area  float-right">
-								<a href="#" class="active" data-toggle="modal"
-									aria-haspopup="true" aria-expanded="false"
-									data-target="#exampleModal1"> <img
-									class="user-avatar rounded-circle" src="images/admin.jpg"
-									alt="profile"></a>
-							</div>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="top-right">
-						<div class="header-menu">
-							<div class="header-left">
-								<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button>
-								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>
-								<div class="dropdown for-notification">
-									<button type="button"
-										class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
-										data-target="#exampleModal" id="loginbtn">login</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</header>
-
-        <div class="breadcrumbs">
-            <div class="breadcrumbs-inner">
-                <div class="row m-0">
-                    <div class="col-sm-4">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <h1>Dashboard</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Icons</a></li>
-                                    <li class="active">FontAwesome</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                  </c:when>
+                  <c:otherwise>
+                     <li id="charge" class="menu-item-has-children dropdown"><a
+                        href="page?url=WEB-INF/pay.jsp"> <i
+                           class="menu-icon fa fa-tasks"></i>충전하기
+                     </a></li>
+                  </c:otherwise>
+               </c:choose>
+            </ul>
+         </div>
+      </nav>
+   </aside>
+   <!-- 왼쪽 네비 끝 -->
+   <!-- 상단 검색바 마이페이지 등등 시작 -->
+   <div id="right-panel" class="right-panel">
+      <!-- Header-->
+      <header id="header" class="header">
+         <div class="top-left">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="./"><img src="images/logo.png"
+                  alt="Logo"></a> <a class="navbar-brand hidden"
+                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+                  class="fa fa-bars"></i></a>
             </div>
-        </div>
+         </div>
+         <c:choose>
+            <c:when test="${user != null }">
+               <div class="top-right">
+                  <div class="header-menu">
+                     <div class="header-left">
+                        <button class="search-trigger">
+                           <i class="fa fa-search"></i>
+                        </button>
+                        <div class="form-inline">
+                           <form class="search-form">
+                              <input class="form-control mr-sm-2" type="text"
+                                 placeholder="Search ..." aria-label="Search">
+                              <button class="search-close" type="submit">
+                                 <i class="fa fa-close"></i>
+                              </button>
+                           </form>
+                        </div>
+						<c:choose>
+                        <c:when test="${user.id ne 'admin'}">
+								<button type="button" class="btn btn-primary" id="msg">msg</button>
+								</c:when>
+							 <c:otherwise>
+									<button type="button" class="btn btn-secondary" id="allmsg">전체msg</button>
+								</c:otherwise>
+						</c:choose>		
+
+
+                     
+
+                        
+                     </div>
+                     <!--  mypage 사람 사진-->
+                     <div class="user-area  float-right">
+                        <a href="#" class="active" data-toggle="modal"
+                           aria-haspopup="true" aria-expanded="false"
+                           data-target="#exampleModal1"> <img
+                           class="user-avatar rounded-circle" src="images/admin.jpg"
+                           alt="profile"></a>
+                     </div>
+                  </div>
+               </div>
+            </c:when>
+            <c:otherwise>
+               <div class="top-right">
+                  <div class="header-menu">
+                     <div class="header-left">
+                        <button class="search-trigger">
+                           <i class="fa fa-search"></i>
+                        </button>
+                        <div class="form-inline">
+                           <form class="search-form">
+                              <input class="form-control mr-sm-2" type="text"
+                                 placeholder="Search ..." aria-label="Search">
+                              <button class="search-close" type="submit">
+                                 <i class="fa fa-close"></i>
+                              </button>
+                           </form>
+                        </div>
+                        <div class="dropdown for-notification">
+                           <button type="button"
+                              class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
+                              data-target="#exampleModal" id="loginbtn">login</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </c:otherwise>
+         </c:choose>
+      </header>
 
         <div class="content">
            <h1 align="center">정보수정</h1>
@@ -272,7 +204,7 @@
             <!-- 본문 들어가는 부분 -->
 
 
-            <form class="form-horizontal" role="form" method="post" action="updateProc.member">
+            <form id="modifyInfo" class="form-horizontal" role="form" method="post" action="updateProc.member">
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
@@ -282,7 +214,7 @@
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label"><div id="pwcheckbox"><div id="pwcheckbox1">패스워드 확인 </div><div id="result"></div></div></label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="newpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" name="newpw2" pattern="[0-9a-zA-z]{8,}" required>
+                        <input type="password" class="form-control" id="newpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" name="newpw2"  required>
                     </div>
                 </div>
 
@@ -298,12 +230,31 @@
                         <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" name="phone" value="${user.phone}">
                     </div>
                 </div>
+                 <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="button" id="search" class="btn btn-default">주소 변경</button>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                        <input required type="text" class="form-control readonly" id="postcode" name="postcode" value="${user.postcode }" readonly >
+                        <input required type="text" class="form-control readonly" id="Address1" name="address1" value="${user.address1 }"  readonly >
+                        <input required type="text" class="form-control" id="Address2" name="address2" value="${user.address2 }" ><br>
+                        <input type="button" class="mb-4" value="우편번호 찾기" id="search">
+                    </div>
+                
+                
+                
+                
+                
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-default">정보수정</button>
+                        <button id="changeinfo" type="button" class="btn btn-default">정보수정</button>
                     </div>
                 </div>
             </form>
+		
+
+
 
         </div>
         <!-- 						진향이 로그인폼끝 -->
@@ -469,13 +420,15 @@
         </div><!-- .content -->
         
         <script>
-		document.getElementById("newpw2").oninput = function() {
+		var count = 1;
+        document.getElementById("newpw2").oninput = function() {
 			var pw1 = document.getElementById("newpw").value;
 			var pw2 = document.getElementById("newpw2").value;
 
 			if (pw1 == pw2) {
 				document.getElementById("result").innerHTML = "패스워드일치";
 				result.style.color = "green";
+				count = 2;
 			}
 
 			else {
@@ -484,6 +437,15 @@
 
 			}
 		}
+        document.getElementById("changeinfo").onclick = function(){
+        	if(count == 2){
+    			document.getElementById("modifyInfo").submit();
+    		}else if(count == 1){
+    			alert("비밀번호가 일치하지 않습니다");
+    		}
+        };
+        
+		
 					
 	</script>
         
@@ -554,6 +516,40 @@
  	   TimerStart();   </script>    
   </c:when>  
 </c:choose> 
+ <script>
+document.getElementById("search").onclick = searchAddress;
+                function searchAddress() {
+                    new daum.Postcode({
+                        oncomplete: function(data) {
+                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                            var roadAddr = data.roadAddress; // 도로명 주소 변수
+                            var extraRoadAddr = ''; // 참고 항목 변수
+
+                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                extraRoadAddr += data.bname;
+                            }
+                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                            if(data.buildingName !== '' && data.apartment === 'Y'){
+                                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                            if(extraRoadAddr !== ''){
+                                extraRoadAddr = ' (' + extraRoadAddr + ')';
+                            }
+
+                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                            document.getElementById('postcode').value = data.zonecode;
+                            document.getElementById("Address1").value = roadAddr;
+                        }
+                    }).open();
+                }
+</script>
+
 
 
 </body>

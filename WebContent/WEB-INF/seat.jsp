@@ -704,7 +704,7 @@
   
   //만일 seat의 자리번호와 useridseat에서 뽑아온 자리번호가 서로 같다면?
 		 console.log($("#seat${i.value}>h4").text() == ${i.value});
-  
+		
   
   if($("#seat${i.value}>h4").text() == ${i.value}){
 		
@@ -724,17 +724,7 @@
  		      var msg = "<font color='green'>" + m +"</font>";
  		         
  		 $("#seat${i.value}>div").html("${i.key}님의 남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
- 		if("${user.id}"=="admin"){
- 		 $("#seat${i.value}>h4").append("<button id='${i.key}'>msg</button>");
- 		}
- 		 $("#${i.key}")
-		.on(
-				"click",
-				function() {
-					
-					window.open("idbyclient.message?who=${i.key}","","width=500px,height=300px");
-				
-				})
+ 		
 		 	
  		 //만일 사용자의 포인트가 다 떨어졌을 경우 반복을 중지시키고 자리색깔을 본래의 색깔로 바꾼다.
  		  if(point == 0){
@@ -762,7 +752,18 @@
  	   function TimerStart(){ tid=setInterval('SeatTime${i.value}()',1000) };
  	   TimerStart();	
  }
-		
+  if("${user.id}"=="admin"){
+		 $("#seat${i.value}>h4").append("<button id='${i.key}'>msg</button>");
+		}
+
+	 $("#${i.key}")
+	.on(
+			"click",
+			function() {
+				
+				window.open("idbyclient.message?who=${i.key}","","width=500px,height=300px");
+			
+			})
 </script>							
 </c:forEach>
 
@@ -819,7 +820,7 @@
   										 webSocket.onmessage = function(event) {
    										   onMessage(event)
   										  };
-  										if("${user.name}"=="관리자"){
+  										if("${user.id}"=="admin"){
   										  function onMessage(event) {
     										  var msg = event.data.split(":");
        										  var who = msg[0]; 
@@ -848,12 +849,12 @@
 									"width=500px,height=300px");
      										 
      								 }
-     								else if("admin"==who&&who2=="all")
-    								 {
-    									 console.log("kk");
-    									window.open("all.message?content="+contents,"",
-   									"location=no, directories=no,width=500px,height=300px");
-    									  }
+     								 else if("admin"==who&&who2=="all")
+     								 {
+     									 console.log("kk");
+     									window.open("page?url=WEB-INF/allclient.jsp","",
+    									"location=no, directories=no,width=500px,height=300px");
+     									  }
      								 
      							 }
      							
