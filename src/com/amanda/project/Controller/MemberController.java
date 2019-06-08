@@ -33,9 +33,9 @@ import com.amanda.project.DTO.SendMailDTO;
 @WebServlet("*.member")
 public class MemberController extends HttpServlet {
 
-	//로그인한 id와 포인트를 맵에 저장시킴
-	public static HashMap<String,Integer>pointmap = new HashMap();//로그인한 id와 포인트를 map에 저장시킨다.
-	public static HashMap<String,String>useridseat = new HashMap();//로그인하는 순간 id와 사용자가 정한 자리번호를 map에 저장시킨다.
+	//濡쒓렇�씤�븳 id�� �룷�씤�듃瑜� 留듭뿉 ���옣�떆�궡
+	public static HashMap<String,Integer>pointmap = new HashMap();//濡쒓렇�씤�븳 id�� �룷�씤�듃瑜� map�뿉 ���옣�떆�궓�떎.
+	public static HashMap<String,String>useridseat = new HashMap();//濡쒓렇�씤�븯�뒗 �닚媛� id�� �궗�슜�옄媛� �젙�븳 �옄由щ쾲�샇瑜� map�뿉 ���옣�떆�궓�떎.
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -49,7 +49,7 @@ public class MemberController extends HttpServlet {
 		switch(cmd) {
 
 		case "loginProc.member" :
-			//로그인 화면에서 아이디 비밀번호 값을 받아 db와 비교하여 로그인을 실행시켜주는 controller
+			//濡쒓렇�씤 �솕硫댁뿉�꽌 �븘�씠�뵒 鍮꾨�踰덊샇 媛믪쓣 諛쏆븘 db�� 鍮꾧탳�븯�뿬 濡쒓렇�씤�쓣 �떎�뻾�떆耳쒖＜�뒗 controller
 			String loginid=request.getParameter("loginid");
 			String loginpw=request.getParameter("loginpw");
 
@@ -59,7 +59,7 @@ public class MemberController extends HttpServlet {
 
 				if(checkPw.equals(dao.testSHA256(loginpw))) {
 
-					if(loginid.equals("admin"))  //관리자인 경우 admincharcontroller로 이동후 main접속 하기
+					if(loginid.equals("admin"))  //愿�由ъ옄�씤 寃쎌슦 admincharcontroller濡� �씠�룞�썑 main�젒�냽 �븯湲�
 					{
 						request.getSession().setAttribute("user", dao.select_user(loginid));
 						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
@@ -79,34 +79,34 @@ public class MemberController extends HttpServlet {
 
 						if(cDao.UserSeatIpCheck(ip) == 0){	
 
-							//pointmap에 로그인한 id와 해당 유저가 가진 포인트를 담는다.
+							//pointmap�뿉 濡쒓렇�씤�븳 id�� �빐�떦 �쑀��媛� 媛�吏� �룷�씤�듃瑜� �떞�뒗�떎.
 							pointmap.put(loginid, user.getPoint());		
 
-							//로그인한 순간 사용자의 포인트를 1초마다 1씩 감소시키는 스레드(timertask)를 생성				
+							//濡쒓렇�씤�븳 �닚媛� �궗�슜�옄�쓽 �룷�씤�듃瑜� 1珥덈쭏�떎 1�뵫 媛먯냼�떆�궎�뒗 �뒪�젅�뱶(timertask)瑜� �깮�꽦				
 							Timer time = new Timer();
 							TimerTask timertask = new TimerTask() {
 
 								@Override
 								public void run() {
 
-									//조건1 : pointmap의 값이 null이 아닌 경우(즉 로그아웃 컨트롤러에서 hashmap을 remove하는 순간 바로 작업이 취소된다.)
+									//議곌굔1 : pointmap�쓽 媛믪씠 null�씠 �븘�땶 寃쎌슦(利� 濡쒓렇�븘�썐 而⑦듃濡ㅻ윭�뿉�꽌 hashmap�쓣 remove�븯�뒗 �닚媛� 諛붾줈 �옉�뾽�씠 痍⑥냼�맂�떎.)
 									if(!(pointmap.get(loginid) == null)) {	
 
-										//조건2 : pointmap에 저장된 포인트의 값이 0보다 큰 경우만 작동함
+										//議곌굔2 : pointmap�뿉 ���옣�맂 �룷�씤�듃�쓽 媛믪씠 0蹂대떎 �겙 寃쎌슦留� �옉�룞�븿
 										if(pointmap.get(loginid) > 0) {	
 											int point = pointmap.get(loginid) - 1;
-											pointmap.put(loginid, point);}//포인트의 값을 1씩 감소시킨다.						
+											pointmap.put(loginid, point);}//�룷�씤�듃�쓽 媛믪쓣 1�뵫 媛먯냼�떆�궓�떎.						
 									}else{
 
-										System.out.println("로그아웃 또는 타임아웃이므로 카운트 초기화");
+										System.out.println("濡쒓렇�븘�썐 �삉�뒗 ���엫�븘�썐�씠誘�濡� 移댁슫�듃 珥덇린�솕");
 										time.cancel();
 
 									}															
 								}
 							};	
 
-							//각각 timertask클래스 변수 , 스레드가 작동하기까지 대기 시간,반복 주기를 나타냄
-							//(반복주기에서 1000은 1초와 같다.)
+							//媛곴컖 timertask�겢�옒�뒪 蹂��닔 , �뒪�젅�뱶媛� �옉�룞�븯湲곌퉴吏� ��湲� �떆媛�,諛섎났 二쇨린瑜� �굹���깂
+							//(諛섎났二쇨린�뿉�꽌 1000�� 1珥덉� 媛숇떎.)
 							time.schedule(timertask,1,1000);
 						}
 
@@ -115,8 +115,8 @@ public class MemberController extends HttpServlet {
 						if(cDao.seatOn(ip)>0) {
 							ComDTO cDto = cDao.seatNum_get(ip);
 							System.out.println(cDto.getOnOff());
-							//useridseat에 로그인한 사용자의 id(key)를 기준으로 자리번호를 담는다.
-							//(이는 나중에 seat페이지에서 key값과 value값으로 사용된다.)
+							//useridseat�뿉 濡쒓렇�씤�븳 �궗�슜�옄�쓽 id(key)瑜� 湲곗��쑝濡� �옄由щ쾲�샇瑜� �떞�뒗�떎.
+							//(�씠�뒗 �굹以묒뿉 seat�럹�씠吏��뿉�꽌 key媛믨낵 value媛믪쑝濡� �궗�슜�맂�떎.)
 							useridseat.put(loginid, cDto.getSeatNum());	
 							request.getServletContext().setAttribute("UserSeatNum", useridseat);				 	
 							request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
@@ -126,7 +126,7 @@ public class MemberController extends HttpServlet {
 						rd.forward(request, response);							
 					}
 
-				}else if(checkPw.equals("아이디 없음")){
+				}else if(checkPw.equals("�븘�씠�뵒 �뾾�쓬")){
 					request.setAttribute("login", 0);
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 					rd.forward(request, response);
@@ -144,16 +144,16 @@ public class MemberController extends HttpServlet {
 
 			break;
 		case "joinProc.member" :
-			//회원 가입 컨트롤러
+			//�쉶�썝 媛��엯 而⑦듃濡ㅻ윭
 			try {
 				MemberDAO jdao = new MemberDAO();
-				String id = request.getParameter("joinmemberid");//회원가입시 받는 아이디
-				String pw = request.getParameter("joinmemberpw");//회원가입시 받는 비밀번호
-				String spw = jdao.testSHA256(pw);//비밀번호 sha처리
-				String name = request.getParameter("joinmembername");//회원가입시 받는 이름
-				String birth = request.getParameter("joinmemberbirth");//회원가입시 받는 생년월일
-				String email = request.getParameter("joinmemberemail");//회원가입시 받는 email
-				String phone = request.getParameter("joinmemberphone");//회원가입시 받는 폰번호
+				String id = request.getParameter("joinmemberid");//�쉶�썝媛��엯�떆 諛쏅뒗 �븘�씠�뵒
+				String pw = request.getParameter("joinmemberpw");//�쉶�썝媛��엯�떆 諛쏅뒗 鍮꾨�踰덊샇
+				String spw = jdao.testSHA256(pw);//鍮꾨�踰덊샇 sha泥섎━
+				String name = request.getParameter("joinmembername");//�쉶�썝媛��엯�떆 諛쏅뒗 �씠由�
+				String birth = request.getParameter("joinmemberbirth");//�쉶�썝媛��엯�떆 諛쏅뒗 �깮�뀈�썡�씪
+				String email = request.getParameter("joinmemberemail");//�쉶�썝媛��엯�떆 諛쏅뒗 email
+				String phone = request.getParameter("joinmemberphone");//�쉶�썝媛��엯�떆 諛쏅뒗 �룿踰덊샇
 
 				String postcode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
@@ -178,9 +178,9 @@ public class MemberController extends HttpServlet {
 
 			break;
 		case "deleteProc.member" :
-			//회원 탈퇴 컨트롤러
-			String delid= request.getParameter("id");//삭제할 아이디
-			String delpw= request.getParameter("pw");//삭제할 패스워드
+			//�쉶�썝 �깉�눜 而⑦듃濡ㅻ윭
+			String delid= request.getParameter("id");//�궘�젣�븷 �븘�씠�뵒
+			String delpw= request.getParameter("pw");//�궘�젣�븷 �뙣�뒪�썙�뱶
 			System.out.println(delpw);
 			int delresult = dao.delete(delid, delpw);
 			//System.out.println(delresult);
@@ -194,7 +194,7 @@ public class MemberController extends HttpServlet {
 			}
 			break;
 		case "updateProc.member" :
-			//회원 정보수정 컨트롤러	
+			//�쉶�썝 �젙蹂댁닔�젙 而⑦듃濡ㅻ윭	
 			try {
 				System.out.println("kk");
 				String pw=request.getParameter("newpw");
@@ -230,21 +230,21 @@ public class MemberController extends HttpServlet {
 				String id = dto.getId();
 
 
-				//만일 로그인한 사용자가 pc방에서 로그아웃 했을 경우 작동하는 코드임	
+				//留뚯씪 濡쒓렇�씤�븳 �궗�슜�옄媛� pc諛⑹뿉�꽌 濡쒓렇�븘�썐 �뻽�쓣 寃쎌슦 �옉�룞�븯�뒗 肄붾뱶�엫	
 				if(!(pointmap.get(id) == null)){
 
 					int hour = dto.getPoint() - pointmap.get(id);
-					//로그아웃하는 순간 point에 담긴 변수를 데이터베이스에 담는다.(id는 로그인한 해당 id)
+					//濡쒓렇�븘�썐�븯�뒗 �닚媛� point�뿉 �떞湲� 蹂��닔瑜� �뜲�씠�꽣踰좎씠�뒪�뿉 �떞�뒗�떎.(id�뒗 濡쒓렇�씤�븳 �빐�떦 id)
 
 					dao.PointUpdate(pointmap.get(id), id);		
 					dao.usehourUpdate(hour, id); 
 
-					//로그아웃하는 순간 hashmap에 담긴 로그아웃한 사용자 데이터를 리셋시킨다.
+					//濡쒓렇�븘�썐�븯�뒗 �닚媛� hashmap�뿉 �떞湲� 濡쒓렇�븘�썐�븳 �궗�슜�옄 �뜲�씠�꽣瑜� 由ъ뀑�떆�궓�떎.
 					pointmap.remove(id);
 					useridseat.remove(id);
 
 
-					//remove연산으로 인해 로그아웃한 사용자의 자리가 비었으므로 다시 useridseat를 세팅해 준다.
+					//remove�뿰�궛�쑝濡� �씤�빐 濡쒓렇�븘�썐�븳 �궗�슜�옄�쓽 �옄由ш� 鍮꾩뿀�쑝誘�濡� �떎�떆 useridseat瑜� �꽭�똿�빐 以��떎.
 					request.getServletContext().setAttribute("UserSeatNum", useridseat);
 
 				}	
@@ -282,20 +282,20 @@ public class MemberController extends HttpServlet {
 
 
 		case "resetpwProc.member" :
-			//비밀번호재설정
-			id = request.getParameter("checkid");//입력받은 id값
+			//鍮꾨�踰덊샇�옱�꽕�젙
+			id = request.getParameter("checkid");//�엯�젰諛쏆� id媛�
 			if(dao.checkCode(id)==1) {
 				request.getRequestDispatcher("WEB-INF/codealert.jsp").forward(request, response);
 			}else {
 
-				String email = request.getParameter("checkemail");//입력받은 email값
-				int result = dao.existMember(id, email);//있으면 return 1,없으면 0, 에러면 -1
+				String email = request.getParameter("checkemail");//�엯�젰諛쏆� email媛�
+				int result = dao.existMember(id, email);//�엳�쑝硫� return 1,�뾾�쑝硫� 0, �뿉�윭硫� -1
 				if(result == 1) {
 					request.setAttribute("id", id);
 					request.setAttribute("email", email);
 					request.getRequestDispatcher("sendemailProc.member").forward(request, response);
 				}else if(result == 0) {
-					request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//이 창에서 회원아니라고 alert
+					request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//�씠 李쎌뿉�꽌 �쉶�썝�븘�땲�씪怨� alert
 				}else {
 					response.sendRedirect("../error.jsp");
 				}
@@ -306,7 +306,7 @@ public class MemberController extends HttpServlet {
 
 
 		case "findidProc.member" :
-			//아이디 찾기
+			//�븘�씠�뵒 李얘린
 			String name = request.getParameter("checkName");
 			String birth = request.getParameter("checkbirth");
 			String email = request.getParameter("checkemail");
@@ -324,7 +324,7 @@ public class MemberController extends HttpServlet {
 
 			}else if(result == 0) {
 
-				request.getRequestDispatcher("WEB-INF/alertid.jsp").forward(request, response);//이 창에서 회원아니라고 alert
+				request.getRequestDispatcher("WEB-INF/alertid.jsp").forward(request, response);//�씠 李쎌뿉�꽌 �쉶�썝�븘�땲�씪怨� alert
 
 
 			}else {
@@ -337,20 +337,20 @@ public class MemberController extends HttpServlet {
 
 
 		case "sendemailProc.member" :
-			//이메일전송
+			//�씠硫붿씪�쟾�넚
 			String from = "acesang@naver.com";
 			String to = (String)request.getAttribute("email");
-			String subject = "비밀번호 재설정 확인코드입니다.";
+			String subject = "鍮꾨�踰덊샇 �옱�꽕�젙 �솗�씤肄붾뱶�엯�땲�떎.";
 			String content = sdao.randomnumber()+"";
-			// 입력값 받음
+			// �엯�젰媛� 諛쏆쓬
 
-			String saveid = (String)request.getAttribute("id");//이메일로 받은 코드 db저장할때 저장할 id값
+			String saveid = (String)request.getAttribute("id");//�씠硫붿씪濡� 諛쏆� 肄붾뱶 db���옣�븷�븣 ���옣�븷 id媛�
 			SendMailDTO sdto = new SendMailDTO(saveid,to,content);
 			sdao.pwcheck_insert(sdto);
 
-			Properties p = new Properties(); // 정보를 담을 객체
+			Properties p = new Properties(); // �젙蹂대�� �떞�쓣 媛앹껜
 
-			p.put("mail.smtp.host","smtp.naver.com"); // 네이버 SMTP
+			p.put("mail.smtp.host","smtp.naver.com"); // �꽕�씠踰� SMTP
 
 			p.put("mail.smtp.port", "465");
 			p.put("mail.smtp.starttls.enable", "true");
@@ -359,7 +359,7 @@ public class MemberController extends HttpServlet {
 			p.put("mail.smtp.socketFactory.port", "465");
 			p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			p.put("mail.smtp.socketFactory.fallback", "false");
-			// SMTP 서버에 접속하기 위한 정보들
+			// SMTP �꽌踰꾩뿉 �젒�냽�븯湲� �쐞�븳 �젙蹂대뱾
 
 			try{
 				Authenticator auth = new SendMailDAO();
@@ -367,29 +367,29 @@ public class MemberController extends HttpServlet {
 
 				ses.setDebug(true);
 
-				MimeMessage msg = new MimeMessage(ses); // 메일의 내용을 담을 객체
-				msg.setSubject(subject); // 제목
+				MimeMessage msg = new MimeMessage(ses); // 硫붿씪�쓽 �궡�슜�쓣 �떞�쓣 媛앹껜
+				msg.setSubject(subject); // �젣紐�
 
 				Address fromAddr = new InternetAddress(from);
-				msg.setFrom(fromAddr); // 보내는 사람
+				msg.setFrom(fromAddr); // 蹂대궡�뒗 �궗�엺
 
 				Address toAddr = new InternetAddress(to);
-				msg.addRecipient(Message.RecipientType.TO, toAddr); // 받는 사람
+				msg.addRecipient(Message.RecipientType.TO, toAddr); // 諛쏅뒗 �궗�엺
 
 
-				msg.setContent(content, "text/html;charset=UTF-8"); // 내용과 인코딩
+				msg.setContent(content, "text/html;charset=UTF-8"); // �궡�슜怨� �씤肄붾뵫
 
-				Transport.send(msg); // 전송
+				Transport.send(msg); // �쟾�넚
 
 				request.setAttribute("email", to);
-				request.setAttribute("saveid", saveid);//id값 전달
-				request.setAttribute("content", content);//코드번호 전달
+				request.setAttribute("saveid", saveid);//id媛� �쟾�떖
+				request.setAttribute("content", content);//肄붾뱶踰덊샇 �쟾�떖
 				request.getRequestDispatcher("WEB-INF/pwcodecheck.jsp").forward(request, response);
 			} catch(Exception e){
 				sdao.pwcheck_delete(saveid, to);
 				e.printStackTrace();
 				response.sendRedirect("error.html");
-				// 오류 발생시 뒤로 돌아가도록
+				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 
 			}
@@ -398,10 +398,10 @@ public class MemberController extends HttpServlet {
 
 
 		case "sendemailid.member" :
-			//이메일전송
+			//�씠硫붿씪�쟾�넚
 			from = "acesang@naver.com";
 			to = (String)request.getAttribute("email");
-			subject = "회원님이 요청하신 아이디 입니다";
+			subject = "�쉶�썝�떂�씠 �슂泥��븯�떊 �븘�씠�뵒 �엯�땲�떎";
 
 			String checkname = request.getParameter("checkName");
 			String checkbirth = request.getParameter("checkbirth");
@@ -409,11 +409,11 @@ public class MemberController extends HttpServlet {
 
 			content = sdao.MemberId(checkname,checkbirth,checkemail);
 
-			// 입력값 받음
+			// �엯�젰媛� 諛쏆쓬
 
-			p = new Properties(); // 정보를 담을 객체
+			p = new Properties(); // �젙蹂대�� �떞�쓣 媛앹껜
 
-			p.put("mail.smtp.host","smtp.naver.com"); // 네이버 SMTP
+			p.put("mail.smtp.host","smtp.naver.com"); // �꽕�씠踰� SMTP
 			p.put("mail.smtp.port", "465");
 			p.put("mail.smtp.starttls.enable", "true");
 			p.put("mail.smtp.auth", "true");
@@ -421,30 +421,30 @@ public class MemberController extends HttpServlet {
 			p.put("mail.smtp.socketFactory.port", "465");
 			p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			p.put("mail.smtp.socketFactory.fallback", "false");
-			// SMTP 서버에 접속하기 위한 정보들
+			// SMTP �꽌踰꾩뿉 �젒�냽�븯湲� �쐞�븳 �젙蹂대뱾
 			try{
 				Authenticator auth = new SendMailDAO();
 				Session ses = Session.getInstance(p, auth);
 
 				ses.setDebug(true);
 
-				MimeMessage msg = new MimeMessage(ses); // 메일의 내용을 담을 객체
-				msg.setSubject(subject); // 제목
+				MimeMessage msg = new MimeMessage(ses); // 硫붿씪�쓽 �궡�슜�쓣 �떞�쓣 媛앹껜
+				msg.setSubject(subject); // �젣紐�
 				Address fromAddr = new InternetAddress(from);
-				msg.setFrom(fromAddr); // 보내는 사람
+				msg.setFrom(fromAddr); // 蹂대궡�뒗 �궗�엺
 				Address toAddr = new InternetAddress(to);
-				msg.addRecipient(Message.RecipientType.TO, toAddr); // 받는 사람
+				msg.addRecipient(Message.RecipientType.TO, toAddr); // 諛쏅뒗 �궗�엺
 				System.out.println(content);
 				msg.setText(content);
-				msg.setContent(content, "text/html;charset=UTF-8"); // 내용과 인코딩
-				Transport.send(msg); // 전송
+				msg.setContent(content, "text/html;charset=UTF-8"); // �궡�슜怨� �씤肄붾뵫
+				Transport.send(msg); // �쟾�넚
 				request.setAttribute("email", to);
-				System.out.println("오나보자");
+				System.out.println("�삤�굹蹂댁옄");
 				request.getRequestDispatcher("WEB-INF/emailComplation.jsp").forward(request, response);
 			} catch(Exception e){
 				e.printStackTrace();
 				response.sendRedirect("error.html");
-				// 오류 발생시 뒤로 돌아가도록
+				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 			}
 			break;
@@ -477,7 +477,7 @@ public class MemberController extends HttpServlet {
 			String spww_pw = dao.testSHA256(pww_pw);
 			sdao.pwcheck_delete(pww_id, pww_email);//
 
-			int compw = sdao.renew_pw(pww_id, spww_pw);//비밀번호 수정
+			int compw = sdao.renew_pw(pww_id, spww_pw);//鍮꾨�踰덊샇 �닔�젙
 
 			if(compw == 1) {
 				request.getRequestDispatcher("WEB-INF/pwcomplete.jsp").forward(request, response);
@@ -486,6 +486,11 @@ public class MemberController extends HttpServlet {
 			}else {
 
 			}
+			break;
+		case "Hello.member" :
+			
+			request.getRequestDispatcher("WEB-INF/Hello.jsp").forward(request, response);
+		
 
 		}
 	}
