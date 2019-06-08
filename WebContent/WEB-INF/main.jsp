@@ -40,7 +40,12 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<!-- 아이콘 link -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+
+
+
 <style>
 #remember {
 	width: 35%;
@@ -87,26 +92,26 @@
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fas fa-home"></i>Home </a></li>
+							class="menu-icon fa fa-home fa-lg"></i>Home </a></li>
 					<li class="menu-item-has-children "><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fas fa-desktop"></i>잔여좌석
+							class="menu-icon fa fa-desktop fa-lg"></i>잔여좌석
 					</a></li>
 
 					<li class="menu-item-has-children"><a
 						href="ClientSelect.admin"> <i
-							class="menu-icon fas fa-concierge-bell"></i>메뉴
+							class="menu-icon fa fa-cutlery fa-lg"></i>메뉴
 					</a></li>
 
 					<li class="menu-item-has-children"><a
 						href="Board.board?currentPage=1"> <i
-							class="menu-icon fas fa-headset"></i>고객의소리
+							class="menu-icon fa fa-comments fa-lg"></i>고객의소리
 					</a></li>
 
 					<c:choose>
 						<c:when test="${user == null }">
 							<li id="charge" class="menu-item-has-children"><a href="#">
-									<i class="menu-icon fas fa-coins"></i>충전하기
+									<i class="menu-icon fa fa-usd fa-lg"></i>충전하기
 							</a></li>
 							<script>
                      
@@ -130,7 +135,7 @@
 						<c:otherwise>
 							<li id="charge" class="menu-item-has-children"><a
 								href="page?url=WEB-INF/pay.jsp"> <i
-									class="menu-icon fas fa-coins"></i>충전하기
+									class="menu-icon fa fa-usd fa-lg"></i>충전하기
 							</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -428,13 +433,13 @@
   			 <div id="carouselExampleControls1" class="carousel slide  " data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="images/event11.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
+      <img src="images/event31.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
     </div>
     <div class="carousel-item">
-      <img src="images/event22.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
+      <img src="images/event32.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
     </div>
     <div class="carousel-item">
-      <img src="images/event33.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
+      <img src="images/event30.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">

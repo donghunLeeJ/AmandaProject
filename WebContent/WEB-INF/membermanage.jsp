@@ -37,7 +37,8 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<!-- 아이콘 link -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
 
 <style>
@@ -110,27 +111,27 @@ table td, table th {
 					</c:when>
 					<c:when test="${user.id == 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
-							class="menu-icon fas fa-home"></i>Home </a></li>
+							class="menu-icon fa fa-home fa-lg"></i>Home </a></li>
 					</c:when>
 					</c:choose>
 					
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fas fa-desktop"></i>잔여좌석
+							class="menu-icon fa fa-desktop fa-lg"></i>잔여좌석
 					</a></li>
 					
 					<c:choose>
               		<c:when test="${user.id == 'admin' }">
                		<li class="menu-item-has-children dropdown"><a
                	    href="select.admin"> <i
-                     class="menu-icon fas fa-concierge-bell"></i>메뉴
+                     class="menu-icon fa fa-cutlery fa-lg "></i>메뉴
               		 </a></li>
               		 </c:when>
         
                		</c:choose>
 					<li class="menu-item-has-children dropdown"><a
 						href="Board.board?currentPage=1"> <i
-							class="menu-icon fas fa-headset"></i>고객의소리
+							class="menu-icon fa fa-comments fa-lg"></i>고객의소리
 					</a></li>
 					
 					<li class="active"><a

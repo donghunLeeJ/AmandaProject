@@ -37,7 +37,8 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<!-- 아이콘 link -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
 
 <style>
@@ -74,26 +75,26 @@
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="menu-item-has-children"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fas fa-home"></i>Home </a></li>
+							class="menu-icon fa fa-home fa-lg"></i>Home </a></li>
 					<li class="menu-item-has-children "><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fas fa-desktop"></i>잔여좌석
+							class="menu-icon fa fa-desktop fa-lg "></i>잔여좌석
 					</a></li>
 
 					<li class="menu-item-has-children"><a
 						href="ClientSelect.admin"> <i
-							class="menu-icon fas fa-concierge-bell"></i>메뉴
+							class="menu-icon fa fa-cutlery fa-lg"></i>메뉴
 					</a></li>
 
 					<li class="menu-item-has-children"><a
 						href="Board.board?currentPage=1"> <i
-							class="menu-icon fas fa-headset"></i>고객의소리
+							class="menu-icon fa fa-comments fa-lg "></i>고객의소리
 					</a></li>
 
 					<c:choose>
 						<c:when test="${user == null }">
 							<li id="charge" class="active"><a href="#">
-									<i class="menu-icon fas fa-coins"></i>충전하기
+									<i class="menu-icon fa fa-usd fa-lg"></i>충전하기
 							</a></li>
 							<script>
                      
@@ -117,7 +118,7 @@
 						<c:otherwise>
 							<li id="charge" class="active"><a
 								href="page?url=WEB-INF/pay.jsp"> <i
-									class="menu-icon fas fa-coins"></i>충전하기
+									class="menu-icon fa fa-usd fa-lg"></i>충전하기
 							</a></li>
 						</c:otherwise>
 					</c:choose>
