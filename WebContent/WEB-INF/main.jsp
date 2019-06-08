@@ -142,10 +142,10 @@
 	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
-		<header id="header" class="header pt-2">
+		<header id="header" class="header">
 			<div class="top-left">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="./"><img src="images/logo.png"
+					<a class="navbar-brand p-0" href="page?url=WEB-INF/main.jsp"><img  src="images/logo5.png"
 						alt="Logo"></a> <a class="navbar-brand hidden"
 						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
 						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
@@ -156,19 +156,7 @@
 				<c:when test="${user != null }">
 					<div class="top-right">
 						<div class="header-menu ">
-						<!-- 	<div class="header-left"> -->
-						<!-- 	<!-- 	<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button> -->
-							<!-- 	<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>  -->
+					
 								
 								<h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
 									 <span id="point" ></span>
@@ -199,7 +187,7 @@
 								<a href="#" class="active" data-toggle="modal"
 									aria-haspopup="true" aria-expanded="false"
 									data-target="#exampleModal1"> <img
-									class="user-avatar rounded-circle " src="images/admin.jpg"
+									class="user-avatar rounded-circle " src="images/profile.jpg"
 									alt="profile"></a>
 							</div>
 						</div>
@@ -522,7 +510,7 @@
 			
 			
 			
-		</div>
+	
 		<!--                여기부터 진향이가 만든 로그인폼 -->
 
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -722,7 +710,8 @@
 			</div>
 		</div>
 	</footer>
-	</div>
+		</div>
+
 	<div class="clearfix"></div>
 	<!-- Footer -->
 	<script

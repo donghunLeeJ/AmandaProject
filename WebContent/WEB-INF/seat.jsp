@@ -142,51 +142,67 @@
       <header id="header" class="header">
          <div class="top-left">
             <div class="navbar-header">
-               <a class="navbar-brand" href="./"><img src="images/logo.png"
+               
+               <c:choose>
+					<c:when test="${user.id != 'admin' }">
+					  <a class="navbar-brand" href="page?url=WEB-INF/main.jsp"><img src="images/logo5.png"
                   alt="Logo"></a> <a class="navbar-brand hidden"
                   href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
                   alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
                   class="fa fa-bars"></i></a>
+					</c:when>
+					<c:when test="${user.id == 'admin' }">
+					<a class="navbar-brand" href="page?url=WEB-INF/adminmain.jsp"><img src="images/logo5.png"
+                  alt="Logo"></a> <a class="navbar-brand hidden"
+                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+                  class="fa fa-bars"></i></a>
+					</c:when>
+				</c:choose>
             </div>
          </div>
          <c:choose>
-            <c:when test="${user != null }">
+            <c:when test="${user != null && user.id != 'admin' }"> 
+<!--             회원일때 -->
                <div class="top-right">
                   <div class="header-menu">
-                     <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
-
-						<c:choose>
-                        <c:when test="${user.id ne 'admin'}">
-								<button type="button" class="btn btn-primary" id="msg">msg</button>
-								</c:when>
-							 <c:otherwise>
-									<button type="button" class="btn btn-secondary" id="allmsg">전체msg</button>
-								</c:otherwise>
-						</c:choose>		
-								
-                     </div>
+                     <h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
+									 <span id="point" ></span>
+									</h5>
+									<h5><img src="https://img.icons8.com/color/30/000000/alarm-clock.png">
+									
+										 <span id="timeout" ></span> 
+									</h5>
+ 									<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+ 									<div class="user-area  float-right">
+                        				<a href="#" class="active" data-toggle="modal"
+                           				aria-haspopup="true" aria-expanded="false"
+                           				data-target="#exampleModal1"> <img
+                          				 class="user-avatar rounded-circle" src="images/profile.jpg"
+                          				 alt="profile"></a>
+                     				</div>
+						
+                     	</div>
                      <!--  mypage 사람 사진-->
-                     <div class="user-area  float-right">
-                        <a href="#" class="active" data-toggle="modal"
-                           aria-haspopup="true" aria-expanded="false"
-                           data-target="#exampleModal1"> <img
-                           class="user-avatar rounded-circle" src="images/admin.jpg"
-                           alt="profile"></a>
-                     </div>
+                    
                   </div>
-               </div>
+             
+            </c:when>
+            <c:when test="${user != null && user.id == 'admin' }"> 
+             <div class="top-right">
+                  <div class="header-menu">
+            
+            	<button type="button" class="btn btn-secondary" id="allmsg">전체msg</button>
+            	<div class="user-area  float-right">
+                        				<a href="#" class="active" data-toggle="modal"
+                           				aria-haspopup="true" aria-expanded="false"
+                           				data-target="#exampleModal1"> <img
+                          				 class="user-avatar rounded-circle" src="images/profile.jpg"
+                          				 alt="profile"></a>
+                     				</div>
+                     				</div>
+                     				</div>
+                     				
             </c:when>
             <c:otherwise>
                <div class="top-right">
@@ -780,44 +796,61 @@
 
 
  <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
-  <c:choose> 
-    <c:when test="${(user != null) && (user.id != 'admin')}">
-      
-       <script>
+ 
+	<c:choose>
+		<c:when test="${user != null }">
+			<script>
 	
-			function msg_time(){  
- 		   
- 		   $.ajax({  
- 		    	 
- 		         url: 'usertime.com',
- 		         type: 'POST'
- 		          
- 		 }).done(function(point){
- 			 		       	   	 			 	
- 		      if (point == 300){      
- 		    	  
- 		         alert("선불시간이 5분 남았습니다.");
- 		         
- 		      }else if(point == 0){
- 		    	  
- 		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
- 		    	  location.href = "logoutProc.member";
- 		    	  clearInterval(tid); 	
- 		    	  
- 		      }else if(point == -1){
- 		    	  
- 		    	 clearInterval(tid); 		
- 		    	     	  
- 		      }   
- 		      		      
- 		 });	   	     
- 	   }	   			
- 	 
- 	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
- 	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
- 	   TimerStart();   </script>    
-  </c:when>  
-</c:choose> 
+     function msg_time(){  
+		   
+    	  $.ajax({  	    	 
+    		         url: 'usertime.com', //ComController에 있는 usertime으로 이동함
+    		         type: 'POST'
+    		          
+    		 }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
+    		         		
+    			 $("#point").html(point);
+    		       	   
+    		      m = (Math.floor(point/60)) + "분 "; 
+    		      var msg = "<font color='red'>" + m +"</font>";
+    		      
+    		     $("#timeout").html(msg);
+    		                       
+    		      if (point == 300){    
+    		    	  
+    		         alert("선불시간이 5분 남았습니다.");  
+    		         
+    		      }else if(point == 0){
+    		    	  
+    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+    		    	  location.href = "logoutProc.member";
+    		    	  clearInterval(tid);   
+    		    	  
+    		      }else if(point == -1){
+    		    	     		    	 
+    		    	  $("#point").html(${user.point}); 		    	  
+    		    	  $("#timeout").html( "<font color='red'>" + (Math.floor(${user.point}/60))+ "분 " +"</font>");      		    	  		    	 	  
+    		    	  clearInterval(tid);     
+    		    	  
+    		      }   	     	                   		      		      
+    		 });   	     
+    	   }
+    	   		
+    	  								
+    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
+    	   
+    	   function TimerStart(){tid=setInterval('msg_time()',1000) };
+    	   TimerStart();                          
+    	  
+    	   var webSocket = new WebSocket('ws://192.168.60.20/websocketendpoint');
+      		webSocket.onopen = function(){
+      			webSocket.send("hi"); 
+      		} ;
+   		
+   </script>
+		</c:when>
+	</c:choose>
+
 
 
  <!-- 메시지  -->  

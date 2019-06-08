@@ -120,7 +120,7 @@
 		 <header id="header" class="header">
          <div class="top-left">
             <div class="navbar-header">
-               <a class="navbar-brand" href="./"><img src="images/logo.png"
+               <a class="navbar-brand p-0" href="page?url=WEB-INF/adminmain.jsp"><img src="images/logo5.png"
                   alt="Logo"></a> <a class="navbar-brand hidden"
                   href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
                   alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
@@ -130,33 +130,16 @@
          <c:choose>
             <c:when test="${user != null }">
                <div class="top-right">
-                  <div class="header-menu">
-                     <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
-
-								
-                     </div>
-                     <!--  mypage 사람 사진-->
+                   <!--  mypage 사람 사진-->
                      <div class="user-area  float-right">
                         <a href="#" class="active" data-toggle="modal"
                            aria-haspopup="true" aria-expanded="false"
                            data-target="#exampleModal1"> <img
-                           class="user-avatar rounded-circle" src="images/admin.jpg"
+                           class="user-avatar rounded-circle" src="images/profile.jpg"
                            alt="profile"></a>
                      </div>
                   </div>
-               </div>
+               
             </c:when>
             <c:otherwise>
                <div class="top-right">
@@ -540,7 +523,7 @@
 				</div>
 			</div>
 		</footer>
-
+		</div>
 		<script>
 							
 

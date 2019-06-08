@@ -97,11 +97,13 @@ table td, table th {
 <body>
 
    <!-- 왼쪽 네비 시작 -->
-   <aside id="left-panel" class="left-panel">
-      <nav class="navbar navbar-expand-sm navbar-default">
-         <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <c:choose>
+  <div id="right-panel" class="right-panel">
+		<!-- Header-->
+		<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fas fa-home"></i>Home </a></li>
@@ -112,12 +114,10 @@ table td, table th {
 					</c:when>
 					</c:choose>
 					
-
 					<li class="menu-item-has-children dropdown"><a
 						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
 							class="menu-icon fas fa-desktop"></i>잔여좌석
 					</a></li>
-
 					
 					<c:choose>
               		<c:when test="${user.id == 'admin' }">
@@ -128,7 +128,6 @@ table td, table th {
               		 </c:when>
         
                		</c:choose>
-
 					<li class="menu-item-has-children dropdown"><a
 						href="Board.board?currentPage=1"> <i
 							class="menu-icon fas fa-headset"></i>고객의소리
@@ -138,18 +137,19 @@ table td, table th {
 						href="member.manage"> <i
 							class="menu-icon fa fa-th"></i>고객관리
 					</a></li>
-            </ul>
-         </div>
-      </nav>
-   </aside>
-   <!-- 왼쪽 네비 끝 -->
-   <!-- 상단 검색바 마이페이지 등등 시작 -->
-   <div id="right-panel" class="right-panel">
-      <!-- Header-->
-     <header id="header" class="header">
+					
+				</ul>
+			</div>
+		</nav>
+	</aside>
+	<!-- 왼쪽 네비 끝 -->
+	<!-- 상단 검색바 마이페이지 등등 시작 -->
+	
+		<!-- Header-->
+		 <header id="header" class="header">
          <div class="top-left">
             <div class="navbar-header">
-               <a class="navbar-brand" href="./"><img src="images/logo.png"
+               <a class="navbar-brand p-0" href="page?url=WEB-INF/adminmain.jsp"><img src="images/logo5.png"
                   alt="Logo"></a> <a class="navbar-brand hidden"
                   href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
                   alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
@@ -161,27 +161,14 @@ table td, table th {
                <div class="top-right">
                   <div class="header-menu">
                      <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
-
-								
+                       								
                      </div>
                      <!--  mypage 사람 사진-->
                      <div class="user-area  float-right">
                         <a href="#" class="active" data-toggle="modal"
                            aria-haspopup="true" aria-expanded="false"
                            data-target="#exampleModal1"> <img
-                           class="user-avatar rounded-circle" src="images/admin.jpg"
+                           class="user-avatar rounded-circle" src="images/profile.jpg"
                            alt="profile"></a>
                      </div>
                   </div>

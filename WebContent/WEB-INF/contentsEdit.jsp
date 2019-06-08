@@ -179,10 +179,10 @@ header {
 <body>
 	<!-- 왼쪽 네비 시작 -->
   	<aside id="left-panel" class="left-panel">
-		<nav class="navbar navbar-expand-sm navbar-default">
-			<div id="main-menu" class="main-menu collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-		     	<c:choose>
+      <nav class="navbar navbar-expand-sm navbar-default">
+         <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+               	<c:choose>
 					<c:when test="${user.id != 'admin' }">
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/main.jsp"><i
 							class="menu-icon fas fa-home"></i>Home </a></li>
@@ -191,46 +191,48 @@ header {
 					<li class="menu-item-has-children dropdown"><a href="page?url=WEB-INF/adminmain.jsp"><i
 							class="menu-icon fas fa-home"></i>Home </a></li>
 					</c:when>
-					</c:choose>
+				</c:choose>
                <li class="menu-item-has-children dropdown"><a
                   href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
                      class="menu-icon fas fa-desktop"></i>잔여좌석
                </a></li>
-               <c:choose>
-              		<c:when test="${user.id == 'admin' }">
-               		<li class="menu-item-has-children dropdown"><a
-               	    href="select.admin"> <i
-                     class="menu-icon fas fa-concierge-bell"></i>메뉴
-              		 </a></li>
-              		 </c:when>
-              		 <c:when test="${user.id != 'admin' }">
-               		<li class="menu-item-has-children dropdown"><a
-               	    href="ClientSelect.admin"> <i
-                     class="menu-icon fas fa-concierge-bell"></i>메뉴
-              		 </a></li>
-              		 </c:when>
-           		</c:choose>
-               <li class="active"><a
+               	<c:choose>
+					<c:when test="${user.id != 'admin' }">
+					<li class="menu-item-has-children dropdown"><a
+              	         href="ClientSelect.admin"> <i
+                         class="menu-icon fas fa-concierge-bell"></i>메뉴
+            	    </a></li>
+					</c:when>
+					<c:when test="${user.id == 'admin' }">
+					<li class="menu-item-has-children dropdown"><a
+              	         href="select.admin"> <i
+                         class="menu-icon fas fa-concierge-bell"></i>메뉴
+					</a></li>
+					</c:when>
+					</c:choose>
+              <li class="active"><a
                   href="Board.board?currentPage=1"> <i
                      class="menu-icon fas fa-headset"></i>고객의소리
                </a></li>
                <c:choose>
+                   <c:when test="${user.id == 'admin' }">
+                     <li id="charge" class="menu-item-has-children dropdown"><a
+                        href="member.manage"> <i class="menu-icon fa fa-tasks"></i>고객관리
+                     </a></li>
+                   
+                  </c:when>
                   <c:when test="${user == null }">
                      <li id="charge" class="menu-item-has-children dropdown"><a
                         href="#"> <i class="menu-icon fas fa-coins"></i>충전하기
                      </a></li>
                      <script>
-                        $("#charge").on("click", function() {
-                           alert("로그인 후 이용가능합니다.");
-                           $("#loginbtn").trigger("click");
-                        })
-                     </script>
-                  </c:when>
-                  <c:when test="${user.id == 'admin' }">
-                     	<li class="menu-item-has-children dropdown"><a
-						href="member.manage"> <i
-							class="menu-icon fa fa-th"></i>고객관리
-					</a></li>
+                     
+                     
+                     $("#charge").on("click",function(){
+                        alert("로그인 후 이용가능합니다.");   
+                        $("#loginbtn").trigger("click");
+                     })
+                  </script>
                   </c:when>
                   <c:otherwise>
                      <li id="charge" class="menu-item-has-children dropdown"><a
@@ -239,88 +241,107 @@ header {
                      </a></li>
                   </c:otherwise>
                </c:choose>
-
-				</ul>
-			</div>
-		</nav>
-	</aside>
-	<!-- 왼쪽 네비 끝 -->
-	<!-- 상단 검색바 마이페이지 등등 시작 -->
-	<div id="right-panel" class="right-panel">
-		<!-- Header-->
-		<header id="header" class="header">
-			<div class="top-left">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="./"><img src="images/logo.png"
-						alt="Logo"></a> <a class="navbar-brand hidden"
-						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
-						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
-						class="fa fa-bars"></i></a>
-				</div>
-			</div>
-			<c:choose>
-				<c:when test="${user != null }">
-					<div class="top-right">
-						<div class="header-menu">
-							<div class="header-left">
-								<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button>
-								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>
-
-								<c:choose>
-                        <c:when test="${user.id ne 'admin'}">
-								<button type="button" class="btn btn-primary" id="msg">msg</button>
-								</c:when>
-							
-						</c:choose>		
-							</div>
-							<!--  mypage 사람 사진-->
-							<div class="user-area  float-right">
-								<a href="#" class="active" data-toggle="modal"
-									aria-haspopup="true" aria-expanded="false"
-									data-target="#exampleModal1"> <img
-									class="user-avatar rounded-circle" src="images/admin.jpg"
-									alt="profile"></a>
-							</div>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="top-right">
-						<div class="header-menu">
-							<div class="header-left">
-								<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button>
-								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>
-								<div class="dropdown for-notification">
-									<button type="button"
-										class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
-										data-target="#exampleModal" id="loginbtn">login</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</header>
+            </ul>
+         </div>
+      </nav>
+   </aside>
+   <!-- 왼쪽 네비 끝 -->
+   <!-- 상단 검색바 마이페이지 등등 시작 -->
+   <div id="right-panel" class="right-panel">
+      <!-- Header-->
+      <header id="header" class="header">
+         <div class="top-left">
+            <div class="navbar-header">
+               
+               <c:choose>
+					<c:when test="${user.id != 'admin' }">
+					  <a class="navbar-brand" href="page?url=WEB-INF/main.jsp"><img src="images/logo5.png"
+                  alt="Logo"></a> <a class="navbar-brand hidden"
+                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+                  class="fa fa-bars"></i></a>
+					</c:when>
+					<c:when test="${user.id == 'admin' }">
+					<a class="navbar-brand" href="page?url=WEB-INF/adminmain.jsp"><img src="images/logo5.png"
+                  alt="Logo"></a> <a class="navbar-brand hidden"
+                  href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
+                  alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
+                  class="fa fa-bars"></i></a>
+					</c:when>
+				</c:choose>
+            </div>
+         </div>
+         <c:choose>
+            <c:when test="${user != null && user.id != 'admin' }"> 
+<!--             회원일때 -->
+               <div class="top-right">
+                  <div class="header-menu">
+                     <h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
+									 <span id="point" ></span>
+									</h5>
+									<h5><img src="https://img.icons8.com/color/30/000000/alarm-clock.png">
+									
+										 <span id="timeout" ></span> 
+									</h5>
+ 									<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+ 									<div class="user-area  float-right">
+                        				<a href="#" class="active" data-toggle="modal"
+                           				aria-haspopup="true" aria-expanded="false"
+                           				data-target="#exampleModal1"> <img
+                          				 class="user-avatar rounded-circle" src="images/profile.jpg"
+                          				 alt="profile"></a>
+                     				</div>
+						
+                     	</div>
+                     <!--  mypage 사람 사진-->
+                    
+                  </div>
+             
+            </c:when>
+            <c:when test="${user != null && user.id == 'admin' }"> 
+             <div class="top-right">
+                  <div class="header-menu">
+            
+            	
+            	<div class="user-area  float-right">
+                        				<a href="#" class="active" data-toggle="modal"
+                           				aria-haspopup="true" aria-expanded="false"
+                           				data-target="#exampleModal1"> <img
+                          				 class="user-avatar rounded-circle" src="images/profile.jpg"
+                          				 alt="profile"></a>
+                     				</div>
+                     				</div>
+                     				</div>
+                     				
+            </c:when>
+            <c:otherwise>
+               <div class="top-right">
+                  <div class="header-menu">
+                     <div class="header-left">
+                        <button class="search-trigger">
+                           <i class="fa fa-search"></i>
+                        </button>
+                        <div class="form-inline">
+                           <form class="search-form">
+                              <input class="form-control mr-sm-2" type="text"
+                                 placeholder="Search ..." aria-label="Search">
+                              <button class="search-close" type="submit">
+                                 <i class="fa fa-close"></i>
+                              </button>
+                           </form>
+                        </div>
+                        <div class="dropdown for-notification">
+                           <button type="button"
+                              class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
+                              data-target="#exampleModal" id="loginbtn">login</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </c:otherwise>
+         </c:choose>
+      </header>
+		<!-- /header -->
 		<!-- /header -->
 
 		<div class="content">
