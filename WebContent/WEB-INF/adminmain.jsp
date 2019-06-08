@@ -566,6 +566,11 @@
 		<!-- 진향이 마이페이지 폼끝 -->
 <!--메시지  -->
 <script>
+history.pushState(null, null, "#noback");
+$(window).bind("hashchange", function(){
+  history.pushState(null, null, "#noback");
+});
+
  var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
 									    webSocket.onerror = function(event) {
      									// onError(event)
