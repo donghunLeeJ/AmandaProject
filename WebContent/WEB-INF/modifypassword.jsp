@@ -257,7 +257,7 @@
 															<div class="card-body">
 																<div class="mx-auto d-block">
 																	<img class="rounded-circle mx-auto d-block"
-																		src="images/admin.jpg" alt="profile image"
+																		src="images/profile.jpg" alt="profile image"
 																		width="80px">
 																	<h5 class="text-center mt-2 mb-1">Steven Lee</h5>
 																	<div class="location text-center">Lv. 일반회원</div>

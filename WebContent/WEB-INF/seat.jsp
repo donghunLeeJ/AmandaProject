@@ -559,7 +559,7 @@
                               <div class="card-body">
                                  <div class="mx-auto d-block">
                                     <img class="rounded-circle mx-auto d-block"
-                                       src="images/admin.jpg" alt="profile image" width="130px">
+                                       src="images/profile.jpg" alt="profile image" width="130px">
                                     <h5 class="text-center mt-2 mb-1">
                                        <b>${user.id} 님</b>
                                     </h5>
