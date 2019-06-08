@@ -156,7 +156,7 @@ header {
                <c:choose>
                    <c:when test="${user.id == 'admin' }">
                      <li id="charge" class="menu-item-has-children dropdown"><a
-                        href="member.manage"> <i class="menu-icon fa fa-tasks"></i>고객관리
+                        href="member.manage"> <i class="menu-icon fa fa-address-book-o fa-lg"></i>고객관리
                      </a></li>
                    
                   </c:when>

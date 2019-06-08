@@ -136,7 +136,7 @@ table td, table th {
 					
 					<li class="active"><a
 						href="member.manage"> <i
-							class="menu-icon fa fa-th"></i>고객관리
+							class="menu-icon fa fa-address-book-o fa-lg"></i>고객관리
 					</a></li>
 					
 				</ul>
