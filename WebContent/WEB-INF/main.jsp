@@ -71,8 +71,7 @@
 }
 #seat{
  background-image:url(images/mainseat.jpg); 
- background-size: 100% ;
-
+ background-size: 98% ;
 }
 
 
@@ -346,26 +345,72 @@
 				
 				<!--              ----------------------------------- 잔여좌석 -->
 
-				<div class="row mb-2">
-					<div class=" col-xl-12 ">
-						<h4><b>| 잔여 좌석</b></h4>
-					</div>
-				</div>
+				
 				<div class="row mb-4">
+				
 
-					<div class="col-lg-12 area " id="seat">
-						<div class="row mb-4">
-
-							<div class="col-lg-12 area ">
+					<div class="col-xl-6 col-lg-12 area p-xl-0 pr-xl-2" >
+					
+<h4><b>| 잔여 좌석</b></h4><br>
+							<div class="col-lg-12 area pr-xl-0pr-xl-2 "id="seat">
 
 								<canvas id="doughutChart" height="100%"></canvas>
 
 							</div>
 						</div>
-					</div>
+				
+					<!-- pc방 내부 인테리어 -->
+					
+					<div class="col-xl-6  col-lg-12 area p-xl-0 "  >
+						<h4><b>| Amada <font color='orange'> PC</font>  </b></h4><br>
+						
+							<div class="col-lg-12 area pr-xl-0pr-xl-2 " >
+						<div id="carouselExampleIndicators_interior" class="carousel slide" data-ride="carousel" data-interval="false">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators_interior" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators_interior" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators_interior" data-slide-to="2"></li>
+       <li data-target="#carouselExampleIndicators_interior" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators_interior" data-slide-to="4"></li>
+             <li data-target="#carouselExampleIndicators_interior" data-slide-to="5"></li>
+             
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/interior1.png" class="d-block w-100" alt="해당이미지가 없습니다">
+      
+    </div>
+    <div class="carousel-item">
+      <img src="images/interior2.png" class="d-block w-100" alt="해당이미지가 없습니다">
+    </div>
+    <div class="carousel-item">
+      <img src="images/interior3.png" class="d-block w-100" alt="해당이미지가 없습니다">
+    </div>
+    <div class="carousel-item">
+      <img src="images/interior4.png" class="d-block w-100" alt="해당이미지가 없습니다">
+    </div>
+    <div class="carousel-item">
+      <img src="images/interior5.png" class="d-block w-100" alt="해당이미지가 없습니다">
+    </div>
+     <div class="carousel-item">
+      <img src="images/interior6.png" class="d-block w-100" alt="해당이미지가 없습니다">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators_interior" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators_interior" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+	</div>					
+						
+					
 				</div>
 
-
+</div>
 
 				<script>
                
@@ -409,7 +454,7 @@
 				<div class="row mb-4" >
                <div class=" col-xl-6 col-lg-12 p-0 area pr-xl-2 pb-sm-4 pb-4">
                 <h4><b>| 오늘의 <font color='red'>추천</font> 메뉴</b></h4> <br>
-  			 <div id="carouselExampleControls" class="carousel slide  " data-ride="carousel">
+  			 <div id="carouselExampleControls" class="carousel slide  " data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="images/beef.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
