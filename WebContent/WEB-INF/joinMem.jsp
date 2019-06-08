@@ -226,7 +226,7 @@
             </div>
        
             <hr/>
-               <form class="form-horizontal" role="form" method="post" action="joinProc.member">
+               <form class="form-horizontal" id="form" method="post" action="joinProc.member">
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
@@ -236,13 +236,13 @@
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{8,}" required>
+                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{8,}" >
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="passwordCheck" name="joinmemberpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                        <input type="password" class="form-control" id="passwordCheck" name="joinmemberpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" >
                     </div>
                 </div>
                 <div class="form-group" id="divName">
@@ -274,9 +274,9 @@
                 
                  <label for="inputPhoneNumber" class="col-lg-2 control-label" >주소 입력 </label> <input type="button" class="mb-4" value="우편번호 찾기" id="search">
                     <div class="col-lg-10">
-                        <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
-                        <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
-                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        <input type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
+                        <input type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
+                        <input type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
                         
                     </div>
                     
@@ -291,7 +291,7 @@
     $(".readonly").on('keydown paste', function(e){
         e.preventDefault();
     });
-</script>
+	</script>
         
         <!-- 						진향이 로그인폼끝 -->
         <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -378,7 +378,7 @@
 								<div class="card-body">
 									<div class="mx-auto d-block">
 										<img class="rounded-circle mx-auto d-block"
-											src="images/admin.jpg" alt="profile image" width="130px">
+											src="images/profile.jpg" alt="profile image" width="130px">
 										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
 										<!-- <div class="location text-center">Lv. 일반회원</div> -->
 									</div>
@@ -643,7 +643,7 @@
 
 
                     //------- validation 검사
-                    $( "form" ).submit(function( event ) {
+                    $("#form").submit(function( event ) {
 
                         var provision = $('#provision');
                         var memberInfo = $('#memberInfo');
@@ -698,6 +698,7 @@
                         }
 
                         //패스워드 비교
+                       
                         if($('#password').val()!=$('#passwordCheck').val() || $('#passwordCheck').val()==""){
                             modalContents.text("패스워드가 일치하지 않습니다.");
                             modal.modal('show');

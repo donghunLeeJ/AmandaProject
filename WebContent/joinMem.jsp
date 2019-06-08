@@ -26,6 +26,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         
+        <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
         
 <!-- -------------------------------------------------------- -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
@@ -35,47 +36,88 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <!-- ------------------------------- -->
 
+<style>
+
+#search{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:20px;
+  font-size:0.8em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#search:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+
+
+
+</style>
+
+
+
+
 
 </head>
 <body>
     <!-- 왼쪽 네비 시작 -->
+	<!-- 왼쪽 네비 시작 -->
 	<aside id="left-panel" class="left-panel">
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fa fa-laptop"></i>Home </a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/seat.jsp"> <i
-							class="menu-icon fa fa-cogs"></i>잔여좌석
-					</a></li>
-					<li class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/manu.jsp"> <i
-							class="menu-icon fa fa-table"></i>메뉴
+							class="menu-icon fas fa-home"></i>Home </a></li>
+					<li class="menu-item-has-children "><a
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fas fa-desktop"></i>잔여좌석
 					</a></li>
 
-					<li class="menu-item-has-children dropdown"><a href="Board.board?currentPage=1"> 
-					<i class="menu-icon fa fa-th"></i>고객의소리
-
+					<li class="menu-item-has-children"><a
+						href="ClientSelect.admin"> <i
+							class="menu-icon fas fa-concierge-bell"></i>메뉴
 					</a></li>
+
+					<li class="menu-item-has-children"><a
+						href="Board.board?currentPage=1"> <i
+							class="menu-icon fas fa-headset"></i>고객의소리
+					</a></li>
+
 					<c:choose>
-					<c:when test="${user == null }">
-						<li id="charge" class="menu-item-has-children dropdown"><a
-						href="#"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
-						<script>
-							$("#charge").on("click",function(){
-								alert("로그인 후 이용가능합니다.");	
-							})
-						</script>
-					</c:when>
-					<c:otherwise>
-					<li id="charge" class="menu-item-has-children dropdown"><a
-						href="page?url=WEB-INF/pay.jsp"> <i
-							class="menu-icon fa fa-tasks"></i>충전하기
-					</a></li>
-					</c:otherwise>
+						<c:when test="${user == null }">
+							<li id="charge" class="menu-item-has-children"><a href="#">
+									<i class="menu-icon fas fa-coins"></i>충전하기
+							</a></li>
+							<script>
+                     
+                     
+                     $(window).on("resize",function(){
+            				if($(window).width() >= 752){
+            					$("#left-panel").css("display","block");
+            				}				
+            			})
+
+                     $("#charge").on("click",function(){
+                         alert("로그인 후 이용가능합니다.");
+                         $("#loginbtn").trigger("click");
+
+                         
+                        
+                     })
+                  </script>
+
+						</c:when>
+						<c:otherwise>
+							<li id="charge" class="menu-item-has-children"><a
+								href="page?url=WEB-INF/pay.jsp"> <i
+									class="menu-icon fas fa-coins"></i>충전하기
+							</a></li>
+						</c:otherwise>
 					</c:choose>
 				</ul>
 			</div>
@@ -85,10 +127,10 @@
 	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
-		<header id="header" class="header">
+		<header id="header" class="header pt-1">
 			<div class="top-left">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="./"><img src="images/logo.png"
+					<a class="navbar-brand p-0" href="page?url=WEB-INF/main.jsp"><img  src="images/logo5.png"
 						alt="Logo"></a> <a class="navbar-brand hidden"
 						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
 						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
@@ -98,92 +140,39 @@
 			<c:choose>
 				<c:when test="${user != null }">
 					<div class="top-right">
-						<div class="header-menu">
-							<div class="header-left">
-								<button class="search-trigger">
-									<i class="fa fa-search"></i>
-								</button>
-								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
-								</div>
+						<div class="header-menu ">
+					
+								
+								<h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
+									 <span id="point" ></span>
+									</h5>
+									<h5><img src="https://img.icons8.com/color/30/000000/alarm-clock.png">
+									
+										 <span id="timeout" ></span> 
+									</h5>
+									<c:choose>
+									<c:when test="${user.id ne 'admin'}">
+										<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="btn btn-secondary " id="allmsg">전체msg</button>
+									</c:otherwise>
+								</c:choose>
+								<!-- 	<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
+							 -->
+								
 
-								<div class="dropdown for-notification">
-									<button class="btn btn-secondary dropdown-toggle" type="button"
-										id="notification" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-bell"></i> <span class="count bg-danger">3</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="notification">
-										<p class="red">You have 3 Notification</p>
-										<a class="dropdown-item media" href="#"> <i
-											class="fa fa-check"></i>
-											<p>Server #1 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-info"></i>
-											<p>Server #2 overloaded.</p>
-										</a> <a class="dropdown-item media" href="#"> <i
-											class="fa fa-warning"></i>
-											<p>Server #3 overloaded.</p>
-										</a>
-									</div>
-								</div>
 
-								<div class="dropdown for-message">
-									<button class="btn btn-secondary dropdown-toggle" type="button"
-										id="message" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-envelope"></i> <span class="count bg-primary">4</span>
-									</button>
-									<div class="dropdown-menu" aria-labelledby="message">
-										<p class="red">You have 4 Mails</p>
-										<a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/1.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jonathan Smith</span> <span
-													class="time float-right">Just now</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/2.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Jack Sanders</span> <span
-													class="time float-right">5 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/3.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Cheryl Wheeler</span> <span
-													class="time float-right">10 minutes ago</span>
-												<p>Hello, this is an example msg</p>
-											</div>
-										</a> <a class="dropdown-item media" href="#"> <span
-											class="photo media-left"><img alt="avatar"
-												src="images/avatar/4.jpg"></span>
-											<div class="message media-body">
-												<span class="name float-left">Rachel Santos</span> <span
-													class="time float-right">15 minutes ago</span>
-												<p>Lorem ipsum dolor sit amet, consectetur</p>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
+
+
+
+							<!-- </div> -->
 							<!--  mypage 사람 사진-->
-							<div class="user-area  float-right">
+							<div class="user-area  float-right pr-1" >
 								<a href="#" class="active" data-toggle="modal"
 									aria-haspopup="true" aria-expanded="false"
 									data-target="#exampleModal1"> <img
-									class="user-avatar rounded-circle" src="images/admin.jpg"
+									class="user-avatar rounded-circle " src="images/profile.jpg"
 									alt="profile"></a>
 							</div>
 						</div>
@@ -193,9 +182,9 @@
 					<div class="top-right">
 						<div class="header-menu">
 							<div class="header-left">
-								<button class="search-trigger">
+								<!-- <button class="search-trigger">
 									<i class="fa fa-search"></i>
-								</button>
+								</button> -->
 								<div class="form-inline">
 									<form class="search-form">
 										<input class="form-control mr-sm-2" type="text"
@@ -216,7 +205,6 @@
 				</c:otherwise>
 			</c:choose>
 		</header>
-
         <div class="content">
             <h1 align="center">회원가입</h1>
         <div class="container">
@@ -267,7 +255,7 @@
                 <div class="form-group" id="divBirth">
                     <label for="inputBirth" class="col-lg-2 control-label">생년월일</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="birth" name="joinmemberbirth" data-rule-required="true"  placeholder="ex)19000101" maxlength="15" readonly>
+                        <input type="text" class="form-control readonly" id="birth" name="joinmemberbirth" data-rule-required="true"  placeholder="ex)19000101" maxlength="15" >
                     </div>
                 </div>
 
@@ -284,21 +272,27 @@
                     </div>
                 </div>
                 
-                 <label for="inputPhoneNumber" class="col-lg-2 control-label">주소 입력</label>
+                 <label for="inputPhoneNumber" class="col-lg-2 control-label" >주소 입력 </label> <input type="button" class="mb-4" value="우편번호 찾기" id="search">
                     <div class="col-lg-10">
-                        <input required type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호" readonly >
-                        <input required type="text" class="form-control" id="Address1" name="address1" placeholder="주소" readonly>
-                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소"><br>
-                        <input type="button" value="우편번호 찾기" id="search">
+                        <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
+                        <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
+                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        
                     </div>
                     
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-outline-success signbt mb-2" id="joinmemberbtn">회원가입</button>
+                        <button type="submit" class="btn btn-outline-info signbt mb-2" id="joinmemberbtn">회원가입</button>
                     </div>
                 </div>
             </form>
         </div>
+     <script>
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
+    });
+</script>
+        
         <!-- 						진향이 로그인폼끝 -->
         <div class="modal fade" id="exampleModal" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLabel"
@@ -314,34 +308,48 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form" method="post">
-													<div class="form-group">
-														<label for="exampleFormControlInput1">ID</label> <input
-															type="text" class="form-control" id="joinemail"
-															placeholder="ID를 입력하시오" required name="loginid">
-													</div>
-													<div class="form-group">
-														<label for="exampleFormControlInput1">Password</label> <input
-															type="password" class="form-control" id="joinpassword"
-															placeholder="비밀번호 입력하시오" required name="loginpw">
-													</div>
-													<div class="modal-footer">
-														<div id="remember">
-															<input type="checkbox">자동로그인
-														</div>
-														<button type="button" class="btn btn-primary"
-															type="button" id="joinMem">회원가입</button>
-														<button type="button" class="btn btn-primary" id="login">login</button>
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Close</button>
-													</div>
-												</form>
+												<form action="loginProc.member" id="form" name="formname" method="post">
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">ID</label> <input
+                              type="text" class="form-control" id="joinemail"
+                              placeholder="ID를 입력하시오" required name="loginid" onkeypress="press(this.form)">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleFormControlInput1">Password</label> <input
+                              type="password" class="form-control" id="joinpassword"
+                              placeholder="비밀번호 입력하시오" required name="loginpw" onkeypress="press(this.form)">
+                        </div>
+                        <div class=row><button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5" type="button"
+										id="findId">ID 찾기</button>
+                           <button type="button" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 " type="button"
+                              id="reinputpw">PW 찾기</button>
+                           <button type="button" class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" type="button"
+                              id="joinMem">회원 가입</button>
+                           <button type="submit" class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button></div>
+                        <div class="modal-footer">
+                        
+                          
+                        </div>
+                     </form>
 											</div>
 										</div>
 									</div>
 								</div>
 
 								<script>
+								
+								$(window).on("resize",function(){
+									if($(window).width() >= 752){
+										$("#left-panel").css("display","block");
+									}				
+								})
+								
+								
+								//엔터 입력시 로그인
+						         function press(f){ if(f.keyCode == 13){  
+						        	 formname.submit();  
+						        	 } }
+								
 									$("#joinMem").on("click",function() {
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
@@ -401,13 +409,16 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button id="deleteMembtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
-							<button id="pointPagebtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">포인트
-								충전</button>
-							<button id="updatememberbtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+							   <c:if test="${user.id != 'admin' }">
+                           <button id="deleteMembtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">회원
+                           		  탈퇴</button>
+                           <button id="pointPagebtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">포인트
+                            	 충전</button>
+                           <button id="updatememberbtn" type="button"
+                              class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+                              </c:if>
 							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
 									
 						</div>
@@ -455,8 +466,13 @@
 	.on(
 			"click",
 			function() {
-				location.href = "logoutProc.member";
-			})
+	            if(${user.id == 'admin' }){
+	            	location.href = "adminlogoutProc.member";	
+	            }else{
+	            	location.href = "logoutProc.member";	
+	            }
+	        	 
+	         })
 
 	
 							$("#updatememberbtn")
@@ -627,8 +643,8 @@
 
 
                     //------- validation 검사
-                    $( "form" ).submit(function( event ) {
-
+                    $("#form").submit(function( event ) {
+                    	
                         var provision = $('#provision');
                         var memberInfo = $('#memberInfo');
                         var divId = $('#divId');
@@ -682,7 +698,8 @@
                         }
 
                         //패스워드 비교
-                        if($('#password').val()!=$('#passwordCheck').val() || $('#passwordCheck').val()==""){
+                       
+                        if($('#password').val() != $('#passwordCheck').val() || $('#passwordCheck').val()==""){
                             modalContents.text("패스워드가 일치하지 않습니다.");
                             modal.modal('show');
 

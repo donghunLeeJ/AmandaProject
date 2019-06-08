@@ -65,18 +65,16 @@ public class MemberController extends HttpServlet {
 						request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
 						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/adminmain.jsp");
 						rd.forward(request, response);					
-					}else {
-
+					}else if(dao.checkBlack(loginid).equals("y")){
+						request.setAttribute("login", 4);	
+						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+						rd.forward(request, response);	
+					}else{
 						MemberDTO user = dao.select_user(loginid);			
 						request.setAttribute("login", 1);													
 						request.getSession().setAttribute("user", dao.select_user(loginid));
-
-
-						String ip = "192.168.60.27";
-						//String ip = request.getRemoteAddr();			
-						System.out.println(ip);
-						System.out.println(ip);
-
+						String ip = request.getRemoteAddr();			
+					
 						if(cDao.UserSeatIpCheck(ip) == 0){	
 
 							//pointmap�뿉 濡쒓렇�씤�븳 id�� �빐�떦 �쑀��媛� 媛�吏� �룷�씤�듃瑜� �떞�뒗�떎.
@@ -126,7 +124,7 @@ public class MemberController extends HttpServlet {
 						rd.forward(request, response);							
 					}
 
-				}else if(checkPw.equals("�븘�씠�뵒 �뾾�쓬")){
+				}else if(checkPw.equals("아이디 없음")){
 					request.setAttribute("login", 0);
 					RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 					rd.forward(request, response);

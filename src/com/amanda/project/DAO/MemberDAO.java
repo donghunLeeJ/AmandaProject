@@ -393,6 +393,22 @@ public class MemberDAO {
 	         return -1;
 	      }
 	   }
+	public String checkBlack(String id) {
+	      String sql = "select blackcheck from member where id = ? ";
+	      try(
+	            Connection con = ds.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ){
+	          pstat.setString(1, id); 
+	    	  ResultSet rs = pstat.executeQuery();
+	           rs.next();
+	           return rs.getString(1);
+	          
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         return null;
+	      }
+	   }
 }
 
 

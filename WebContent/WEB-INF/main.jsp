@@ -252,6 +252,8 @@
                             	  loaction.href=    "page?url=WEB-INF/main.jsp";
                               }else if(${login== -1}){
                             	  alert("비밀번호가 일치하지 않습니다.")
+                              }else if(${login== 4}){
+                            	  alert("로그인이 불가능한 상태입니다 관리자에게 문의해주세요.")
                               }
                        		 </script>
 									<!-- <h3 class="card-title">충전/로그인/개인정보</h3>
@@ -262,7 +264,7 @@
 								</c:when>
 								<c:otherwise>
 						<script>		
-					window.open("Hello.member","",
+					window.open("page?url=WEB-INF/Hello.jsp","",
 									"location=no, directories=no,width=400px,height=250px");
 				
 </script>
@@ -609,7 +611,7 @@
 									<div class="card-body">
 										<div class="mx-auto d-block">
 											<img class="rounded-circle mx-auto d-block"
-												src="images/admin.jpg" alt="profile image" width="130px">
+												src="images/profile.jpg" alt="profile image" width="130px">
 											<h5 class="text-center mt-2 mb-1">
 												<b>${user.id} 님</b>
 											</h5>
