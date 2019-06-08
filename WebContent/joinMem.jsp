@@ -26,15 +26,46 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         
-        <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-        
-<!-- -------------------------------------------------------- -->
+
+!-- -------------------------------------------------------- -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <!-- ------------------------------- -->
+
+<style>
+
+#search{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:20px;
+  font-size:0.8em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#search:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+
+
+
+</style>
+
+
+
+
+
+
+<!-- 아이콘 link -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
 
 <style>
 
@@ -72,27 +103,7 @@
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
-							class="menu-icon fas fa-home"></i>Home </a></li>
-					<li class="menu-item-has-children "><a
-						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
-							class="menu-icon fas fa-desktop"></i>잔여좌석
-					</a></li>
 
-					<li class="menu-item-has-children"><a
-						href="ClientSelect.admin"> <i
-							class="menu-icon fas fa-concierge-bell"></i>메뉴
-					</a></li>
-
-					<li class="menu-item-has-children"><a
-						href="Board.board?currentPage=1"> <i
-							class="menu-icon fas fa-headset"></i>고객의소리
-					</a></li>
-
-					<c:choose>
-						<c:when test="${user == null }">
-							<li id="charge" class="menu-item-has-children"><a href="#">
-									<i class="menu-icon fas fa-coins"></i>충전하기
-							</a></li>
 							<script>
                      
                      
@@ -115,7 +126,7 @@
 						<c:otherwise>
 							<li id="charge" class="menu-item-has-children"><a
 								href="page?url=WEB-INF/pay.jsp"> <i
-									class="menu-icon fas fa-coins"></i>충전하기
+
 							</a></li>
 						</c:otherwise>
 					</c:choose>
