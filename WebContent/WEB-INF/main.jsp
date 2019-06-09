@@ -244,12 +244,7 @@
 						<img src="images/pcroom3.png" width=100% height=600px>
 					</div>
 				</div>
-				
-				
-				
-				
-				
-							<c:choose>
+								<c:choose>
 								<c:when test="${user == null }">
 							
 									<script>
@@ -260,6 +255,8 @@
                             	  alert("비밀번호가 일치하지 않습니다.")
                               }else if(${login== 4}){
                             	  alert("로그인이 불가능한 상태입니다 관리자에게 문의해주세요.")
+                              }else if(${login== 5}){
+                            	  alert("이미 로그인 한 아이디 입니다 관리자에게 문의해주세요.")
                               }
                        		 </script>
 									<!-- <h3 class="card-title">충전/로그인/개인정보</h3>

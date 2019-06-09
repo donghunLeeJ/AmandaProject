@@ -24,11 +24,17 @@ background-color: #bbe3e3;
 									<h5 class="card-title"><img src="https://img.icons8.com/color/48/000000/human-head.png">
 									${user.name}님반갑습니다</h5>
 									</c:when>
+								
+								
+								
+								
+								
 								<c:otherwise>
 								<h5 class="card-title"><img src="https://img.icons8.com/color/48/000000/human-head.png">
 									${user.name}님충전이 필요합니다</h5>
 								</c:otherwise>	
 							</c:choose>	
+							
 							
 							<p class="card-text"></p>
 									<h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
@@ -42,6 +48,8 @@ background-color: #bbe3e3;
 								
 									</div>
 					</div>
+					
+					
 					<c:choose>
 		<c:when test="${user != null }">
 			<script>

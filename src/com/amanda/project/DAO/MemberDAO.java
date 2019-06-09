@@ -409,6 +409,57 @@ public class MemberDAO {
 	         return null;
 	      }
 	   }
+	public int inputloginCheck_table(String id) {
+	      String sql = "insert into already_login values(?)";
+	      try(
+	            Connection con = ds.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ){
+	          pstat.setString(1, id); 
+	    	  int result = pstat.executeUpdate();
+	           
+	           return result;
+	          
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         return -1;
+	      }
+	   }
+	
+	public int checkAlreadyLogin(String id) {
+	      String sql = "select * from already_login where user_id = ? ";
+	      try(
+	            Connection con = ds.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ){
+	          pstat.setString(1, id); 
+	    	  ResultSet rs = pstat.executeQuery();
+	          if(rs.next()) {
+	        	return 1;  
+	          }
+	           return 0;
+	          
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         return -1;
+	      }
+	   }
+	public int deleteAlreadyLogOut(String id) {
+	      String sql = "delete already_login where user_id = ?";
+	      try(
+	            Connection con = ds.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);
+	            ){
+	          pstat.setString(1, id); 
+	    	 int result = pstat.executeUpdate();
+	           
+	           return result;
+	          
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         return -1;
+	      }
+	   }
 }
 
 

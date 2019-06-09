@@ -69,7 +69,12 @@ public class MemberController extends HttpServlet {
 						request.setAttribute("login", 4);	
 						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 						rd.forward(request, response);	
+					}else if(dao.checkAlreadyLogin(loginid) == 1){
+						request.setAttribute("login", 5);	
+						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+						rd.forward(request, response);	
 					}else{
+						dao.inputloginCheck_table(loginid);
 						MemberDTO user = dao.select_user(loginid);			
 						request.setAttribute("login", 1);													
 						request.getSession().setAttribute("user", dao.select_user(loginid));
@@ -152,13 +157,10 @@ public class MemberController extends HttpServlet {
 				String birth = request.getParameter("joinmemberbirth");//�쉶�썝媛��엯�떆 諛쏅뒗 �깮�뀈�썡�씪
 				String email = request.getParameter("joinmemberemail");//�쉶�썝媛��엯�떆 諛쏅뒗 email
 				String phone = request.getParameter("joinmemberphone");//�쉶�썝媛��엯�떆 諛쏅뒗 �룿踰덊샇
-
 				String postcode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
-
 				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone,postcode,address1,address2);
-
 				int result = dao.joinmember(dto);
 				System.out.println(result);
 				if(result == 1) {
@@ -250,8 +252,8 @@ public class MemberController extends HttpServlet {
 
 				//cDao.seatOff("192.168.60.27");
 				cDao.seatOff(request.getRemoteAddr());
-
 				cDao.resetId(request.getRemoteAddr());
+				dao.deleteAlreadyLogOut(id);
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
 
@@ -338,7 +340,7 @@ public class MemberController extends HttpServlet {
 			//�씠硫붿씪�쟾�넚
 			String from = "acesang@naver.com";
 			String to = (String)request.getAttribute("email");
-			String subject = "鍮꾨�踰덊샇 �옱�꽕�젙 �솗�씤肄붾뱶�엯�땲�떎.";
+			String subject = "비밀번호 변경 코드 입니다.";
 			String content = sdao.randomnumber()+"";
 			// �엯�젰媛� 諛쏆쓬
 
@@ -399,7 +401,7 @@ public class MemberController extends HttpServlet {
 			//�씠硫붿씪�쟾�넚
 			from = "acesang@naver.com";
 			to = (String)request.getAttribute("email");
-			subject = "�쉶�썝�떂�씠 �슂泥��븯�떊 �븘�씠�뵒 �엯�땲�떎";
+			subject = "문의하신 아이디 입니다";
 
 			String checkname = request.getParameter("checkName");
 			String checkbirth = request.getParameter("checkbirth");

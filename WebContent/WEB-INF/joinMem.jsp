@@ -508,11 +508,9 @@
                             divPhoneNumber.addClass("has-success");
                         }
                         
-                        if($("#postcode").val()==""){
+                        if($("#Address2").val()==""){
                         	alert("주소를 입력해주세요");
-                        	modal.modal("show");
-                        	
-                        	divEmail.removeClass("has-success");
+                       		divEmail.removeClass("has-success");
                             divEmail.addClass("has-error");
                             return false;
                         }else{
