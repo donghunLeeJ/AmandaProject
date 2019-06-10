@@ -47,7 +47,6 @@ public class BoardController extends HttpServlet {
             String newTitle = title.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
 
             String contents =request.getParameter("contents");
-            String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
 
             MemberDTO writerdto = (MemberDTO)request.getSession().getAttribute("user");
             String writer = writerdto.getId();
@@ -56,7 +55,7 @@ public class BoardController extends HttpServlet {
 
             int viewCount = 1;
             String ipAddr = request.getLocalAddr();
-            BoardDTO dto = new BoardDTO(newTitle,newContents,writer,viewCount,ipAddr,path);
+            BoardDTO dto = new BoardDTO(newTitle,contents,writer,viewCount,ipAddr,path);
 
             result = dao.write(dto);
 
@@ -125,9 +124,8 @@ public class BoardController extends HttpServlet {
             String title = request.getParameter("title");
             String newTitle = title.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
             String contents = request.getParameter("contents");
-            String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
 
-            result = dao.update(newTitle, newContents, no);
+            result = dao.update(newTitle, contents, no);
 
             request.setAttribute("writer", writer);
             request.setAttribute("result", result);
