@@ -431,7 +431,7 @@
       <footer class="site-footer">
          <div class="footer-inner bg-white">
             <div class="row">
-               <div class="col-sm-6">Copyright &copy; Amanda</div>
+               <div class="col-sm-6">2019년 PC방의 혁신을 일으키다</div>
                <div class="col-sm-6 text-right">
                   Designed by <a href="https://colorlib.com">Amanda</a>
                </div>
@@ -516,8 +516,8 @@
          aria-labelledby="exampleModalLabel1" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
-               <div class="modal-body1">
-                  <form class="modal-body">
+               <form class="modal-body1">
+                  
                      <div class="form-group m-0 p-0">
                         <div class="card">
                            <div class="card-header">
@@ -568,7 +568,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="row">
+                     <div class="row p-3">
                         <c:if test="${user.id != 'admin' }">
                            <button id="deleteMembtn" type="button"
                               class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-4 p-0" data-dismiss="modal">회원
@@ -579,12 +579,12 @@
                            <button id="updatememberbtn" type="button"
                               class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" data-dismiss="modal">정보수정</button>
                         </c:if>
-                        <button type="button" class="btn btn-primary col-6 col-sm-2 mr-sm-2" id="logoutbtn1">로그아웃</button>
+                        <button type="button" class="btn btn-primary col-6 col-sm-2 mr-sm-2 ㅔ-0" id="logoutbtn1">로그아웃</button>
 
                      </div>
                   </form>
 
-               </div>
+               
             </div>
          </div>
       </div>
