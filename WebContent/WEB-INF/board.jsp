@@ -119,6 +119,14 @@
 	margin-left: 0px;
 	margin-right: 0px;
 }
+.adminList{
+	color:blue;
+	font-weight:800;
+}
+.adminList2{
+	color:blue;
+	font-weight:600;
+}
 </style>
 </head>
 <body>
@@ -358,13 +366,13 @@
                                           class="adminList"><input type="hidden" value="${admin.board_seq}" name="no" ></td>
                                        <td
                                           class="col-lg-4 col-md-4 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button
-                                             class="titleLink adminList">${admin.title}</button></td>
+                                             class="titleLink adminList" >${admin.title}</button></td>
                                        <td
                                           class="col-lg-2 col-md-2 col-sm-4 col-7 order-md-2 order-sm-2 order-2 adminList">관리자</td>
                                        <td
-                                          class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList">${admin.writeDate}</td>
+                                          class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList2">${admin.writeDate}</td>
                                        <td
-                                          class="col-lg-2 col-md-2 col-sm-2 col-2 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList">${admin.viewCount}</td>
+                                          class="col-lg-2 col-md-2 col-sm-2 col-2 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList2">${admin.viewCount}</td>
                                     </tr>
                                  </form>
                               </c:forEach>

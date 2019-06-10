@@ -44,10 +44,9 @@ public class BoardController extends HttpServlet {
          if(command.equals("/BoardWrite.board")){
 
             String title = request.getParameter("title");
-            String newTitle = title.replace("<", "%1$2#").replace(">", "!5@4#");
+            String newTitle = title.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
 
             String contents =request.getParameter("contents");
-            String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
 
             MemberDTO writerdto = (MemberDTO)request.getSession().getAttribute("user");
             String writer = writerdto.getId();
@@ -56,7 +55,7 @@ public class BoardController extends HttpServlet {
 
             int viewCount = 1;
             String ipAddr = request.getLocalAddr();
-            BoardDTO dto = new BoardDTO(newTitle,newContents,writer,viewCount,ipAddr,path);
+            BoardDTO dto = new BoardDTO(newTitle,contents,writer,viewCount,ipAddr,path);
 
             result = dao.write(dto);
 
@@ -123,7 +122,7 @@ public class BoardController extends HttpServlet {
             int no = Integer.parseInt(request.getParameter("no"));
             String writer = request.getParameter("writer");
             String title = request.getParameter("title");
-            String newTitle = title.replace("<", "%1$2#").replace(">", "!5@4#");
+            String newTitle = title.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
             String contents = request.getParameter("contents");
 
             result = dao.update(newTitle, contents, no);
@@ -166,9 +165,10 @@ public class BoardController extends HttpServlet {
             MemberDTO writerdto = (MemberDTO)request.getSession().getAttribute("user");
             String id = writerdto.getId();
             String repl_contents = request.getParameter("repl_contents");
+            String new_repl_contents = repl_contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
             int contents_no = Integer.parseInt(request.getParameter("contents_no"));
 
-            result = dao.insertRepl(contents_no, id, repl_contents);
+            result = dao.insertRepl(contents_no, id, new_repl_contents);
 
             request.setAttribute("no", contents_no);
             request.setAttribute("result", result);
@@ -179,8 +179,9 @@ public class BoardController extends HttpServlet {
          }else if(command.equals("/ReplEdit.board")) {
             int repl_seq = Integer.parseInt(request.getParameter("repl_seq"));
             int contents_no = Integer.parseInt(request.getParameter("contents_no"));
-            String repl_contents = request.getParameter("repl_contents");         
-            result = dao.updateRepl(repl_seq,repl_contents);
+            String repl_contents = request.getParameter("repl_contents"); 
+            String new_repl_contents = repl_contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
+            result = dao.updateRepl(repl_seq,new_repl_contents);
 
             request.setAttribute("result", result);
             request.setAttribute("contents_no", contents_no);
