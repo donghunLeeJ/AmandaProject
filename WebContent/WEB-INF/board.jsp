@@ -362,7 +362,7 @@
                                     <tr class="row myrow">
                                        <td
                                           class="col-lg-2 col-md-2 col-sm-2 col-5 order-lg-1 order-md-1 order-sm-2 order-2"><input
-                                          type="text" id="noInput" value="공지 사항" readonly
+                                          type="text" id="noInput" value="[공지 사항]" readonly
                                           class="adminList"><input type="hidden" value="${admin.board_seq}" name="no" ></td>
                                        <td
                                           class="col-lg-4 col-md-4 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button

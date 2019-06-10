@@ -252,7 +252,7 @@
                 <div class="form-group" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" name="joinmemberemail" data-rule-required="true" placeholder="이메일" maxlength="40">
+                        <input type="email" class="form-control onlyemail" id="email" name="joinmemberemail" data-rule-required="true"  placeholder="이메일" maxlength="40">
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
@@ -264,9 +264,9 @@
                 
                  <label for="inputPhoneNumber" class="col-lg-2 col-sm-2 control-label " >주소 입력 </label> <input type="button" class="mb-12 mb-2" value="우편번호 찾기" id="search">
                     <div class="col-lg-10">
-                        <input type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
-                        <input type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
-                        <input type="text" class="form-control noT" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        <input type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" required >
+                        <input type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소" required >
+                        <input type="text" class="form-control noT" id="Address2" name="address2" placeholder="상세주소" required ><br>
                         
                     </div>
                     
@@ -295,6 +295,13 @@
                             $(this).val($(this).val().replace(/[^_a-z0-9]/gi,'')); //_(underscore), 영어, 숫자만 가능
                         }
                     });
+                    $('.onlyemail').keyup(function(event){
+                   	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                        var inputVal = $(this).val();
+                        $(this).val($(this).val().replace(/[^_a-z0-9@.]/gi,'')); //_(underscore), 영어, 숫자만 가능
+                    }
+                });
+
 
                     $(".onlyHangul").keyup(function(event){
                         if (!(event.keyCode >=37 && event.keyCode<=40)) {
@@ -370,19 +377,7 @@
                             divName.addClass("has-success");
                         }
                     });
-
-                    $('#nickname').keyup(function(event){
-
-                        var divNickname = $('#divNickname');
-
-                        if($.trim($('#nickname').val())==""){
-                            divNickname.removeClass("has-success");
-                            divNickname.addClass("has-error");
-                        }else{
-                            divNickname.removeClass("has-error");
-                            divNickname.addClass("has-success");
-                        }
-                    });
+              
 
                     $('#email').keyup(function(event){
 
@@ -409,6 +404,10 @@
                             divPhoneNumber.addClass("has-success");
                         }
                     });
+                   
+           
+                    
+                    
 
 
                     //------- validation 검사
@@ -476,11 +475,20 @@
                         //이름
                         if($('#name').val()==""){
                         	alert("이름을 입력하여 주시기 바랍니다.");
-                            modal.modal('show');
-
                             divName.removeClass("has-success");
                             divName.addClass("has-error");
                             $('#name').focus();
+                            return false;
+                        }else{
+                            divName.removeClass("has-error");
+                            divName.addClass("has-success");
+                        }
+                        
+                        if($('#birth').val()==""){
+                        	alert("생년월일을 입력하여 주시기 바랍니다.");
+                            divName.removeClass("has-success");
+                            divName.addClass("has-error");
+                            $('#birth').focus();
                             return false;
                         }else{
                             divName.removeClass("has-error");
@@ -525,6 +533,7 @@
                     });
 
                 });
+                
                 document.getElementById("search").onclick = searchAddress;
                 
                 function searchAddress() {

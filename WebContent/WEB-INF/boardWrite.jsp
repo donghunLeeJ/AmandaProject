@@ -289,7 +289,7 @@ header {
             <div class="card">
 
                <form action="BoardWrite.board" id="formWrite" method="post">
-                  <div class="card-header">
+                  <div class="card-header" style="text-align: center;">
                      <strong class="card-title">제목 : <input type="text"
                         id="title" name="title" required></strong>
                   </div>
