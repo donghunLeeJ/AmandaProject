@@ -221,9 +221,9 @@
             <c:when test="${user != null && user.id != 'admin' }"> 
 <!--             회원일때 -->
                <div class="top-right">
-                  <div class="header-menu">
+                  <div class="header-menu pt-3">
                      <h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
-									 <span id="point" ></span>
+									 <span id="point" class="pr-3"></span>
 									</h5>
 									<h5><img src="https://img.icons8.com/color/30/000000/alarm-clock.png">
 									
@@ -235,7 +235,7 @@
                            				aria-haspopup="true" aria-expanded="false"
                            				data-target="#exampleModal1"> <img
                           				 class="user-avatar rounded-circle" src="images/profile.jpg"
-                          				 alt="profile"></a>
+                          				 alt="profile" height="80%"></a>
                      				</div>
 						
                      	</div>
