@@ -195,7 +195,7 @@
              <div class="top-right">
                   <div class="header-menu">
             
-            	<button type="button" class="btn btn-secondary" id="allmsg">전체msg</button>
+            	<button type="button" class="btn" id="allmsg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
             	<div class="user-area  float-right">
                         				<a href="#" class="active" data-toggle="modal"
                            				aria-haspopup="true" aria-expanded="false"

@@ -85,7 +85,7 @@
 </style>
 </head>
 
-<body>
+<body onload="javascript:openPopup('page?url=WEB-INF/Hello.jsp')">
 
 	<!-- 왼쪽 네비 시작 -->
 	<aside id="left-panel" class="left-panel">
@@ -161,11 +161,11 @@
 			<c:choose>
 				<c:when test="${user != null }">
 					<div class="top-right">
-						<div class="header-menu ">
+						<div class="header-menu pt-3">
 					
 								
 								<h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
-									 <span id="point" ></span>
+									 <span id="point" class="pr-3" ></span>
 									</h5>
 									<h5><img src="https://img.icons8.com/color/30/000000/alarm-clock.png">
 									
@@ -179,14 +179,7 @@
 										<button type="button" class="btn btn-secondary " id="allmsg">전체msg</button>
 									</c:otherwise>
 								</c:choose>
-								<!-- 	<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
-							 -->
 								
-
-
-
-
-
 							<!-- </div> -->
 							<!--  mypage 사람 사진-->
 							<div class="user-area  float-right pr-1" >
@@ -194,7 +187,7 @@
 									aria-haspopup="true" aria-expanded="false"
 									data-target="#exampleModal1"> <img
 									class="user-avatar rounded-circle " src="images/profile.jpg"
-									alt="profile"></a>
+									alt="profile" height="80%"></a>
 							</div>
 						</div>
 					</div>
@@ -250,13 +243,13 @@
 									<script>
                               if(${login== 0}){
                             	  alert("아이디가 없습니다 ");
-                            	  loaction.href=    "page?url=WEB-INF/main.jsp";
+                            	  loaction.href= "page?url=WEB-INF/main.jsp";
                               }else if(${login== -1}){
-                            	  alert("비밀번호가 일치하지 않습니다.")
+                            	  alert("비밀번호가 일치하지 않습니다.");
                               }else if(${login== 4}){
-                            	  alert("로그인이 불가능한 상태입니다 관리자에게 문의해주세요.")
+                            	  alert("로그인이 불가능한 상태입니다 관리자에게 문의해주세요.");
                               }else if(${login== 5}){
-                            	  alert("이미 로그인 한 아이디 입니다 관리자에게 문의해주세요.")
+                            	  alert("이미 로그인 한 아이디 입니다 관리자에게 문의해주세요.");
                               }
                        		 </script>
 									<!-- <h3 class="card-title">충전/로그인/개인정보</h3>
@@ -266,11 +259,25 @@
 										data-target="#exampleModal" id="loginbtn">login</button> -->
 								</c:when>
 								<c:otherwise>
-						<script>		
+						<!-- <script>		
 					window.open("page?url=WEB-INF/Hello.jsp","",
 									"location=no, directories=no,width=400px,height=250px");
 				
+</script> -->
+<script type="text/javascript"> function getCookie(name) { var cookie = document.cookie; 
+if (document.cookie != "") { var cookie_array = cookie.split("; ");
+for ( var index in cookie_array) 
+{ var cookie_name = cookie_array[index].split("=");
+if (cookie_name[0] == "popupYN") { return cookie_name[1]; } } } return ; 
+} function openPopup(url) { 
+	var cookieCheck = getCookie("popupYN"); 
+if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450,height=300,left=0,top=0') } 
 </script>
+
+
+
+
+
 									<script>
 										//msg보내는 소켓 및 버튼
 										 var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');

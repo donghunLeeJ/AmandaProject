@@ -15,8 +15,29 @@ background-color: #bbe3e3;
 
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script language="JavaScript">
+    function setCookie(name, value, expiredays) {
+        var date = new Date();
+        date.setDate(date.getDate() + expiredays);
+        document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString();
+    }
+
+    function closePopup() {
+        if (document.getElementById("check").value) {
+            setCookie("popupYN", "N", 1);
+            self.close();
+        }
+    }
+</script>
+
+
+
+
+
+
 </head>
-<body>
+<body onunload="closeWin()">
 <div class="card my-card border-danger">
 						<div class="pointcard-body">
 						<c:choose>
@@ -24,10 +45,6 @@ background-color: #bbe3e3;
 									<h5 class="card-title"><img src="https://img.icons8.com/color/48/000000/human-head.png">
 									${user.name}님반갑습니다</h5>
 									</c:when>
-								
-								
-								
-								
 								
 								<c:otherwise>
 								<h5 class="card-title"><img src="https://img.icons8.com/color/48/000000/human-head.png">
@@ -44,8 +61,13 @@ background-color: #bbe3e3;
 									
 									${user.name }님의
 										현재 남은 시간은 <span id="timeout"></span> 입니다.
-									</h5><br>
-								
+									</h5>
+<input type="checkbox" id="check" onclick="closePopup();">
+ 
+    <fontsize=3> <b>하루에 한번만 보기</b> </font>
+
+
+
 									</div>
 					</div>
 					
