@@ -65,6 +65,8 @@
 .card-text {
    text-align: left;
 }
+
+
 </style>
 </head>
 
@@ -144,11 +146,11 @@
 			<c:choose>
 				<c:when test="${user != null }">
 					<div class="top-right">
-						<div class="header-menu ">
+						<div class="header-menu pt-3" >
 					
 								
 								<h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
-									 <span id="point" ></span>
+									 <span id="point"class="pr-3" ></span>
 									</h5>
 									<h5><img src="https://img.icons8.com/color/30/000000/alarm-clock.png">
 									
@@ -156,28 +158,27 @@
 									</h5>
 									<c:choose>
 									<c:when test="${user.id ne 'admin'}">
-										<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+										<button type="button" class="btn pr-1 pt-0 mb-1" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-secondary " id="allmsg">전체msg</button>
 									</c:otherwise>
 								</c:choose>
-								<!-- 	<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
-							 -->
+							
 								
 
 
 
 
 
-							<!-- </div> -->
+						
 							<!--  mypage 사람 사진-->
 							<div class="user-area  float-right pr-1" >
 								<a href="#" class="active" data-toggle="modal"
 									aria-haspopup="true" aria-expanded="false"
 									data-target="#exampleModal1"> <img
 									class="user-avatar rounded-circle " src="images/profile.jpg"
-									alt="profile"></a>
+									alt="profile" height="70%"></a>
 							</div>
 						</div>
 					</div>
