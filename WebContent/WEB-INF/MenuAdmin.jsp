@@ -93,6 +93,9 @@
 .myspan {
    text-align: center;
 }
+.myImg{
+	width:100%;
+}
 </style>
 </head>
 
