@@ -143,7 +143,7 @@ public class MemberController extends HttpServlet {
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e1.printStackTrace();
 			}	
 
@@ -175,7 +175,7 @@ public class MemberController extends HttpServlet {
 				}
 
 			} catch (Exception e) {
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -217,7 +217,7 @@ public class MemberController extends HttpServlet {
 
 			} catch (Exception e) {
 				
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -265,7 +265,7 @@ public class MemberController extends HttpServlet {
 
 			} catch (Exception e) {
 				
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -300,7 +300,7 @@ public class MemberController extends HttpServlet {
 				}else if(result == 0) {
 					request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//�씠 李쎌뿉�꽌 �쉶�썝�븘�땲�씪怨� alert
 				}else {
-					response.sendRedirect("../error.jsp");
+					response.sendRedirect("error.jsp");
 				}
 
 			}
@@ -331,7 +331,7 @@ public class MemberController extends HttpServlet {
 
 
 			}else {
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 			}
 			break;
 
@@ -391,7 +391,7 @@ public class MemberController extends HttpServlet {
 			} catch(Exception e){
 				sdao.pwcheck_delete(saveid, to);
 				e.printStackTrace();
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 
@@ -446,7 +446,7 @@ public class MemberController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/emailComplation.jsp").forward(request, response);
 			} catch(Exception e){
 				e.printStackTrace();
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 			}
