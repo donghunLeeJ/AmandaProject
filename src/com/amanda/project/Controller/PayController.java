@@ -32,6 +32,7 @@ public class PayController extends HttpServlet {
 			
 			String id = request.getParameter("id");
 			int price=Integer.parseInt(request.getParameter("amount"));
+			pdao.pay_table_insert(id, price);
 			if(price == 1000) {
 				price = 3600;
 			}else if(price == 2000) {
@@ -45,10 +46,8 @@ public class PayController extends HttpServlet {
 			}else if(price == 20000) {
 				price = 82800;
 			}
+			pdao.update_point(id, price);
 			
-			String name = request.getParameter("name");
-			System.out.println(pdao.update_point(id, price));
-			pdao.pay_table_insert(id, price);
 			request.getSession().setAttribute("user", dao.select_user(id));
 					
 			if(!(MemberController.pointmap.get(id) == null)){//만일 사용자가 pc방에서 로그인했을 경우에만 작동하는 코드	

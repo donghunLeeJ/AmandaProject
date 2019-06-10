@@ -6,11 +6,13 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Main</title>
+<title>AmandaPC홈</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+
+<!--title아이콘 변경하는 link  -->
+<link rel="shortcut icon" href="images/title.png">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 
@@ -249,14 +251,11 @@
 					</div>
 				</div>
 
+								<c:choose>
+								<c:when test="${user == null }">
+							
+									<script>
 
-
-
-
-				<c:choose>
-					<c:when test="${user == null }">
-
-						<script>
                               if(${login== 0}){
                             	  alert("아이디가 없습니다 ");
                             	  loaction.href=    "page?url=WEB-INF/main.jsp";
@@ -264,6 +263,8 @@
                             	  alert("비밀번호가 일치하지 않습니다.")
                               }else if(${login== 4}){
                             	  alert("로그인이 불가능한 상태입니다 관리자에게 문의해주세요.")
+                              }else if(${login== 5}){
+                            	  alert("이미 로그인 한 아이디 입니다 관리자에게 문의해주세요.")
                               }
                        		 </script>
 						<!-- <h3 class="card-title">충전/로그인/개인정보</h3>

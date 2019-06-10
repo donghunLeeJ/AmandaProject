@@ -16,7 +16,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+<!--title아이콘 변경하는 link  -->
+<link rel="shortcut icon" href="images/title.png">
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <link rel="stylesheet"
@@ -117,6 +118,14 @@
 .myrow {
 	margin-left: 0px;
 	margin-right: 0px;
+}
+.adminList{
+	color:blue;
+	font-weight:800;
+}
+.adminList2{
+	color:blue;
+	font-weight:600;
 }
 </style>
 </head>
@@ -228,7 +237,7 @@
 									
 										 <span id="timeout" ></span> 
 									</h5>
- 									<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+ 									<button type="button" class="btn pr-1 pt-0" id="msg" style="background-color:white"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
  									<div class="user-area  float-right">
                         				<a href="#" class="active" data-toggle="modal"
                            				aria-haspopup="true" aria-expanded="false"
@@ -263,18 +272,7 @@
                <div class="top-right">
                   <div class="header-menu">
                      <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
+                       
                         <div class="dropdown for-notification">
                            <button type="button"
                               class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
@@ -368,13 +366,13 @@
                                           class="adminList"><input type="hidden" value="${admin.board_seq}" name="no" ></td>
                                        <td
                                           class="col-lg-4 col-md-4 col-sm-12 col-12 order-lg-2 order-md-2 order-sm-1 order-1"><button
-                                             class="titleLink adminList">${admin.title}</button></td>
+                                             class="titleLink adminList" >${admin.title}</button></td>
                                        <td
                                           class="col-lg-2 col-md-2 col-sm-4 col-7 order-md-2 order-sm-2 order-2 adminList">관리자</td>
                                        <td
-                                          class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList">${admin.writeDate}</td>
+                                          class="col-lg-2 col-md-2 col-sm-4 col-4 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList2">${admin.writeDate}</td>
                                        <td
-                                          class="col-lg-2 col-md-2 col-sm-2 col-2 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList">${admin.viewCount}</td>
+                                          class="col-lg-2 col-md-2 col-sm-2 col-2 order-md-2 order-sm-2 order-2 d-none d-sm-block adminList2">${admin.viewCount}</td>
                                     </tr>
                                  </form>
                               </c:forEach>

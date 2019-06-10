@@ -6,11 +6,12 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Main</title>
+<title>메뉴</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+<!--title아이콘 변경하는 link  -->
+<link rel="shortcut icon" href="images/title.png">
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 
@@ -47,10 +48,13 @@
 }
 
 #todaysMenu {
-   background-color: white;
-   padding-left: 20px;
-   padding-right: 20px;
-   border-radius: 10px;
+	text-shadow: 4px 2px 2px gray;
+	font-family:cursive;
+	font-weight:600;
+	color: white;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 10px;
 }
 
 #caroWrapper {
@@ -83,6 +87,9 @@
 }
 .myspan {
    text-align: center;
+}
+.myImg{
+	width:100%;
 }
 </style>
 </head>

@@ -6,11 +6,12 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Main</title>
+<title>충전</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+<!--title아이콘 변경하는 link  -->
+<link rel="shortcut icon" href="images/title.png">
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 
@@ -130,7 +131,7 @@
 	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
-		<header id="header" class="header pt-1">
+		<header id="header" class="header">
 			<div class="top-left">
 				<div class="navbar-header">
 					<a class="navbar-brand p-0" href="page?url=WEB-INF/main.jsp"><img  src="images/logo5.png"

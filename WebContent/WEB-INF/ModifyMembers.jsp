@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>정보수정</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -136,7 +136,7 @@
 									</h5>
 									<c:choose>
 									<c:when test="${user.id ne 'admin'}">
-										<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+										<button type="button" style="background-color:white" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-secondary " id="allmsg">전체msg</button>
@@ -216,159 +216,446 @@
             <!-- 본문 들어가는 부분 -->
 
 
-            <form id="modifyInfo" class="form-horizontal" role="form" method="post" action="updateProc.member">
+              <form class="form-horizontal" id="form" method="post" action="updateProc.member">
+               
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="newpw" name="newpw" data-rule-required="true" placeholder="패스워드" maxlength="30"  pattern="[0-9a-zA-z]{8,}"required>
+                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{8,}" >
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
-                    <label for="inputPasswordCheck" class="col-lg-2 control-label"><div id="pwcheckbox"><div id="pwcheckbox1">패스워드 확인 </div><div id="result"></div></div></label>
+                    <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="newpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" name="newpw2"  required>
+                        <input type="password" class="form-control" id="passwordCheck" name="joinmemberpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" >
                     </div>
                 </div>
-
+             
                 <div class="form-group" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" data-rule-required="true"maxlength="40" name="newemail" value="${user.email}">
+                        <input type="email" class="form-control" id="email" name="joinmemberemail" data-rule-required="true" value=${user.email } pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" maxlength="40">
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" name="phone" value="${user.phone}">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="joinmemberphone" data-rule-required="true" value=${user.phone } minlength="7">
                     </div>
                 </div>
-                 <div class="form-group">
-                    <div class="col-lg-offset-2 col-lg-10">
-                        <button type="button" id="search" class="btn btn-default">주소 변경</button>
+                
+                 <label for="inputPhoneNumber" class="col-lg-2 control-label" >주소 입력 </label> <input type="button" class="mb-4" value="우편번호 찾기" id="search">
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control readonly" id="postcode" name="postcode" value=${user.postcode } >
+                        <input type="text" class="form-control readonly" id="Address1" name="address1" value=${user.address1 }  >
+                        <input type="text" class="form-control noT" id="Address2" name="address2" value=${user.address2 }><br>
+                        
                     </div>
-                </div>
-                <div class="col-lg-10">
-                        <input required type="text" class="form-control readonly" id="postcode" name="postcode" value="${user.postcode }" readonly >
-                        <input required type="text" class="form-control readonly" id="Address1" name="address1" value="${user.address1 }"  readonly >
-                        <input required type="text" class="form-control" id="Address2" name="address2" value="${user.address2 }" ><br>
-                        <input type="button" class="mb-4" value="우편번호 찾기" id="search">
-                    </div>
-                
-                
-                
-                
-                
+                    
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button id="changeinfo" type="button" class="btn btn-default">정보수정</button>
+                        <button type="submit" class="btn btn-outline-info signbt mb-2" id="joinmemberbtn">정보수정</button>
                     </div>
                 </div>
             </form>
-		
-
-
-
         </div>
+     <script>
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
+    });
+	</script>
+	<script>
+
+                $(function(){
+                	
+                	$("img.ui-datepicker-trigger").remove();
+                	
+                    //모달을 전역변수로 선언
+                    $('.onlyAlphabetAndNumber').keyup(function(event){
+                       	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val($(this).val().replace(/[^_a-z0-9]/gi,'')); //_(underscore), 영어, 숫자만 가능
+                        }
+                    });
+
+                    $(".onlyHangul").keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val(inputVal.replace(/[a-z0-9!-~\s]/gi,''));
+                        }
+                    });
+                    $(".noT").keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val(inputVal.replace(/[!-,./:-@]/gi,''));
+                        }
+                    });
+
+                    $(".onlyNumber").keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val(inputVal.replace(/[^0-9]/gi,''));
+                        }
+                    });
+
+                    //------- 검사하여 상태를 class에 적용
+                    $('#id').keyup(function(event){
+
+                        var divId = $('#divId');
+
+                        if($('#id').val()==""){
+                            divId.removeClass("has-success");
+                            divId.addClass("has-error");
+                        }else{
+                            divId.removeClass("has-error");
+                            divId.addClass("has-success");
+                        }
+                    });
+
+                    $('#password').keyup(function(event){
+
+                        var divPassword = $('#divPassword');
+
+                        if($('#password').val()==""){
+                            divPassword.removeClass("has-success");
+                            divPassword.addClass("has-error");
+                        }else{
+                            divPassword.removeClass("has-error");
+                            divPassword.addClass("has-success");
+                        }
+                    });
+
+                    $('#passwordCheck').keyup(function(event){
+
+                        var passwordCheck = $('#passwordCheck').val();
+                        var password = $('#password').val();
+                        var divPasswordCheck = $('#divPasswordCheck');
+
+                        if((passwordCheck=="") || (password!=passwordCheck)){
+                            divPasswordCheck.removeClass("has-success");
+                            divPasswordCheck.addClass("has-error");
+                        }else{
+                            divPasswordCheck.removeClass("has-error");
+                            divPasswordCheck.addClass("has-success");
+                        }
+                    });
+
+                    $('#name').keyup(function(event){
+
+                        var divName = $('#divName');
+
+                        if($.trim($('#name').val())==""){
+                            divName.removeClass("has-success");
+                            divName.addClass("has-error");
+                        }else{
+                            divName.removeClass("has-error");
+                            divName.addClass("has-success");
+                        }
+                    });
+
+                    $('#nickname').keyup(function(event){
+
+                        var divNickname = $('#divNickname');
+
+                        if($.trim($('#nickname').val())==""){
+                            divNickname.removeClass("has-success");
+                            divNickname.addClass("has-error");
+                        }else{
+                            divNickname.removeClass("has-error");
+                            divNickname.addClass("has-success");
+                        }
+                    });
+
+                    $('#email').keyup(function(event){
+
+                        var divEmail = $('#divEmail');
+
+                        if($.trim($('#email').val())==""){
+                            divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                        }else{
+                            divEmail.removeClass("has-error");
+                            divEmail.addClass("has-success");
+                        }
+                    });
+
+                    $('#phoneNumber').keyup(function(event){
+
+                        var divPhoneNumber = $('#divPhoneNumber');
+
+                        if($.trim($('#phoneNumber').val())==""){
+                            divPhoneNumber.removeClass("has-success");
+                            divPhoneNumber.addClass("has-error");
+                        }else{
+                            divPhoneNumber.removeClass("has-error");
+                            divPhoneNumber.addClass("has-success");
+                        }
+                    });
+
+
+                    //------- validation 검사
+                    $("#form").submit(function( event ) {
+
+                        var provision = $('#provision');
+                        var memberInfo = $('#memberInfo');
+                        var divId = $('#divId');
+                        var divPassword = $('#divPassword');
+                        var divPasswordCheck = $('#divPasswordCheck');
+                        var divName = $('#divName');
+                        var divEmail = $('#divEmail');
+                        var divPhoneNumber = $('#divPhoneNumber');
+
+
+                        //아이디 검사
+                        if($('#id').val()==""){
+                            alert("아이디를 입력하여 주시기 바랍니다.");
+                            divId.removeClass("has-success");
+                            divId.addClass("has-error");
+                            $('#id').focus();
+                            return false;
+                        }else{
+                            divId.removeClass("has-error");
+                            divId.addClass("has-success");
+                        }
+
+                        //패스워드 검사
+                        if($('#password').val()==""){
+                        	alert("패스워드를 입력하여 주시기 바랍니다.");
+                        	divPassword.removeClass("has-success");
+                            divPassword.addClass("has-error");
+                            $('#password').focus();
+                            return false;
+                        }else{
+                            divPassword.removeClass("has-error");
+                            divPassword.addClass("has-success");
+                        }
+
+                        //패스워드 확인
+                        if($('#passwordCheck').val()==""){
+                        	alert("패스워드 확인을 입력하여 주시기 바랍니다.");                         
+                            divPasswordCheck.removeClass("has-success");
+                            divPasswordCheck.addClass("has-error");
+                            $('#passwordCheck').focus();
+                            return false;
+                        }else{
+                            divPasswordCheck.removeClass("has-error");
+                            divPasswordCheck.addClass("has-success");
+                        }
+
+                        //패스워드 비교
+                       
+                        if($('#password').val()!=$('#passwordCheck').val() || $('#passwordCheck').val()==""){
+                        	alert("패스워드가 일치하지 않습니다.");      
+                        	divPasswordCheck.removeClass("has-success");
+                            divPasswordCheck.addClass("has-error");
+                            $('#passwordCheck').focus();
+                            return false;
+                        }else{
+                            divPasswordCheck.removeClass("has-error");
+                            divPasswordCheck.addClass("has-success");
+                        }
+
+                        //이름
+                        if($('#name').val()==""){
+                        	alert("이름을 입력하여 주시기 바랍니다.");
+                            modal.modal('show');
+
+                            divName.removeClass("has-success");
+                            divName.addClass("has-error");
+                            $('#name').focus();
+                            return false;
+                        }else{
+                            divName.removeClass("has-error");
+                            divName.addClass("has-success");
+                        }
+
+                        //이메일
+                        if($('#email').val()==""){
+                        	alert("이메일을 입력하여 주시기 바랍니다.");
+                            divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                            $('#email').focus();
+                            return false;
+                        }else{
+                            divEmail.removeClass("has-error");
+                            divEmail.addClass("has-success");
+                        }
+
+                        //휴대폰 번호
+                        if($('#phoneNumber').val()==""){
+                        	alert("휴대폰 번호를 입력하여 주시기 바랍니다.");
+                            divPhoneNumber.removeClass("has-success");
+                            divPhoneNumber.addClass("has-error");
+                            $('#phoneNumber').focus();
+                            return false;
+                        }else{
+                            divPhoneNumber.removeClass("has-error");
+                            divPhoneNumber.addClass("has-success");
+                        }
+                        
+                        if($("#Address2").val()==""){
+                        	alert("주소를 입력해주세요");
+                       		divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                            return false;
+                        }else{
+                        	  divEmail.removeClass("has-error");
+                              divEmail.addClass("has-success");
+                        }
+
+
+                    });
+
+                });
+                document.getElementById("search").onclick = searchAddress;
+                
+                function searchAddress() {
+                    new daum.Postcode({
+                        oncomplete: function(data) {
+                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                            var roadAddr = data.roadAddress; // 도로명 주소 변수
+                            var extraRoadAddr = ''; // 참고 항목 변수
+
+                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                extraRoadAddr += data.bname;
+                            }
+                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                            if(data.buildingName !== '' && data.apartment === 'Y'){
+                                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                            if(extraRoadAddr !== ''){
+                                extraRoadAddr = ' (' + extraRoadAddr + ')';
+                            }
+
+                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                            document.getElementById('postcode').value = data.zonecode;
+                            document.getElementById("Address1").value = roadAddr;
+                        }
+                    }).open();
+                }
+
+            </script>
+	
+
+
+
+
+
+
+   
         <!-- 						진향이 로그인폼끝 -->
 								<!-- 								진향이 마이페이지 폼 -->
 								<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel1" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body1">
-					<form>
-						<div class="form-group m-0 p-0">
-							<div class="card">
-								<div class="card-header">
-									<i class="fa fa-user"></i><strong class="card-title pl-2">
-										My Page </strong>
+			aria-labelledby="exampleModalLabel1" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body1">
+						<form>
+							<div class="form-group m-0 p-0">
+								<div class="card">
+									<div class="card-header">
+										<i class="fa fa-user"></i><strong class="card-title pl-2">
+											My Page </strong>
 										<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-								</div>
-								<div class="card-body">
-									<div class="mx-auto d-block">
-										<img class="rounded-circle mx-auto d-block"
-											src="images/profile.jpg" alt="profile image" width="130px">
-										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
-										<!-- <div class="location text-center">Lv. 일반회원</div> -->
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
 									</div>
-									<hr>
-									<div class="card-text">
-										<div>
-											<b>이름 </b>
-											<p>${user.name}</p>
+									<div class="card-body">
+										<div class="mx-auto d-block">
+											<img class="rounded-circle mx-auto d-block"
+												src="images/profile.jpg" alt="profile image" width="130px">
+											<h5 class="text-center mt-2 mb-1">
+												<b>${user.id} 님</b>
+											</h5>
+											<!-- <div class="location text-center">Lv. 일반회원</div> -->
 										</div>
-										<div>
-											<b>생년월일</b>
-											<p>${user.birth}</p>
+										<hr>
+										<div class="card-text">
+											<div>
+												<b>이름 </b>
+												<p>${user.name}</p>
+											</div>
+											<div>
+												<b>생년월일</b>
+												<p>${user.birth}</p>
+											</div>
+											<div>
+												<b>이메일</b>
+												<p>${user.email}</p>
+											</div>
+											<div>
+												<b>핸드폰번호</b>
+												<p>${user.phone}</p>
+											</div>
+											<div>
+												<b>주소</b>
+												<p>${user.address1 }</p>
+												<p>${user.address2 }</p>
+											</div>
 										</div>
-										<div>
-											<b>이메일</b>
-											<p>${user.email}</p>
-										</div>
-										<div>
-											<b>핸드폰번호</b>
-											<p>${user.phone}</p>
-										</div>										
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button id="deleteMembtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">회원 탈퇴</button>
-							<button id="pointPagebtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">포인트
-								충전</button>
-							<button id="updatememberbtn" type="button"
-								class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-							<button type="button" class="btn btn-primary"  id="logoutbtn1">로그아웃</button>
-									
-						</div>
-					</form>
+							<div class="modal-footer">
+								<button id="deleteMembtn" type="button"
+									class="btn btn-outline-info" data-dismiss="modal">회원
+									탈퇴</button>
+								<button id="pointPagebtn" type="button"
+									class="btn btn-outline-info" data-dismiss="modal">포인트
+									충전</button>
+								<button id="updatememberbtn" type="button"
+									class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+								<button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
 
+							</div>
+						</form>
+
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
 
-	<script>
-	
-	
-	$("#logoutbtn1")
-	.on(
-			"click",
-			function() {
-	            if(${user.id == 'admin' }){
-	            	location.href = "adminlogoutProc.member";	
-	            }else{
-	            	location.href = "logoutProc.member";	
-	            }
-	        	 
-	         })
-
-	
-							$("#updatememberbtn")
-									.on(
-											"click",
-											function() {
-												location.href = "page?url=WEB-INF/ModifyMembers.jsp";
-											})
-							$("#deleteMembtn")
-									.on(
-											"click",
-											function() {
-												location.href = "page?url=WEB-INF/deleteMem.jsp";
-											})
-							$("#pointPagebtn").on("click", function() {
-								location.href = "page?url=WEB-INF/pay.jsp";
-							})
-						</script>
-
+		<script>
+         history.pushState(null, null, "#noback");
+         $(window).bind("hashchange", function(){
+           history.pushState(null, null, "#noback");
+         });
+   $("#logoutbtn1")
+   .on(
+         "click",
+         function() {
+             if(${user.id == 'admin' }){
+             	location.href = "adminlogoutProc.member";	
+             }else{
+             	location.href = "logoutProc.member";	
+             }
+         	 
+          })
+                        $("#updatememberbtn")
+                           .on(
+                                 "click",
+                                 function() {
+                                    location.href = "page?url=WEB-INF/ModifyMembers.jsp";
+                                 })
+                     $("#deleteMembtn")
+                           .on(
+                                 "click",
+                                 function() {
+                                    location.href = "page?url=WEB-INF/deleteMem.jsp";
+                                 })
+                     $("#pointPagebtn").on("click", function() {
+                        location.href = "page?url=WEB-INF/pay.jsp";
+                     })
+                  </script>
 
 						<!-- 진향이 마이페이지 폼끝 -->
         <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -431,35 +718,7 @@
 								</script>
         </div><!-- .content -->
         
-        <script>
-		var count = 1;
-        document.getElementById("newpw2").oninput = function() {
-			var pw1 = document.getElementById("newpw").value;
-			var pw2 = document.getElementById("newpw2").value;
-
-			if (pw1 == pw2) {
-				document.getElementById("result").innerHTML = "패스워드일치";
-				result.style.color = "green";
-				count = 2;
-			}
-
-			else {
-				document.getElementById("result").innerHTML = "불일치";
-				result.style.color = "#e66178";
-
-			}
-		}
-        document.getElementById("changeinfo").onclick = function(){
-        	if(count == 2){
-    			document.getElementById("modifyInfo").submit();
-    		}else if(count == 1){
-    			alert("비밀번호가 일치하지 않습니다");
-    		}
-        };
-        
-		
-					
-	</script>
+     
         
     <div class="clearfix"></div>
 
@@ -490,44 +749,55 @@
 
 
  <!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 --> 
-  <c:choose> 
-    <c:when test="${(user != null) && (user.id != 'admin')}">
-      
-       <script>
+<c:choose>
+		<c:when test="${user != null }">
+			<script>
 	
-			function msg_time(){  
- 		   
- 		   $.ajax({  
- 		    	 
- 		         url: 'usertime.com',
- 		         type: 'POST'
- 		          
- 		 }).done(function(point){
- 			 		       	   	 			 	
- 		      if (point == 300){      
- 		    	  
- 		         alert("선불시간이 5분 남았습니다.");
- 		         
- 		      }else if(point == 0){
- 		    	  
- 		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
- 		    	  location.href = "logoutProc.member";
- 		    	  clearInterval(tid); 	
- 		    	  
- 		      }else if(point == -1){
- 		    	  
- 		    	 clearInterval(tid); 		
- 		    	     	  
- 		      }   
- 		      		      
- 		 });	   	     
- 	   }	   			
- 	 
- 	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 남은 시간을 보여주기 위해 만듬
- 	   function TimerStart(){ tid=setInterval('msg_time()',1000) };
- 	   TimerStart();   </script>    
-  </c:when>  
-</c:choose> 
+     function msg_time(){  
+		   
+    	  $.ajax({  	    	 
+    		         url: 'usertime.com', //ComController에 있는 usertime으로 이동함
+    		         type: 'POST'
+    		          
+    		 }).done(function(point){ //컨트롤러에서 1초마다 1씩 감소시키는 포인트값을 수시로 받아온다
+    		         		
+    			 $("#point").html(point);
+    		       	   
+    		      m = (Math.floor(point/60)) + "분 "; 
+    		      var msg = "<font color='red'>" + m +"</font>";
+    		      
+    		     $("#timeout").html(msg);
+    		                       
+    		      if (point == 300){    
+    		    	  
+    		         alert("선불시간이 5분 남았습니다.");  
+    		         
+    		      }else if(point == 0){
+    		    	  
+    		    	  alert("포인트가 0이 되었으므로 자동 로그아웃됩니다.");
+    		    	  location.href = "logoutProc.member";
+    		    	  clearInterval(tid);   
+    		    	  
+    		      }else if(point == -1){
+    		    	     		    	 
+    		    	  $("#point").html(${user.point}); 		    	  
+    		    	  $("#timeout").html( "<font color='red'>" + (Math.floor(${user.point}/60))+ "분 " +"</font>");      		    	  		    	 	  
+    		    	  clearInterval(tid);     
+    		    	  
+    		      }   	     	                   		      		      
+    		 });   	     
+    	   }
+    	   		
+    	  								
+    	   setTimeout(msg_time());//아래의 setInterval코드만 실행할 경우 1초의 딜레이가 생기는데 즉시 포인트와 남은 시간을 보여주기 위해 만듬
+    	   
+    	   function TimerStart(){tid=setInterval('msg_time()',1000) };
+    	   TimerStart();                          
+    	  
+    	 
+   </script>
+		</c:when>
+	</c:choose>
  <script>
 document.getElementById("search").onclick = searchAddress;
                 function searchAddress() {

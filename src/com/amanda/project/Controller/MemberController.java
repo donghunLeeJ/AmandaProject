@@ -69,10 +69,18 @@ public class MemberController extends HttpServlet {
 						request.setAttribute("login", 4);	
 						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 						rd.forward(request, response);	
+					}else if(dao.checkAlreadyLogin(loginid) == 1){
+						request.setAttribute("login", 5);	
+						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
+						rd.forward(request, response);	
 					}else{
+						dao.inputloginCheck_table(loginid);
 						MemberDTO user = dao.select_user(loginid);			
 						request.setAttribute("login", 1);													
 						request.getSession().setAttribute("user", dao.select_user(loginid));
+						
+					
+						//String ip = "192.168.60.27";	
 						String ip = request.getRemoteAddr();			
 					
 						if(cDao.UserSeatIpCheck(ip) == 0){	
@@ -135,7 +143,7 @@ public class MemberController extends HttpServlet {
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e1.printStackTrace();
 			}	
 
@@ -152,13 +160,10 @@ public class MemberController extends HttpServlet {
 				String birth = request.getParameter("joinmemberbirth");//�쉶�썝媛��엯�떆 諛쏅뒗 �깮�뀈�썡�씪
 				String email = request.getParameter("joinmemberemail");//�쉶�썝媛��엯�떆 諛쏅뒗 email
 				String phone = request.getParameter("joinmemberphone");//�쉶�썝媛��엯�떆 諛쏅뒗 �룿踰덊샇
-
 				String postcode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
-
 				MemberDTO dto = new MemberDTO(id,spw,name,birth,email,phone,postcode,address1,address2);
-
 				int result = dao.joinmember(dto);
 				System.out.println(result);
 				if(result == 1) {
@@ -170,7 +175,7 @@ public class MemberController extends HttpServlet {
 				}
 
 			} catch (Exception e) {
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -192,12 +197,12 @@ public class MemberController extends HttpServlet {
 			}
 			break;
 		case "updateProc.member" :
-			//�쉶�썝 �젙蹂댁닔�젙 而⑦듃濡ㅻ윭	
+			
 			try {
 				System.out.println("kk");
-				String pw=request.getParameter("newpw");
-				String email=request.getParameter("newemail");
-				String phone=request.getParameter("phone");
+				String pw=request.getParameter("joinmemberpw");
+				String email=request.getParameter("joinmemberemail");
+				String phone=request.getParameter("phoneNumber");
 				String address1=request.getParameter("address1");
 				String address2=request.getParameter("address2");
 				String postcode=request.getParameter("postcode");
@@ -212,7 +217,7 @@ public class MemberController extends HttpServlet {
 
 			} catch (Exception e) {
 				
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -250,8 +255,8 @@ public class MemberController extends HttpServlet {
 
 				//cDao.seatOff("192.168.60.27");
 				cDao.seatOff(request.getRemoteAddr());
-
 				cDao.resetId(request.getRemoteAddr());
+				dao.deleteAlreadyLogOut(id);
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
 
@@ -260,7 +265,7 @@ public class MemberController extends HttpServlet {
 
 			} catch (Exception e) {
 				
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -295,7 +300,7 @@ public class MemberController extends HttpServlet {
 				}else if(result == 0) {
 					request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//�씠 李쎌뿉�꽌 �쉶�썝�븘�땲�씪怨� alert
 				}else {
-					response.sendRedirect("../error.jsp");
+					response.sendRedirect("error.jsp");
 				}
 
 			}
@@ -326,7 +331,7 @@ public class MemberController extends HttpServlet {
 
 
 			}else {
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 			}
 			break;
 
@@ -338,7 +343,7 @@ public class MemberController extends HttpServlet {
 			//�씠硫붿씪�쟾�넚
 			String from = "acesang@naver.com";
 			String to = (String)request.getAttribute("email");
-			String subject = "鍮꾨�踰덊샇 �옱�꽕�젙 �솗�씤肄붾뱶�엯�땲�떎.";
+			String subject = "비밀번호 변경 코드 입니다.";
 			String content = sdao.randomnumber()+"";
 			// �엯�젰媛� 諛쏆쓬
 
@@ -386,7 +391,7 @@ public class MemberController extends HttpServlet {
 			} catch(Exception e){
 				sdao.pwcheck_delete(saveid, to);
 				e.printStackTrace();
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 
@@ -399,7 +404,7 @@ public class MemberController extends HttpServlet {
 			//�씠硫붿씪�쟾�넚
 			from = "acesang@naver.com";
 			to = (String)request.getAttribute("email");
-			subject = "�쉶�썝�떂�씠 �슂泥��븯�떊 �븘�씠�뵒 �엯�땲�떎";
+			subject = "문의하신 아이디 입니다";
 
 			String checkname = request.getParameter("checkName");
 			String checkbirth = request.getParameter("checkbirth");
@@ -441,7 +446,7 @@ public class MemberController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/emailComplation.jsp").forward(request, response);
 			} catch(Exception e){
 				e.printStackTrace();
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 			}

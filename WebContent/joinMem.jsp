@@ -9,7 +9,8 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+<!--title아이콘 변경하는 link  -->
+<link rel="shortcut icon" href="images/title.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
@@ -26,40 +27,15 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         
-
-!-- -------------------------------------------------------- -->
+      
+        
+<!-- -------------------------------------------------------- -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <!-- ------------------------------- -->
-
-<style>
-
-#search{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:20px;
-  font-size:0.8em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-#search:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-
-
-
-</style>
-
-
-
 
 
 
@@ -102,9 +78,54 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp">
+					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+							class="menu-icon fa fa-home fa-lg"></i>Home </a></li>
+					<li class="menu-item-has-children "><a
+						href="page?url=WEB-INF/seat.jsp" onclick="send()"> <i
+							class="menu-icon fa fa-desktop fa-lg"></i>잔여좌석
+					</a></li>
 
-				
+					<li class="menu-item-has-children"><a
+						href="ClientSelect.admin"> <i
+							class="menu-icon fa fa-cutlery fa-lg"></i>메뉴
+					</a></li>
+
+					<li class="menu-item-has-children"><a
+						href="Board.board?currentPage=1"> <i
+							class="menu-icon fa fa-comments fa-lg"></i>고객의소리
+					</a></li>
+
+					<c:choose>
+						<c:when test="${user == null }">
+							<li id="charge" class="menu-item-has-children"><a href="#">
+									<i class="menu-icon fa fa-usd fa-lg "></i>충전하기
+							</a></li>
+							<script>
+                    $(window).on("resize",function(){
+            				if($(window).width() >= 752){
+            					$("#left-panel").css("display","block");
+            				}				
+            			})
+
+                     $("#charge").on("click",function(){
+                         alert("로그인 후 이용가능합니다.");
+                         $("#loginbtn").trigger("click");
+
+                         
+                        
+                     })
+                  </script>
+
+						</c:when>
+						<c:otherwise>
+							<li id="charge" class="menu-item-has-children"><a
+								href="page?url=WEB-INF/pay.jsp"> <i
+									class="menu-icon fa fa-usd fa-lg"></i>충전하기
+							</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+
 			</div>
 		</nav>
 	</aside>
@@ -193,25 +214,8 @@
         <div class="content">
             <h1 align="center">회원가입</h1>
         <div class="container">
-            <div class="modal fade" id="defaultModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">알림</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p class="modal-contents"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-       
-            <hr/>
-               <form class="form-horizontal" role="form" method="post" action="joinProc.member">
+           
+               <form class="form-horizontal" id="form" method="post" action="joinProc.member">
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
@@ -221,13 +225,13 @@
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{8,}" required>
+                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{8,}" >
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="passwordCheck" name="joinmemberpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                        <input type="password" class="form-control" id="passwordCheck" name="joinmemberpw2" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" >
                     </div>
                 </div>
                 <div class="form-group" id="divName">
@@ -259,9 +263,9 @@
                 
                  <label for="inputPhoneNumber" class="col-lg-2 control-label" >주소 입력 </label> <input type="button" class="mb-4" value="우편번호 찾기" id="search">
                     <div class="col-lg-10">
-                        <input required type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
-                        <input required type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
-                        <input required type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        <input type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
+                        <input type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
+                        <input type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
                         
                     </div>
                     
@@ -276,7 +280,284 @@
     $(".readonly").on('keydown paste', function(e){
         e.preventDefault();
     });
-</script>
+	</script>
+	<script>
+
+                $(function(){
+                	
+                	$("img.ui-datepicker-trigger").remove();
+                	
+                    //모달을 전역변수로 선언
+                    var modalContents = $(".modal-contents");
+                    var modal = $("#defaultModal");
+
+                    $('.onlyAlphabetAndNumber').keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val($(this).val().replace(/[^_a-z0-9]/gi,'')); //_(underscore), 영어, 숫자만 가능
+                        }
+                    });
+
+                    $(".onlyHangul").keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val(inputVal.replace(/[a-z0-9]/gi,''));
+                        }
+                    });
+
+                    $(".onlyNumber").keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val(inputVal.replace(/[^0-9]/gi,''));
+                        }
+                    });
+
+                    //------- 검사하여 상태를 class에 적용
+                    $('#id').keyup(function(event){
+
+                        var divId = $('#divId');
+
+                        if($('#id').val()==""){
+                            divId.removeClass("has-success");
+                            divId.addClass("has-error");
+                        }else{
+                            divId.removeClass("has-error");
+                            divId.addClass("has-success");
+                        }
+                    });
+
+                    $('#password').keyup(function(event){
+
+                        var divPassword = $('#divPassword');
+
+                        if($('#password').val()==""){
+                            divPassword.removeClass("has-success");
+                            divPassword.addClass("has-error");
+                        }else{
+                            divPassword.removeClass("has-error");
+                            divPassword.addClass("has-success");
+                        }
+                    });
+
+                    $('#passwordCheck').keyup(function(event){
+
+                        var passwordCheck = $('#passwordCheck').val();
+                        var password = $('#password').val();
+                        var divPasswordCheck = $('#divPasswordCheck');
+
+                        if((passwordCheck=="") || (password!=passwordCheck)){
+                            divPasswordCheck.removeClass("has-success");
+                            divPasswordCheck.addClass("has-error");
+                        }else{
+                            divPasswordCheck.removeClass("has-error");
+                            divPasswordCheck.addClass("has-success");
+                        }
+                    });
+
+                    $('#name').keyup(function(event){
+
+                        var divName = $('#divName');
+
+                        if($.trim($('#name').val())==""){
+                            divName.removeClass("has-success");
+                            divName.addClass("has-error");
+                        }else{
+                            divName.removeClass("has-error");
+                            divName.addClass("has-success");
+                        }
+                    });
+
+                    $('#nickname').keyup(function(event){
+
+                        var divNickname = $('#divNickname');
+
+                        if($.trim($('#nickname').val())==""){
+                            divNickname.removeClass("has-success");
+                            divNickname.addClass("has-error");
+                        }else{
+                            divNickname.removeClass("has-error");
+                            divNickname.addClass("has-success");
+                        }
+                    });
+
+                    $('#email').keyup(function(event){
+
+                        var divEmail = $('#divEmail');
+
+                        if($.trim($('#email').val())==""){
+                            divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                        }else{
+                            divEmail.removeClass("has-error");
+                            divEmail.addClass("has-success");
+                        }
+                    });
+
+                    $('#phoneNumber').keyup(function(event){
+
+                        var divPhoneNumber = $('#divPhoneNumber');
+
+                        if($.trim($('#phoneNumber').val())==""){
+                            divPhoneNumber.removeClass("has-success");
+                            divPhoneNumber.addClass("has-error");
+                        }else{
+                            divPhoneNumber.removeClass("has-error");
+                            divPhoneNumber.addClass("has-success");
+                        }
+                    });
+
+
+                    //------- validation 검사
+                    $("#form").submit(function( event ) {
+
+                        var provision = $('#provision');
+                        var memberInfo = $('#memberInfo');
+                        var divId = $('#divId');
+                        var divPassword = $('#divPassword');
+                        var divPasswordCheck = $('#divPasswordCheck');
+                        var divName = $('#divName');
+                        var divEmail = $('#divEmail');
+                        var divPhoneNumber = $('#divPhoneNumber');
+
+
+                        //아이디 검사
+                        if($('#id').val()==""){
+                            alert("아이디를 입력하여 주시기 바랍니다.");
+                            divId.removeClass("has-success");
+                            divId.addClass("has-error");
+                            $('#id').focus();
+                            return false;
+                        }else{
+                            divId.removeClass("has-error");
+                            divId.addClass("has-success");
+                        }
+
+                        //패스워드 검사
+                        if($('#password').val()==""){
+                        	alert("패스워드를 입력하여 주시기 바랍니다.");
+                        	divPassword.removeClass("has-success");
+                            divPassword.addClass("has-error");
+                            $('#password').focus();
+                            return false;
+                        }else{
+                            divPassword.removeClass("has-error");
+                            divPassword.addClass("has-success");
+                        }
+
+                        //패스워드 확인
+                        if($('#passwordCheck').val()==""){
+                        	alert("패스워드 확인을 입력하여 주시기 바랍니다.");                         
+                            divPasswordCheck.removeClass("has-success");
+                            divPasswordCheck.addClass("has-error");
+                            $('#passwordCheck').focus();
+                            return false;
+                        }else{
+                            divPasswordCheck.removeClass("has-error");
+                            divPasswordCheck.addClass("has-success");
+                        }
+
+                        //패스워드 비교
+                       
+                        if($('#password').val()!=$('#passwordCheck').val() || $('#passwordCheck').val()==""){
+                        	alert("패스워드가 일치하지 않습니다.");      
+                        	divPasswordCheck.removeClass("has-success");
+                            divPasswordCheck.addClass("has-error");
+                            $('#passwordCheck').focus();
+                            return false;
+                        }else{
+                            divPasswordCheck.removeClass("has-error");
+                            divPasswordCheck.addClass("has-success");
+                        }
+
+                        //이름
+                        if($('#name').val()==""){
+                        	alert("이름을 입력하여 주시기 바랍니다.");
+                            modal.modal('show');
+
+                            divName.removeClass("has-success");
+                            divName.addClass("has-error");
+                            $('#name').focus();
+                            return false;
+                        }else{
+                            divName.removeClass("has-error");
+                            divName.addClass("has-success");
+                        }
+
+                        //이메일
+                        if($('#email').val()==""){
+                        	alert("이메일을 입력하여 주시기 바랍니다.");
+                            divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                            $('#email').focus();
+                            return false;
+                        }else{
+                            divEmail.removeClass("has-error");
+                            divEmail.addClass("has-success");
+                        }
+
+                        //휴대폰 번호
+                        if($('#phoneNumber').val()==""){
+                        	alert("휴대폰 번호를 입력하여 주시기 바랍니다.");
+                            divPhoneNumber.removeClass("has-success");
+                            divPhoneNumber.addClass("has-error");
+                            $('#phoneNumber').focus();
+                            return false;
+                        }else{
+                            divPhoneNumber.removeClass("has-error");
+                            divPhoneNumber.addClass("has-success");
+                        }
+                        
+                        if($("#postcode").val()==""){
+                        	alert("주소를 입력해주세요");
+                        	modal.modal("show");
+                        	
+                        	divEmail.removeClass("has-success");
+                            divEmail.addClass("has-error");
+                            return false;
+                        }else{
+                        	  divEmail.removeClass("has-error");
+                              divEmail.addClass("has-success");
+                        }
+
+
+                    });
+
+                });
+                document.getElementById("search").onclick = searchAddress;
+                
+                function searchAddress() {
+                    new daum.Postcode({
+                        oncomplete: function(data) {
+                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                            var roadAddr = data.roadAddress; // 도로명 주소 변수
+                            var extraRoadAddr = ''; // 참고 항목 변수
+
+                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                extraRoadAddr += data.bname;
+                            }
+                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                            if(data.buildingName !== '' && data.apartment === 'Y'){
+                                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                            if(extraRoadAddr !== ''){
+                                extraRoadAddr = ' (' + extraRoadAddr + ')';
+                            }
+
+                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                            document.getElementById('postcode').value = data.zonecode;
+                            document.getElementById("Address1").value = roadAddr;
+                        }
+                    }).open();
+                }
+
+            </script>
+	
         
         <!-- 						진향이 로그인폼끝 -->
         <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -363,7 +644,7 @@
 								<div class="card-body">
 									<div class="mx-auto d-block">
 										<img class="rounded-circle mx-auto d-block"
-											src="images/admin.jpg" alt="profile image" width="130px">
+											src="images/profile.jpg" alt="profile image" width="130px">
 										<h5 class="text-center mt-2 mb-1"><b>${user.id} 님</b></h5>
 										<!-- <div class="location text-center">Lv. 일반회원</div> -->
 									</div>
@@ -501,295 +782,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="assets/js/main.js"></script>
-	<script>
-
-                $(function(){
-                	
-                	$("img.ui-datepicker-trigger").remove();
-                	
-                    //모달을 전역변수로 선언
-                    var modalContents = $(".modal-contents");
-                    var modal = $("#defaultModal");
-
-                    $('.onlyAlphabetAndNumber').keyup(function(event){
-                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
-                            var inputVal = $(this).val();
-                            $(this).val($(this).val().replace(/[^_a-z0-9]/gi,'')); //_(underscore), 영어, 숫자만 가능
-                        }
-                    });
-
-                    $(".onlyHangul").keyup(function(event){
-                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
-                            var inputVal = $(this).val();
-                            $(this).val(inputVal.replace(/[a-z0-9]/gi,''));
-                        }
-                    });
-
-                    $(".onlyNumber").keyup(function(event){
-                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
-                            var inputVal = $(this).val();
-                            $(this).val(inputVal.replace(/[^0-9]/gi,''));
-                        }
-                    });
-
-                    //------- 검사하여 상태를 class에 적용
-                    $('#id').keyup(function(event){
-
-                        var divId = $('#divId');
-
-                        if($('#id').val()==""){
-                            divId.removeClass("has-success");
-                            divId.addClass("has-error");
-                        }else{
-                            divId.removeClass("has-error");
-                            divId.addClass("has-success");
-                        }
-                    });
-
-                    $('#password').keyup(function(event){
-
-                        var divPassword = $('#divPassword');
-
-                        if($('#password').val()==""){
-                            divPassword.removeClass("has-success");
-                            divPassword.addClass("has-error");
-                        }else{
-                            divPassword.removeClass("has-error");
-                            divPassword.addClass("has-success");
-                        }
-                    });
-
-                    $('#passwordCheck').keyup(function(event){
-
-                        var passwordCheck = $('#passwordCheck').val();
-                        var password = $('#password').val();
-                        var divPasswordCheck = $('#divPasswordCheck');
-
-                        if((passwordCheck=="") || (password!=passwordCheck)){
-                            divPasswordCheck.removeClass("has-success");
-                            divPasswordCheck.addClass("has-error");
-                        }else{
-                            divPasswordCheck.removeClass("has-error");
-                            divPasswordCheck.addClass("has-success");
-                        }
-                    });
-
-                    $('#name').keyup(function(event){
-
-                        var divName = $('#divName');
-
-                        if($.trim($('#name').val())==""){
-                            divName.removeClass("has-success");
-                            divName.addClass("has-error");
-                        }else{
-                            divName.removeClass("has-error");
-                            divName.addClass("has-success");
-                        }
-                    });
-
-                    $('#nickname').keyup(function(event){
-
-                        var divNickname = $('#divNickname');
-
-                        if($.trim($('#nickname').val())==""){
-                            divNickname.removeClass("has-success");
-                            divNickname.addClass("has-error");
-                        }else{
-                            divNickname.removeClass("has-error");
-                            divNickname.addClass("has-success");
-                        }
-                    });
-
-                    $('#email').keyup(function(event){
-
-                        var divEmail = $('#divEmail');
-
-                        if($.trim($('#email').val())==""){
-                            divEmail.removeClass("has-success");
-                            divEmail.addClass("has-error");
-                        }else{
-                            divEmail.removeClass("has-error");
-                            divEmail.addClass("has-success");
-                        }
-                    });
-
-                    $('#phoneNumber').keyup(function(event){
-
-                        var divPhoneNumber = $('#divPhoneNumber');
-
-                        if($.trim($('#phoneNumber').val())==""){
-                            divPhoneNumber.removeClass("has-success");
-                            divPhoneNumber.addClass("has-error");
-                        }else{
-                            divPhoneNumber.removeClass("has-error");
-                            divPhoneNumber.addClass("has-success");
-                        }
-                    });
-
-
-                    //------- validation 검사
-                    $("#form").submit(function( event ) {
-                    	
-                        var provision = $('#provision');
-                        var memberInfo = $('#memberInfo');
-                        var divId = $('#divId');
-                        var divPassword = $('#divPassword');
-                        var divPasswordCheck = $('#divPasswordCheck');
-                        var divName = $('#divName');
-                        var divEmail = $('#divEmail');
-                        var divPhoneNumber = $('#divPhoneNumber');
-
-
-                        //아이디 검사
-                        if($('#id').val()==""){
-                            modalContents.text("아이디를 입력하여 주시기 바랍니다.");
-                            modal.modal('show');
-
-                            divId.removeClass("has-success");
-                            divId.addClass("has-error");
-                            $('#id').focus();
-                            return false;
-                        }else{
-                            divId.removeClass("has-error");
-                            divId.addClass("has-success");
-                        }
-
-                        //패스워드 검사
-                        if($('#password').val()==""){
-                            modalContents.text("패스워드를 입력하여 주시기 바랍니다.");
-                            modal.modal('show');
-
-                            divPassword.removeClass("has-success");
-                            divPassword.addClass("has-error");
-                            $('#password').focus();
-                            return false;
-                        }else{
-                            divPassword.removeClass("has-error");
-                            divPassword.addClass("has-success");
-                        }
-
-                        //패스워드 확인
-                        if($('#passwordCheck').val()==""){
-                            modalContents.text("패스워드 확인을 입력하여 주시기 바랍니다.");
-                            modal.modal('show');
-
-                            divPasswordCheck.removeClass("has-success");
-                            divPasswordCheck.addClass("has-error");
-                            $('#passwordCheck').focus();
-                            return false;
-                        }else{
-                            divPasswordCheck.removeClass("has-error");
-                            divPasswordCheck.addClass("has-success");
-                        }
-
-                        //패스워드 비교
-                       
-                        if($('#password').val() != $('#passwordCheck').val() || $('#passwordCheck').val()==""){
-                            modalContents.text("패스워드가 일치하지 않습니다.");
-                            modal.modal('show');
-
-                            divPasswordCheck.removeClass("has-success");
-                            divPasswordCheck.addClass("has-error");
-                            $('#passwordCheck').focus();
-                            return false;
-                        }else{
-                            divPasswordCheck.removeClass("has-error");
-                            divPasswordCheck.addClass("has-success");
-                        }
-
-                        //이름
-                        if($('#name').val()==""){
-                            modalContents.text("이름을 입력하여 주시기 바랍니다.");
-                            modal.modal('show');
-
-                            divName.removeClass("has-success");
-                            divName.addClass("has-error");
-                            $('#name').focus();
-                            return false;
-                        }else{
-                            divName.removeClass("has-error");
-                            divName.addClass("has-success");
-                        }
-
-                        //이메일
-                        if($('#email').val()==""){
-                            modalContents.text("이메일을 입력하여 주시기 바랍니다.");
-                            modal.modal('show');
-
-                            divEmail.removeClass("has-success");
-                            divEmail.addClass("has-error");
-                            $('#email').focus();
-                            return false;
-                        }else{
-                            divEmail.removeClass("has-error");
-                            divEmail.addClass("has-success");
-                        }
-
-                        //휴대폰 번호
-                        if($('#phoneNumber').val()==""){
-                            modalContents.text("휴대폰 번호를 입력하여 주시기 바랍니다.");
-                            modal.modal('show');
-
-                            divPhoneNumber.removeClass("has-success");
-                            divPhoneNumber.addClass("has-error");
-                            $('#phoneNumber').focus();
-                            return false;
-                        }else{
-                            divPhoneNumber.removeClass("has-error");
-                            divPhoneNumber.addClass("has-success");
-                        }
-                        
-                        if($("#postcode").val()==""){
-                        	modalContents.text("주소를 입력해주세요");
-                        	modal.modal("show");
-                        	
-                        	divEmail.removeClass("has-success");
-                            divEmail.addClass("has-error");
-                            return false;
-                        }else{
-                        	  divEmail.removeClass("has-error");
-                              divEmail.addClass("has-success");
-                        }
-
-
-                    });
-
-                });
-                document.getElementById("search").onclick = searchAddress;
-                
-                function searchAddress() {
-                    new daum.Postcode({
-                        oncomplete: function(data) {
-                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                            var roadAddr = data.roadAddress; // 도로명 주소 변수
-                            var extraRoadAddr = ''; // 참고 항목 변수
-
-                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                                extraRoadAddr += data.bname;
-                            }
-                            // 건물명이 있고, 공동주택일 경우 추가한다.
-                            if(data.buildingName !== '' && data.apartment === 'Y'){
-                                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                            }
-                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                            if(extraRoadAddr !== ''){
-                                extraRoadAddr = ' (' + extraRoadAddr + ')';
-                            }
-
-                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                            document.getElementById('postcode').value = data.zonecode;
-                            document.getElementById("Address1").value = roadAddr;
-                        }
-                    }).open();
-                }
-
-            </script>
-
+	
 </body>
 </html>
     

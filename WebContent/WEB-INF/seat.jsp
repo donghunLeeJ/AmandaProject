@@ -6,11 +6,12 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Main</title>
+<title>좌석</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+<!--title아이콘 변경하는 link  -->
+<link rel="shortcut icon" href="images/title.png">
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 
@@ -210,18 +211,7 @@
                <div class="top-right">
                   <div class="header-menu">
                      <div class="header-left">
-                        <button class="search-trigger">
-                           <i class="fa fa-search"></i>
-                        </button>
-                        <div class="form-inline">
-                           <form class="search-form">
-                              <input class="form-control mr-sm-2" type="text"
-                                 placeholder="Search ..." aria-label="Search">
-                              <button class="search-close" type="submit">
-                                 <i class="fa fa-close"></i>
-                              </button>
-                           </form>
-                        </div>
+                       
                         <div class="dropdown for-notification">
                            <button type="button"
                               class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
