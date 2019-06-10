@@ -226,7 +226,7 @@
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{8,}" >
+                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{7,10}" >
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -299,7 +299,7 @@
                     $(".onlyHangul").keyup(function(event){
                         if (!(event.keyCode >=37 && event.keyCode<=40)) {
                             var inputVal = $(this).val();
-                            $(this).val(inputVal.replace(/[a-z0-9!-~]/gi,''));
+                            $(this).val(inputVal.replace(/[a-z0-9!-~\s]/gi,''));
                         }
                     });
                     $(".noT").keyup(function(event){
@@ -576,7 +576,7 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form" name="formname" method="post">
+												<form action="loginProc.member" id="formee" name="formname" method="post">
                         <div class="form-group">
                            <label for="exampleFormControlInput1">ID</label> <input
                               type="text" class="form-control" id="joinemail"
@@ -622,7 +622,7 @@
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
 									document.getElementById("login").onclick = function() {
-									document.getElementById("form").submit();
+									document.getElementById("formee").submit();
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
 								</script>
