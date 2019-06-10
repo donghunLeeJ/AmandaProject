@@ -281,8 +281,7 @@
 					<c:otherwise>
 						<script>		
 
-					window.open("page?url=WEB-INF/Hello.jsp","",
-									"location=no, directories=no,width=400px,height=250px");
+					
 				
 </script> -->
 <script type="text/javascript"> function getCookie(name) { var cookie = document.cookie; 
@@ -292,7 +291,7 @@ for ( var index in cookie_array)
 if (cookie_name[0] == "popupYN") { return cookie_name[1]; } } } return ; 
 } function openPopup(url) { 
 	var cookieCheck = getCookie("popupYN"); 
-if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450,height=300,left=0,top=0') } 
+if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=400,height=250,left=0,top=0') } 
 </script>
 
 

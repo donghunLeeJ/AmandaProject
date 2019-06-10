@@ -110,9 +110,6 @@ public class MemberController extends HttpServlet {
 									}															
 								}
 							};	
-
-							//媛곴컖 timertask�겢�옒�뒪 蹂��닔 , �뒪�젅�뱶媛� �옉�룞�븯湲곌퉴吏� ��湲� �떆媛�,諛섎났 二쇨린瑜� �굹���깂
-							//(諛섎났二쇨린�뿉�꽌 1000�� 1珥덉� 媛숇떎.)
 							time.schedule(timertask,1,1000);
 						}
 
@@ -128,6 +125,7 @@ public class MemberController extends HttpServlet {
 							request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
 						}
 
+						request.getServletContext().setAttribute("seatUsed", cDao.selectSeat());
 						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/loginProc.jsp");
 						rd.forward(request, response);							
 					}
@@ -259,7 +257,7 @@ public class MemberController extends HttpServlet {
 				dao.deleteAlreadyLogOut(id);
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
-
+				request.getServletContext().setAttribute("seatUsed", cDao.usedSeat());
 				request.getSession().invalidate();		
 				request.getRequestDispatcher("WEB-INF/logout.jsp").forward(request, response);	
 

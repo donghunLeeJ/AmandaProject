@@ -704,8 +704,8 @@
    		  <c:forEach var="i" items="${seat }">
 				<script>
 				if(${i.onOff }==1){
-				$('#seat${i.seatNum}').css('background-color','red');	
-				
+				$('#seat${i.seatNum}').css('background-color','dodgerblue');	
+				$('#seat${i.seatNum}').css('color','white');	
 				
 				}										
 				</script>
@@ -740,10 +740,10 @@
  		          
  		 }).done(function(point){
  			     	   
- 		      m = (Math.floor(point/60)) + "분 "; 
- 		      var msg = "<font color='green'>" + m +"</font>";
+ 		      m = (Math.floor(point/60)) + " 분 "; 
+ 		      var msg = "<font color='pink'> " + m +"</font>";
  		         
- 		 $("#seat${i.value}>div").html("${i.key}님의 남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
+ 		 $("#seat${i.value}>div").html("${i.key}님의 <br>남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
  		
 		 	
  		 //만일 사용자의 포인트가 다 떨어졌을 경우 반복을 중지시키고 자리색깔을 본래의 색깔로 바꾼다.
