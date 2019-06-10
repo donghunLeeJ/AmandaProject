@@ -286,7 +286,7 @@ public class BoardController extends HttpServlet {
 
       }catch(Exception e) {
          e.printStackTrace();
-         response.sendRedirect("error.html");
+         response.sendRedirect("error.jsp");
       }
    }
 
