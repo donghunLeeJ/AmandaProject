@@ -44,7 +44,7 @@ public class BoardController extends HttpServlet {
          if(command.equals("/BoardWrite.board")){
 
             String title = request.getParameter("title");
-            String newTitle = title.replace("<", "%1$2#").replace(">", "!5@4#");
+            String newTitle = title.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
 
             String contents =request.getParameter("contents");
             String newContents = contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
@@ -166,9 +166,10 @@ public class BoardController extends HttpServlet {
             MemberDTO writerdto = (MemberDTO)request.getSession().getAttribute("user");
             String id = writerdto.getId();
             String repl_contents = request.getParameter("repl_contents");
+            String new_repl_contents = repl_contents.replace("<script>", "%1$2#").replace("</script>", "!5@4#");
             int contents_no = Integer.parseInt(request.getParameter("contents_no"));
 
-            result = dao.insertRepl(contents_no, id, repl_contents);
+            result = dao.insertRepl(contents_no, id, new_repl_contents);
 
             request.setAttribute("no", contents_no);
             request.setAttribute("result", result);
