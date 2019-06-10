@@ -48,10 +48,13 @@
 }
 
 #todaysMenu {
-   background-color: white;
-   padding-left: 20px;
-   padding-right: 20px;
-   border-radius: 10px;
+	text-shadow: 4px 2px 2px gray;
+	font-family:cursive;
+	font-weight:600;
+	color: white;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 10px;
 }
 
 #caroWrapper {
