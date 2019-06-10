@@ -78,6 +78,9 @@ public class MemberController extends HttpServlet {
 						MemberDTO user = dao.select_user(loginid);			
 						request.setAttribute("login", 1);													
 						request.getSession().setAttribute("user", dao.select_user(loginid));
+						
+					
+						//String ip = "192.168.60.27";	
 						String ip = request.getRemoteAddr();			
 					
 						if(cDao.UserSeatIpCheck(ip) == 0){	

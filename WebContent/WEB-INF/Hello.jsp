@@ -80,9 +80,11 @@ background-color: #bbe3e3;
     		    	  clearInterval(tid);   
     		    	  
     		      }else if(point == -1){
-    		    			    	  		    	 	  
-    		    	  clearInterval(tid);     
-    		    	  
+    		    			
+    		    	  $("#point").html(${user.point});
+    		    	  $("#timeout").html("<font color='red'>" +  ((Math.floor(${user.point}/60)) + "Ка ") +"</font>");
+    		    	  clearInterval(tid);   
+    		    	  	    	 
     		      }   	     	                   		      		      
     		 });   	     
     	   }
