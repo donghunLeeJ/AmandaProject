@@ -102,35 +102,9 @@
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="page?url=WEB-INF/main.jsp"><i
+					<li class="active"><a href="page?url=WEB-INF/main.jsp">
 
-							<script>
-                     
-                     
-                     $(window).on("resize",function(){
-            				if($(window).width() >= 752){
-            					$("#left-panel").css("display","block");
-            				}				
-            			})
-
-                     $("#charge").on("click",function(){
-                         alert("로그인 후 이용가능합니다.");
-                         $("#loginbtn").trigger("click");
-
-                         
-                        
-                     })
-                  </script>
-
-						</c:when>
-						<c:otherwise>
-							<li id="charge" class="menu-item-has-children"><a
-								href="page?url=WEB-INF/pay.jsp"> <i
-
-							</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
+				
 			</div>
 		</nav>
 	</aside>
