@@ -194,12 +194,12 @@ public class MemberController extends HttpServlet {
 			}
 			break;
 		case "updateProc.member" :
-			//�쉶�썝 �젙蹂댁닔�젙 而⑦듃濡ㅻ윭	
+			
 			try {
 				System.out.println("kk");
-				String pw=request.getParameter("newpw");
-				String email=request.getParameter("newemail");
-				String phone=request.getParameter("phone");
+				String pw=request.getParameter("joinmemberpw");
+				String email=request.getParameter("joinmemberemail");
+				String phone=request.getParameter("phoneNumber");
 				String address1=request.getParameter("address1");
 				String address2=request.getParameter("address2");
 				String postcode=request.getParameter("postcode");

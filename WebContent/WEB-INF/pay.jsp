@@ -131,7 +131,7 @@
 	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
-		<header id="header" class="header pt-1">
+		<header id="header" class="header">
 			<div class="top-left">
 				<div class="navbar-header">
 					<a class="navbar-brand p-0" href="page?url=WEB-INF/main.jsp"><img  src="images/logo5.png"

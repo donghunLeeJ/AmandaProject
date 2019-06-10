@@ -238,7 +238,7 @@
                 <div class="form-group" id="divName">
                     <label for="inputName" class="col-lg-2 control-label">이름</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyHangul" id="name" name="joinmembername" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
+                        <input type="text" class="form-control onlyHangul" id="name" name="joinmembername" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15" >
                     </div>
                 </div>
 
@@ -258,7 +258,7 @@
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="joinmemberphone" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="joinmemberphone" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." minlength="7">
                     </div>
                 </div>
                 
@@ -266,7 +266,7 @@
                     <div class="col-lg-10">
                         <input type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
                         <input type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
-                        <input type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        <input type="text" class="form-control noT" id="Address2" name="address2" placeholder="상세주소" ><br>
                         
                     </div>
                     
@@ -289,11 +289,8 @@
                 	$("img.ui-datepicker-trigger").remove();
                 	
                     //모달을 전역변수로 선언
-                    var modalContents = $(".modal-contents");
-                    var modal = $("#defaultModal");
-
                     $('.onlyAlphabetAndNumber').keyup(function(event){
-                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                       	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
                             var inputVal = $(this).val();
                             $(this).val($(this).val().replace(/[^_a-z0-9]/gi,'')); //_(underscore), 영어, 숫자만 가능
                         }
@@ -302,7 +299,13 @@
                     $(".onlyHangul").keyup(function(event){
                         if (!(event.keyCode >=37 && event.keyCode<=40)) {
                             var inputVal = $(this).val();
-                            $(this).val(inputVal.replace(/[a-z0-9]/gi,''));
+                            $(this).val(inputVal.replace(/[a-z0-9!-~]/gi,''));
+                        }
+                    });
+                    $(".noT").keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val(inputVal.replace(/[!-,./:-@]/gi,''));
                         }
                     });
 

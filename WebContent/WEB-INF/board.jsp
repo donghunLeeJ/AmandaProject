@@ -229,7 +229,7 @@
 									
 										 <span id="timeout" ></span> 
 									</h5>
- 									<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+ 									<button type="button" class="btn pr-1 pt-0" id="msg" style="background-color:white"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
  									<div class="user-area  float-right">
                         				<a href="#" class="active" data-toggle="modal"
                            				aria-haspopup="true" aria-expanded="false"
