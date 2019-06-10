@@ -63,7 +63,8 @@ public class ChartController extends HttpServlet {
 				for(int i = 0 ; i < 7 ; i ++) {
 					Calendar cal = Calendar.getInstance();
 					cal.add(Calendar.MONTH, -i);
-					String dated = sdf.format(cal.getTime());
+					SimpleDateFormat sdf2 = new SimpleDateFormat("YY/MM");
+					String dated = sdf2.format(cal.getTime());
 					System.out.println(dated);
 					hashMap.put("amount"+i,chartDAO.monthly_sell(i));
 					hashMap2.put("day"+i,dated);

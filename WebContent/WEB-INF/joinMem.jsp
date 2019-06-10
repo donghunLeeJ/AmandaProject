@@ -50,9 +50,9 @@
   color:#fff;
   border:none;
   position:relative;
-  height:20px;
+  height:30px;
   font-size:0.8em;
-  padding:0 2em;
+  padding:0 1em;
   cursor:pointer;
   transition:800ms ease all;
   outline:none;
@@ -220,13 +220,13 @@
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyAlphabetAndNumber" name="joinmemberid" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                        <input type="text" class="form-control onlyAlphabetAndNumber" name="joinmemberid" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30" >
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{8,}" >
+                        <input type="password" class="form-control" id="password" name="joinmemberpw" data-rule-required="true" placeholder="영어 대,소문자 숫자로 8글자 이상" maxlength="30" pattern="[0-9a-zA-z]{7,10}" >
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -238,7 +238,7 @@
                 <div class="form-group" id="divName">
                     <label for="inputName" class="col-lg-2 control-label">이름</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyHangul" id="name" name="joinmembername" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
+                        <input type="text" class="form-control onlyHangul" id="name" name="joinmembername" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15" >
                     </div>
                 </div>
 
@@ -258,15 +258,15 @@
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
                     <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="joinmemberphone" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="joinmemberphone" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." minlength="7">
                     </div>
                 </div>
                 
-                 <label for="inputPhoneNumber" class="col-lg-2 control-label" >주소 입력 </label> <input type="button" class="mb-4" value="우편번호 찾기" id="search">
+                 <label for="inputPhoneNumber" class="col-lg-2 col-sm-2 control-label " >주소 입력 </label> <input type="button" class="mb-12 mb-2" value="우편번호 찾기" id="search">
                     <div class="col-lg-10">
                         <input type="text" class="form-control readonly" id="postcode" name="postcode" placeholder="우편번호" >
                         <input type="text" class="form-control readonly" id="Address1" name="address1" placeholder="주소"  >
-                        <input type="text" class="form-control" id="Address2" name="address2" placeholder="상세주소" ><br>
+                        <input type="text" class="form-control noT" id="Address2" name="address2" placeholder="상세주소" ><br>
                         
                     </div>
                     
@@ -289,11 +289,8 @@
                 	$("img.ui-datepicker-trigger").remove();
                 	
                     //모달을 전역변수로 선언
-                    var modalContents = $(".modal-contents");
-                    var modal = $("#defaultModal");
-
                     $('.onlyAlphabetAndNumber').keyup(function(event){
-                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                       	    if (!(event.keyCode >=37 && event.keyCode<=40)) {
                             var inputVal = $(this).val();
                             $(this).val($(this).val().replace(/[^_a-z0-9]/gi,'')); //_(underscore), 영어, 숫자만 가능
                         }
@@ -302,7 +299,13 @@
                     $(".onlyHangul").keyup(function(event){
                         if (!(event.keyCode >=37 && event.keyCode<=40)) {
                             var inputVal = $(this).val();
-                            $(this).val(inputVal.replace(/[a-z0-9]/gi,''));
+                            $(this).val(inputVal.replace(/[a-z0-9!-~\s]/gi,''));
+                        }
+                    });
+                    $(".noT").keyup(function(event){
+                        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                            var inputVal = $(this).val();
+                            $(this).val(inputVal.replace(/[!-,./:-@]/gi,''));
                         }
                     });
 
@@ -573,7 +576,7 @@
 												</button>
 											</div>
 											<div class="modal-body">
-												<form action="loginProc.member" id="form" name="formname" method="post">
+												<form action="loginProc.member" id="formee" name="formname" method="post">
                         <div class="form-group">
                            <label for="exampleFormControlInput1">ID</label> <input
                               type="text" class="form-control" id="joinemail"
@@ -619,7 +622,7 @@
 									location.href = "page?url=WEB-INF/joinMem.jsp";
 									})
 									document.getElementById("login").onclick = function() {
-									document.getElementById("form").submit();
+									document.getElementById("formee").submit();
 									}
 									// 									로그인 버튼과 회원가입 버튼의 script
 								</script>

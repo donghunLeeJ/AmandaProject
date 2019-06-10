@@ -101,9 +101,7 @@
 									<i class="menu-icon fa fa-usd fa-lg "></i>충전하기
 							</a></li>
 							<script>
-                     
-                     
-                     $(window).on("resize",function(){
+                    $(window).on("resize",function(){
             				if($(window).width() >= 752){
             					$("#left-panel").css("display","block");
             				}				
@@ -127,6 +125,7 @@
 						</c:otherwise>
 					</c:choose>
 				</ul>
+
 			</div>
 		</nav>
 	</aside>

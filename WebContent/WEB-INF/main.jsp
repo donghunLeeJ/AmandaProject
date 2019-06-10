@@ -76,12 +76,11 @@
 #header {
 	border: 0px;
 }
-#seat{
- background-image:url(images/mainseat.jpg); 
- background-size: 98% ;
+
+#seat {
+	background-image: url(images/mainseat.jpg);
+	background-size: 98%;
 }
-
-
 </style>
 </head>
 
@@ -151,38 +150,55 @@
 		<header id="header" class="header">
 			<div class="top-left">
 				<div class="navbar-header">
-					<a class="navbar-brand p-0" href="page?url=WEB-INF/main.jsp"><img  src="images/logo5.png"
-						alt="Logo"></a> <a class="navbar-brand hidden"
-						href="page?url=WEB-INF/main.jsp"><img src="images/logo2.png"
-						alt="Logo"></a> <a id="menuToggle" class="menutoggle"><i
-						class="fa fa-bars"></i></a>
+					<a class="navbar-brand p-0" href="page?url=WEB-INF/main.jsp"><img
+						src="images/logo5.png" alt="Logo"></a> <a
+						class="navbar-brand hidden" href="page?url=WEB-INF/main.jsp"><img
+						src="images/logo2.png" alt="Logo"></a> <a id="menuToggle"
+						class="menutoggle"><i class="fa fa-bars"></i></a>
 				</div>
 			</div>
 			<c:choose>
 				<c:when test="${user != null }">
 					<div class="top-right">
-						<div class="header-menu pt-3">
-					
-								
-								<h5><img src="https://img.icons8.com/color/30/000000/sales-performance.png">
-									 <span id="point" class="pr-3" ></span>
-									</h5>
-									<h5><img src="https://img.icons8.com/color/30/000000/alarm-clock.png">
-									
-										 <span id="timeout" ></span> 
-									</h5>
-									<c:choose>
-									<c:when test="${user.id ne 'admin'}">
-										<button type="button" class="btn pr-1 pt-0" id="msg"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
-									</c:when>
-									<c:otherwise>
-										<button type="button" class="btn btn-secondary " id="allmsg">전체msg</button>
-									</c:otherwise>
-								</c:choose>
-								
+
+	
+						<div class="header-menu ">
+
+
+							<h5>
+								<img
+									src="https://img.icons8.com/color/30/000000/sales-performance.png">
+								<span id="point"></span>
+							</h5>
+							<h5>
+								<img
+									src="https://img.icons8.com/color/30/000000/alarm-clock.png">
+
+								<span id="timeout"></span>
+							</h5>
+							<c:choose>
+								<c:when test="${user.id ne 'admin'}">
+									<button type="button" class="btn pr-1 pt-0" id="msg">
+										<img
+											src="https://img.icons8.com/color/35/000000/filled-sent.png">
+									</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn btn-secondary " id="allmsg">전체msg</button>
+								</c:otherwise>
+							</c:choose>
+							<!-- 	<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
+							 -->
+
+
+
+
+
+
+
 							<!-- </div> -->
 							<!--  mypage 사람 사진-->
-							<div class="user-area  float-right pr-1" >
+							<div class="user-area  float-right pr-1">
 								<a href="#" class="active" data-toggle="modal"
 									aria-haspopup="true" aria-expanded="false"
 									data-target="#exampleModal1"> <img
@@ -237,10 +253,12 @@
 						<img src="images/pcroom3.png" width=100% height=600px>
 					</div>
 				</div>
+
 								<c:choose>
 								<c:when test="${user == null }">
 							
 									<script>
+
                               if(${login== 0}){
                             	  alert("아이디가 없습니다 ");
                             	  loaction.href= "page?url=WEB-INF/main.jsp";
@@ -252,14 +270,17 @@
                             	  alert("이미 로그인 한 아이디 입니다 관리자에게 문의해주세요.");
                               }
                        		 </script>
-									<!-- <h3 class="card-title">충전/로그인/개인정보</h3>
+						<!-- <h3 class="card-title">충전/로그인/개인정보</h3>
 									<p class="card-text">내용</p>
 									<button type="button"
 										class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
 										data-target="#exampleModal" id="loginbtn">login</button> -->
-								</c:when>
-								<c:otherwise>
-						<!-- <script>		
+
+		
+					</c:when>
+					<c:otherwise>
+						<script>		
+
 					window.open("page?url=WEB-INF/Hello.jsp","",
 									"location=no, directories=no,width=400px,height=250px");
 				
@@ -278,7 +299,10 @@ if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450
 
 
 
+
 									<script>
+
+
 										//msg보내는 소켓 및 버튼
 										 var webSocket = new WebSocket('ws://192.168.60.20/broadcasting');
 									    webSocket.onerror = function(event) {
@@ -333,85 +357,107 @@ if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450
 										
 											                                                         
                            </script>
-								</c:otherwise>
-							</c:choose>
+					</c:otherwise>
+				</c:choose>
 
 
 
-					
-				
-				
-				
-				
-				
+
+
+
+
+
+
 				<!--              ----------------------------------- 잔여좌석 -->
 
-				
+
 				<div class="row mb-4">
-				
 
-					<div class="col-xl-6 col-lg-12 area p-xl-0 pr-xl-2" >
-					
-<h4><b>| 잔여 좌석</b></h4><br>
-							<div class="col-lg-12 area pr-xl-0pr-xl-2 "id="seat">
 
-								<canvas id="doughutChart" height="100%"></canvas>
+					<div class="col-xl-6 col-lg-12 area p-xl-0 pr-xl-2">
 
+						<h4>
+							<b>| 잔여 좌석</b>
+						</h4>
+						<br>
+						<div class="col-lg-12 area pr-xl-0pr-xl-2 " id="seat">
+
+							<canvas id="doughutChart" height="100%"></canvas>
+
+						</div>
+					</div>
+
+					<!-- pc방 내부 인테리어 -->
+
+					<div class="col-xl-6  col-lg-12 area p-xl-0 ">
+						<h4>
+							<b>| Amada <font color='orange'> PC</font>
+							</b>
+						</h4>
+						<br>
+
+						<div class="col-lg-12 area pr-xl-0pr-xl-2 ">
+							<div id="carouselExampleIndicators_interior"
+								class="carousel slide" data-ride="carousel"
+								data-interval="false">
+								<ol class="carousel-indicators">
+									<li data-target="#carouselExampleIndicators_interior"
+										data-slide-to="0" class="active"></li>
+									<li data-target="#carouselExampleIndicators_interior"
+										data-slide-to="1"></li>
+									<li data-target="#carouselExampleIndicators_interior"
+										data-slide-to="2"></li>
+									<li data-target="#carouselExampleIndicators_interior"
+										data-slide-to="3"></li>
+									<li data-target="#carouselExampleIndicators_interior"
+										data-slide-to="4"></li>
+									<li data-target="#carouselExampleIndicators_interior"
+										data-slide-to="5"></li>
+
+								</ol>
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<img src="images/interior1.png" class="d-block w-100"
+											alt="해당이미지가 없습니다">
+
+									</div>
+									<div class="carousel-item">
+										<img src="images/interior2.png" class="d-block w-100"
+											alt="해당이미지가 없습니다">
+									</div>
+									<div class="carousel-item">
+										<img src="images/interior3.png" class="d-block w-100"
+											alt="해당이미지가 없습니다">
+									</div>
+									<div class="carousel-item">
+										<img src="images/interior4.png" class="d-block w-100"
+											alt="해당이미지가 없습니다">
+									</div>
+									<div class="carousel-item">
+										<img src="images/interior5.png" class="d-block w-100"
+											alt="해당이미지가 없습니다">
+									</div>
+									<div class="carousel-item">
+										<img src="images/interior6.png" class="d-block w-100"
+											alt="해당이미지가 없습니다">
+									</div>
+								</div>
+								<a class="carousel-control-prev"
+									href="#carouselExampleIndicators_interior" role="button"
+									data-slide="prev"> <span class="carousel-control-prev-icon"
+									aria-hidden="true"></span> <span class="sr-only">Previous</span>
+								</a> <a class="carousel-control-next"
+									href="#carouselExampleIndicators_interior" role="button"
+									data-slide="next"> <span class="carousel-control-next-icon"
+									aria-hidden="true"></span> <span class="sr-only">Next</span>
+								</a>
 							</div>
 						</div>
-				
-					<!-- pc방 내부 인테리어 -->
-					
-					<div class="col-xl-6  col-lg-12 area p-xl-0 "  >
-						<h4><b>| Amada <font color='orange'> PC</font>  </b></h4><br>
-						
-							<div class="col-lg-12 area pr-xl-0pr-xl-2 " >
-						<div id="carouselExampleIndicators_interior" class="carousel slide" data-ride="carousel" data-interval="false">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators_interior" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators_interior" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators_interior" data-slide-to="2"></li>
-       <li data-target="#carouselExampleIndicators_interior" data-slide-to="3"></li>
-          <li data-target="#carouselExampleIndicators_interior" data-slide-to="4"></li>
-             <li data-target="#carouselExampleIndicators_interior" data-slide-to="5"></li>
-             
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/interior1.png" class="d-block w-100" alt="해당이미지가 없습니다">
-      
-    </div>
-    <div class="carousel-item">
-      <img src="images/interior2.png" class="d-block w-100" alt="해당이미지가 없습니다">
-    </div>
-    <div class="carousel-item">
-      <img src="images/interior3.png" class="d-block w-100" alt="해당이미지가 없습니다">
-    </div>
-    <div class="carousel-item">
-      <img src="images/interior4.png" class="d-block w-100" alt="해당이미지가 없습니다">
-    </div>
-    <div class="carousel-item">
-      <img src="images/interior5.png" class="d-block w-100" alt="해당이미지가 없습니다">
-    </div>
-     <div class="carousel-item">
-      <img src="images/interior6.png" class="d-block w-100" alt="해당이미지가 없습니다">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators_interior" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators_interior" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-	</div>					
-						
-					
-				</div>
 
-</div>
+
+					</div>
+
+				</div>
 
 				<script>
                
@@ -449,78 +495,101 @@ if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450
 				<!--              ----------------------------------- 잔여좌석 차트 시작 끝-->
 
 
-				
-				
+
+
 				<!--메뉴 및 이벤트   -->
-				<div class="row mb-4" >
-               <div class=" col-xl-6 col-lg-12 p-0 area pr-xl-2 pb-sm-4 pb-4">
-                <h4><b>| 오늘의 <font color='red'>추천</font> 메뉴</b></h4> <br>
-  			 <div id="carouselExampleControls" class="carousel slide  " data-ride="carousel" data-interval="false">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/beef.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
-    </div>
-    <div class="carousel-item">
-      <img src="images/kimchi.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
-    </div>
-    <div class="carousel-item">
-      <img src="images/nabe.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-               
-                 
-               </div>
+				<div class="row mb-4">
+					<div class=" col-xl-6 col-lg-12 p-0 area pr-xl-2 pb-sm-4 pb-4">
+						<h4>
+							<b>| 오늘의 <font color='red'>추천</font> 메뉴
+							</b>
+						</h4>
+						<br>
+						<div id="carouselExampleControls" class="carousel slide  "
+							data-ride="carousel" data-interval="false">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img src="images/beef.png" class="d-block w-100"
+										alt="해당 이미지를 찾을 수 없습니다">
+								</div>
+								<div class="carousel-item">
+									<img src="images/kimchi.png" class="d-block w-100"
+										alt="해당 이미지를 찾을 수 없습니다">
+								</div>
+								<div class="carousel-item">
+									<img src="images/nabe.png" class="d-block w-100"
+										alt="해당 이미지를 찾을 수 없습니다">
+								</div>
+							</div>
+							<a class="carousel-control-prev" href="#carouselExampleControls"
+								role="button" data-slide="prev"> <span
+								class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+								class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next" href="#carouselExampleControls"
+								role="button" data-slide="next"> <span
+								class="carousel-control-next-icon" aria-hidden="true"></span> <span
+								class="sr-only">Next</span>
+							</a>
+						</div>
 
 
-               <div class="  col-xl-6 col-lg-12  p-0 area " >
-                  <h4><b>| 이벤트</b></h4> <br>
-  			 <div id="carouselExampleControls1" class="carousel slide  " data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/event31.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
-    </div>
-    <div class="carousel-item">
-      <img src="images/event32.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
-    </div>
-    <div class="carousel-item">
-      <img src="images/event30.png" class="d-block w-100" alt="해당 이미지를 찾을 수 없습니다">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-         
-               </div>
-               </div>
-               
-               <!-- 찾아 오는 길 -->
-				<div class="row mb-2" >
-               <div class=" col-xl-12 ">
-                <h4><b>| 찾아오시는 길</b></h4>
-                                 </div>
-               
-                 </div>   
-               
-          <div id="map" style="width:96%;height:350px;color: black;margin-left:15px;margin-top:50px;border-radius: 20px;"></div>
-                    <div style="margin-left: 15px;margin-top: 10px;"><font color='red'>주소 :</font> 서울특별시 중구 남대문로1가 남대문로 120</div>  
-			
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=af582622a1adc92099e0690071c5bfd5"></script>
-        <script>
+					</div>
+
+
+					<div class="  col-xl-6 col-lg-12  p-0 area ">
+						<h4>
+							<b>| 이벤트</b>
+						</h4>
+						<br>
+						<div id="carouselExampleControls1" class="carousel slide  "
+							data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img src="images/event31.png" class="d-block w-100"
+										alt="해당 이미지를 찾을 수 없습니다">
+								</div>
+								<div class="carousel-item">
+									<img src="images/event32.png" class="d-block w-100"
+										alt="해당 이미지를 찾을 수 없습니다">
+								</div>
+								<div class="carousel-item">
+									<img src="images/event30.png" class="d-block w-100"
+										alt="해당 이미지를 찾을 수 없습니다">
+								</div>
+							</div>
+							<a class="carousel-control-prev" href="#carouselExampleControls1"
+								role="button" data-slide="prev"> <span
+								class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+								class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next"
+								href="#carouselExampleControls1" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- 찾아 오는 길 -->
+				<div class="row mb-2">
+					<div class=" col-xl-12 ">
+						<h4>
+							<b>| 찾아오시는 길</b>
+						</h4>
+					</div>
+
+				</div>
+
+				<div id="map"
+					style="width: 96%; height: 350px; color: black; margin-left: 15px; margin-top: 50px; border-radius: 20px;"></div>
+				<div style="margin-left: 15px; margin-top: 10px;">
+					<font color='red'>주소 :</font> 서울특별시 중구 남대문로1가 남대문로 120
+				</div>
+
+				<script type="text/javascript"
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=af582622a1adc92099e0690071c5bfd5"></script>
+				<script>
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = { 
                     center: new daum.maps.LatLng(37.567937, 126.983023), // 지도의 중심좌표
@@ -561,66 +630,66 @@ if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450
                 infowindow.open(map, marker);  
             });
         </script>
-			
-			
+
+
 			</div>
-			
-			
-			
-			
-	
-		<!--                여기부터 진향이가 만든 로그인폼 -->
 
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
 
-					<div class="modal-body">
-						<form action="loginProc.member" id="form" name="formname"
-							method="post">
-							<div class="form-group">
-								<label for="exampleFormControlInput1">ID</label> <input
-									type="text" class="form-control" id="joinemail"
-									placeholder="ID를 입력하시오" required name="loginid"
-									onkeypress="press(this.form)">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1">Password</label> <input
-									type="password" class="form-control" id="joinpassword"
-									placeholder="비밀번호 입력하시오" required name="loginpw"
-									onkeypress="press(this.form)">
-							</div>
-							<div class=row>
-								<button type="button"
-									class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5"
-									type="button" id="findId">ID 찾기</button>
-								<button type="button"
-									class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 "
-									type="button" id="reinputpw">PW 찾기</button>
-								<button type="button"
-									class="btn btn-outline-info col-6 col-sm-3 mr-sm-2"
-									type="button" id="joinMem">회원 가입</button>
-								<button type="submit"
-									class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button>
-							</div>
-							<div class="modal-footer"></div>
-						</form>
 
+
+
+			<!--                여기부터 진향이가 만든 로그인폼 -->
+
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">L O G I N</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+						<div class="modal-body">
+							<form action="loginProc.member" id="form" name="formname"
+								method="post">
+								<div class="form-group">
+									<label for="exampleFormControlInput1">ID</label> <input
+										type="text" class="form-control" id="joinemail"
+										placeholder="ID를 입력하시오" required name="loginid"
+										onkeypress="press(this.form)">
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlInput1">Password</label> <input
+										type="password" class="form-control" id="joinpassword"
+										placeholder="비밀번호 입력하시오" required name="loginpw"
+										onkeypress="press(this.form)">
+								</div>
+								<div class=row>
+									<button type="button"
+										class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-5"
+										type="button" id="findId">ID 찾기</button>
+									<button type="button"
+										class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 "
+										type="button" id="reinputpw">PW 찾기</button>
+									<button type="button"
+										class="btn btn-outline-info col-6 col-sm-3 mr-sm-2"
+										type="button" id="joinMem">회원 가입</button>
+									<button type="submit"
+										class="btn btn-outline-info col-6 col-sm-2 mr-sm-2" id="login">login</button>
+								</div>
+
+							</form>
+
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
 
-		<script>
+			<script>
          //엔터 입력시 로그인
          function press(f){ if(f.keyCode == 13){  
         	 formname.submit();  
@@ -646,82 +715,86 @@ if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450
   		 </script>
 
 
-		<!--                   진향이 로그인폼끝 -->
-		<!--                         진향이 마이페이지 폼 -->
-		<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel1" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-body1">
-						<form>
-							<div class="form-group m-0 p-0">
-								<div class="card">
-									<div class="card-header">
-										<i class="fa fa-user"></i><strong class="card-title pl-2">
-											My Page </strong>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="card-body">
-										<div class="mx-auto d-block">
-											<img class="rounded-circle mx-auto d-block"
-												src="images/profile.jpg" alt="profile image" width="130px">
-											<h5 class="text-center mt-2 mb-1">
-												<b>${user.id} 님</b>
-											</h5>
-											<!-- <div class="location text-center">Lv. 일반회원</div> -->
+			<!--                   진향이 로그인폼끝 -->
+			<!--                         진향이 마이페이지 폼 -->
+			<div class="modal fade" id="exampleModal1" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel1"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-body1">
+							<form class="modal-body">
+								<div class="form-group m-0 p-0">
+									<div class="card">
+										<div class="card-header">
+											<i class="fa fa-user"></i><strong class="card-title pl-2">
+												My Page </strong>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
 										</div>
-										<hr>
-										<div class="card-text">
-											<div>
-												<b>이름 </b>
-												<p>${user.name}</p>
+										<div class="card-body">
+											<div class="mx-auto d-block">
+												<img class="rounded-circle mx-auto d-block"
+													src="images/profile.jpg" alt="profile image" width="130px">
+												<h5 class="text-center mt-2 mb-1">
+													<b>${user.id} 님</b>
+												</h5>
+												<!-- <div class="location text-center">Lv. 일반회원</div> -->
 											</div>
-											<div>
-												<b>생년월일</b>
-												<p>${user.birth}</p>
-											</div>
-											<div>
-												<b>이메일</b>
-												<p>${user.email}</p>
-											</div>
-											<div>
-												<b>핸드폰번호</b>
-												<p>${user.phone}</p>
-											</div>
-											<div>
-												<b>주소</b>
-												<p>${user.address1 }</p>
-												<p>${user.address2 }</p>
+											<hr>
+											<div class="card-text">
+												<div>
+													<b>이름 </b>
+													<p>${user.name}</p>
+												</div>
+												<div>
+													<b>생년월일</b>
+													<p>${user.birth}</p>
+												</div>
+												<div>
+													<b>이메일</b>
+													<p>${user.email}</p>
+												</div>
+												<div>
+													<b>핸드폰번호</b>
+													<p>${user.phone}</p>
+												</div>
+												<div>
+													<b>주소</b>
+													<p>${user.address1 }</p>
+													<p>${user.address2 }</p>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="modal-footer">
-								<button id="deleteMembtn" type="button"
-									class="btn btn-outline-info" data-dismiss="modal">회원
-									탈퇴</button>
-								<button id="pointPagebtn" type="button"
-									class="btn btn-outline-info" data-dismiss="modal">포인트
-									충전</button>
-								<button id="updatememberbtn" type="button"
-									class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
-								<button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
+								<div class="row">
+									<button id="deleteMembtn" type="button"
+										class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-4 p-0"
+										>회원탈퇴</button>
+									<button id="pointPagebtn" type="button"
+										class="btn btn-outline-info  col-6 col-sm-3 mr-sm-2"
+										 >포인트 충전</button>
+									<button id="updatememberbtn" type="button"
+										class="btn btn-outline-info col-6 col-sm-3 mr-sm-2"
+										>정보수정</button>
+									<button type="button"
+										class="btn btn-outline-info  col-6 col-sm-2 mr-sm-2"
+										id="logoutbtn1">로그아웃</button>
 
-							</div>
-						</form>
+								</div>
+							</form>
 
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
 
 
-		<script>
+			<script>
          history.pushState(null, null, "#noback");
          $(window).bind("hashchange", function(){
            history.pushState(null, null, "#noback");
@@ -753,22 +826,22 @@ if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=450
                         location.href = "page?url=WEB-INF/pay.jsp";
                      })
                   </script>
-		<!-- 진향이 마이페이지 폼끝 -->
-	</div>
-	<!-- 컨텐츠 끝 -->
-	<div class="clearfix"></div>
-	<!-- Footer -->
-	<footer class="site-footer">
-		<div class="footer-inner bg-white">
-			<div class="row">
-				<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
-				<div class="col-sm-6 text-right">
-					Designed by <a href="https://colorlib.com">1조</a>
+			<!-- 진향이 마이페이지 폼끝 -->
+		</div>
+		<!-- 컨텐츠 끝 -->
+		<div class="clearfix"></div>
+		<!-- Footer -->
+		<footer class="site-footer">
+			<div class="footer-inner bg-white">
+				<div class="row">
+					<div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
+					<div class="col-sm-6 text-right">
+						Designed by <a href="https://colorlib.com">1조</a>
+					</div>
 				</div>
 			</div>
-		</div>
-	</footer>
-		</div>
+		</footer>
+	</div>
 
 	<div class="clearfix"></div>
 	<!-- Footer -->

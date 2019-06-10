@@ -133,7 +133,7 @@
 	<!-- 상단 검색바 마이페이지 등등 시작 -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
-		<header id="header" class="header pt-1">
+		<header id="header" class="header">
 			<div class="top-left">
 				<div class="navbar-header">
 					<a class="navbar-brand p-0" href="page?url=WEB-INF/main.jsp"><img  src="images/logo5.png"
@@ -398,7 +398,7 @@
             <div class="modal-dialog" role="document">
                <div class="modal-content">
                   <div class="modal-body1">
-                     <form>
+                     <form class="modal-body">
                         <div class="form-group m-0 p-0">
                            <div class="card">
                               <div class="card-header">
@@ -446,18 +446,18 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="row">
                              <c:if test="${user.id != 'admin' }">
                            <button id="deleteMembtn" type="button"
-                              class="btn btn-outline-info" data-dismiss="modal">회원
+                              class="btn btn-outline-info col-6 col-sm-2 mr-sm-2 ml-sm-4 p-0" data-dismiss="modal">회원
                              	탈퇴</button>
                            <button id="pointPagebtn" type="button"
-                              class="btn btn-outline-info" data-dismiss="modal">포인트
+                              class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" data-dismiss="modal">포인트
                             	 충전</button>
                            <button id="updatememberbtn" type="button"
-                              class="btn btn-outline-info" data-dismiss="modal">정보수정</button>
+                              class="btn btn-outline-info col-6 col-sm-3 mr-sm-2" data-dismiss="modal">정보수정</button>
                               </c:if>
-                           <button type="button" class="btn btn-primary" id="logoutbtn1">로그아웃</button>
+                           <button type="button" class="btn btn-primary col-6 col-sm-2 mr-sm-2" id="logoutbtn1">로그아웃</button>
 
                         </div>
                      </form>

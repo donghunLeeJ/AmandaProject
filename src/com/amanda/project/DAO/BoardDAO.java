@@ -145,7 +145,7 @@ public class BoardDAO {
          con1.commit();
          con2.commit();
          if(rs.next()) {         
-            BoardDTO dto = new BoardDTO(rs.getString(1),rs.getString(2),rs.getTimestamp(3),rs.getString(4).replace("&lt;/script&gt","&lt$$;/script$$&gt"));
+            BoardDTO dto = new BoardDTO(rs.getString(1),rs.getString(2),rs.getTimestamp(3),rs.getString(4).replace("&lt;/script&gt","$&lt$;/script$&gt$").replace("&lt;script&gt","$&lt$;script$&gt$"));
             return dto;
          }
          return null;

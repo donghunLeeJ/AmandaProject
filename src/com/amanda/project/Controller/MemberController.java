@@ -78,6 +78,9 @@ public class MemberController extends HttpServlet {
 						MemberDTO user = dao.select_user(loginid);			
 						request.setAttribute("login", 1);													
 						request.getSession().setAttribute("user", dao.select_user(loginid));
+						
+					
+						//String ip = "192.168.60.27";	
 						String ip = request.getRemoteAddr();			
 					
 						if(cDao.UserSeatIpCheck(ip) == 0){	
@@ -140,7 +143,7 @@ public class MemberController extends HttpServlet {
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e1.printStackTrace();
 			}	
 
@@ -172,7 +175,7 @@ public class MemberController extends HttpServlet {
 				}
 
 			} catch (Exception e) {
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -194,12 +197,12 @@ public class MemberController extends HttpServlet {
 			}
 			break;
 		case "updateProc.member" :
-			//�쉶�썝 �젙蹂댁닔�젙 而⑦듃濡ㅻ윭	
+			
 			try {
 				System.out.println("kk");
-				String pw=request.getParameter("newpw");
-				String email=request.getParameter("newemail");
-				String phone=request.getParameter("phone");
+				String pw=request.getParameter("joinmemberpw");
+				String email=request.getParameter("joinmemberemail");
+				String phone=request.getParameter("phoneNumber");
 				String address1=request.getParameter("address1");
 				String address2=request.getParameter("address2");
 				String postcode=request.getParameter("postcode");
@@ -214,7 +217,7 @@ public class MemberController extends HttpServlet {
 
 			} catch (Exception e) {
 				
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -262,7 +265,7 @@ public class MemberController extends HttpServlet {
 
 			} catch (Exception e) {
 				
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -297,7 +300,7 @@ public class MemberController extends HttpServlet {
 				}else if(result == 0) {
 					request.getRequestDispatcher("WEB-INF/modifyalert.jsp").forward(request, response);//�씠 李쎌뿉�꽌 �쉶�썝�븘�땲�씪怨� alert
 				}else {
-					response.sendRedirect("../error.jsp");
+					response.sendRedirect("error.jsp");
 				}
 
 			}
@@ -328,7 +331,7 @@ public class MemberController extends HttpServlet {
 
 
 			}else {
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 			}
 			break;
 
@@ -388,7 +391,7 @@ public class MemberController extends HttpServlet {
 			} catch(Exception e){
 				sdao.pwcheck_delete(saveid, to);
 				e.printStackTrace();
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 
@@ -443,7 +446,7 @@ public class MemberController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/emailComplation.jsp").forward(request, response);
 			} catch(Exception e){
 				e.printStackTrace();
-				response.sendRedirect("error.html");
+				response.sendRedirect("error.jsp");
 				// �삤瑜� 諛쒖깮�떆 �뮘濡� �룎�븘媛��룄濡�
 				return;
 			}

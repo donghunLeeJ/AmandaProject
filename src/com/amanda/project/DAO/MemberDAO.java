@@ -115,7 +115,7 @@ public class MemberDAO {
 		pstat.setString(4, dto.getPostcode());
 		pstat.setString(5, dto.getAddress1());
 		pstat.setString(6, dto.getAddress2());
-		pstat.setString(6, dto.getId());
+		pstat.setString(7, dto.getId());
 		
 		int result=pstat.executeUpdate();
 		con.commit();
