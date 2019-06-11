@@ -80,8 +80,8 @@ public class MemberController extends HttpServlet {
 						request.getSession().setAttribute("user", dao.select_user(loginid));
 						
 					
-						String ip = "192.168.60.27";	
-						//String ip = request.getRemoteAddr();			
+						//String ip = "192.168.60.27";	
+						String ip = request.getRemoteAddr();			
 					
 						if(cDao.UserSeatIpCheck(ip) == 0){	
 
@@ -251,8 +251,8 @@ public class MemberController extends HttpServlet {
 				}	
 
 
-				cDao.seatOff("192.168.60.27");
-				//cDao.seatOff(request.getRemoteAddr());
+				//cDao.seatOff("192.168.60.27");
+				cDao.seatOff(request.getRemoteAddr());
 				cDao.resetId(request.getRemoteAddr());
 				dao.deleteAlreadyLogOut(id);
 				List<ComDTO> arr = cDao.selectSeat_all();
