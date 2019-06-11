@@ -105,7 +105,7 @@ public class MemberDAO {
 
 	/** 회원정보수정 메서드*/
 	public int updateMember(MemberDTO dto) throws Exception {
-
+		
 		String sql="update Member set pw=?,email=?,phone=?,postcode=?,address1=?,address2=?  where id=? ";
 		Connection con=ds.getConnection();
 		PreparedStatement pstat=con.prepareStatement(sql);
