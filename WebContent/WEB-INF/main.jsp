@@ -162,7 +162,7 @@
 					<div class="top-right">
 
 	
-						<div class="header-menu ">
+						<div class="header-menu pt-3">
 
 
 							<h5>
@@ -187,18 +187,8 @@
 									<button type="button" class="btn btn-secondary " id="allmsg">전체msg</button>
 								</c:otherwise>
 							</c:choose>
-							<!-- 	<button type="button" class="btn btn-primary" id="logoutbtn">logout</button>
-							 -->
-
-
-
-
-
-
-
-							<!-- </div> -->
-							<!--  mypage 사람 사진-->
-							<div class="user-area  float-right pr-1">
+							
+							<div class="user-area  float-right pr-1 ">
 								<a href="#" class="active" data-toggle="modal"
 									aria-haspopup="true" aria-expanded="false"
 									data-target="#exampleModal1"> <img
@@ -216,13 +206,7 @@
 									<i class="fa fa-search"></i>
 								</button> -->
 								<div class="form-inline">
-									<form class="search-form">
-										<input class="form-control mr-sm-2" type="text"
-											placeholder="Search ..." aria-label="Search">
-										<button class="search-close" type="submit">
-											<i class="fa fa-close"></i>
-										</button>
-									</form>
+									
 								</div>
 								<div class="dropdown for-notification">
 									<button type="button"
@@ -270,12 +254,7 @@
                             	  alert("이미 로그인 한 아이디 입니다 관리자에게 문의해주세요.");
                               }
                        		 </script>
-						<!-- <h3 class="card-title">충전/로그인/개인정보</h3>
-									<p class="card-text">내용</p>
-									<button type="button"
-										class="btn btn-outline-danger signbt mb-2" data-toggle="modal"
-										data-target="#exampleModal" id="loginbtn">login</button> -->
-
+					
 		
 					</c:when>
 					<c:otherwise>
@@ -358,13 +337,6 @@ if (cookieCheck != "N") window.open('page?url=WEB-INF/Hello.jsp', '', 'width=400
                            </script>
 					</c:otherwise>
 				</c:choose>
-
-
-
-
-
-
-
 
 
 				<!--              ----------------------------------- 잔여좌석 -->

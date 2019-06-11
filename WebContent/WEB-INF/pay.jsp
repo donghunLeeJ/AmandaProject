@@ -821,10 +821,7 @@
     	   function TimerStart(){tid=setInterval('msg_time()',1000) };
     	   TimerStart();                          
     	  
-    	   var webSocket = new WebSocket('ws://192.168.60.20/websocketendpoint');
-      		webSocket.onopen = function(){
-      			webSocket.send("hi"); 
-      		} ;
+    	 
    		
    </script>
 		</c:when>

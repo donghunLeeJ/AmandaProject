@@ -652,7 +652,7 @@
          <div class="row">
             <div class="col-sm-6">Copyright &copy; 2019년 PC방임</div>
             <div class="col-sm-6 text-right">
-               Designed by <a href="https://colorlib.com">1조</a>
+               Designed by 1조
             </div>
          </div>
       </div>

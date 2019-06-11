@@ -45,7 +45,7 @@ public class MemberController extends HttpServlet {
 		MemberDAO dao = new MemberDAO();
 		SendMailDAO sdao = new SendMailDAO();
 		ComDAO cDao = new ComDAO();
-
+		request.getServletContext().setAttribute("seatUsed", cDao.selectSeat());
 		switch(cmd) {
 
 		case "loginProc.member" :
@@ -69,12 +69,9 @@ public class MemberController extends HttpServlet {
 						request.setAttribute("login", 4);	
 						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
 						rd.forward(request, response);	
-					}else if(dao.checkAlreadyLogin(loginid) == 1){
-						request.setAttribute("login", 5);	
-						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/main.jsp");
-						rd.forward(request, response);	
+					
 					}else{
-						dao.inputloginCheck_table(loginid);
+						
 						MemberDTO user = dao.select_user(loginid);			
 						request.setAttribute("login", 1);													
 						request.getSession().setAttribute("user", dao.select_user(loginid));
@@ -125,7 +122,7 @@ public class MemberController extends HttpServlet {
 							request.getServletContext().setAttribute("seat", cDao.selectSeat_all());
 						}
 
-						request.getServletContext().setAttribute("seatUsed", cDao.selectSeat());
+						
 						RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/loginProc.jsp");
 						rd.forward(request, response);							
 					}
@@ -180,13 +177,15 @@ public class MemberController extends HttpServlet {
 			break;
 		case "deleteProc.member" :
 			//�쉶�썝 �깉�눜 而⑦듃濡ㅻ윭
-			String delid= request.getParameter("id");//�궘�젣�븷 �븘�씠�뵒
-			String delpw= request.getParameter("pw");//�궘�젣�븷 �뙣�뒪�썙�뱶
+			String delid= request.getParameter("id");
+			String delpw= request.getParameter("pw");
 			System.out.println(delpw);
 			int delresult = dao.delete(delid, delpw);
 			//System.out.println(delresult);
 			if(delresult==1) {
 				request.getSession().invalidate();
+				pointmap.remove(delid);
+				useridseat.remove(delid);
 				request.setAttribute("delresult", delresult);
 				request.getRequestDispatcher("WEB-INF/outMember.jsp").forward(request, response);
 			}else {
@@ -254,7 +253,7 @@ public class MemberController extends HttpServlet {
 				//cDao.seatOff("192.168.60.27");
 				cDao.seatOff(request.getRemoteAddr());
 				cDao.resetId(request.getRemoteAddr());
-				dao.deleteAlreadyLogOut(id);
+	
 				List<ComDTO> arr = cDao.selectSeat_all();
 				request.getServletContext().setAttribute("seat", arr);
 				request.getServletContext().setAttribute("seatUsed", cDao.usedSeat());

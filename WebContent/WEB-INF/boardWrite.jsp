@@ -291,12 +291,12 @@ header {
                <form action="BoardWrite.board" id="formWrite" method="post">
                   <div class="card-header" style="text-align: center;">
                      <strong class="card-title">제목 : <input type="text"
-                        id="title" name="title" required></strong>
+                        id="title" name="title" required maxlength="90"></strong>
                   </div>
                   <div class="card-body">
                      <div class="container" id="wrapper">
                         <div id="text">
-                           <textarea id="contents" name="contents"></textarea>
+                           <textarea id="contents" name="contents" maxlength="1111"></textarea>
                            <input type="text" id="path" name="path">
                         </div>
 

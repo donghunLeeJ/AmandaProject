@@ -237,7 +237,7 @@
 									
 										 <span id="timeout" ></span> 
 									</h5>
- 									<button type="button" class="btn pr-1 pt-0" id="msg" style="background-color:white"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
+ 									<button type="button" class="btn pr-1 pt-0" id="msg" style="background-color:#00000000"><img src="https://img.icons8.com/color/35/000000/filled-sent.png"></button>
  									<div class="user-area  float-right">
                         				<a href="#" class="active" data-toggle="modal"
                            				aria-haspopup="true" aria-expanded="false"
@@ -719,6 +719,7 @@
                            </script>
 
 	<!-- 5분(포인트 300)이 되면 경고창을 날림 / 포인트가 0이 되는 순간 강제 로그아웃되게 만드는 함수 -->
+	
 	<c:choose>
 		<c:when test="${user != null }">
 			<script>
@@ -764,15 +765,10 @@
     	   function TimerStart(){tid=setInterval('msg_time()',1000) };
     	   TimerStart();                          
     	  
-    	   var webSocket = new WebSocket('ws://192.168.60.20/websocketendpoint');
-      		webSocket.onopen = function(){
-      			webSocket.send("hi"); 
-      		} ;
-   		
+    	  
    </script>
 		</c:when>
 	</c:choose>
-
 
 </body>
 </html>

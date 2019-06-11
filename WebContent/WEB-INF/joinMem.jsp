@@ -220,7 +220,7 @@
                 <div class="form-group" id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control onlyAlphabetAndNumber" name="joinmemberid" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30" >
+                        <input type="text" class="form-control onlyAlphabetAndNumber" name="joinmemberid" id="id" data-rule-required="true" placeholder="20자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="20" >
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">

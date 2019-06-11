@@ -67,7 +67,7 @@ public class VisitDAO {
 			}
 		}
 		public int timelyVisit(int num){				
-			String sql = "select sum(vcount) from visit where today between sysdate-(?+1/24) and sysdate-(?/24)";
+			String sql = "select sum(vcount) from visit where today between sysdate-(?+1)/24 and sysdate-?/24";
 			try( Connection con = this.connect();	
 					PreparedStatement pstat = con.prepareStatement(sql);
 					){

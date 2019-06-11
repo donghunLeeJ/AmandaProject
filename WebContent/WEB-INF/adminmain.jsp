@@ -247,8 +247,8 @@
 		                yAxes: [{
 		                    ticks: {
 		                       min:0,
-		                        max:500,
-		                        stepSize: 50
+		                        max:100,
+		                        stepSize: 20
 		                    }
 		                   }]
 		            }
