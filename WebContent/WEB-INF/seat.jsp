@@ -697,22 +697,7 @@
           </script>
 		<!-- 	---------------------------------소켓연결  script--------------------------------- -->
      
-     
-     
-     
-     
-   		  <c:forEach var="i" items="${seat }">
-				<script>
-				if(${i.onOff }==1){
-				$('#seat${i.seatNum}').css('background-color','dodgerblue');	
-				$('#seat${i.seatNum}').css('color','white');	
-				
-				}										
-				</script>
-			</c:forEach>
-     
-     
-        
+          
  <!--hashmap 사용 예시 -->    
   <c:forEach var="i" items="${UserSeatNum}"> 
        
@@ -742,7 +727,9 @@
  			     	   
  		      m = (Math.floor(point/60)) + " 분 "; 
  		      var msg = "<font color='pink'> " + m +"</font>";
- 		         
+ 		 
+ 		 $('#seat${i.value}').css('background-color','dodgerblue');	
+		 $('#seat${i.value}').css('color','white');	
  		 $("#seat${i.value}>div").html("${i.key}님의 <br>남은 시간 :" + msg );//i.key는 자리별로 로그인한 유저id임	
  		
 		 	

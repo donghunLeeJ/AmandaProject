@@ -370,7 +370,30 @@
                                     </div>
                                     <div class="modal-footer">
                              <c:if test="${user != null }">
-                             <button class = "btn btn-info" id="menu${dto.menu_seq }">결제하기 </button> 
+                             <div id="${dto.menu_seq}"><button class = "btn btn-info" id="menu${dto.menu_seq}">결제하기 </button></div> 
+                      
+<script>
+     function countCheck(){//만일 사용자가 pc방이 아닌 다른 기기로 로그인했을 경우 결제하기 버튼을 삭제시킨다.  
+		   
+    	  $.ajax({  	    	 
+    		         url: 'usertime.com', 
+    		         type: 'POST'
+    		          
+    		 }).done(function(count){ 
+    			       		
+    		 if(count == -1){
+    		    	     		    	 
+    		    	  if($("#${dto.menu_seq}").attr('id') == ${dto.menu_seq}){
+    		    			 
+    		    			 $("#${dto.menu_seq}").html("");    		    			 
+    		    	}	    	     		    	  
+    		     }   	     	                   		      		      
+    		 });   	     
+    	   }
+     
+    	   setTimeout(countCheck()); 	                 	    		
+   </script>
+                     
                              </c:if>
                           	 <button type="button" class="btn btn-secondary"
                               data-dismiss="modal">닫기</button>
@@ -437,11 +460,8 @@
                 		});
                 		})
  			             		
-                		
-   		
-                		
-                		
-                	
+         
+            	            	
                   </script>
               </c:forEach>
             </div>
@@ -754,5 +774,25 @@
    </script>
 		</c:when>
 	</c:choose>
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
