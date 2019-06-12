@@ -197,7 +197,7 @@ public class BoardDAO {
    }
    
    private int boardCount() throws Exception{
-      String sql = "select count(*) from board";
+      String sql = "select count(*) from board where writer != 'admin'";
       try(
             Connection con = this.connect();   
             PreparedStatement pstat = con.prepareStatement(sql);
